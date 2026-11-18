@@ -1,0 +1,2449 @@
+/* ============================================================================
+ * Liquid Glass V18 Premium Theme
+ * Recreates the Glassy Dashboard V18 aesthetic:
+ *   - Studio architectural atmospheric backdrop (warm amber-umber on left +
+ *     luminous royal/cobalt blue glass refraction on right)
+ *   - Deep frosted smoky liquid glass cards (heavy backdrop-filter blur + saturate)
+ *   - Specular 1px optical edge highlights & inner top glass glint
+ *   - Signature royal-blue frosted accent cards & pill CTAs (#3b82f6 -> #2563eb)
+ *   - Crisp emerald positive indicators (#34d399) & tabular numerals
+ *   - Smooth framer-style lift & staggered bento reveals (prefers-reduced-motion safe)
+ * Scoped strictly under html.theme-liquid-glass-v18 so other themes and report
+ * print/export canvases outside .app-shell remain completely untouched.
+ * ============================================================================ */
+
+html.theme-liquid-glass-v18 {
+  --font-display: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Core palette */
+  --lg18-ink: #ffffff;
+  --lg18-ink-soft: rgba(248, 250, 252, 0.90);
+  --lg18-ink-muted: rgba(226, 232, 240, 0.80);
+  --lg18-blue: #3b82f6;
+  --lg18-blue-bright: #93c5fd;
+  --lg18-blue-deep: #2563eb;
+  --lg18-blue-glow: rgba(59, 130, 246, 0.52);
+  --lg18-emerald: #34d399;
+  --lg18-amber: #fbbf24;
+  --lg18-coral: #fb7185;
+
+  /* Liquid water-glass materials (camadas de profundidade: base densa < cards cristalinos < cápsulas flutuantes) */
+  --lg18-glass-base: linear-gradient(
+    158deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(16, 25, 44, 0.44) 48%,
+    rgba(12, 20, 38, 0.50) 100%
+  );
+  --lg18-glass-card: linear-gradient(
+    144deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(186, 230, 253, 0.11) 18%,
+    rgba(15, 24, 42, 0.19) 54%,
+    rgba(18, 28, 48, 0.25) 82%,
+    rgba(56, 189, 248, 0.18) 100%
+  );
+  --lg18-glass-card-hover: linear-gradient(
+    144deg,
+    rgba(255, 255, 255, 0.30) 0%,
+    rgba(224, 242, 254, 0.18) 20%,
+    rgba(16, 27, 48, 0.24) 56%,
+    rgba(20, 32, 58, 0.30) 82%,
+    rgba(56, 189, 248, 0.26) 100%
+  );
+  --lg18-glass-featured: linear-gradient(
+    142deg,
+    rgba(96, 165, 250, 0.44) 0%,
+    rgba(37, 99, 235, 0.80) 26%,
+    rgba(29, 78, 216, 0.90) 72%,
+    rgba(23, 58, 168, 0.94) 100%
+  );
+  --lg18-glass-featured-hover: linear-gradient(
+    142deg,
+    rgba(125, 191, 255, 0.54) 0%,
+    rgba(46, 108, 245, 0.86) 26%,
+    rgba(37, 90, 228, 0.92) 72%,
+    rgba(29, 72, 196, 0.96) 100%
+  );
+  --lg18-glass-capsule: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(224, 242, 254, 0.14) 48%,
+    rgba(56, 189, 248, 0.22) 100%
+  );
+  --lg18-glass-input: rgba(12, 18, 32, 0.42);
+  --lg18-blur: blur(32px) saturate(195%) brightness(1.10) contrast(1.03);
+  --lg18-blur-heavy: blur(44px) saturate(220%) brightness(1.11) contrast(1.04);
+  --lg18-blur-active: blur(52px) saturate(235%) brightness(1.14) contrast(1.05);
+  --lg18-border: rgba(255, 255, 255, 0.30);
+  --lg18-border-bright: rgba(224, 242, 254, 0.54);
+  --lg18-border-blue: rgba(186, 230, 253, 0.66);
+  --lg18-shadow:
+    0 26px 60px -22px rgba(0, 0, 0, 0.72),
+    0 10px 26px -10px rgba(14, 116, 144, 0.26),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.60),
+    inset 1.5px 0 1px rgba(255, 255, 255, 0.24),
+    inset 0 -2px 2px rgba(125, 211, 252, 0.26);
+  --lg18-shadow-depth:
+    0 28px 64px -20px rgba(0, 0, 0, 0.78),
+    0 12px 30px -10px rgba(56, 189, 248, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.66),
+    inset 1.5px 0 1px rgba(224, 242, 254, 0.28),
+    inset 0 -2px 3px rgba(125, 211, 252, 0.32);
+  --lg18-shadow-hover:
+    0 32px 68px -20px rgba(0, 0, 0, 0.80),
+    0 14px 34px -10px rgba(56, 189, 248, 0.38),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.70),
+    inset 1.5px 0 1px rgba(255, 255, 255, 0.30),
+    inset 0 -2px 2px rgba(125, 211, 252, 0.34);
+  --lg18-shadow-blue:
+    0 24px 52px -14px rgba(37, 99, 235, 0.58),
+    0 10px 24px -6px rgba(56, 189, 248, 0.44),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.70),
+    inset 1.5px 0 1px rgba(255, 255, 255, 0.30),
+    inset 0 -2px 2px rgba(186, 230, 253, 0.36);
+  --lg18-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Global semantic tokens */
+  --bg-primary: #141923 !important;
+  --bg-secondary: rgba(18, 25, 40, 0.42) !important;
+  --bg-tertiary: rgba(24, 34, 54, 0.40) !important;
+  --bg-card: rgba(18, 26, 44, 0.38) !important;
+  --bg-sidebar: rgba(16, 22, 36, 0.42) !important;
+  --bg-hover: rgba(224, 242, 254, 0.14) !important;
+  --bg-accent: rgba(56, 189, 248, 0.22) !important;
+
+  --text-primary: #ffffff !important;
+  --text-secondary: rgba(248, 250, 252, 0.92) !important;
+  --text-tertiary: rgba(226, 232, 240, 0.84) !important;
+  --text-muted: rgba(226, 232, 240, 0.82) !important;
+  --text-inverse: #ffffff !important;
+
+  --border-primary: rgba(255, 255, 255, 0.26) !important;
+  --border-secondary: rgba(255, 255, 255, 0.14) !important;
+  --border-accent: rgba(125, 211, 252, 0.56) !important;
+
+  --brand-green: #60a5fa !important;
+  --brand-green-light: #34d399 !important;
+  --brand-yellow: #fbbf24 !important;
+  --brand-red: #fb7185 !important;
+  --brand-dark: #1e3a8a !important;
+  --brand-accent: #38bdf8 !important;
+
+  --sidebar-text: #ffffff !important;
+  --sidebar-text-muted: rgba(226, 232, 240, 0.82) !important;
+  --sidebar-active-bg: rgba(255, 255, 255, 0.22) !important;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.12) !important;
+  --sidebar-border: rgba(255, 255, 255, 0.22) !important;
+  --sidebar-logo-ring: rgba(125, 211, 252, 0.82) !important;
+
+  --status-atrasado-bg: rgba(251, 113, 133, 0.22) !important;
+  --status-atrasado-text: #ffe4e6 !important;
+  --status-atrasado-border: rgba(251, 113, 133, 0.52) !important;
+  --status-pendente-bg: rgba(251, 191, 36, 0.22) !important;
+  --status-pendente-text: #fef3c7 !important;
+  --status-pendente-border: rgba(251, 191, 36, 0.52) !important;
+  --status-programado-bg: rgba(56, 189, 248, 0.24) !important;
+  --status-programado-text: #e0f2fe !important;
+  --status-programado-border: rgba(125, 211, 252, 0.58) !important;
+  --status-encerrado-bg: rgba(52, 211, 153, 0.22) !important;
+  --status-encerrado-text: #d1fae5 !important;
+  --status-encerrado-border: rgba(52, 211, 153, 0.52) !important;
+  --status-andamento-bg: rgba(139, 92, 246, 0.24) !important;
+  --status-andamento-text: #ede9fe !important;
+  --status-andamento-border: rgba(167, 139, 250, 0.52) !important;
+
+  --glass-card-bg: rgba(18, 26, 44, 0.36) !important;
+  --glass-card-border: rgba(255, 255, 255, 0.28) !important;
+  --glass-card-shadow: var(--lg18-shadow) !important;
+  --glass-blur: 32px;
+  --glass-input-bg: rgba(12, 18, 32, 0.44) !important;
+  --glass-input-border: rgba(255, 255, 255, 0.26) !important;
+
+  --scrollbar-track: rgba(14, 18, 28, 0.55) !important;
+  --scrollbar-thumb: rgba(224, 242, 254, 0.32) !important;
+  --scrollbar-thumb-hover: rgba(125, 211, 252, 0.82) !important;
+
+  --wm-halo-opacity: 0.26;
+  color-scheme: dark;
+  font-family: var(--font-family);
+}
+
+/* ── Studio Architectural Backdrop (Warm Amber-Copper + Luminous Aqua-Cobalt Caustics) */
+html.theme-liquid-glass-v18 body {
+  background:
+    radial-gradient(52% 46% at 12% 16%, rgba(226, 174, 118, 0.42) 0%, rgba(140, 102, 70, 0.14) 56%, transparent 100%),
+    radial-gradient(48% 46% at 88% 14%, rgba(56, 189, 248, 0.46) 0%, rgba(37, 99, 235, 0.22) 52%, transparent 100%),
+    radial-gradient(44% 40% at 52% 48%, rgba(125, 211, 252, 0.20) 0%, rgba(30, 64, 175, 0.08) 58%, transparent 100%),
+    radial-gradient(48% 44% at 80% 78%, rgba(59, 130, 246, 0.36) 0%, rgba(29, 78, 216, 0.14) 58%, transparent 100%),
+    radial-gradient(56% 44% at 22% 88%, rgba(182, 134, 92, 0.34) 0%, rgba(78, 58, 44, 0.12) 60%, transparent 100%),
+    linear-gradient(128deg, #3b3027 0%, #524237 22%, #20242c 48%, #152540 76%, #13325c 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--lg18-ink) !important;
+  font-family: var(--font-family) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Soft blurred architectural panes & aqueous caustic ripples behind the frosted glass shell */
+html.theme-liquid-glass-v18 body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='warmPane' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f5d0a9' stop-opacity='0.30'/%3E%3Cstop offset='100%25' stop-color='%238c6747' stop-opacity='0.06'/%3E%3C/linearGradient%3E%3ClinearGradient id='aquaLens' x1='0.1' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0%25' stop-color='%23bae6fd' stop-opacity='0.52'/%3E%3Cstop offset='52%25' stop-color='%2338bdf8' stop-opacity='0.28'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8' stop-opacity='0.10'/%3E%3C/linearGradient%3E%3ClinearGradient id='goldArc' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23fbbf24' stop-opacity='0.18'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0.08'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='165' cy='205' r='265' fill='url(%23warmPane)'/%3E%3Crect x='965' y='40' width='420' height='365' rx='64' transform='rotate(-6 1175 222)' fill='url(%23aquaLens)'/%3E%3Ccircle cx='1225' cy='695' r='265' fill='url(%23aquaLens)' opacity='0.64'/%3E%3Cellipse cx='690' cy='435' rx='310' ry='155' fill='url(%23aquaLens)' opacity='0.28'/%3E%3Cellipse cx='440' cy='790' rx='430' ry='180' fill='url(%23goldArc)'/%3E%3Cpath d='M-90 660C220 500 500 615 800 420C1060 250 1260 260 1540 80' stroke='%23ffffff' stroke-opacity='0.20' stroke-width='2.2'/%3E%3Cpath d='M-110 755C230 580 510 680 830 495C1100 335 1290 345 1560 165' stroke='%237dd3fc' stroke-opacity='0.30' stroke-width='1.8'/%3E%3Cpath d='M120 120C380 220 620 80 940 190C1140 260 1320 180 1480 230' stroke='%23e0f2fe' stroke-opacity='0.16' stroke-width='1.5'/%3E%3Cpath d='M-40 370C260 270 520 350 860 245C1120 165 1300 190 1490 110' stroke='%23bae6fd' stroke-opacity='0.14' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}
+
+/* ── Unified Typography & Tabular Numerals ─────────────────────────────────── */
+html.theme-liquid-glass-v18 :is(
+  .app-shell,
+  .lavagem-premium,
+  .lavagem-premium .lub-module,
+  .lavagem-premium .lavagem-premium-body,
+  .lavagem-premium .lavagem-premium-body button,
+  .lavagem-premium :is(input, select, textarea),
+  .lub-premium-modal,
+  .lub-premium-modal :is(button, input, select, textarea),
+  .app-shell .maintenance-tracking,
+  .app-shell .apoio-module,
+  .app-shell .apoio-premium,
+  .app-shell .apoio-reference,
+  .bi-root,
+  .tv-monitor,
+  .tv-dialog,
+  .equipment-image-manager
+) {
+  font-family: var(--font-family) !important;
+}
+
+html.theme-liquid-glass-v18 :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  .shell-header__title,
+  .lavagem-premium .lavagem-premium-brand h2,
+  .lavagem-premium .lub-toolbar-title,
+  .lavagem-premium .lub-kpi strong,
+  .lavagem-premium .lub-fleet,
+  .app-shell .maintenance-tracking .mt-hero h2,
+  .app-shell .maintenance-tracking .mt-kpi strong,
+  .app-shell .maintenance-tracking .mt-fleet-title strong,
+  .app-shell .apoio-reference .apoio-hero h2,
+  .app-shell .apoio-reference .apoio-fleet-title,
+  .bi-brand h1,
+  .bi-kpi > strong,
+  .tv-topbar h2,
+  .tv-summary strong
+) {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.024em;
+}
+
+html.theme-liquid-glass-v18 :is(
+  .tabular-nums,
+  .lub-kpi strong,
+  .bi-kpi > strong,
+  .dashboard-kpi p:last-child,
+  .lub-date,
+  .lub-os,
+  .mt-kpi strong,
+  .mt-os,
+  .apoio-kpi strong
+) {
+  font-variant-numeric: tabular-nums;
+}
+
+html.theme-liquid-glass-v18 :is(code, pre, .font-mono) {
+  font-family: var(--font-mono) !important;
+}
+
+/* ── Strict Logo Color Preservation ────────────────────────────────────────── */
+html.theme-liquid-glass-v18 img[src*="logo.png"],
+html.theme-liquid-glass-v18 .shell-sidebar__logo,
+html.theme-liquid-glass-v18 .mt-hero-brand img,
+html.theme-liquid-glass-v18 .tv-brand img,
+html.theme-liquid-glass-v18 .bi-brand img,
+html.theme-liquid-glass-v18 .lavagem-premium-brand img,
+html.theme-liquid-glass-v18 .lavagem-premium .lub-brand img,
+html.theme-liquid-glass-v18 .verdan-watermark-logo {
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+html.theme-liquid-glass-v18 .shell-sidebar__logo,
+html.theme-liquid-glass-v18 .lavagem-premium .lavagem-premium-brand img,
+html.theme-liquid-glass-v18 .lavagem-premium .lub-module .lub-brand img,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-hero-brand img,
+html.theme-liquid-glass-v18 .bi-brand img,
+html.theme-liquid-glass-v18 .tv-brand img {
+  border: 1.5px solid rgba(255, 255, 255, 0.30) !important;
+  border-radius: 9999px !important;
+  background: rgba(24, 21, 23, 0.72) !important;
+  padding: 2px !important;
+  box-shadow:
+    0 10px 24px -8px rgba(0, 0, 0, 0.85),
+    0 0 18px rgba(59, 130, 246, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+}
+
+/* ── App Shell, Floating Frosted Sidebar & Translucent Header ──────────────── */
+html.theme-liquid-glass-v18 .app-shell,
+html.theme-liquid-glass-v18 .app-shell--lub > div > main,
+html.theme-liquid-glass-v18 .app-shell--apoio > div > main,
+html.theme-liquid-glass-v18 .app-shell--apoio-reference > div > main,
+html.theme-liquid-glass-v18 .app-shell > div > main {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel {
+  background: linear-gradient(176deg, rgba(255, 255, 255, 0.22) 0%, rgba(26, 36, 56, 0.42) 52%, rgba(56, 189, 248, 0.18) 100%) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow:
+    16px 0 46px -18px rgba(0, 0, 0, 0.78),
+    inset -1px 0 0 rgba(255, 255, 255, 0.20),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.42) !important;
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar {
+    flex: 0 0 88px;
+    width: 88px;
+    min-width: 88px;
+    padding: 12px 0 12px 12px;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel {
+    inset: 12px auto 12px 12px;
+    min-height: calc(100% - 24px);
+    height: calc(100% - 24px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    background: linear-gradient(175deg, rgba(255, 255, 255, 0.24) 0%, rgba(22, 32, 52, 0.36) 54%, rgba(56, 189, 248, 0.18) 100%) !important;
+    box-shadow: var(--lg18-shadow) !important;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:hover,
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:has(:focus-visible),
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel.has-popout {
+    width: 268px;
+    background: linear-gradient(175deg, rgba(32, 46, 72, 0.88) 0%, rgba(14, 22, 38, 0.92) 100%) !important;
+    backdrop-filter: blur(44px) saturate(215%) !important;
+    -webkit-backdrop-filter: blur(44px) saturate(215%) !important;
+    border-color: rgba(224, 242, 254, 0.44) !important;
+    box-shadow:
+      20px 28px 62px -14px rgba(0, 0, 0, 0.90),
+      0 0 0 1px rgba(56, 189, 248, 0.30),
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.42) !important;
+  }
+
+  /* Override sidebar-motion.css :focus-within so mouse clicks do not pin the expanded drawer over content */
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) {
+    width: 76px;
+    box-shadow: var(--lg18-shadow) !important;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) .shell-sidebar__brand {
+    justify-content: center;
+    padding-inline: 10px;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) :is(.shell-sidebar__brand-copy, .shell-nav-label, .shell-sidebar__status-detail, .shell-sidebar__last-sync, .shell-sidebar__version) {
+    max-width: 0;
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) :is(.shell-nav-section, .shell-nav-item, .shell-sidebar__status-line) {
+    width: auto;
+    margin-inline: 10px;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) .shell-nav-item__chevron {
+    width: 0;
+    max-width: 0;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1023px), (pointer: coarse) {
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel {
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+    background: linear-gradient(180deg, rgba(24, 34, 54, 0.90) 0%, rgba(12, 18, 32, 0.94) 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.26) !important;
+  }
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-sidebar__brand-name {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-sidebar__brand-subtitle {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-nav-section {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(165%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-left: 3px solid rgba(125, 211, 252, 0.78) !important;
+  border-radius: 12px !important;
+  color: rgba(226, 232, 240, 0.84) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-nav-section__marker {
+  background: var(--lg18-blue-bright) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-nav-section.is-current-section {
+  background: rgba(56, 189, 248, 0.20) !important;
+  border-color: rgba(186, 230, 253, 0.42) !important;
+  border-left-color: #38bdf8 !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-nav-item {
+  color: rgba(241, 245, 249, 0.84) !important;
+  border-radius: 14px !important;
+  border: 1px solid transparent !important;
+  transition: background 180ms var(--lg18-ease), border-color 180ms var(--lg18-ease), transform 180ms var(--lg18-ease), box-shadow 180ms var(--lg18-ease), color 180ms ease !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-nav-item:hover,
+html.theme-liquid-glass-v18 .app-shell .shell-nav-item:focus-visible {
+  background: rgba(255, 255, 255, 0.13) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26) !important;
+}
+
+/* Matches the glowing crystalline water-glass active pill */
+html.theme-liquid-glass-v18 .app-shell .shell-nav-item.is-active,
+html.theme-liquid-glass-v18 .shell-sidebar__popup-item[aria-current="page"] {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(56, 189, 248, 0.30) 100%) !important;
+  border: 1px solid rgba(224, 242, 254, 0.44) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow:
+    0 12px 26px -10px rgba(37, 99, 235, 0.46),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.50) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-nav-item.is-active *,
+html.theme-liquid-glass-v18 .shell-sidebar__popup-item[aria-current="page"] * {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .shell-sidebar__popup,
+html.theme-liquid-glass-v18 .shell-theme-picker {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.20) 0%, rgba(16, 26, 46, 0.80) 48%, rgba(12, 20, 38, 0.88) 100%) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border: 1px solid rgba(224, 242, 254, 0.32) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-sidebar__popup-item {
+  color: #e2e8f0 !important;
+}
+
+html.theme-liquid-glass-v18 .shell-sidebar__popup-item:hover,
+html.theme-liquid-glass-v18 .shell-theme-option:hover {
+  background: rgba(224, 242, 254, 0.14) !important;
+}
+
+/* Header bar */
+html.theme-liquid-glass-v18 .app-shell .shell-header,
+html.theme-liquid-glass-v18 .app-shell.app-shell--lub .shell-header,
+html.theme-liquid-glass-v18 .app-shell.app-shell--apoio .shell-header,
+html.theme-liquid-glass-v18 .app-shell.app-shell--apoio-reference .shell-header {
+  --shell-header-bg: rgba(20, 28, 46, 0.36) !important;
+  --shell-header-text: #f8fafc !important;
+  --shell-header-muted: rgba(226, 232, 240, 0.72) !important;
+  --shell-header-action: #f8fafc !important;
+  --shell-header-action-bg: rgba(255, 255, 255, 0.14) !important;
+  --shell-header-action-border: rgba(255, 255, 255, 0.26) !important;
+  --shell-header-border: rgba(255, 255, 255, 0.20) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(18, 28, 48, 0.34) 100%) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 0 12px 32px -18px rgba(0, 0, 0, 0.72), inset 0 -1px 0 rgba(186, 230, 253, 0.22) !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-header__title {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-header__subtitle {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-header__theme-button,
+html.theme-liquid-glass-v18 .shell-header__closed-button,
+html.theme-liquid-glass-v18 .shell-header__notification > div > button {
+  border-radius: 9999px !important;
+  background: var(--lg18-glass-capsule) !important;
+  backdrop-filter: blur(22px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-header__theme-button:hover,
+html.theme-liquid-glass-v18 .shell-header__closed-button:hover,
+html.theme-liquid-glass-v18 .shell-header__notification > div > button:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.36) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .shell-header__sync-button {
+  border-radius: 9999px !important;
+  padding-inline: 16px !important;
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-header__sync-button:hover:not(:disabled) {
+  background: var(--lg18-glass-featured-hover) !important;
+  box-shadow: 0 18px 34px -10px rgba(59, 130, 246, 0.62), inset 0 1.5px 0 rgba(255, 255, 255, 0.56) !important;
+}
+
+/* Offline banner & pills tuned for liquid glass refraction */
+html.theme-liquid-glass-v18 .shell-offline-banner {
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-offline-banner.is-offline {
+  background: linear-gradient(145deg, rgba(110, 56, 18, 0.54) 0%, rgba(36, 22, 16, 0.64) 100%) !important;
+  border-color: rgba(251, 191, 36, 0.45) !important;
+}
+
+html.theme-liquid-glass-v18 .shell-offline-banner.is-reconnecting {
+  background: linear-gradient(145deg, rgba(16, 86, 56, 0.54) 0%, rgba(12, 42, 32, 0.64) 100%) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+}
+
+/* ── Global Smoky Frosted Glass Cards, Inputs & Royal-Blue CTAs ────────────── */
+html.theme-liquid-glass-v18 .glass-card,
+html.theme-liquid-glass-v18 .app-shell .glass-card {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+  transition: transform 280ms var(--lg18-ease), border-color 220ms ease, box-shadow 280ms var(--lg18-ease), background 220ms ease;
+}
+
+html.theme-liquid-glass-v18 .glass-input,
+html.theme-liquid-glass-v18 .app-shell .glass-input,
+html.theme-liquid-glass-v18 .app-shell :is(input:not([type="checkbox"]):not([type="radio"]):not([type="color"]), select, textarea):not(.bg-transparent) {
+  background: var(--lg18-glass-input) !important;
+  backdrop-filter: blur(20px) saturate(175%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(175%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.19) !important;
+  color: var(--lg18-ink) !important;
+  color-scheme: dark !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 2px 6px rgba(0, 0, 0, 0.38) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(input, select, textarea)::placeholder {
+  color: rgba(203, 213, 225, 0.56) !important;
+  opacity: 1 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(input, select, textarea):focus {
+  border-color: var(--lg18-blue-bright) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  outline: none;
+}
+
+html.theme-liquid-glass-v18 select option {
+  background-color: #18171c !important;
+  color: #f8fafc !important;
+}
+
+/* Primary action buttons & fleet pills (royal blue liquid glass) */
+html.theme-liquid-glass-v18 button[class*="bg-green-"],
+html.theme-liquid-glass-v18 button[class*="bg-emerald-"],
+html.theme-liquid-glass-v18 button[class*="bg-[var(--brand-green)]"]:not([class*="/15"]):not([class*="/10"]),
+html.theme-liquid-glass-v18 a[class*="bg-green-"],
+html.theme-liquid-glass-v18 a[class*="bg-[var(--brand-green)]"],
+html.theme-liquid-glass-v18 button[class*="from-green-500"][class*="to-green-700"],
+html.theme-liquid-glass-v18 span[class*="from-green-500"][class*="to-green-700"] {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 12px 26px -8px var(--lg18-blue-glow), inset 0 1.5px 0 rgba(255, 255, 255, 0.44) !important;
+}
+
+html.theme-liquid-glass-v18 button[class*="bg-green-"]:hover:not(:disabled),
+html.theme-liquid-glass-v18 button[class*="bg-emerald-"]:hover:not(:disabled),
+html.theme-liquid-glass-v18 button[class*="bg-[var(--brand-green)]"]:not([class*="/15"]):not([class*="/10"]):hover:not(:disabled) {
+  background: var(--lg18-glass-featured-hover) !important;
+  box-shadow: 0 16px 32px -8px rgba(59, 130, 246, 0.62), inset 0 1.5px 0 rgba(255, 255, 255, 0.54) !important;
+}
+
+html.theme-liquid-glass-v18 .rounded-full[class*="bg-[var(--brand-green)]"],
+html.theme-liquid-glass-v18 div[class*="from-green-500"] {
+  background: var(--lg18-glass-featured) !important;
+  color: #ffffff !important;
+}
+
+/* Frosted status pills (e.g. Turno de Hoje %) & aqueous glass equipment thumbnails */
+html.theme-liquid-glass-v18 .app-shell .bg-amber-100 {
+  background: rgba(251, 191, 36, 0.20) !important;
+  border: 1px solid rgba(251, 191, 36, 0.46) !important;
+  color: #fde68a !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+html.theme-liquid-glass-v18 .app-shell .bg-blue-100 {
+  background: rgba(59, 130, 246, 0.24) !important;
+  border: 1px solid rgba(147, 197, 253, 0.48) !important;
+  color: #dbeafe !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+html.theme-liquid-glass-v18 .app-shell .bg-green-100 {
+  background: rgba(52, 211, 153, 0.22) !important;
+  border: 1px solid rgba(110, 231, 183, 0.48) !important;
+  color: #d1fae5 !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-thumbnail {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.22) 0%, rgba(147, 197, 253, 0.14) 55%, rgba(255, 255, 255, 0.10) 100%) !important;
+  backdrop-filter: blur(16px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.30) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.40),
+    inset 0 -1px 0 rgba(147, 197, 253, 0.20),
+    0 8px 18px -8px rgba(0, 0, 0, 0.58) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-thumbnail::after {
+  background: linear-gradient(90deg, transparent, rgba(147, 197, 253, 0.28), transparent) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-thumbnail--loading {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.30) 0%,
+    rgba(186, 230, 253, 0.16) 52%,
+    rgba(56, 189, 248, 0.24) 100%
+  ) !important;
+  backdrop-filter: blur(22px) saturate(210%) brightness(1.10) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(210%) brightness(1.10) !important;
+  border-color: rgba(186, 230, 253, 0.44) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-thumbnail__shimmer::before {
+  background: linear-gradient(
+    108deg,
+    transparent 20%,
+    rgba(125, 211, 252, 0.18) 36%,
+    rgba(255, 255, 255, 0.58) 50%,
+    rgba(186, 230, 253, 0.34) 62%,
+    transparent 80%
+  ) !important;
+}
+
+/* ── Signature Bento Motion & Hover (matches video StatsCard whileHover y: -5) */
+.shell-page-stage {
+  min-width: 0;
+}
+
+html.theme-liquid-glass-v18 .app-shell .shell-page-stage {
+  animation: lg18-page-enter 440ms var(--lg18-ease) backwards;
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi) {
+  animation: lg18-card-rise 420ms var(--lg18-ease) backwards;
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):nth-child(1) { animation-delay: 40ms; }
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):nth-child(2) { animation-delay: 85ms; }
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):nth-child(3) { animation-delay: 130ms; }
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):nth-child(4) { animation-delay: 175ms; }
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):nth-child(5) { animation-delay: 220ms; }
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):nth-child(6) { animation-delay: 265ms; }
+
+@media (hover: hover) and (pointer: fine) {
+  html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi, .mt-order, .apoio-order):hover {
+    transform: translateY(-5px);
+    border-color: var(--lg18-border-bright) !important;
+    box-shadow: var(--lg18-shadow-hover) !important;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .dashboard-panel:hover {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-header button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(.lub-table-panel, .lub-filter-panel, .lub-modal).glass-card:hover {
+  transform: none;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+@keyframes lg18-page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lg18-card-rise {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Signature Featured Royal-Blue Hero Cards (from video right column) ──── */
+html.theme-liquid-glass-v18 .app-shell .dashboard-kpi:nth-child(5),
+html.theme-liquid-glass-v18 .app-shell .lub-kpi:first-child,
+html.theme-liquid-glass-v18 .app-shell .bi-kpi:first-child,
+html.theme-liquid-glass-v18 .app-shell .mt-kpi:first-child,
+html.theme-liquid-glass-v18 .app-shell .apoio-kpi:first-child {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.48) !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi:nth-child(5), .lub-kpi:first-child, .bi-kpi:first-child, .mt-kpi:first-child, .apoio-kpi:first-child) :is(p, span, small, strong, div, svg) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(7, 18, 46, 0.42);
+}
+
+html.theme-liquid-glass-v18 .app-shell :is(.dashboard-kpi:nth-child(5), .lub-kpi:first-child, .bi-kpi:first-child, .mt-kpi:first-child, .apoio-kpi:first-child) > div > div:last-child {
+  background: rgba(255, 255, 255, 0.20) !important;
+}
+
+/* ── Dashboard Module Cards & Charts ───────────────────────────────────────── */
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-kpi {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--lg18-shadow) !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-kpi:nth-child(5) {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.54) !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-kpi:nth-child(5) :is(p, span, small, strong, div, svg) {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-panel,
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .glow-red,
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .glow-green {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .glow-red {
+  border-color: rgba(251, 113, 133, 0.34) !important;
+  box-shadow: 0 22px 50px -20px rgba(225, 29, 72, 0.24), var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .glow-green {
+  border-color: rgba(96, 165, 250, 0.36) !important;
+  box-shadow: 0 22px 50px -20px rgba(37, 99, 235, 0.28), var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-equipment-card.glass-card {
+  background: linear-gradient(
+    144deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(186, 230, 253, 0.12) 24%,
+    rgba(16, 26, 46, 0.34) 100%
+  ) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--lg18-shadow-depth) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .glow-red .dashboard-equipment-card.glass-card {
+  border-color: rgba(251, 113, 133, 0.38) !important;
+  box-shadow:
+    var(--lg18-shadow-depth),
+    inset 2px 0 0 rgba(251, 113, 133, 0.56) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .glow-green .dashboard-equipment-card.glass-card {
+  border-color: rgba(125, 211, 252, 0.38) !important;
+  box-shadow:
+    var(--lg18-shadow-depth),
+    inset 2px 0 0 rgba(52, 211, 153, 0.54) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-equipment-card.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(224, 242, 254, 0.56) !important;
+  box-shadow: var(--lg18-shadow-hover) !important;
+}
+
+/* Emerald accent for completion rate readout */
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .text-emerald-400,
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard [class*="text-[var(--brand-green-light)]"] {
+  color: var(--lg18-emerald) !important;
+}
+
+/* Calendário selected cell & frosted calendar polish */
+html.theme-liquid-glass-v18 .app-shell [class*="ring-green-500"] {
+  background: rgba(59, 130, 246, 0.24) !important;
+  --tw-ring-color: rgba(147, 197, 253, 0.78) !important;
+}
+
+/* Recharts crisp contrast inside frosted glass */
+html.theme-liquid-glass-v18 .recharts-text,
+html.theme-liquid-glass-v18 .recharts-cartesian-axis-tick-value,
+html.theme-liquid-glass-v18 .recharts-legend-item-text {
+  fill: rgba(248, 250, 252, 0.88) !important;
+  color: rgba(248, 250, 252, 0.88) !important;
+}
+
+html.theme-liquid-glass-v18 .recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* ── Lavagem / Lubrificação Module ─────────────────────────────────────────── */
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium,
+html.theme-liquid-glass-v18 .lavagem-premium {
+  --lavagem-ivory: transparent !important;
+  --lavagem-ivory-deep: rgba(22, 20, 22, 0.50) !important;
+  --lavagem-surface: rgba(30, 27, 31, 0.52) !important;
+  --lavagem-surface-soft: rgba(36, 32, 36, 0.48) !important;
+  --lavagem-cream: rgba(40, 35, 40, 0.52) !important;
+  --lavagem-green: #93c5fd !important;
+  --lavagem-green-deep: #2563eb !important;
+  --lavagem-green-medium: #3b82f6 !important;
+  --lavagem-green-soft: rgba(59, 130, 246, 0.20) !important;
+  --lavagem-gold: rgba(255, 255, 255, 0.24) !important;
+  --lavagem-gold-mid: rgba(255, 255, 255, 0.22) !important;
+  --lavagem-gold-light: rgba(147, 197, 253, 0.50) !important;
+  --lavagem-ink: #ffffff !important;
+  --lavagem-muted: rgba(226, 232, 240, 0.80) !important;
+  --lavagem-line: rgba(255, 255, 255, 0.18) !important;
+  --lavagem-warning: #fcd34d !important;
+  --lavagem-warning-bg: rgba(251, 191, 36, 0.18) !important;
+  --lavagem-danger: #fda4af !important;
+  --lavagem-danger-bg: rgba(251, 113, 133, 0.20) !important;
+  --lavagem-blue: #93c5fd !important;
+  --lavagem-blue-bg: rgba(59, 130, 246, 0.20) !important;
+
+  --lub-surface: rgba(30, 27, 31, 0.52) !important;
+  --lub-soft: rgba(38, 34, 38, 0.48) !important;
+  --lub-line: rgba(255, 255, 255, 0.18) !important;
+  --lub-text: #ffffff !important;
+  --lub-muted: rgba(226, 232, 240, 0.80) !important;
+  --lub-green: #93c5fd !important;
+  --lub-hover: rgba(255, 255, 255, 0.10) !important;
+
+  /* Re-override semantic tokens defined in lavagem-premium.css so inline styles like PCMIntegrationPanel never fall back to white/sage */
+  --bg-primary: rgba(16, 15, 20, 0.58) !important;
+  --bg-secondary: rgba(26, 24, 30, 0.54) !important;
+  --bg-tertiary: rgba(34, 30, 36, 0.52) !important;
+  --bg-card: rgba(30, 27, 31, 0.52) !important;
+  --bg-hover: rgba(255, 255, 255, 0.10) !important;
+  --border-primary: rgba(255, 255, 255, 0.20) !important;
+  --border-secondary: rgba(255, 255, 255, 0.12) !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: rgba(248, 250, 252, 0.90) !important;
+  --text-muted: rgba(226, 232, 240, 0.80) !important;
+  --brand-green: #3b82f6 !important;
+  --brand-green-light: #34d399 !important;
+
+  background: transparent !important;
+  color: var(--lg18-ink) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-liquid-glass-v18 .lavagem-premium > .lavagem-premium-ribbons {
+  display: none !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium > .lavagem-premium-hero {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border: 1px solid rgba(255, 255, 255, 0.19) !important;
+  border-radius: 24px !important;
+  box-shadow: var(--lg18-shadow) !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .lavagem-premium .lavagem-premium-brand h2 {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .lavagem-premium .lavagem-premium-brand p {
+  color: var(--lg18-blue-bright) !important;
+  font-weight: 600 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-tabs {
+  background: rgba(28, 25, 27, 0.52) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.17) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]) {
+  background: var(--lg18-glass-capsule) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 13px !important;
+  color: rgba(241, 245, 249, 0.80) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]):hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-sync,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-tabs > button[aria-current="page"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-edit,
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-radius: 13px !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(label, dt) {
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(p, small, dd, li):not([class*="text-amber-"]):not([class*="text-red-"]):not([class*="text-blue-"]):not([class*="text-purple-"]):not([class*="text-green-"]):not([class*="text-emerald-"]):not([class*="text-cyan-"]) {
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.17) !important;
+  border-left: 3px solid var(--lg18-blue) !important;
+  border-radius: 16px !important;
+  color: var(--lg18-ink-soft) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] strong {
+  color: var(--lg18-ink) !important;
+}
+
+/* PCMIntegrationPanel inline card (both direct and nested inside .lub-module) */
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.19) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] h3 {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] p {
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] button:not([style*="--brand-green"]) {
+  background: var(--lg18-glass-capsule) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] button[style*="--brand-green"] {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] article {
+  background: rgba(16, 15, 18, 0.48) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 14px !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table-panel {
+  background: var(--lg18-glass-base) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .glass-card,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body [class*="glass-card"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-filter-panel,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-schedule-card,
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/5"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/10"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-tertiary)]"],
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-secondary)]"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Segmented view switcher (Tabela / Cartões / Quadro) & toolbar pills */
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"] {
+  color: rgba(241, 245, 249, 0.84) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"]:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-[var(--brand-green)]"] {
+  background: var(--lg18-glass-featured) !important;
+  color: #ffffff !important;
+  border-color: var(--lg18-border-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi:first-child {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.54) !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi:first-child :is(span, small, strong, svg, div) {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi:not(:first-child) {
+  border-top: 2px solid var(--lub-kpi-color, #93c5fd) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi-label,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi small {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi strong {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi.is-selected {
+  border-color: rgba(147, 197, 253, 0.72) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.45), var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-toolbar-title,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-filter-title strong,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-table-caption strong {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-toolbar p,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-filter-title span,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-table-caption span {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-toolbar p > span {
+  color: var(--lg18-amber) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-perf-soft-warning {
+  background: rgba(251, 191, 36, 0.14) !important;
+  backdrop-filter: blur(22px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  border: 1px solid rgba(251, 191, 36, 0.38) !important;
+  color: #fde68a !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-table-caption {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-filter-panel label.glass-input {
+  background: var(--lg18-glass-input) !important;
+  border: 1px solid rgba(255, 255, 255, 0.19) !important;
+  color: var(--lg18-ink-soft) !important;
+  border-radius: 14px !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-filter-panel label.glass-input > span {
+  color: var(--lg18-blue-bright) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-filter-panel label.glass-input > input {
+  border: 0 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  color: var(--lg18-ink) !important;
+}
+
+/* Lavagem table */
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table th,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table th button,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  background: rgba(16, 24, 42, 0.72) !important;
+  backdrop-filter: blur(24px) saturate(195%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(195%) !important;
+  color: #bae6fd !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table td {
+  background: rgba(16, 24, 42, 0.24) !important;
+  color: var(--lg18-ink) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table tbody tr:hover td {
+  background: rgba(224, 242, 254, 0.10) !important;
+}
+
+/* Sticky actions column occludes passing horizontal cells cleanly */
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  background: rgba(16, 24, 42, 0.84) !important;
+  background-clip: padding-box;
+  border-left: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: -8px 0 18px -10px rgba(0, 0, 0, 0.80) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-fleet,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-date.is-complete,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-detail {
+  color: #bae6fd !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-service,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-observation {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-secondary,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-os,
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-group {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-origin {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-origin.is-pcm {
+  background: rgba(56, 189, 248, 0.22) !important;
+  border-color: rgba(125, 211, 252, 0.50) !important;
+  color: #e0f2fe !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-narrative {
+  background: rgba(14, 22, 38, 0.42) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-narrative strong {
+  color: #bae6fd !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module.lub-fullscreen {
+  background:
+    radial-gradient(54% 48% at 14% 18%, rgba(226, 174, 118, 0.34) 0%, transparent 68%),
+    radial-gradient(50% 48% at 88% 18%, rgba(56, 189, 248, 0.40) 0%, transparent 66%),
+    linear-gradient(128deg, #3b3027 0%, #20242c 48%, #13325c 100%) !important;
+}
+
+/* Modals (crystal water-glass sheets — includes portaled dialogs on document.body) */
+html.theme-liquid-glass-v18 .lub-premium-modal,
+html.theme-liquid-glass-v18 .historico-frota-modal {
+  --lavagem-ink: #ffffff !important;
+  --lavagem-muted: rgba(226, 232, 240, 0.80) !important;
+  --lavagem-green: #ffffff !important;
+  --lavagem-line: rgba(255, 255, 255, 0.22) !important;
+  --lavagem-cream: rgba(255, 255, 255, 0.12) !important;
+  --lavagem-ivory: rgba(12, 18, 32, 0.54) !important;
+  --bg-card: rgba(18, 28, 48, 0.72) !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: rgba(248, 250, 252, 0.90) !important;
+  --text-muted: rgba(226, 232, 240, 0.80) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal,
+html.theme-liquid-glass-v18 .historico-frota-modal .historico-frota-card,
+html.theme-liquid-glass-v18 [role='dialog'] .rounded-2xl {
+  background: linear-gradient(
+    146deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(186, 230, 253, 0.14) 22%,
+    rgba(14, 24, 44, 0.76) 62%,
+    rgba(16, 32, 62, 0.82) 100%
+  ) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border: 1px solid rgba(224, 242, 254, 0.34) !important;
+  border-radius: 24px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow:
+    0 34px 84px -22px rgba(0, 0, 0, 0.88),
+    0 10px 30px -10px rgba(56, 189, 248, 0.24),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.56),
+    inset 0 -2px 2px rgba(125, 211, 252, 0.24) !important;
+}
+
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal > div:first-child,
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal > div:last-child,
+html.theme-liquid-glass-v18 .historico-frota-modal .historico-frota-card > div:first-child {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .historico-frota-modal .historico-frota-card h3,
+html.theme-liquid-glass-v18 .historico-frota-modal .historico-frota-card h4,
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal h3,
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal label {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal :is(input, select, textarea) {
+  background: rgba(12, 18, 32, 0.54) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+}
+
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal select option {
+  background: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal .lub-modal-note {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(125, 211, 252, 0.38) !important;
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .lub-premium-modal .lub-modal button:not([class*="bg-green-600"]) {
+  background: var(--lg18-glass-capsule) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  color: #f8fafc !important;
+}
+
+/* ── Central Gerencial (BI) ────────────────────────────────────────────────── */
+html.theme-liquid-glass-v18 .bi-root {
+  --bi-ink: #ffffff !important;
+  --bi-muted: rgba(226, 232, 240, 0.80) !important;
+  --bi-green: #3b82f6 !important;
+  --bi-line: rgba(255, 255, 255, 0.18) !important;
+  --bi-bg: transparent !important;
+  --bi-gold: #93c5fd !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: rgba(248, 250, 252, 0.90) !important;
+  --text-muted: rgba(226, 232, 240, 0.80) !important;
+  --bg-card: rgba(30, 27, 31, 0.52) !important;
+  --bg-primary: transparent !important;
+  --brand-green: #3b82f6 !important;
+  background: transparent !important;
+  color: var(--lg18-ink) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-liquid-glass-v18 .bi-header,
+html.theme-liquid-glass-v18 .bi-filter-panel,
+html.theme-liquid-glass-v18 .bi-kpi,
+html.theme-liquid-glass-v18 .bi-panel,
+html.theme-liquid-glass-v18 .bi-chart-panel,
+html.theme-liquid-glass-v18 .bi-view-toolbar nav,
+html.theme-liquid-glass-v18 .bi-empty-callout,
+html.theme-liquid-glass-v18 .bi-loading,
+html.theme-liquid-glass-v18 .bi-select-popover,
+html.theme-liquid-glass-v18 .bi-method-note,
+html.theme-liquid-glass-v18 .bi-tooltip,
+html.theme-liquid-glass-v18 .bi-full-narrative {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-kpi:first-child {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.52) !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .bi-kpi:first-child :is(p, span, small, strong, div, svg) {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .bi-brand h1,
+html.theme-liquid-glass-v18 .bi-panel-heading h2,
+html.theme-liquid-glass-v18 .bi-methodology h2,
+html.theme-liquid-glass-v18 .bi-kpi > strong,
+html.theme-liquid-glass-v18 .bi-chart-panel-header h3,
+html.theme-liquid-glass-v18 .bi-chart-empty strong,
+html.theme-liquid-glass-v18 .bi-source-line strong {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-kpi > div,
+html.theme-liquid-glass-v18 .bi-kpi p,
+html.theme-liquid-glass-v18 .bi-panel-heading p,
+html.theme-liquid-glass-v18 .bi-chart-panel-header p,
+html.theme-liquid-glass-v18 .bi-chart-empty span,
+html.theme-liquid-glass-v18 .bi-methodology p,
+html.theme-liquid-glass-v18 .bi-legend-item,
+html.theme-liquid-glass-v18 .bi-pagination,
+html.theme-liquid-glass-v18 .bi-source-line,
+html.theme-liquid-glass-v18 .bi-detail-note,
+html.theme-liquid-glass-v18 .bi-narrative-preview {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-methodology h3,
+html.theme-liquid-glass-v18 .bi-eyebrow,
+html.theme-liquid-glass-v18 .bi-orders-table th,
+html.theme-liquid-glass-v18 .bi-orders-table td > strong,
+html.theme-liquid-glass-v18 .bi-tooltip > strong,
+html.theme-liquid-glass-v18 .bi-tooltip-row b {
+  color: #bfdbfe !important;
+}
+
+html.theme-liquid-glass-v18 .bi-orders-table th {
+  background: rgba(20, 19, 26, 0.84) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-orders-table td {
+  color: var(--lg18-ink-soft) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-orders-table tbody > tr:hover td,
+html.theme-liquid-glass-v18 .bi-expanded-row td {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-orders-table small,
+html.theme-liquid-glass-v18 .bi-order-details dt {
+  color: var(--lg18-ink-muted) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-order-details dd,
+html.theme-liquid-glass-v18 .bi-order-details h3 {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-root input,
+html.theme-liquid-glass-v18 .bi-root select,
+html.theme-liquid-glass-v18 .bi-select-trigger,
+html.theme-liquid-glass-v18 .bi-search,
+html.theme-liquid-glass-v18 .bi-chart-empty {
+  background: var(--lg18-glass-input) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  color: var(--lg18-ink) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-liquid-glass-v18 .bi-button,
+html.theme-liquid-glass-v18 .bi-presets button,
+html.theme-liquid-glass-v18 .bi-period-shortcuts button,
+html.theme-liquid-glass-v18 .bi-filter-summary small,
+html.theme-liquid-glass-v18 .bi-pagination button,
+html.theme-liquid-glass-v18 .bi-detail-button,
+html.theme-liquid-glass-v18 .bi-chart-actions button,
+html.theme-liquid-glass-v18 .bi-select-options small {
+  background: var(--lg18-glass-capsule) !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  color: var(--lg18-ink-soft) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-button-primary,
+html.theme-liquid-glass-v18 .bi-view-toolbar nav button[aria-pressed="true"],
+html.theme-liquid-glass-v18 .bi-button.is-active {
+  background: var(--lg18-glass-featured) !important;
+  border-color: var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-premium-label {
+  background: rgba(59, 130, 246, 0.20) !important;
+  border-color: rgba(147, 197, 253, 0.44) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-liquid-glass-v18 .bi-charts {
+  --bi-green: #3b82f6 !important;
+  --bi-slate-900: #ffffff !important;
+  --bi-slate-700: #f1f5f9 !important;
+  --bi-slate-500: rgba(226, 232, 240, 0.80) !important;
+  --bi-slate-300: rgba(255, 255, 255, 0.24) !important;
+  --bi-slate-200: rgba(255, 255, 255, 0.14) !important;
+  --bi-slate-100: rgba(24, 22, 28, 0.56) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-charts .bi-axis-tick {
+  fill: rgba(241, 245, 249, 0.86) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-charts .recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-charts .recharts-cartesian-axis-tick text {
+  fill: rgba(241, 245, 249, 0.86) !important;
+}
+
+/* ── Apoio, Gestão de Ordens, Reformas & Canavieiras ───────────────────────── */
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking,
+html.theme-liquid-glass-v18 .app-shell .apoio-module,
+html.theme-liquid-glass-v18 .app-shell .apoio-premium,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference,
+html.theme-liquid-glass-v18 .app-shell .apoio-like-reformas {
+  --mt-ivory: transparent !important;
+  --mt-green: #93c5fd !important;
+  --mt-green-deep: #2563eb !important;
+  --mt-green-mid: #3b82f6 !important;
+  --mt-gold: rgba(255, 255, 255, 0.24) !important;
+  --mt-gold-light: rgba(147, 197, 253, 0.34) !important;
+  --mt-text: #ffffff !important;
+  --mt-muted: rgba(226, 232, 240, 0.82) !important;
+  --mt-line: rgba(255, 255, 255, 0.18) !important;
+
+  --apoio-ivory: transparent !important;
+  --apoio-surface: rgba(30, 27, 31, 0.52) !important;
+  --apoio-surface-soft: rgba(36, 32, 38, 0.48) !important;
+  --apoio-text: #ffffff !important;
+  --apoio-heading: #ffffff !important;
+  --apoio-muted: rgba(226, 232, 240, 0.82) !important;
+  --apoio-soft: rgba(59, 130, 246, 0.20) !important;
+  --apoio-border: rgba(255, 255, 255, 0.20) !important;
+  --apoio-border-strong: rgba(147, 197, 253, 0.50) !important;
+  --apoio-line: rgba(255, 255, 255, 0.18) !important;
+  --apoio-green: #3b82f6 !important;
+  --apoio-medium: #93c5fd !important;
+  --apoio-shadow: var(--lg18-shadow) !important;
+  --apoio-danger: #fda4af !important;
+
+  /* Re-override semantic tokens defined by maintenance-premium.css (#fff / #eee7d3 / #b38e43 / #5e6e63) */
+  --bg-primary: rgba(16, 15, 20, 0.54) !important;
+  --bg-secondary: rgba(28, 25, 31, 0.54) !important;
+  --bg-tertiary: rgba(34, 30, 38, 0.52) !important;
+  --bg-card: rgba(30, 27, 33, 0.54) !important;
+  --bg-hover: rgba(255, 255, 255, 0.08) !important;
+  --bg-accent: rgba(59, 130, 246, 0.20) !important;
+  --border-primary: rgba(255, 255, 255, 0.20) !important;
+  --border-secondary: rgba(255, 255, 255, 0.12) !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: rgba(241, 245, 249, 0.88) !important;
+  --text-muted: rgba(226, 232, 240, 0.82) !important;
+  --brand-green: #3b82f6 !important;
+  --brand-green-light: #34d399 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--lg18-ink) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking > .mt-ribbon-layer,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference > .apoio-ribbon-layer,
+html.theme-liquid-glass-v18 .app-shell .apoio-premium::before,
+html.theme-liquid-glass-v18 .app-shell .apoio-premium::after,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-hero::after {
+  display: none !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :where(h2, h3, h4, strong, dt, label),
+html.theme-liquid-glass-v18 .app-shell .apoio-reference :where(h2, h3, h4, strong, dt, label) {
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :where(p, dd, small, summary span),
+html.theme-liquid-glass-v18 .app-shell .apoio-reference :where(p, dd, small) {
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-hero,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference > .apoio-hero {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  border-radius: 26px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-hero-count {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-radius: 16px !important;
+  color: #ffffff !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-hero-count * {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-hero .mt-eyebrow,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-eyebrow,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-card-kicker,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-label,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-eyebrow {
+  color: #dbeafe !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.11em;
+  text-shadow: 0 1px 6px rgba(10, 16, 30, 0.72);
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order.mt-order--late .mt-card-kicker {
+  color: #fecdd3 !important;
+  text-shadow: 0 1px 6px rgba(24, 10, 16, 0.72);
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-hero .mt-hero-description {
+  color: rgba(241, 245, 249, 0.90) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-hero .mt-source-tag {
+  background: rgba(59, 130, 246, 0.22) !important;
+  border: 1px solid rgba(147, 197, 253, 0.42) !important;
+  border-radius: 9999px !important;
+  padding: 5px 12px !important;
+  color: #e0f2fe !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+}
+
+/* Source connection telemetry bar + helper labels (fixes dim murky #5e6e63 text) */
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-source-line {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(22, 22, 28, 0.44) 100%) !important;
+  backdrop-filter: blur(22px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  padding: 10px 14px !important;
+  color: rgba(241, 245, 249, 0.90) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-source-line > span {
+  color: rgba(241, 245, 249, 0.90) !important;
+  font-weight: 500 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-source-line strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-connection-dot {
+  background: #34d399 !important;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.68), 0 0 0 3px rgba(52, 211, 153, 0.20) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-connection-dot--warning {
+  background: #fbbf24 !important;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.58), 0 0 0 3px rgba(251, 191, 36, 0.22) !important;
+}
+
+/* Closed/archive visibility bar (replaces yellowish #fff8df card with frosted liquid water glass) */
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-visibility-bar {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(30, 27, 34, 0.52) 48%, rgba(59, 130, 246, 0.16) 100%) !important;
+  backdrop-filter: blur(28px) saturate(195%) brightness(1.06) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(195%) brightness(1.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-left: 4px solid #60a5fa !important;
+  border-radius: 18px !important;
+  color: #f8fafc !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-visibility-bar > svg {
+  color: #93c5fd !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-visibility-bar > span {
+  color: #f8fafc !important;
+  font-weight: 600 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-visibility-toggle {
+  background: rgba(59, 130, 246, 0.24) !important;
+  border-color: rgba(147, 197, 253, 0.48) !important;
+  color: #e0f2fe !important;
+}
+
+/* Override all #5e6e63 murky muted & #0b321f dark ink leaks from maintenance-premium.css */
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(
+  .mt-toolbar > div > p:not(.mt-eyebrow),
+  .mt-history-summary,
+  .mt-method,
+  .mt-date-note,
+  .mt-source-fact,
+  .mt-quadrant small,
+  .mt-detail-meta dt,
+  .mt-closure-fact small,
+  .apoio-direct-count,
+  .apoio-sync,
+  .apoio-sync-note,
+  .apoio-footer
+) {
+  color: rgba(226, 232, 240, 0.86) !important;
+  font-weight: 500 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(
+  .mt-toolbar h3,
+  .mt-fleet-title strong,
+  .mt-empty h4,
+  .mt-method strong,
+  .mt-table th,
+  .mt-table td:first-child strong,
+  .mt-history-summary strong,
+  .mt-closure-fact strong,
+  .mt-closure-fact--clear strong
+) {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-alert, .apoio-stale) {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.18) 0%, rgba(36, 26, 18, 0.62) 100%) !important;
+  backdrop-filter: blur(24px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(185%) !important;
+  border: 1px solid rgba(251, 191, 36, 0.42) !important;
+  border-left: 4px solid #fbbf24 !important;
+  border-radius: 16px !important;
+  color: #fef3c7 !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-alert strong, .apoio-stale strong) {
+  color: #fde68a !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-notice, .apoio-notice, .apoio-recency-summary) {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, rgba(20, 24, 34, 0.62) 100%) !important;
+  backdrop-filter: blur(24px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(185%) !important;
+  border: 1px solid rgba(147, 197, 253, 0.40) !important;
+  border-left: 4px solid #60a5fa !important;
+  border-radius: 16px !important;
+  color: #e0f2fe !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-btn, .apoio-button, .apoio-image-picker-action, .apoio-direct-clear),
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-button {
+  background: var(--lg18-glass-capsule) !important;
+  backdrop-filter: blur(20px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+  border-radius: 14px !important;
+  box-shadow:
+    0 8px 20px -10px rgba(0, 0, 0, 0.72),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.26),
+    inset 0 -1px 0 rgba(147, 197, 253, 0.14) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-btn, .apoio-button, .apoio-image-picker-action, .apoio-direct-clear):hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.36) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"], .mt-full-history > summary),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) button[aria-pressed="true"],
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"],
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-visibility-action,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference :is(.apoio-sync-button, .apoio-full-history > summary),
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-report-scope-btn.is-active,
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-compact-cards .apoio-card-bottom .apoio-details-button {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-visibility-action {
+  padding: 9px 18px !important;
+  min-height: 40px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-toolbar-actions .mt-visibility-toggle {
+  white-space: nowrap;
+  padding: 9px 16px !important;
+  min-height: 44px;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"]) *,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] *,
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-compact-cards .apoio-card-bottom .apoio-details-button * {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-filters, .apoio-sticky-search, .apoio-order-filters, .apoio-recency-panel, .mt-toolbar, .mt-pagination, .mt-empty, .mt-method, .mt-closure-summary),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking section.p-5,
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports section[aria-label],
+html.theme-liquid-glass-v18 .app-shell .apoio-reference :is(.apoio-command-center, .apoio-filter-center, .apoio-closed-toggle, .apoio-footer, .apoio-orders-panel > .p-4:last-child) {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-toolbar {
+  padding: 18px 20px !important;
+  gap: 14px 18px !important;
+  box-sizing: border-box !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-toolbar > div:first-child {
+  min-width: 0;
+  max-width: 100%;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-history-summary {
+  margin: 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi):first-child {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.54) !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi):first-child :is(span, small, strong, svg, div) {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi):not(:first-child) {
+  border-top: 2px solid rgba(147, 197, 253, 0.56) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi):not(:first-child) > svg,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-kpi svg {
+  color: var(--lg18-blue-bright) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.mt-kpi-label, .apoio-kpi-label, .mt-kpi small) {
+  color: rgba(226, 232, 240, 0.84) !important;
+  font-weight: 600 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-filters > summary {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-filters > summary > span:last-child {
+  color: #bfdbfe !important;
+  font-weight: 600 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-filter-body {
+  background: linear-gradient(180deg, rgba(16, 16, 22, 0.48) 0%, rgba(18, 22, 34, 0.56) 100%) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-panel-heading h3 {
+  border-left-color: var(--lg18-blue) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-panel-heading span,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-direct-search-label,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-filters label {
+  color: rgba(241, 245, 249, 0.90) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-direct-search-control, .apoio-multi-select-trigger, .apoio-multi-select-search, .apoio-group-fleet-search) {
+  background: var(--lg18-glass-input) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 14px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 2px 6px rgba(0, 0, 0, 0.36) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-direct-search-control {
+  gap: 11px !important;
+  padding: 0 14px !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-direct-search-control:focus-within {
+  border-color: var(--lg18-blue-bright) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-sticky-search .apoio-direct-search-control input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-group-fleet-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-multi-select-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 9px 4px !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]) {
+  padding-left: 42px !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-direct-search-control, .mt-search) svg {
+  color: var(--lg18-blue-bright) !important;
+  flex-shrink: 0;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) button:not([aria-pressed="true"]),
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-status-tabs button:not([aria-pressed="true"]),
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-report-scope-btn:not(.is-active) {
+  background: var(--lg18-glass-capsule) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: #f1f5f9 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-status-tabs button:not([aria-pressed="true"]) b {
+  background: rgba(59, 130, 246, 0.22) !important;
+  border: 1px solid rgba(147, 197, 253, 0.34) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] b {
+  background: rgba(255, 255, 255, 0.24) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-multi-select-popover,
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-group-fleet-picker {
+  background: rgba(24, 22, 28, 0.90) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  border-radius: 18px !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-multi-select-option, .apoio-multi-select-chip, .apoio-group-fleet-tile, .apoio-group-fleet-option, .apoio-group-fleet-all, .apoio-multi-select-actions button, .apoio-group-fleet-actions button, .apoio-group-fleet-clear) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-multi-select-option.is-selected, .apoio-group-fleet-tile.is-selected, .apoio-group-fleet-option.is-selected, .apoio-group-fleet-all.is-active) {
+  background: rgba(59, 130, 246, 0.24) !important;
+  border-color: rgba(147, 197, 253, 0.56) !important;
+  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.30) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-group-fleet-checkbox {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.36) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-group-fleet-all.is-active, .apoio-group-fleet-tile.is-selected) .apoio-group-fleet-checkbox {
+  background: var(--lg18-blue) !important;
+  border-color: rgba(191, 219, 254, 0.80) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-group-fleet-tile-copy strong, .apoio-group-fleet-option-text strong, .apoio-group-fleet-picker-heading strong, .apoio-multi-select-option span) {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-group-fleet-tile-copy small, .apoio-group-fleet-option-text small, .apoio-group-fleet-option-count, .apoio-multi-select-option small) {
+  color: rgba(203, 213, 225, 0.86) !important;
+}
+
+/* Equipamentos em Oficina de Terceiros — crystal water-glass checklist */
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px !important;
+  padding: 10px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(165deg, rgba(16, 26, 44, 0.42) 0%, rgba(12, 22, 42, 0.50) 100%) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.26) !important;
+  box-shadow:
+    inset 0 2px 12px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    0 12px 30px -16px rgba(0, 0, 0, 0.65) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-row {
+  background: linear-gradient(
+    138deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(224, 242, 254, 0.10) 48%,
+    rgba(56, 189, 248, 0.16) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(195%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(195%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 14px !important;
+  padding: 10px 12px !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 6px 16px -8px rgba(0, 0, 0, 0.50),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(125, 211, 252, 0.20) !important;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms var(--lg18-ease);
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-row:hover {
+  background: linear-gradient(
+    138deg,
+    rgba(255, 255, 255, 0.30) 0%,
+    rgba(224, 242, 254, 0.14) 50%,
+    rgba(56, 189, 248, 0.24) 100%
+  ) !important;
+  border-color: rgba(186, 230, 253, 0.58) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-row.is-unmarked {
+  opacity: 0.54 !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-style: dashed !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  box-shadow: none !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-row input[type="checkbox"] {
+  accent-color: #38bdf8 !important;
+  color-scheme: dark !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-text strong {
+  color: #ffffff !important;
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  letter-spacing: -0.01em;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.26) !important;
+  border: 1px solid rgba(186, 230, 253, 0.52) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-text span {
+  color: #f8fafc !important;
+  font-weight: 600 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-text small {
+  color: #bae6fd !important;
+  font-weight: 500 !important;
+  margin-top: 2px;
+}
+
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-text small.apoio-preview-emergency {
+  color: #fcd34d !important;
+  font-weight: 700 !important;
+}
+
+/* Grupos Apoio e nossas frotas (Cadastros tab) */
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-group-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(22, 22, 28, 0.56) 100%) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-group-card__name {
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order,
+html.theme-liquid-glass-v18 .app-shell .apoio-module.apoio-reference .apoio-compact-cards .apoio-order,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-order,
+html.theme-liquid-glass-v18 .app-shell .lub-schedule-card.glass-card {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border: 1px solid var(--lg18-border) !important;
+  border-left: 4px solid var(--lg18-blue) !important;
+  border-radius: 22px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow-depth) !important;
+}
+
+/* Camada elevada de backdrop-filter para elementos ativos ou selecionados */
+html.theme-liquid-glass-v18 .app-shell :is(
+  .glass-card,
+  .dashboard-equipment-card,
+  .mt-order,
+  .apoio-order,
+  .lub-schedule-card,
+  .apoio-group-card,
+  .lub-kpi
+):is(.is-active, .is-selected, .is-expanded, [aria-pressed="true"], [aria-selected="true"]),
+html.theme-liquid-glass-v18 .app-shell .lavagem-dashboard .dashboard-equipment-card.glass-card:is(.is-active, .is-selected, [aria-pressed="true"]),
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .glass-card:is(.is-active, .is-selected, .is-expanded, [aria-pressed="true"]),
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-schedule-card:is(.is-active, .is-selected, .is-expanded),
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-image-preview-row.is-marked.is-selected,
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-group-fleet-tile.is-selected, .apoio-group-fleet-tile.is-open, .apoio-group-fleet-option.is-selected),
+html.theme-liquid-glass-v18 .app-shell .apoio-image-reports .apoio-report-scope-btn.is-active,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] {
+  backdrop-filter: var(--lg18-blur-active) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-active) !important;
+  border-color: var(--lg18-border-bright) !important;
+  box-shadow: var(--lg18-shadow-hover) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order.mt-order--late {
+  border-color: rgba(251, 113, 133, 0.38) !important;
+  border-left-color: var(--lg18-coral) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order.mt-order--closed,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-order-closed {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.14) 0%, rgba(20, 34, 30, 0.56) 60%, rgba(52, 211, 153, 0.14) 100%) !important;
+  border-color: rgba(52, 211, 153, 0.38) !important;
+  border-left-color: var(--lg18-emerald) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-closed-ribbon,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-timeline-header,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-timeline-header {
+  background: var(--lg18-glass-featured) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.24) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-os {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.22) !important;
+  border: 1px solid rgba(147, 197, 253, 0.44) !important;
+  color: #e0f2fe !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-status,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-status {
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.26) !important;
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-status--programado,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-status-scheduled {
+  background: rgba(59, 130, 246, 0.24) !important;
+  border-color: rgba(147, 197, 253, 0.54) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-status--andamento {
+  background: rgba(139, 92, 246, 0.24) !important;
+  border-color: rgba(167, 139, 250, 0.52) !important;
+  color: #ede9fe !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-status--outros {
+  background: rgba(251, 191, 36, 0.20) !important;
+  border-color: rgba(251, 191, 36, 0.46) !important;
+  color: #fef3c7 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-status--encerrado,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order--closed .mt-status--encerrado,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-status-closed,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-closed-seal {
+  background: rgba(52, 211, 153, 0.22) !important;
+  border-color: rgba(110, 231, 183, 0.52) !important;
+  color: #d1fae5 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-days,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-days {
+  background: rgba(59, 130, 246, 0.24) !important;
+  border: 1px solid rgba(147, 197, 253, 0.52) !important;
+  border-radius: 14px !important;
+  color: #e0f2fe !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late,
+html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-days.apoio-age-critical {
+  background: rgba(244, 63, 94, 0.26) !important;
+  border: 1px solid rgba(251, 113, 133, 0.60) !important;
+  color: #ffe4e6 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order :is(.mt-quadrants, .mt-narrative-section, .mt-observations, .mt-closure-summary),
+html.theme-liquid-glass-v18 .app-shell .apoio-module.apoio-reference .apoio-compact-cards :is(.apoio-order-fields > div, .apoio-narrative-section, .apoio-observations) {
+  background: rgba(14, 19, 32, 0.30) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+  color: var(--lg18-ink-soft) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order :is(.mt-closure-fact, .mt-closure-fact--detection) {
+  background: rgba(16, 22, 36, 0.34) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-closure-fact span {
+  color: #93c5fd !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order .mt-order-bottom button,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-details-button,
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-group-card__edit {
+  background: var(--lg18-glass-capsule) !important;
+  backdrop-filter: blur(22px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(200%) !important;
+  border: 1px solid rgba(147, 197, 253, 0.48) !important;
+  color: #e0f2fe !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.52), inset 0 1.5px 0 rgba(255, 255, 255, 0.30) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-table-scroll, .mt-table-scroll),
+html.theme-liquid-glass-v18 .app-shell .apoio-module :is(.apoio-table-scroll, .apoio-orders-table) {
+  background: var(--lg18-glass-base) !important;
+  backdrop-filter: var(--lg18-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--lg18-blur-heavy) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-orders-table thead th, .mt-table thead th),
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-orders-table thead th {
+  background: rgba(16, 22, 34, 0.82) !important;
+  color: #bfdbfe !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking :is(.apoio-orders-table tbody td, .apoio-orders-table tbody th, .mt-table tbody td, .mt-table-row--closed > td),
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-orders-table tbody td,
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-table-row {
+  background: rgba(18, 24, 38, 0.22) !important;
+  color: var(--lg18-ink) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.11) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-table-closure-facts {
+  background: rgba(16, 18, 26, 0.56) !important;
+  border-left-color: #60a5fa !important;
+  color: rgba(226, 232, 240, 0.86) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-table-closed-ribbon {
+  background: rgba(52, 211, 153, 0.22) !important;
+  border-color: rgba(110, 231, 183, 0.48) !important;
+  color: #d1fae5 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell,
+html.theme-liquid-glass-v18 .app-shell .apoio-module .apoio-table-fleet-cell {
+  background: rgba(20, 19, 26, 0.92) !important;
+}
+
+/* ── Equipment Image Manager & TV Monitor ──────────────────────────────────── */
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager {
+  --eim-ink: #f8fafc !important;
+  --eim-muted: rgba(226, 232, 240, 0.68) !important;
+  --eim-line: rgba(255, 255, 255, 0.16) !important;
+  --eim-panel: rgba(30, 27, 29, 0.54) !important;
+  --eim-soft: rgba(59, 130, 246, 0.16) !important;
+  --eim-green: #60a5fa !important;
+  --eim-green-dark: #93c5fd !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager :is(.equipment-image-manager__preview-card, .equipment-image-manager__form, .equipment-image-manager__login, .equipment-image-manager__preview-caption) {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  border-radius: 20px !important;
+  color: var(--lg18-ink) !important;
+  box-shadow: var(--lg18-shadow) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager .equipment-image-manager__checker {
+  background-color: rgba(14, 18, 28, 0.64) !important;
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager .equipment-image-manager__role,
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager .equipment-image-manager__role.is-viewer,
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager .equipment-image-manager__notice.is-info {
+  background: var(--lg18-glass-capsule) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border: 1px solid rgba(147, 197, 253, 0.36) !important;
+  color: #e0f2fe !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager .equipment-image-manager__file-label {
+  background: rgba(59, 130, 246, 0.18) !important;
+  border-color: rgba(147, 197, 253, 0.44) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .equipment-image-manager .equipment-image-manager__button.is-primary {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .tv-monitor,
+html.theme-liquid-glass-v18 .tv-dialog {
+  --tv-bg: #181412;
+  --tv-panel: rgba(30, 27, 29, 0.56);
+  --tv-line: rgba(255, 255, 255, 0.18);
+  --tv-text: #f8fafc;
+  --tv-muted: rgba(226, 232, 240, 0.68);
+  --tv-green: #3b82f6;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .tv-monitor[data-tv-theme="dark"],
+html.theme-liquid-glass-v18 .tv-monitor {
+  background:
+    radial-gradient(54% 48% at 14% 18%, rgba(212, 168, 122, 0.28) 0%, transparent 66%),
+    radial-gradient(50% 48% at 88% 18%, rgba(59, 130, 246, 0.36) 0%, transparent 64%),
+    linear-gradient(128deg, #3c3129 0%, #262122 52%, #1d2d52 100%) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .tv-monitor .tv-summary,
+html.theme-liquid-glass-v18 .tv-monitor .tv-order,
+html.theme-liquid-glass-v18 .tv-dialog {
+  background: var(--lg18-glass-card) !important;
+  backdrop-filter: var(--lg18-blur) !important;
+  -webkit-backdrop-filter: var(--lg18-blur) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--lg18-shadow) !important;
+  color: var(--lg18-ink) !important;
+}
+
+html.theme-liquid-glass-v18 .tv-monitor .tv-board-tabs button[aria-pressed="true"],
+html.theme-liquid-glass-v18 .tv-monitor .tv-refresh,
+html.theme-liquid-glass-v18 .tv-dialog .tv-primary {
+  background: var(--lg18-glass-featured) !important;
+  border-color: var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+}
+
+/* ── Focus rings, Scrollbars, Fallbacks & Reduced Motion ───────────────────── */
+html.theme-liquid-glass-v18 :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--lg18-blue-bright) !important;
+  outline-offset: 2px;
+}
+
+html.theme-liquid-glass-v18 .app-shell ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html.theme-liquid-glass-v18 .app-shell ::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+html.theme-liquid-glass-v18 .app-shell ::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+}
+
+html.theme-liquid-glass-v18 .app-shell ::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+@media (max-width: 719px) {
+  html.theme-liquid-glass-v18 {
+    --glass-blur: 22px;
+    --lg18-blur-active: blur(34px) saturate(215%) brightness(1.12);
+  }
+
+  html.theme-liquid-glass-v18 .glass-card,
+  html.theme-liquid-glass-v18 .app-shell .glass-card,
+  html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-kpi,
+  html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-filter-panel,
+  html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lub-module .lub-table-panel,
+  html.theme-liquid-glass-v18 .app-shell .maintenance-tracking .mt-order,
+  html.theme-liquid-glass-v18 .app-shell .apoio-reference .apoio-order {
+    border-radius: 18px !important;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html.theme-liquid-glass-v18 .app-shell .glass-card,
+  html.theme-liquid-glass-v18 .app-shell .lub-kpi,
+  html.theme-liquid-glass-v18 .app-shell .dashboard-panel,
+  html.theme-liquid-glass-v18 .app-shell .apoio-order,
+  html.theme-liquid-glass-v18 .app-shell .mt-order,
+  html.theme-liquid-glass-v18 .app-shell .lub-table-panel,
+  html.theme-liquid-glass-v18 .app-shell .lub-filter-panel {
+    background: #232024 !important;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell .shell-header,
+  html.theme-liquid-glass-v18 .app-shell .shell-sidebar__panel {
+    background: #1c191d !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-liquid-glass-v18 .app-shell *,
+  html.theme-liquid-glass-v18 .app-shell *::before,
+  html.theme-liquid-glass-v18 .app-shell *::after,
+  html.theme-liquid-glass-v18 .shell-theme-picker {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.theme-liquid-glass-v18 .app-shell :is(.glass-card, .dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi, .mt-order, .apoio-order):hover,
+  html.theme-liquid-glass-v18 .app-shell .shell-header button:hover,
+  html.theme-liquid-glass-v18 .app-shell button:active {
+    transform: none !important;
+  }
+}

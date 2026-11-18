@@ -1,0 +1,121 @@
+[
+  {
+    "key": "leve",
+    "original": "VeículolevesOrochi.png",
+    "output": "leve.png",
+    "width": 400,
+    "height": 225,
+    "bytes": 33594,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "caminhonete",
+    "original": "caminhonetegeral.webp",
+    "output": "caminhonete.png",
+    "width": 360,
+    "height": 270,
+    "bytes": 66181,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "cacamba",
+    "original": "caminhãoCaçamba.webp",
+    "output": "cacamba.png",
+    "width": 400,
+    "height": 267,
+    "bytes": 119508,
+    "alpha": "RGBA — transparente",
+    "ajuste_v10_11": "Remoção do fundo cinza por edição com alpha real."
+  },
+  {
+    "key": "carga-seca",
+    "original": "caminhãocargaseca.webp",
+    "output": "carga-seca.png",
+    "width": 400,
+    "height": 320,
+    "bytes": 128708,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "cavalo",
+    "original": "caminhãocavalo.webp",
+    "output": "cavalo.png",
+    "width": 400,
+    "height": 276,
+    "bytes": 74960,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "munck",
+    "original": "caminhãomunck.webp",
+    "output": "munck.png",
+    "width": 400,
+    "height": 267,
+    "bytes": 105839,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "pipa",
+    "original": "caminhãopipa.webp",
+    "output": "pipa.png",
+    "width": 400,
+    "height": 225,
+    "bytes": 117772,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "canavieira",
+    "original": "carretacanavieira.webp",
+    "output": "canavieira.png",
+    "width": 400,
+    "height": 269,
+    "bytes": 79776,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "rodomuda",
+    "original": "carretarodomuda.webp",
+    "output": "rodomuda.png",
+    "width": 400,
+    "height": 267,
+    "bytes": 134773,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "colhedora",
+    "original": "colhedora.webp",
+    "output": "colhedora.png",
+    "width": 400,
+    "height": 288,
+    "bytes": 117183,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "prancha",
+    "original": "reboqueprancha.webp",
+    "output": "prancha.png",
+    "width": 400,
+    "height": 267,
+    "bytes": 38476,
+    "alpha": "RGBA — transparente",
+    "ajuste_v10_11": "Remoção do fundo cinza por edição com alpha real."
+  },
+  {
+    "key": "trator",
+    "original": "tratortranbortoereboque.webp",
+    "output": "trator.png",
+    "width": 400,
+    "height": 267,
+    "bytes": 141384,
+    "alpha": "RGBA — transparente"
+  },
+  {
+    "key": "vivencia",
+    "original": "áreadevivência.webp",
+    "output": "vivencia.png",
+    "width": 400,
+    "height": 263,
+    "bytes": 146786,
+    "alpha": "RGBA — transparente"
+  }
+]

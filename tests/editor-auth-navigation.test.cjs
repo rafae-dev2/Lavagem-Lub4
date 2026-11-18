@@ -1,0 +1,18 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const {buildSync}=require('esbuild');
+const vm=require('node:vm');
+const output=buildSync({entryPoints:['src/lib/editorAuthNavigation.ts'],bundle:true,platform:'node',format:'cjs',write:false}).outputFiles[0].text;
+const context={exports:{},module:{exports:{}},URL,URLSearchParams};vm.runInNewContext(output,context);
+const {isEquipmentEditorReturn}=context.module.exports;
+assert.equal(isEquipmentEditorReturn('https://controlelogisticalub.netlify.app/?editor_login=1'),true);
+assert.equal(isEquipmentEditorReturn('https://controlelogisticalub.netlify.app/#error=access_denied&error_code=otp_expired'),true);
+assert.equal(isEquipmentEditorReturn('https://controlelogisticalub.netlify.app/#access_token=SYNTHETIC&token_type=bearer'),true);
+for(const href of ['https://controlelogisticalub.netlify.app/#programacoes','https://controlelogisticalub.netlify.app/#configuracoes','https://controlelogisticalub.netlify.app/?editor_login=0','invalid'])assert.equal(isEquipmentEditorReturn(href),false);
+const app=fs.readFileSync('src/App.tsx','utf8');
+const route=app.slice(app.indexOf('const readHashPage'),app.indexOf('const [page, setPageState]'));
+assert.ok(route.indexOf('if (validPages.includes(candidate))')<route.indexOf('if (isEquipmentEditorReturn('));
+assert.match(app,/url\.searchParams\.delete\("editor_login"\)/);
+assert.match(app,/initialEquipmentEditorReturn/);
+assert.doesNotMatch(output,/console\.|localStorage|sessionStorage/);
+console.log('OK: retorno do editor, hash de erro/token, navegação operacional prioritária e nenhuma persistência de credenciais.');

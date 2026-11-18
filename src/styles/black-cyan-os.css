@@ -1,0 +1,1514 @@
+/* ============================================================================
+ * Black Total & Azul Ciano Robusto Premium Theme
+ * Strictly scoped to html.theme-black-cyan so verdan and other themes remain untouched.
+ * Logotipo (/logo.png) colors are strictly preserved with zero color filters.
+ * ============================================================================ */
+
+html.theme-black-cyan {
+  --font-display: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --bc-canvas: #000000;
+  --bc-surface: #060a0f;
+  --bc-surface-elevated: #0b1118;
+  --bc-surface-soft: #101923;
+  --bc-border: rgba(56, 189, 248, 0.18);
+  --bc-border-strong: rgba(34, 211, 238, 0.45);
+  --bc-cyan: #0891b2;
+  --bc-cyan-bright: #22d3ee;
+  --bc-cyan-mid: #0284c7;
+  --bc-cyan-deep: #0e7490;
+  --bc-cyan-glow: rgba(6, 182, 212, 0.46);
+  --bc-cyan-grad: linear-gradient(135deg, #0891b2 0%, #0284c7 52%, #0e7490 100%);
+  --bc-cyan-grad-hover: linear-gradient(135deg, #06b6d4 0%, #0284c7 50%, #0891b2 100%);
+  --bc-text: #f3f9fc;
+  --bc-text-soft: #c5d8e4;
+  --bc-text-muted: #8ea5b5;
+
+  /* Global semantic tokens when theme-black-cyan is active */
+  --bg-primary: #000000 !important;
+  --bg-secondary: #060a0f !important;
+  --bg-tertiary: #0b1118 !important;
+  --bg-card: #070b11 !important;
+  --bg-sidebar: #000000 !important;
+  --bg-hover: #0d151f !important;
+  --bg-accent: rgba(6, 182, 212, 0.16) !important;
+
+  --text-primary: #f3f9fc !important;
+  --text-secondary: #c5d8e4 !important;
+  --text-tertiary: #96adbc !important;
+  --text-muted: #869ead !important;
+  --text-inverse: #ffffff !important;
+
+  --border-primary: rgba(56, 189, 248, 0.18) !important;
+  --border-secondary: rgba(148, 163, 184, 0.14) !important;
+  --border-accent: rgba(34, 211, 238, 0.45) !important;
+
+  --brand-green: #0891b2 !important;
+  --brand-green-light: #22d3ee !important;
+  --brand-yellow: #fbbf24 !important;
+  --brand-red: #f87171 !important;
+  --brand-dark: #0e7490 !important;
+  --brand-accent: #06b6d4 !important;
+
+  --sidebar-text: #f3f9fc !important;
+  --sidebar-text-muted: #8fa6b5 !important;
+  --sidebar-active-bg: var(--bc-cyan-grad) !important;
+  --sidebar-hover-bg: rgba(6, 182, 212, 0.12) !important;
+  --sidebar-border: rgba(56, 189, 248, 0.16) !important;
+  --sidebar-logo-ring: rgba(34, 211, 238, 0.45) !important;
+
+  --glass-card-bg: rgba(7, 11, 17, 0.94) !important;
+  --glass-card-border: rgba(56, 189, 248, 0.18) !important;
+  --glass-card-shadow: 0 22px 48px -18px rgba(0, 0, 0, 0.92), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  --glass-input-bg: #03060a !important;
+  --glass-input-border: rgba(56, 189, 248, 0.24) !important;
+
+  --scrollbar-track: #020406 !important;
+  --scrollbar-thumb: rgba(8, 145, 178, 0.65) !important;
+  --scrollbar-thumb-hover: rgba(34, 211, 238, 0.88) !important;
+
+  --wm-halo-opacity: 0.34;
+  color-scheme: dark;
+  font-family: var(--font-family);
+}
+
+html.theme-black-cyan body {
+  background: #000000 !important;
+  background-image:
+    radial-gradient(60% 45% at 18% 6%, rgba(6, 182, 212, 0.08) 0%, transparent 65%),
+    radial-gradient(50% 40% at 84% 12%, rgba(2, 132, 199, 0.07) 0%, transparent 62%) !important;
+  background-attachment: fixed !important;
+  color: #f3f9fc !important;
+  font-family: var(--font-family) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Unified Premium Typography Across All Modules ─────────────────────────── */
+html.theme-black-cyan :is(
+  .app-shell,
+  .lavagem-premium,
+  .lavagem-premium .lub-module,
+  .lavagem-premium .lavagem-premium-body,
+  .lavagem-premium .lavagem-premium-body button,
+  .lavagem-premium :is(input, select, textarea),
+  .lub-premium-modal,
+  .lub-premium-modal :is(button, input, select, textarea),
+  .app-shell .maintenance-tracking,
+  .app-shell .apoio-module,
+  .app-shell .apoio-premium,
+  .app-shell .apoio-reference,
+  .bi-root,
+  .tv-monitor,
+  .tv-dialog,
+  .equipment-image-manager
+) {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+html.theme-black-cyan :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  .shell-header__title,
+  .lavagem-premium .lavagem-premium-brand h2,
+  .lavagem-premium .lub-toolbar-title,
+  .lavagem-premium .lub-kpi strong,
+  .lavagem-premium .lub-fleet,
+  .app-shell .maintenance-tracking .mt-hero h2,
+  .app-shell .maintenance-tracking .mt-fleet-title strong,
+  .app-shell .apoio-reference .apoio-hero h2,
+  .app-shell .apoio-reference .apoio-fleet-title,
+  .bi-brand h1,
+  .bi-kpi > strong,
+  .tv-topbar h2,
+  .tv-summary strong
+) {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  letter-spacing: -0.02em;
+}
+
+html.theme-black-cyan :is(code, pre, .font-mono) {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace !important;
+}
+
+/* ── Strict Logo Color Preservation ────────────────────────────────────────── */
+html.theme-black-cyan img[src*="logo.png"],
+html.theme-black-cyan .shell-sidebar__logo,
+html.theme-black-cyan .mt-hero-brand img,
+html.theme-black-cyan .tv-brand img,
+html.theme-black-cyan .bi-brand img,
+html.theme-black-cyan .lavagem-premium-brand img,
+html.theme-black-cyan .lavagem-premium .lub-brand img,
+html.theme-black-cyan .verdan-watermark-logo {
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+html.theme-black-cyan .shell-sidebar__logo,
+html.theme-black-cyan .lavagem-premium .lavagem-premium-brand img,
+html.theme-black-cyan .lavagem-premium .lub-module .lub-brand img,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-hero-brand img,
+html.theme-black-cyan .bi-brand img,
+html.theme-black-cyan .tv-brand img {
+  border: 1.5px solid rgba(34, 211, 238, 0.45) !important;
+  border-radius: 9999px !important;
+  background: #05080c !important;
+  padding: 2px !important;
+  box-shadow:
+    0 8px 22px -6px rgba(0, 0, 0, 0.9),
+    0 0 18px rgba(6, 182, 212, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── App Shell, Sidebar & Header ───────────────────────────────────────────── */
+html.theme-black-cyan .app-shell {
+  background: #000000 !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell--lub > div > main,
+html.theme-black-cyan .app-shell--apoio > div > main,
+html.theme-black-cyan .app-shell--apoio-reference > div > main,
+html.theme-black-cyan .app-shell > div > main {
+  background: #000000 !important;
+  background-image:
+    radial-gradient(65% 48% at 22% 8%, rgba(6, 182, 212, 0.065) 0%, transparent 65%),
+    radial-gradient(50% 42% at 85% 22%, rgba(2, 132, 199, 0.055) 0%, transparent 62%) !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .shell-sidebar__panel,
+html.theme-black-cyan .app-shell aside {
+  background: linear-gradient(180deg, #000000 0%, #04070b 65%, #060b11 100%) !important;
+  border-color: rgba(56, 189, 248, 0.16) !important;
+  box-shadow: 0 24px 56px -14px rgba(0, 0, 0, 0.95) !important;
+}
+
+html.theme-black-cyan .app-shell .shell-sidebar__brand-name {
+  color: #f4f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .shell-sidebar__brand-subtitle {
+  color: #8ea5b5 !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-section {
+  background: rgba(11, 17, 24, 0.85) !important;
+  border: 1px solid rgba(56, 189, 248, 0.14) !important;
+  border-left: 3px solid #0891b2 !important;
+  color: #a4bac8 !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-section__marker {
+  background: #22d3ee !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-section.is-current-section {
+  background: rgba(6, 182, 212, 0.14) !important;
+  border-color: rgba(34, 211, 238, 0.36) !important;
+  border-left-color: #22d3ee !important;
+  color: #ecfeff !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-item {
+  color: #b4c8d5 !important;
+  border-radius: 14px !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-item:hover,
+html.theme-black-cyan .app-shell .shell-nav-item:focus-visible {
+  background: rgba(6, 182, 212, 0.12) !important;
+  border-color: rgba(34, 211, 238, 0.28) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-item.is-active,
+html.theme-black-cyan .shell-sidebar__popup-item[aria-current="page"] {
+  background: var(--bc-cyan-grad) !important;
+  border: 1px solid rgba(103, 232, 249, 0.58) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 10px 26px -8px var(--bc-cyan-glow), inset 0 1px 0 rgba(255, 255, 255, 0.26) !important;
+}
+
+html.theme-black-cyan .app-shell .shell-nav-item.is-active .shell-nav-item__icon,
+html.theme-black-cyan .app-shell .shell-nav-item.is-active .shell-nav-item__chevron,
+html.theme-black-cyan .shell-sidebar__popup-item[aria-current="page"] .shell-sidebar__popup-item-icon {
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .shell-sidebar__popup,
+html.theme-black-cyan .shell-theme-picker {
+  background: rgba(5, 8, 12, 0.96) !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 24px 56px -12px rgba(0, 0, 0, 0.95) !important;
+}
+
+html.theme-black-cyan .app-shell .shell-header,
+html.theme-black-cyan .app-shell.app-shell--lub .shell-header,
+html.theme-black-cyan .app-shell.app-shell--apoio .shell-header,
+html.theme-black-cyan .app-shell.app-shell--apoio-reference .shell-header {
+  --shell-header-bg: rgba(3, 5, 8, 0.94) !important;
+  --shell-header-text: #f3f9fc !important;
+  --shell-header-muted: #92aab9 !important;
+  --shell-header-action: #ecfeff !important;
+  --shell-header-action-bg: rgba(14, 22, 32, 0.9) !important;
+  --shell-header-action-border: rgba(56, 189, 248, 0.22) !important;
+  --shell-header-border: rgba(56, 189, 248, 0.16) !important;
+  background: rgba(3, 5, 8, 0.94) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.16) !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .shell-header__title {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .shell-header__subtitle {
+  color: #8ea5b5 !important;
+}
+
+html.theme-black-cyan .shell-header__theme-button,
+html.theme-black-cyan .shell-header__closed-button,
+html.theme-black-cyan .shell-header__notification > div > button {
+  border-radius: 9999px !important;
+  background: rgba(12, 18, 26, 0.92) !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  color: #e6f6fb !important;
+}
+
+html.theme-black-cyan .shell-header__theme-button:hover,
+html.theme-black-cyan .shell-header__closed-button:hover,
+html.theme-black-cyan .shell-header__notification > div > button:hover {
+  background: rgba(6, 182, 212, 0.16) !important;
+  border-color: rgba(34, 211, 238, 0.5) !important;
+}
+
+html.theme-black-cyan .shell-header__sync-button {
+  border-radius: 9999px !important;
+  padding-inline: 16px !important;
+  background: var(--bc-cyan-grad) !important;
+  border: 1px solid rgba(103, 232, 249, 0.6) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 22px -6px var(--bc-cyan-glow), inset 0 1px 0 rgba(255, 255, 255, 0.26) !important;
+}
+
+html.theme-black-cyan .shell-header__sync-button:hover:not(:disabled) {
+  background: var(--bc-cyan-grad-hover) !important;
+  box-shadow: 0 12px 26px -6px rgba(34, 211, 238, 0.58) !important;
+}
+
+/* ── Global Cards, Inputs & Cyan Primary Buttons ───────────────────────────── */
+html.theme-black-cyan .glass-card,
+html.theme-black-cyan .app-shell .glass-card {
+  background: rgba(7, 11, 17, 0.94) !important;
+  border: 1px solid rgba(56, 189, 248, 0.18) !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 18px 42px -18px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .glass-card:hover {
+  border-color: rgba(34, 211, 238, 0.34) !important;
+}
+
+html.theme-black-cyan .glass-input,
+html.theme-black-cyan .app-shell .glass-input {
+  background: #03060a !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+/* Replace green utility action buttons with robust Cyan gradient */
+html.theme-black-cyan button[class*="bg-green-"],
+html.theme-black-cyan button[class*="bg-emerald-"],
+html.theme-black-cyan button[class*="bg-[var(--brand-green)]"]:not([class*="/15"]):not([class*="/10"]),
+html.theme-black-cyan a[class*="bg-green-"],
+html.theme-black-cyan a[class*="bg-[var(--brand-green)]"] {
+  background: var(--bc-cyan-grad) !important;
+  border-color: rgba(103, 232, 249, 0.58) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 20px -8px var(--bc-cyan-glow), inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+html.theme-black-cyan button[class*="bg-green-"]:hover:not(:disabled),
+html.theme-black-cyan button[class*="bg-emerald-"]:hover:not(:disabled),
+html.theme-black-cyan button[class*="bg-[var(--brand-green)]"]:not([class*="/15"]):not([class*="/10"]):hover:not(:disabled) {
+  background: var(--bc-cyan-grad-hover) !important;
+  box-shadow: 0 12px 26px -6px rgba(34, 211, 238, 0.55) !important;
+}
+
+/* Active step pills / calendar today badge / turn progress fill */
+html.theme-black-cyan .rounded-full[class*="bg-[var(--brand-green)]"],
+html.theme-black-cyan div[class*="from-green-500"] {
+  background: var(--bc-cyan-grad) !important;
+  color: #ffffff !important;
+}
+
+/* ── Lavagem / Lubrificação + Dashboard + Importar + Exportar ──────────────── */
+html.theme-black-cyan .app-shell .lavagem-premium,
+html.theme-black-cyan .lavagem-premium {
+  --lavagem-ivory: transparent !important;
+  --lavagem-ivory-deep: #04070b !important;
+  --lavagem-surface: #070b11 !important;
+  --lavagem-surface-soft: #0b1119 !important;
+  --lavagem-cream: #0e1621 !important;
+  --lavagem-green: #22d3ee !important;
+  --lavagem-green-deep: #0e7490 !important;
+  --lavagem-green-medium: #06b6d4 !important;
+  --lavagem-green-soft: rgba(6, 182, 212, 0.14) !important;
+  --lavagem-gold: #38bdf8 !important;
+  --lavagem-gold-mid: rgba(56, 189, 248, 0.22) !important;
+  --lavagem-gold-light: rgba(34, 211, 238, 0.36) !important;
+  --lavagem-ink: #f3f9fc !important;
+  --lavagem-muted: #93aab9 !important;
+  --lavagem-line: rgba(56, 189, 248, 0.18) !important;
+  --lavagem-warning: #fbbf24 !important;
+  --lavagem-warning-bg: rgba(251, 191, 36, 0.14) !important;
+  --lavagem-danger: #f87171 !important;
+  --lavagem-danger-bg: rgba(248, 113, 113, 0.14) !important;
+  --lavagem-blue: #38bdf8 !important;
+  --lavagem-blue-bg: rgba(56, 189, 248, 0.14) !important;
+
+  --lub-surface: #070b11 !important;
+  --lub-soft: #0c121b !important;
+  --lub-line: rgba(56, 189, 248, 0.18) !important;
+  --lub-text: #f3f9fc !important;
+  --lub-muted: #93aab9 !important;
+  --lub-green: #38bdf8 !important;
+  --lub-hover: rgba(6, 182, 212, 0.1) !important;
+
+  /* Override all descendant inherited tokens that lavagem-premium.css forced light */
+  --bg-primary: #000000 !important;
+  --bg-secondary: #060a0f !important;
+  --bg-tertiary: #0c131c !important;
+  --bg-card: #070c12 !important;
+  --bg-hover: #0f1824 !important;
+  --border-primary: rgba(56, 189, 248, 0.2) !important;
+  --border-secondary: rgba(148, 163, 184, 0.12) !important;
+  --text-primary: #f3f9fc !important;
+  --text-secondary: #c5d8e4 !important;
+  --text-muted: #8ea5b5 !important;
+  --text-inverse: #ffffff !important;
+  --brand-green: #0891b2 !important;
+  --glass-card-bg: #070c12 !important;
+  --glass-card-border: rgba(56, 189, 248, 0.18) !important;
+  --glass-input-bg: #03060a !important;
+  --glass-input-border: rgba(56, 189, 248, 0.24) !important;
+
+  background: transparent !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .lavagem-premium > .lavagem-premium-ribbons {
+  display: none !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium > .lavagem-premium-hero {
+  background:
+    radial-gradient(60% 120% at 88% 10%, rgba(6, 182, 212, 0.16) 0%, transparent 65%),
+    linear-gradient(125deg, #070c12 0%, #030508 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.22) !important;
+  border-top: 2px solid #06b6d4 !important;
+  box-shadow: 0 22px 46px -20px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .lavagem-premium .lavagem-premium-brand h2 {
+  color: #f4f9fc !important;
+}
+
+html.theme-black-cyan .lavagem-premium .lavagem-premium-brand p {
+  color: #22d3ee !important;
+}
+
+/* Primary action & active tabs in Lavagem */
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-sync,
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-tabs > button[aria-current="page"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body .lub-edit,
+html.theme-black-cyan .lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  background: var(--bc-cyan-grad) !important;
+  border: 1px solid rgba(103, 232, 249, 0.62) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 10px 24px -8px var(--bc-cyan-glow), inset 0 1px 0 rgba(255, 255, 255, 0.26) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-sync:hover:not(:disabled),
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"]:hover:not(:disabled),
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body .lub-edit:hover:not(:disabled) {
+  background: var(--bc-cyan-grad-hover) !important;
+  border-color: rgba(165, 243, 252, 0.85) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-tabs {
+  background: #060a0f !important;
+  border: 1px solid rgba(56, 189, 248, 0.18) !important;
+  box-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Explicitly override lavagem-premium.css bottom green inactive-tab rule */
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]) {
+  background: #0b1118 !important;
+  border: 1px solid rgba(56, 189, 248, 0.14) !important;
+  color: #b4c8d5 !important;
+  box-shadow: none !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]):hover:not(:disabled) {
+  background: rgba(6, 182, 212, 0.14) !important;
+  border-color: rgba(34, 211, 238, 0.36) !important;
+  color: #ffffff !important;
+}
+
+/* Lavagem body text & headings contrast */
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(h1, h2, h3, h4, h5, h6) {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(label, dt) {
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(p, small, dd, li):not([class*="text-amber-"]):not([class*="text-red-"]):not([class*="text-blue-"]):not([class*="text-purple-"]):not([class*="text-green-"]):not([class*="text-emerald-"]):not([class*="text-cyan-"]) {
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body [class*="text-[var(--text-primary)]"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body [class~="text-white"] {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body [class*="text-[var(--text-secondary)]"] {
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body [class*="text-[var(--text-muted)]"] {
+  color: #93aab9 !important;
+}
+
+/* Note banner: "Controle dos demais equipamentos" */
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] {
+  background: #070c12 !important;
+  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  border-left: 3px solid #06b6d4 !important;
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] strong {
+  color: #f3f9fc !important;
+}
+
+/* PCM Integration Panel (override inline green linear-gradient & light buttons) */
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body > section[style*="linear-gradient"] {
+  background:
+    radial-gradient(80% 120% at 100% 0%, rgba(6, 182, 212, 0.14) 0%, transparent 62%),
+    linear-gradient(125deg, #080e16 0%, #05080d 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body > section[style*="linear-gradient"] h3 {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body > section[style*="linear-gradient"] p {
+  color: #b7ccd9 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body > section[style*="linear-gradient"] article {
+  background: #04070c !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+/* Glass cards & panels inside Lavagem/Dashboard/Import/Export */
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body .glass-card,
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body [class*="glass-card"],
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-kpi,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-filter-panel,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table-panel,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-schedule-card,
+html.theme-black-cyan .lub-premium-modal .lub-modal,
+html.theme-black-cyan .historico-frota-modal .historico-frota-card {
+  background: #070b11 !important;
+  border: 1px solid rgba(56, 189, 248, 0.18) !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 18px 42px -18px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/5"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/10"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-tertiary)]"],
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-secondary)]"] {
+  background: #0b1119 !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+  color: #dbeaf3 !important;
+}
+
+/* Toolbar view switcher + Semana chip + Atalhos + Turno de Hoje */
+html.theme-black-cyan .app-shell .lavagem-premium .lub-toolbar-title {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-toolbar p {
+  color: #93aab9 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-toolbar p > span {
+  color: #fbbf24 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-toolbar button[class*="bg-amber-"] {
+  background: rgba(251, 191, 36, 0.16) !important;
+  border-color: rgba(251, 191, 36, 0.42) !important;
+  color: #fde68a !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-toolbar button[class*="bg-green-"] {
+  background: var(--bc-cyan-grad) !important;
+  border-color: rgba(103, 232, 249, 0.6) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-filter-title strong,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-table-caption strong {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-filter-title span,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-table-caption span {
+  color: #8fa6b5 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-perf-soft-warning {
+  background: rgba(251, 191, 36, 0.14) !important;
+  border: 1px solid rgba(251, 191, 36, 0.36) !important;
+  color: #fde68a !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-perf-soft-warning__icon {
+  color: #fbbf24 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lavagem-perf-soft-warning__close {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(251, 191, 36, 0.36) !important;
+  color: #fde68a !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-table-caption {
+  background: #05090e !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.16) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-filter-panel label.glass-input {
+  background: #03060a !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-filter-panel label.glass-input > span {
+  color: #38bdf8 !important;
+  font-weight: 600;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-filter-panel label.glass-input > input {
+  border: 0 !important;
+  background: transparent !important;
+  color: #f3f9fc !important;
+  box-shadow: none !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium :is(input, select, textarea):not(.bg-transparent),
+html.theme-black-cyan .lub-premium-modal .lub-modal :is(input, select, textarea) {
+  background: #03060a !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium :is(input, select, textarea)::placeholder,
+html.theme-black-cyan .lub-premium-modal .lub-modal :is(input, select, textarea)::placeholder {
+  color: #6b8494 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium select option,
+html.theme-black-cyan .lub-premium-modal .lub-modal select option {
+  background: #060a0f !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-kpi {
+  border-top: 2px solid var(--lub-kpi-color, #06b6d4) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-kpi-label,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-kpi small {
+  color: #93aab9 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-kpi strong {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-kpi.is-selected {
+  border-color: rgba(34, 211, 238, 0.72) !important;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.36) !important;
+}
+
+/* Lavagem Table */
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table th,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table th button,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  background: #03060a !important;
+  color: #38bdf8 !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.24) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table td {
+  background: #070b11 !important;
+  color: #eaf4fa !important;
+  border-bottom-color: rgba(56, 189, 248, 0.09) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table tbody tr:hover td {
+  background: #0b121b !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  background: #05090e !important;
+  border-left: 1px solid rgba(56, 189, 248, 0.16) !important;
+  box-shadow: -6px 0 12px -6px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-fleet,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-date.is-complete,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-detail {
+  color: #38bdf8 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-service,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-observation {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-secondary,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-os,
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-group {
+  color: #8ea5b5 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-origin {
+  background: #0c131d !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+  color: #96adbc !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-origin.is-pcm {
+  background: rgba(6, 182, 212, 0.16) !important;
+  border-color: rgba(34, 211, 238, 0.36) !important;
+  color: #67e8f9 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-narrative {
+  background: #04070c !important;
+  border: 1px solid rgba(56, 189, 248, 0.16) !important;
+  color: #dceaf2 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module .lub-narrative strong {
+  color: #38bdf8 !important;
+}
+
+html.theme-black-cyan .app-shell .lavagem-premium .lub-module.lub-fullscreen {
+  background:
+    radial-gradient(900px 580px at 14% -8%, rgba(6, 182, 212, 0.14), transparent 62%),
+    #000000 !important;
+}
+
+/* Lavagem Modal */
+html.theme-black-cyan .lub-premium-modal {
+  --lavagem-ink: #f3f9fc !important;
+  --lavagem-muted: #93aab9 !important;
+  --lavagem-green: #f3f9fc !important;
+  --lavagem-line: rgba(56, 189, 248, 0.2) !important;
+  --lavagem-cream: #0a1018 !important;
+  --lavagem-ivory: #03060a !important;
+  --bg-card: #070b11 !important;
+  --text-primary: #f3f9fc !important;
+  --text-secondary: #c5d8e4 !important;
+  --text-muted: #93aab9 !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .lub-premium-modal .lub-modal > div:first-child {
+  background: #0a1018 !important;
+  border-bottom-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+html.theme-black-cyan .lub-premium-modal .lub-modal > div:last-child {
+  background: #05090e !important;
+  border-top-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+html.theme-black-cyan .lub-premium-modal .lub-modal .lub-modal-note {
+  background: #0b121b !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .lub-premium-modal .lub-modal .lub-modal-note strong {
+  color: #38bdf8 !important;
+}
+
+html.theme-black-cyan .lub-premium-modal .lub-modal button:not([class*="bg-green-600"]) {
+  background: #0c131d !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #dceaf2 !important;
+}
+
+/* TurnoKanban & Calendario & Importar Cyan Accents */
+html.theme-black-cyan button[class*="from-green-500"][class*="to-green-700"] {
+  background: var(--bc-cyan-grad) !important;
+  border-color: rgba(103, 232, 249, 0.5) !important;
+  box-shadow: 0 4px 12px -4px var(--bc-cyan-glow) !important;
+}
+
+html.theme-black-cyan div[class*="bg-green-900/30"][class*="ring-green-500"] {
+  background: rgba(6, 182, 212, 0.22) !important;
+  --tw-ring-color: rgba(34, 211, 238, 0.7) !important;
+}
+
+html.theme-black-cyan .recharts-text,
+html.theme-black-cyan .recharts-cartesian-axis-tick-value,
+html.theme-black-cyan .recharts-legend-item-text {
+  fill: #b6ccd9 !important;
+  color: #b6ccd9 !important;
+}
+
+/* ── Central Gerencial (BI) ────────────────────────────────────────────────── */
+html.theme-black-cyan .bi-root {
+  --bi-ink: #f3f9fc !important;
+  --bi-muted: #93aab9 !important;
+  --bi-green: #0891b2 !important;
+  --bi-line: rgba(56, 189, 248, 0.18) !important;
+  --bi-bg: #000000 !important;
+  --bi-gold: #06b6d4 !important;
+  --text-primary: #f3f9fc !important;
+  --text-secondary: #c5d8e4 !important;
+  --bg-card: #070b11 !important;
+  --bg-primary: #000000 !important;
+  --brand-green: #0891b2 !important;
+  background: transparent !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .bi-header,
+html.theme-black-cyan .bi-filter-panel,
+html.theme-black-cyan .bi-kpi,
+html.theme-black-cyan .bi-panel,
+html.theme-black-cyan .bi-chart-panel,
+html.theme-black-cyan .bi-view-toolbar nav,
+html.theme-black-cyan .bi-empty-callout,
+html.theme-black-cyan .bi-loading,
+html.theme-black-cyan .bi-select-popover,
+html.theme-black-cyan .bi-method-note,
+html.theme-black-cyan .bi-tooltip,
+html.theme-black-cyan .bi-full-narrative {
+  background: #070b11 !important;
+  border: 1px solid rgba(56, 189, 248, 0.18) !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 20px 44px -20px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .bi-header {
+  border-top: 2px solid #06b6d4 !important;
+}
+
+html.theme-black-cyan .bi-brand h1,
+html.theme-black-cyan .bi-panel-heading h2,
+html.theme-black-cyan .bi-methodology h2,
+html.theme-black-cyan .bi-kpi > strong,
+html.theme-black-cyan .bi-chart-panel-header h3,
+html.theme-black-cyan .bi-chart-empty strong,
+html.theme-black-cyan .bi-source-line strong {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .bi-kpi > div,
+html.theme-black-cyan .bi-kpi p,
+html.theme-black-cyan .bi-panel-heading p,
+html.theme-black-cyan .bi-chart-panel-header p,
+html.theme-black-cyan .bi-chart-empty span,
+html.theme-black-cyan .bi-methodology p,
+html.theme-black-cyan .bi-legend-item,
+html.theme-black-cyan .bi-pagination,
+html.theme-black-cyan .bi-source-line,
+html.theme-black-cyan .bi-detail-note,
+html.theme-black-cyan .bi-narrative-preview {
+  color: #9bb1bf !important;
+}
+
+html.theme-black-cyan .bi-methodology h3,
+html.theme-black-cyan .bi-eyebrow,
+html.theme-black-cyan .bi-orders-table th,
+html.theme-black-cyan .bi-orders-table td > strong,
+html.theme-black-cyan .bi-tooltip > strong,
+html.theme-black-cyan .bi-tooltip-row b {
+  color: #38bdf8 !important;
+}
+
+html.theme-black-cyan .bi-orders-table th {
+  background: #04070c !important;
+  border-bottom-color: rgba(56, 189, 248, 0.22) !important;
+}
+
+html.theme-black-cyan .bi-orders-table td {
+  color: #dbeaf3 !important;
+  border-bottom-color: rgba(56, 189, 248, 0.1) !important;
+}
+
+html.theme-black-cyan .bi-orders-table tbody > tr:hover td,
+html.theme-black-cyan .bi-expanded-row td {
+  background: #0b121c !important;
+}
+
+html.theme-black-cyan .bi-orders-table small,
+html.theme-black-cyan .bi-order-details dt {
+  color: #8ea5b5 !important;
+}
+
+html.theme-black-cyan .bi-order-details dd,
+html.theme-black-cyan .bi-order-details h3 {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .bi-root input,
+html.theme-black-cyan .bi-root select,
+html.theme-black-cyan .bi-select-trigger,
+html.theme-black-cyan .bi-search,
+html.theme-black-cyan .bi-chart-empty {
+  background: #03060a !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .bi-button,
+html.theme-black-cyan .bi-presets button,
+html.theme-black-cyan .bi-period-shortcuts button,
+html.theme-black-cyan .bi-filter-summary small,
+html.theme-black-cyan .bi-pagination button,
+html.theme-black-cyan .bi-detail-button,
+html.theme-black-cyan .bi-chart-actions button,
+html.theme-black-cyan .bi-select-options small {
+  background: #0b121b !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+  color: #dbeaf3 !important;
+}
+
+html.theme-black-cyan .bi-select-options label:hover {
+  background: rgba(6, 182, 212, 0.14) !important;
+}
+
+html.theme-black-cyan .bi-select-clear,
+html.theme-black-cyan .bi-notice-warning {
+  background: rgba(6, 182, 212, 0.12) !important;
+  border: 1px solid rgba(56, 189, 248, 0.28) !important;
+  color: #bae6fd !important;
+}
+
+html.theme-black-cyan .bi-button-primary,
+html.theme-black-cyan .bi-view-toolbar nav button[aria-pressed="true"],
+html.theme-black-cyan .bi-button.is-active {
+  background: var(--bc-cyan-grad) !important;
+  border-color: rgba(103, 232, 249, 0.58) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 10px 24px -8px var(--bc-cyan-glow) !important;
+}
+
+html.theme-black-cyan .bi-button-primary:hover {
+  background: var(--bc-cyan-grad-hover) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .bi-premium-label {
+  background: rgba(6, 182, 212, 0.14) !important;
+  border-color: rgba(34, 211, 238, 0.36) !important;
+  color: #67e8f9 !important;
+}
+
+html.theme-black-cyan .bi-charts {
+  --bi-green: #06b6d4 !important;
+  --bi-slate-900: #f3f9fc !important;
+  --bi-slate-700: #c5d8e4 !important;
+  --bi-slate-500: #8ea5b5 !important;
+  --bi-slate-300: rgba(56, 189, 248, 0.22) !important;
+  --bi-slate-200: rgba(56, 189, 248, 0.12) !important;
+  --bi-slate-100: #0a1017 !important;
+}
+
+html.theme-black-cyan .bi-heat-cell {
+  background: color-mix(in srgb, #06b6d4 calc(var(--heat-intensity) * 78%), #0b121a) !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+/* ── Apoio, Reformas & Carretas Canavieiras ────────────────────────────────── */
+html.theme-black-cyan .app-shell .maintenance-tracking,
+html.theme-black-cyan .app-shell .apoio-module,
+html.theme-black-cyan .app-shell .apoio-premium,
+html.theme-black-cyan .app-shell .apoio-reference,
+html.theme-black-cyan .app-shell .apoio-like-reformas {
+  --mt-ivory: transparent !important;
+  --mt-green: #38bdf8 !important;
+  --mt-green-deep: #0e7490 !important;
+  --mt-green-mid: #06b6d4 !important;
+  --mt-gold: rgba(56, 189, 248, 0.34) !important;
+  --mt-gold-light: rgba(56, 189, 248, 0.16) !important;
+  --mt-text: #f3f9fc !important;
+  --mt-muted: #93aab9 !important;
+  --mt-line: rgba(56, 189, 248, 0.18) !important;
+
+  --apoio-ivory: transparent !important;
+  --apoio-surface: #070b11 !important;
+  --apoio-surface-soft: #0c121b !important;
+  --apoio-text: #f3f9fc !important;
+  --apoio-heading: #f3f9fc !important;
+  --apoio-muted: #93aab9 !important;
+  --apoio-soft: rgba(6, 182, 212, 0.14) !important;
+  --apoio-border: rgba(56, 189, 248, 0.18) !important;
+  --apoio-border-strong: rgba(34, 211, 238, 0.44) !important;
+  --apoio-line: rgba(56, 189, 248, 0.18) !important;
+  --apoio-green: #0891b2 !important;
+  --apoio-medium: #06b6d4 !important;
+  --apoio-shadow: 0 22px 46px -20px rgba(0, 0, 0, 0.92) !important;
+  --apoio-danger: #f87171 !important;
+
+  --bg-primary: #03060a !important;
+  --bg-secondary: #070b11 !important;
+  --bg-card: #070b11 !important;
+  --bg-hover: #0d1520 !important;
+  --border-primary: rgba(56, 189, 248, 0.2) !important;
+  --text-primary: #f3f9fc !important;
+  --text-secondary: #c5d8e4 !important;
+  --text-inverse: #ffffff !important;
+  --brand-green: #0891b2 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking > .mt-ribbon-layer,
+html.theme-black-cyan .app-shell .apoio-reference > .apoio-ribbon-layer,
+html.theme-black-cyan .app-shell .apoio-premium::before,
+html.theme-black-cyan .app-shell .apoio-premium::after,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-hero::after {
+  display: none !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :where(h2, h3, h4, strong, dt, label),
+html.theme-black-cyan .app-shell .apoio-reference :where(h2, h3, h4, strong, dt, label) {
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :where(p, dd, small, summary span),
+html.theme-black-cyan .app-shell .apoio-reference :where(p, dd, small) {
+  color: #b7ccd9 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-hero,
+html.theme-black-cyan .app-shell .apoio-reference > .apoio-hero {
+  background:
+    radial-gradient(85% 95% at 100% 0%, rgba(6, 182, 212, 0.16) 0%, transparent 60%),
+    linear-gradient(135deg, #070c12 0%, #020407 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.22) !important;
+  border-top: 2px solid #06b6d4 !important;
+  border-radius: 18px !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-hero .mt-eyebrow,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-eyebrow,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-eyebrow {
+  color: #22d3ee !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-hero .mt-source-tag {
+  background: rgba(6, 182, 212, 0.15) !important;
+  border-color: rgba(34, 211, 238, 0.38) !important;
+  color: #67e8f9 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-btn, .apoio-button, .apoio-image-picker-action, .apoio-direct-clear),
+html.theme-black-cyan .app-shell .apoio-reference .apoio-button {
+  background: #0b1118 !important;
+  border: 1px solid rgba(56, 189, 248, 0.22) !important;
+  color: #eaf5fb !important;
+  border-radius: 12px !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-btn, .apoio-button, .apoio-image-picker-action, .apoio-direct-clear):not(.mt-btn-primary):not([aria-pressed="true"]):not([style*="--brand-green"]):hover:not(:disabled) {
+  background: #111b26 !important;
+  border-color: rgba(34, 211, 238, 0.48) !important;
+  color: #ffffff !important;
+}
+
+/* Primary & active buttons in Apoio / Reformas / Canavieiras */
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"], .mt-full-history > summary),
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) button[aria-pressed="true"],
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"],
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-visibility-action,
+html.theme-black-cyan .app-shell .apoio-reference :is(.apoio-sync-button, .apoio-full-history > summary),
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-report-scope-btn.is-active,
+html.theme-black-cyan .app-shell .apoio-module .apoio-compact-cards .apoio-card-bottom .apoio-details-button {
+  background: var(--bc-cyan-grad) !important;
+  border: 1px solid rgba(103, 232, 249, 0.62) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 10px 24px -8px var(--bc-cyan-glow), inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"]):hover:not(:disabled),
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-report-scope-btn.is-active:hover,
+html.theme-black-cyan .app-shell .apoio-module .apoio-compact-cards .apoio-card-bottom .apoio-details-button:hover {
+  background: var(--bc-cyan-grad-hover) !important;
+  border-color: rgba(165, 243, 252, 0.85) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"]) svg,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] *,
+html.theme-black-cyan .app-shell .apoio-module .apoio-compact-cards .apoio-card-bottom .apoio-details-button * {
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] b {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Panels, KPIs, visibility bar, closed summary, & Apoio reference blocks */
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi),
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-filters, .apoio-sticky-search, .apoio-order-filters, .apoio-recency-panel, .mt-toolbar, .mt-pagination, .mt-empty, .mt-method, .mt-closure-summary),
+html.theme-black-cyan .app-shell .maintenance-tracking section.p-5,
+html.theme-black-cyan .app-shell .apoio-image-reports section[aria-label],
+html.theme-black-cyan .app-shell .apoio-reference :is(.apoio-command-center, .apoio-filter-center, .apoio-closed-toggle, .apoio-footer, .apoio-orders-panel > .p-4:last-child) {
+  background: #070b11 !important;
+  border: 1px solid rgba(56, 189, 248, 0.18) !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-visibility-bar {
+  background: rgba(251, 191, 36, 0.12) !important;
+  border: 1px solid rgba(251, 191, 36, 0.36) !important;
+  border-left: 4px solid #f59e0b !important;
+  color: #fde68a !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-visibility-bar > svg {
+  color: #fbbf24 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-visibility-toggle {
+  background: rgba(6, 182, 212, 0.16) !important;
+  border-color: rgba(34, 211, 238, 0.45) !important;
+  color: #a5f3fc !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi) {
+  border-top: 3px solid #06b6d4 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-kpi > svg, .apoio-kpi svg) {
+  color: #22d3ee !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-filter-body,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-closure-fact--detection {
+  background: #04070b !important;
+  border-color: rgba(56, 189, 248, 0.14) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-closure-fact span {
+  color: #38bdf8 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-panel-heading h3 {
+  border-left-color: #06b6d4 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-direct-search-control, .mt-search, .apoio-multi-select-trigger, .apoio-multi-select-search, .apoio-group-fleet-search, input:not([type="checkbox"]):not([type="color"]), select, textarea, select option) {
+  background: #03060a !important;
+  border-color: rgba(56, 189, 248, 0.24) !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-direct-search-control, .mt-search) svg,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-filters > summary > span:last-child {
+  color: #22d3ee !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle),
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) button:not([aria-pressed="true"]),
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-status-tabs button:not([aria-pressed="true"]),
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-report-scope-btn:not(.is-active) {
+  background: #0a1018 !important;
+  border: 1px solid rgba(56, 189, 248, 0.18) !important;
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-module .apoio-multi-select-popover,
+html.theme-black-cyan .app-shell .apoio-module .apoio-group-fleet-picker {
+  background: #05090e !important;
+  border: 1px solid rgba(34, 211, 238, 0.42) !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-module :is(.apoio-multi-select-option, .apoio-group-fleet-tile, .apoio-group-fleet-option, .apoio-group-fleet-all, .apoio-multi-select-actions button, .apoio-group-fleet-actions button, .apoio-group-fleet-clear) {
+  background: #0b1119 !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-module :is(.apoio-multi-select-option.is-selected, .apoio-group-fleet-tile.is-selected, .apoio-group-fleet-option.is-selected, .apoio-group-fleet-all.is-active) {
+  background: rgba(6, 182, 212, 0.16) !important;
+  border-color: rgba(34, 211, 238, 0.5) !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-image-preview {
+  background: #03060a !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-image-preview-row {
+  background: #090e15 !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+  color: #e6f2f9 !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-image-preview-row input[type="checkbox"] {
+  accent-color: #06b6d4 !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-image-reports .apoio-image-preview-text strong {
+  color: #38bdf8 !important;
+}
+
+/* Order cards in Apoio, Reformas, and Canavieiras */
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order,
+html.theme-black-cyan .app-shell .apoio-module.apoio-reference .apoio-compact-cards .apoio-order,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-order {
+  background: #070b11 !important;
+  background-image: none !important;
+  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  border-left: 4px solid #06b6d4 !important;
+  color: #f3f9fc !important;
+  box-shadow: 0 16px 36px -18px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order--closed,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-order-closed {
+  border-left-color: #22d3ee !important;
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.08) 0%, #070b11 26%) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-closed-ribbon,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-timeline-header,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-timeline-header {
+  background: linear-gradient(115deg, #0891b2 0%, #0e7490 65%, #070b11 100%) !important;
+  border-bottom-color: rgba(56, 189, 248, 0.26) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-card-kicker,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-fleet-title svg,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-label,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-quadrant > svg,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-order-fields > div > svg {
+  color: #22d3ee !important;
+  stroke: #22d3ee !important;
+  filter: none !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-module .apoio-group-fleet-checkbox {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.36) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .apoio-module :is(.apoio-group-fleet-all.is-active, .apoio-group-fleet-tile.is-selected) .apoio-group-fleet-checkbox {
+  background: #06b6d4 !important;
+  border-color: rgba(103, 232, 249, 0.78) !important;
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-os,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-days,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-days {
+  background: rgba(6, 182, 212, 0.18) !important;
+  border-color: rgba(34, 211, 238, 0.44) !important;
+  color: #cffafe !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-days strong,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-days strong {
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-days small,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-days span {
+  color: #a5f3fc !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-days.apoio-age-critical {
+  background: rgba(239, 68, 68, 0.24) !important;
+  border-color: rgba(248, 113, 113, 0.56) !important;
+  color: #fee2e2 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late strong,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-days.apoio-age-critical strong {
+  color: #ffffff !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late small,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-days.apoio-age-critical span {
+  color: #fecaca !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order :is(.mt-quadrants, .mt-narrative-section, .mt-observations),
+html.theme-black-cyan .app-shell .apoio-module.apoio-reference .apoio-compact-cards :is(.apoio-order-fields > div, .apoio-narrative-section, .apoio-observations) {
+  background: #04070b !important;
+  border-color: rgba(56, 189, 248, 0.15) !important;
+  color: #dceaf2 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-quadrant.mt-quadrant--late dd,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-quadrant.mt-quadrant--late small,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-quadrant.mt-quadrant--late dd svg {
+  color: #fecaca !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-late-label,
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-recency-error {
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(248, 113, 113, 0.36) !important;
+  border-radius: 10px !important;
+  padding: 7px 11px !important;
+  color: #fecaca !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-narrative-section {
+  border-left-color: #06b6d4 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-order-bottom button,
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-details-button,
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-group-card__edit {
+  background: rgba(6, 182, 212, 0.18) !important;
+  border: 1px solid rgba(34, 211, 238, 0.45) !important;
+  color: #67e8f9 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-order-bottom button:hover,
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-group-card__edit:hover:not(:disabled) {
+  background: var(--bc-cyan-grad) !important;
+  color: #ffffff !important;
+}
+
+/* Status pills inside Maintenance / Apoio */
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-status--programado {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  color: #bae6fd !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-status--andamento {
+  background: rgba(167, 139, 250, 0.18) !important;
+  border-color: rgba(167, 139, 250, 0.45) !important;
+  color: #ede9fe !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-status--encerrado,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-status-closed,
+html.theme-black-cyan .app-shell .apoio-reference .apoio-closed-seal {
+  background: rgba(6, 182, 212, 0.22) !important;
+  border-color: rgba(34, 211, 238, 0.5) !important;
+  color: #cffafe !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-status--encerrado small {
+  color: #a5f3fc !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-order .mt-status--outros {
+  background: rgba(251, 191, 36, 0.16) !important;
+  border-color: rgba(251, 191, 36, 0.42) !important;
+  color: #fde68a !important;
+}
+
+/* Tables inside Apoio, Reformas, and Canavieiras */
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-table-scroll, .mt-table-scroll),
+html.theme-black-cyan .app-shell .apoio-module :is(.apoio-table-scroll, .apoio-orders-table) {
+  background: #060a0f !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-orders-table thead th, .mt-table thead th),
+html.theme-black-cyan .app-shell .apoio-module .apoio-orders-table thead th {
+  background: #03060a !important;
+  color: #38bdf8 !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.26) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.apoio-orders-table tbody td, .apoio-orders-table tbody th, .mt-table tbody td),
+html.theme-black-cyan .app-shell .apoio-module .apoio-orders-table tbody td,
+html.theme-black-cyan .app-shell .apoio-module .apoio-table-row {
+  background: #070b11 !important;
+  color: #eaf4fa !important;
+  border-bottom-color: rgba(56, 189, 248, 0.09) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-orders-table tbody tr.is-odd :is(td, th),
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-table tbody tr:nth-child(even) td {
+  background: #0a1018 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-table-row--closed > td,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-table-closure-facts {
+  background: #09121a !important;
+  color: #cde3ef !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell,
+html.theme-black-cyan .app-shell .apoio-module .apoio-table-fleet-cell {
+  background: #04070c !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell strong,
+html.theme-black-cyan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-os-cell,
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-table td:first-child strong {
+  color: #38bdf8 !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking :is(.mt-notice, .apoio-notice) {
+  background: rgba(6, 182, 212, 0.14) !important;
+  border: 1px solid rgba(34, 211, 238, 0.38) !important;
+  color: #cffafe !important;
+}
+
+/* ── Equipment Image Manager (Configurações) ───────────────────────────────── */
+html.theme-black-cyan .app-shell .equipment-image-manager {
+  --eim-ink: #f3f9fc !important;
+  --eim-muted: #93aab9 !important;
+  --eim-line: rgba(56, 189, 248, 0.2) !important;
+  --eim-panel: #070b11 !important;
+  --eim-soft: rgba(6, 182, 212, 0.14) !important;
+  --eim-green: #22d3ee !important;
+  --eim-green-dark: #67e8f9 !important;
+  color: #f3f9fc !important;
+  color-scheme: dark !important;
+}
+
+html.theme-black-cyan .app-shell .equipment-image-manager :is(.equipment-image-manager__preview-card, .equipment-image-manager__form, .equipment-image-manager__login, .equipment-image-manager__preview-caption) {
+  background: #070b11 !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .equipment-image-manager .equipment-image-manager__checker {
+  background-color: #04070c !important;
+  background-image:
+    linear-gradient(45deg, rgba(56, 189, 248, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(56, 189, 248, 0.06) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(56, 189, 248, 0.06) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(56, 189, 248, 0.06) 75%) !important;
+}
+
+html.theme-black-cyan .app-shell .equipment-image-manager :is(select, input, textarea) {
+  background: #03060a !important;
+  border-color: rgba(56, 189, 248, 0.24) !important;
+  color: #f3f9fc !important;
+}
+
+html.theme-black-cyan .app-shell .equipment-image-manager .equipment-image-manager__role.is-viewer,
+html.theme-black-cyan .app-shell .equipment-image-manager .equipment-image-manager__notice.is-info {
+  background: #0b121b !important;
+  color: #9bb1bf !important;
+}
+
+html.theme-black-cyan .app-shell .equipment-image-manager .equipment-image-manager__button.is-primary {
+  background: var(--bc-cyan-grad) !important;
+  border: 1px solid rgba(103, 232, 249, 0.6) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px -8px var(--bc-cyan-glow) !important;
+}
+
+html.theme-black-cyan .app-shell .equipment-image-manager .equipment-image-manager__file-label {
+  background: rgba(6, 182, 212, 0.1) !important;
+  border-color: rgba(34, 211, 238, 0.42) !important;
+  color: #67e8f9 !important;
+}
+
+/* ── TV Monitor ────────────────────────────────────────────────────────────── */
+html.theme-black-cyan .tv-monitor,
+html.theme-black-cyan .tv-dialog {
+  --tv-bg: #000000;
+  --tv-panel: #070b11;
+  --tv-line: rgba(56, 189, 248, 0.2);
+  --tv-text: #f3f9fc;
+  --tv-muted: #93aab9;
+  --tv-green: #22d3ee;
+}
+
+html.theme-black-cyan .tv-monitor[data-tv-theme="dark"],
+html.theme-black-cyan .tv-monitor {
+  background:
+    radial-gradient(ellipse at 92% 0, rgba(6, 182, 212, 0.14), transparent 52%),
+    #000000 !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
+html.theme-black-cyan .tv-monitor .tv-summary,
+html.theme-black-cyan .tv-monitor .tv-order,
+html.theme-black-cyan .tv-dialog {
+  background: #070b11 !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
+html.theme-black-cyan .tv-monitor .tv-board-tabs button[aria-pressed="true"],
+html.theme-black-cyan .tv-monitor .tv-refresh,
+html.theme-black-cyan .tv-dialog .tv-primary {
+  background: var(--bc-cyan-grad) !important;
+  border-color: rgba(103, 232, 249, 0.58) !important;
+  color: #ffffff !important;
+}
+
+/* ── Focus rings ───────────────────────────────────────────────────────────── */
+html.theme-black-cyan :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid #22d3ee !important;
+  outline-offset: 2px;
+}

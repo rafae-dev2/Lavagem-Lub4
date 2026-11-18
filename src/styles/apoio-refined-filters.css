@@ -1,0 +1,36 @@
+/* Multi-select local do Controle de Equipamentos — Apoio. */
+.apoio-module .apoio-multi-select { position: relative; min-width: 0; color: var(--text-primary); }
+.apoio-module .apoio-multi-select-label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; min-height: 18px; }
+.apoio-module .apoio-multi-select-label { color: var(--apoio-heading); font-size: 11px; font-weight: 800; }
+.apoio-module .apoio-multi-select-description { color: var(--text-secondary); font-size: 10px; }
+.apoio-module .apoio-multi-select-trigger { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 42px; margin-top: 5px; padding: 8px 10px; border: 1px solid #1f6b45; border-radius: 9px; background: var(--bg-primary); color: var(--text-primary); text-align: left; font: inherit; font-size: 13px; cursor: pointer; }
+.apoio-module .apoio-multi-select-trigger:hover { background: var(--bg-hover); }
+.apoio-module .apoio-multi-select-caption { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.apoio-module .apoio-multi-select-count { flex: 0 0 auto; min-width: 24px; color: var(--apoio-heading); font-size: 10px; font-weight: 800; text-align: right; }
+.apoio-module .apoio-multi-select-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.apoio-module .apoio-multi-select-chip { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; min-height: 24px; padding: 3px 4px 3px 8px; border: 1px solid #1f6b45; border-radius: 999px; background: color-mix(in srgb, var(--apoio-soft) 75%, var(--bg-card)); color: var(--text-primary); font-size: 10px; font-weight: 700; }
+.apoio-module .apoio-multi-select-chip > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.apoio-module .apoio-multi-select-chip small { color: var(--text-secondary); font-size: 9px; font-variant-numeric: tabular-nums; }
+.apoio-module .apoio-multi-select-chip button { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.apoio-module .apoio-multi-select-chip button:hover { background: var(--bg-hover); color: var(--text-primary); }
+.apoio-module .apoio-multi-select-popover { position: absolute; z-index: 20; top: calc(100% + 7px); left: 0; width: min(370px, calc(100vw - 32px)); padding: 10px; border: 1px solid #1f6b45; border-radius: 11px; background: var(--bg-card); color: var(--text-primary); box-shadow: 0 14px 32px rgba(20, 72, 47, .18); }
+.apoio-module .apoio-multi-select-search { display: flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 8px; border: 1px solid var(--border-primary); border-radius: 8px; background: var(--bg-primary); color: var(--text-secondary); }
+.apoio-module .apoio-multi-select-search input { min-width: 0; flex: 1; padding: 6px 0; border: 0; outline: 0; background: transparent; color: var(--text-primary); font-size: 16px; }
+.apoio-module .apoio-multi-select-search button { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; padding: 0; border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.apoio-module .apoio-multi-select-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.apoio-module .apoio-multi-select-actions button { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; padding: 6px 8px; border: 1px solid var(--border-primary); border-radius: 7px; background: var(--bg-hover); color: var(--text-primary); font-size: 10px; font-weight: 800; cursor: pointer; }
+.apoio-module .apoio-multi-select-actions button:first-child { border-color: #1f6b45; }
+.apoio-module .apoio-multi-select-actions button span { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.apoio-module .apoio-multi-select-actions button:disabled { opacity: .45; cursor: not-allowed; }
+.apoio-module .apoio-multi-select-visible-summary { margin-top: 8px; color: var(--text-secondary); font-size: 10px; }
+.apoio-module .apoio-multi-select-options { display: grid; gap: 5px; max-height: 260px; margin-top: 7px; overflow: auto; padding: 2px; }
+.apoio-module .apoio-multi-select-option { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 7px; min-height: 38px; padding: 6px 7px; border: 1px solid var(--border-primary); border-radius: 7px; background: var(--bg-primary); color: var(--text-primary); font-size: 12px; cursor: pointer; }
+.apoio-module .apoio-multi-select-option.is-selected { border-color: #1f6b45; background: color-mix(in srgb, var(--apoio-soft) 65%, var(--bg-card)); }
+.apoio-module .apoio-multi-select-option input { width: 17px; height: 17px; margin: 0; accent-color: #1f6b45; cursor: pointer; }
+.apoio-module .apoio-multi-select-option span { min-width: 0; overflow-wrap: anywhere; }
+.apoio-module .apoio-multi-select-option small { color: var(--text-secondary); font-size: 10px; font-variant-numeric: tabular-nums; }
+.apoio-module .apoio-multi-select-empty { margin: 0; padding: 14px 8px; color: var(--text-secondary); font-size: 11px; text-align: center; }
+.apoio-module .apoio-multi-select-footer { display: flex; align-items: center; gap: 5px; margin: 8px 2px 0; color: var(--text-secondary); font-size: 10px; }
+@media (max-width: 719px) { .apoio-module .apoio-multi-select-popover { position: fixed; top: 50%; left: 50%; width: min(410px, calc(100vw - 24px)); max-height: min(76vh, 560px); transform: translate(-50%, -50%); overflow: auto; } }
+
+@media(min-width:720px){.apoio-module .apoio-multi-select-popover{width:100%;max-width:370px;}}

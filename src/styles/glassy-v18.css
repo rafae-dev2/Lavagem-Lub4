@@ -1,0 +1,332 @@
+/*
+ * Glassy Dashboard V18 — optional warm-glass skin.
+ * Intentionally scoped to html.theme-glassy-v18 and .app-shell.
+ * Report canvases are created outside .app-shell and retain fixed colors.
+ */
+
+html.theme-glassy-v18 {
+  color-scheme: dark;
+  --font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --brand-green: #8ca6ef;
+  --brand-green-light: #b4c4ff;
+  --brand-yellow: #e4b86f;
+  --brand-red: #e98b7c;
+  --brand-dark: #403b33;
+  --brand-accent: #8ca6ef;
+  --bg-primary: #514841;
+  --bg-secondary: rgba(67, 59, 53, .76);
+  --bg-tertiary: rgba(95, 83, 73, .72);
+  --bg-card: rgba(79, 69, 61, .62);
+  --bg-sidebar: linear-gradient(180deg, rgba(62, 54, 49, .91), rgba(82, 71, 63, .84));
+  --sidebar-text: #f6f0e6;
+  --sidebar-text-muted: #c8baaa;
+  --sidebar-active-bg: rgba(140, 166, 239, .24);
+  --sidebar-hover-bg: rgba(255, 248, 236, .10);
+  --sidebar-border: rgba(255, 255, 255, .16);
+  --sidebar-logo-ring: #b6c6ff;
+  --bg-hover: rgba(255, 248, 236, .10);
+  --bg-accent: rgba(140, 166, 239, .18);
+  --text-primary: #f6f0e6;
+  --text-secondary: #e3d8ca;
+  --text-tertiary: #c7b9a9;
+  --text-muted: #ad9f90;
+  --text-inverse: #403b33;
+  --border-primary: rgba(255, 255, 255, .16);
+  --border-secondary: rgba(255, 255, 255, .10);
+  --border-accent: rgba(140, 166, 239, .40);
+  --status-atrasado-bg: rgba(208, 102, 88, .22);
+  --status-atrasado-text: #ffc0b5;
+  --status-atrasado-border: rgba(255, 167, 151, .42);
+  --status-pendente-bg: rgba(226, 184, 104, .20);
+  --status-pendente-text: #f6d48d;
+  --status-pendente-border: rgba(242, 204, 130, .40);
+  --status-programado-bg: rgba(112, 143, 224, .24);
+  --status-programado-text: #c5d2ff;
+  --status-programado-border: rgba(164, 186, 255, .44);
+  --status-encerrado-bg: rgba(80, 157, 112, .24);
+  --status-encerrado-text: #a4e2b8;
+  --status-encerrado-border: rgba(144, 214, 167, .42);
+  --status-andamento-bg: rgba(169, 130, 194, .23);
+  --status-andamento-text: #e0bef2;
+  --status-andamento-border: rgba(208, 167, 231, .42);
+  --scrollbar-track: rgba(47, 41, 37, .64);
+  --scrollbar-thumb: rgba(190, 177, 161, .62);
+  --scrollbar-thumb-hover: #8ca6ef;
+  --glass-card-bg: rgba(78, 68, 60, .60);
+  --glass-card-border: rgba(255, 255, 255, .16);
+  --glass-card-shadow: 0 18px 44px -22px rgba(27, 22, 19, .74), inset 0 1px 0 rgba(255, 255, 255, .08);
+  --glass-blur: 22px;
+  --glass-input-bg: rgba(48, 43, 39, .74);
+  --glass-input-border: rgba(255, 255, 255, .18);
+  --shell-header-bg: rgba(57, 50, 46, .78);
+  --shell-header-text: #f6f0e6;
+  --shell-header-muted: #c9baaa;
+  --shell-header-action: #b8c7ff;
+  --shell-header-action-bg: rgba(140, 166, 239, .18);
+  --shell-header-action-border: rgba(183, 199, 255, .38);
+  --shell-header-border: rgba(255, 255, 255, .16);
+  --shell-popover-shadow: 0 24px 70px -24px rgba(22, 18, 16, .86);
+}
+
+html.theme-glassy-v18 body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse 66rem 36rem at 12% -8%, rgba(244, 220, 183, .31), transparent 67%), radial-gradient(ellipse 44rem 30rem at 93% 6%, rgba(140, 166, 239, .28), transparent 65%), radial-gradient(ellipse 54rem 32rem at 53% 112%, rgba(192, 157, 120, .27), transparent 69%), linear-gradient(135deg, #494039 0%, #806f61 47%, #514942 100%);
+  background-attachment: fixed;
+}
+
+html.theme-glassy-v18 body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 28% 40%, rgba(255, 241, 211, .12), transparent 22rem), radial-gradient(circle at 78% 70%, rgba(144, 169, 239, .12), transparent 24rem);
+  filter: blur(26px);
+}
+
+html.theme-glassy-v18 #root { min-height: 100vh; }
+
+html.theme-glassy-v18 .app-shell {
+  --bg-primary: transparent;
+  --bg-secondary: rgba(67, 59, 53, .76);
+  --bg-card: rgba(79, 69, 61, .62);
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-family);
+}
+
+html.theme-glassy-v18 .app-shell > aside {
+  background: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+  box-shadow: 16px 0 46px -28px rgba(27, 22, 19, .88) !important;
+  backdrop-filter: saturate(125%) blur(24px);
+  -webkit-backdrop-filter: saturate(125%) blur(24px);
+}
+
+html.theme-glassy-v18 .app-shell > aside img {
+  border-color: var(--sidebar-logo-ring) !important;
+  box-shadow: 0 0 18px rgba(182, 198, 255, .42), 0 0 4px rgba(255, 246, 229, .22) !important;
+}
+
+html.theme-glassy-v18 .app-shell > aside button[aria-current='page'] {
+  background: var(--sidebar-active-bg) !important;
+  color: var(--sidebar-text) !important;
+  border-color: rgba(183, 199, 255, .34) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 8px 20px -14px rgba(145, 169, 239, .7) !important;
+}
+
+html.theme-glassy-v18 .app-shell > aside button:not([aria-current='page']):hover { background: var(--sidebar-hover-bg) !important; color: var(--sidebar-text) !important; }
+html.theme-glassy-v18 .app-shell > aside button span,
+html.theme-glassy-v18 .app-shell > aside button svg,
+html.theme-glassy-v18 .app-shell > aside > div { color: var(--sidebar-text-muted); }
+html.theme-glassy-v18 .app-shell > aside button[aria-current='page'] span,
+html.theme-glassy-v18 .app-shell > aside button[aria-current='page'] svg,
+html.theme-glassy-v18 .app-shell > aside > div:first-child strong { color: var(--sidebar-text) !important; }
+
+html.theme-glassy-v18 .app-shell .shell-header {
+  background: var(--shell-header-bg) !important;
+  border-bottom-color: var(--shell-header-border) !important;
+  color: var(--shell-header-text) !important;
+  box-shadow: 0 12px 32px -28px rgba(28, 22, 19, .90);
+  backdrop-filter: saturate(135%) blur(20px);
+  -webkit-backdrop-filter: saturate(135%) blur(20px);
+}
+html.theme-glassy-v18 .app-shell .shell-header__title,
+html.theme-glassy-v18 .app-shell .shell-header__subtitle,
+html.theme-glassy-v18 .app-shell .shell-header__icon-button,
+html.theme-glassy-v18 .app-shell .shell-header__theme-button,
+html.theme-glassy-v18 .app-shell .shell-header__sync-button { color: var(--shell-header-text) !important; }
+html.theme-glassy-v18 .app-shell .shell-header__subtitle { color: var(--shell-header-muted) !important; }
+html.theme-glassy-v18 .app-shell .shell-header__theme-button,
+html.theme-glassy-v18 .app-shell .shell-header__sync-button,
+html.theme-glassy-v18 .app-shell .shell-header__notification > div > button {
+  background: var(--shell-header-action-bg) !important;
+  border-color: var(--shell-header-action-border) !important;
+  color: var(--shell-header-action) !important;
+}
+html.theme-glassy-v18 .app-shell main { background: transparent !important; }
+
+html.theme-glassy-v18 .app-shell .glass-card,
+html.theme-glassy-v18 .app-shell .backdrop-blur-2xl,
+html.theme-glassy-v18 .app-shell .apoio-module section:not(.apoio-hero),
+html.theme-glassy-v18 .app-shell .apoio-order,
+html.theme-glassy-v18 .app-shell .lub-kpi,
+html.theme-glassy-v18 .app-shell .lub-filter-panel,
+html.theme-glassy-v18 .app-shell .lub-table-panel {
+  background: var(--glass-card-bg) !important;
+  border-color: var(--glass-card-border) !important;
+  box-shadow: var(--glass-card-shadow) !important;
+  backdrop-filter: saturate(135%) blur(20px);
+  -webkit-backdrop-filter: saturate(135%) blur(20px);
+}
+html.theme-glassy-v18 .app-shell .glass-card,
+html.theme-glassy-v18 .app-shell .apoio-order,
+html.theme-glassy-v18 .app-shell .lub-kpi,
+html.theme-glassy-v18 .app-shell .lub-filter-panel,
+html.theme-glassy-v18 .app-shell .lub-table-panel { border-radius: 20px; }
+html.theme-glassy-v18 .app-shell .glass-card:hover,
+html.theme-glassy-v18 .app-shell .apoio-order:hover,
+html.theme-glassy-v18 .app-shell .lub-kpi:hover {
+  transform: translateY(-3px);
+  border-color: rgba(190, 205, 255, .38) !important;
+  box-shadow: 0 22px 50px -24px rgba(26, 21, 18, .86), inset 0 1px 0 rgba(255, 255, 255, .12) !important;
+}
+
+html.theme-glassy-v18 .app-shell h1,
+html.theme-glassy-v18 .app-shell h2,
+html.theme-glassy-v18 .app-shell h3,
+html.theme-glassy-v18 .app-shell .apoio-hero h2,
+html.theme-glassy-v18 .app-shell .lub-hero h2 { font-family: var(--font-display); letter-spacing: -.02em; }
+html.theme-glassy-v18 .app-shell label,
+html.theme-glassy-v18 .app-shell th { color: var(--text-secondary); }
+
+html.theme-glassy-v18 .app-shell input,
+html.theme-glassy-v18 .app-shell select,
+html.theme-glassy-v18 .app-shell textarea,
+html.theme-glassy-v18 .app-shell .glass-input {
+  background: var(--glass-input-bg) !important;
+  border-color: var(--glass-input-border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+html.theme-glassy-v18 .app-shell input::placeholder,
+html.theme-glassy-v18 .app-shell textarea::placeholder { color: var(--text-muted) !important; }
+html.theme-glassy-v18 .app-shell select,
+html.theme-glassy-v18 .app-shell select option { background-color: #49413b !important; color: #f6f0e6 !important; }
+html.theme-glassy-v18 .app-shell input:focus,
+html.theme-glassy-v18 .app-shell select:focus,
+html.theme-glassy-v18 .app-shell textarea:focus { border-color: #9cb3ff !important; box-shadow: 0 0 0 3px rgba(140, 166, 239, .22) !important; outline: none; }
+
+html.theme-glassy-v18 .app-shell .apoio-module {
+  --apoio-green: #a9bcff;
+  --apoio-medium: #8ca6ef;
+  --apoio-heading: #f2e9dc;
+  --apoio-soft: rgba(255, 246, 230, .11);
+  --apoio-line: rgba(255, 255, 255, .16);
+  --apoio-surface: rgba(78, 68, 60, .60);
+  --apoio-text: #f6f0e6;
+  --apoio-muted: #c7b9a9;
+  --apoio-warning: #f2c979;
+  --apoio-warning-bg: rgba(226, 184, 104, .20);
+  --apoio-danger: #ffb0a2;
+  --apoio-danger-bg: rgba(208, 102, 88, .22);
+  --apoio-blue: #bed0ff;
+  --apoio-blue-bg: rgba(112, 143, 224, .24);
+  color: var(--apoio-text);
+}
+html.theme-glassy-v18 .app-shell .apoio-hero,
+html.theme-glassy-v18 .app-shell .lub-hero {
+  background: radial-gradient(circle at 84% 12%, rgba(153, 177, 245, .42), transparent 35%), linear-gradient(115deg, rgba(63, 55, 50, .92), rgba(116, 93, 77, .84) 54%, rgba(78, 89, 132, .82)) !important;
+  color: #fff8ee !important;
+  border-color: rgba(255, 255, 255, .20) !important;
+  border-radius: 20px;
+  box-shadow: 0 20px 44px -24px rgba(27, 22, 19, .84), inset 0 1px 0 rgba(255, 255, 255, .12) !important;
+  backdrop-filter: saturate(140%) blur(18px);
+  -webkit-backdrop-filter: saturate(140%) blur(18px);
+}
+html.theme-glassy-v18 .app-shell .apoio-hero-description,
+html.theme-glassy-v18 .app-shell .apoio-eyebrow,
+html.theme-glassy-v18 .app-shell .apoio-hero-count span,
+html.theme-glassy-v18 .app-shell .apoio-sync,
+html.theme-glassy-v18 .app-shell .apoio-sync-note,
+html.theme-glassy-v18 .app-shell .lub-eyebrow,
+html.theme-glassy-v18 .app-shell .lub-hero p:not(.lub-eyebrow),
+html.theme-glassy-v18 .app-shell .lub-hero-total span { color: rgba(255, 247, 235, .78) !important; }
+html.theme-glassy-v18 .app-shell .apoio-hero-count { background: rgba(255, 255, 255, .12) !important; border-color: rgba(255, 255, 255, .23) !important; border-radius: 16px; }
+html.theme-glassy-v18 .app-shell .apoio-kpi { background: var(--glass-card-bg) !important; border-top-color: #8ca6ef !important; }
+html.theme-glassy-v18 .app-shell .apoio-kpi strong,
+html.theme-glassy-v18 .app-shell .apoio-os,
+html.theme-glassy-v18 .app-shell .apoio-order-fields dd,
+html.theme-glassy-v18 .app-shell .apoio-equipment strong { color: var(--text-primary) !important; }
+html.theme-glassy-v18 .app-shell .apoio-module table th,
+html.theme-glassy-v18 .app-shell .lub-table th { background: rgba(42, 37, 34, .54) !important; color: var(--text-secondary) !important; border-bottom-color: var(--border-primary) !important; }
+html.theme-glassy-v18 .app-shell .apoio-module table td,
+html.theme-glassy-v18 .app-shell .lub-table td { background: rgba(74, 64, 57, .42) !important; color: var(--text-primary) !important; border-bottom-color: var(--border-secondary) !important; }
+html.theme-glassy-v18 .app-shell .apoio-module table tbody tr:hover td,
+html.theme-glassy-v18 .app-shell .lub-table tbody tr:hover td { background: rgba(140, 166, 239, .12) !important; }
+
+html.theme-glassy-v18 .app-shell .lub-module {
+  --lub-surface: rgba(78, 68, 60, .60);
+  --lub-soft: rgba(255, 246, 230, .10);
+  --lub-line: rgba(255, 255, 255, .16);
+  --lub-text: #f6f0e6;
+  --lub-muted: #c7b9a9;
+  --lub-green: #a9bcff;
+  --lub-hover: rgba(140, 166, 239, .12);
+  color: var(--lub-text);
+}
+html.theme-glassy-v18 .app-shell .lub-kpi.is-selected { box-shadow: 0 0 0 2px #9cb3ff, 0 18px 40px -24px rgba(140, 166, 239, .8) !important; }
+html.theme-glassy-v18 .app-shell .lub-table-panel .lub-table-scroll { overflow-x: auto; }
+html.theme-glassy-v18 .app-shell .lub-modal,
+html.theme-glassy-v18 [role='dialog'] .rounded-2xl {
+  background: rgba(61, 53, 48, .97) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(255, 255, 255, .20) !important;
+  box-shadow: 0 30px 80px -26px rgba(22, 18, 16, .92) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+html.theme-glassy-v18 .app-shell .lub-modal-header,
+html.theme-glassy-v18 .app-shell .lub-modal-note { background: rgba(255, 246, 230, .09) !important; border-color: rgba(255, 255, 255, .15) !important; color: var(--text-secondary) !important; }
+html.theme-glassy-v18 .app-shell .apoio-status,
+html.theme-glassy-v18 .app-shell .status-badge { border: 1px solid var(--border-primary); }
+html.theme-glassy-v18 .app-shell .apoio-notice { background: rgba(80, 157, 112, .18) !important; border-color: rgba(144, 214, 167, .36) !important; color: #b9edc8 !important; }
+html.theme-glassy-v18 .app-shell [role='alert'],
+html.theme-glassy-v18 .app-shell .toast,
+html.theme-glassy-v18 .app-shell .notification { background: rgba(61, 53, 48, .96) !important; color: var(--text-primary) !important; border-color: rgba(255, 255, 255, .19) !important; box-shadow: var(--shell-popover-shadow) !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+html.theme-glassy-v18 .app-shell .shell-theme-picker { background: rgba(60, 52, 47, .96) !important; color: var(--text-primary) !important; border-color: rgba(255, 255, 255, .20) !important; box-shadow: var(--shell-popover-shadow) !important; }
+html.theme-glassy-v18 .app-shell .shell-theme-picker__heading,
+html.theme-glassy-v18 .app-shell .shell-theme-option__label,
+html.theme-glassy-v18 .app-shell .shell-theme-option__description { color: var(--text-primary) !important; }
+html.theme-glassy-v18 .app-shell .shell-theme-option:hover { background: rgba(140, 166, 239, .16) !important; }
+html.theme-glassy-v18 .app-shell button:focus-visible,
+html.theme-glassy-v18 .app-shell input:focus-visible,
+html.theme-glassy-v18 .app-shell select:focus-visible,
+html.theme-glassy-v18 .app-shell textarea:focus-visible { outline: 2px solid #b4c4ff; outline-offset: 3px; }
+html.theme-glassy-v18 .app-shell ::-webkit-scrollbar { width: 6px; height: 6px; }
+html.theme-glassy-v18 .app-shell ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+html.theme-glassy-v18 .app-shell ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 999px; }
+html.theme-glassy-v18 .app-shell ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+
+/* Apoio group/fleet filter: keep chips and search readable over the warm surface. */
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-all,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-chip,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-tile,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-option { background: rgba(78, 68, 60, .54) !important; border-color: rgba(255, 255, 255, .16) !important; color: var(--text-primary) !important; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-all.is-active,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-chip.is-selected,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-tile.is-selected,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-option.is-selected { background: rgba(140, 166, 239, .20) !important; border-color: rgba(183, 199, 255, .58) !important; color: #f6f0e6 !important; }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-picker { background: rgba(61, 53, 48, .82) !important; border-color: rgba(255, 255, 255, .18) !important; box-shadow: var(--glass-card-shadow) !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-search { background: rgba(48, 43, 39, .86) !important; border-color: rgba(255, 255, 255, .20) !important; color: var(--text-secondary) !important; }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-search input { background: transparent !important; border: 0 !important; color: var(--text-primary) !important; box-shadow: none !important; }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-title,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-picker-heading strong,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-option-text strong { color: var(--text-primary) !important; }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-subtitle,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-chip-count,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-option-text small,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-option-count,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-picker-heading span:not(.apoio-group-fleet-dot) { color: var(--text-secondary) !important; }
+
+@media (max-width: 719px) {
+  html.theme-glassy-v18 .app-shell .apoio-hero,
+  html.theme-glassy-v18 .app-shell .lub-hero { border-radius: 18px; }
+  html.theme-glassy-v18 .app-shell .apoio-order,
+  html.theme-glassy-v18 .app-shell .glass-card,
+  html.theme-glassy-v18 .app-shell .lub-kpi,
+  html.theme-glassy-v18 .app-shell .lub-filter-panel,
+  html.theme-glassy-v18 .app-shell .lub-table-panel { border-radius: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-glassy-v18 .app-shell *,
+  html.theme-glassy-v18 .app-shell *::before,
+  html.theme-glassy-v18 .app-shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  html.theme-glassy-v18 .app-shell .glass-card:hover,
+  html.theme-glassy-v18 .app-shell .apoio-order:hover,
+  html.theme-glassy-v18 .app-shell .lub-kpi:hover { transform: none; }
+}

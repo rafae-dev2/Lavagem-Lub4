@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');const fs=require('fs');
+const sql=fs.readFileSync('supabase/EQUIPMENT_GROUP_IMAGES.sql','utf8');
+assert.match(sql,/equipment_group_images[\s\S]*bytes between 1 and 180000/);
+assert.match(sql,/width between 1 and 640/);assert.match(sql,/height between 1 and 640/);
+assert.match(sql,/file_size_limit[\s\S]*180000/);assert.match(sql,/array\['image\/png','image\/webp'\]/);
+assert.match(sql,/auth\.uid\(\) is not null/);assert.match(sql,/e\.email=lower\(coalesce\(auth\.jwt\(\)->>'email'/);
+assert.match(sql,/revoke all on public\.equipment_group_images from anon,authenticated/);assert.doesNotMatch(sql,/grant insert.*to anon/);
+assert.match(sql,/equipment_images_object_insert[\s\S]*to authenticated[\s\S]*is_equipment_image_editor/);
+assert.match(sql,/not exists\(select 1 from public\.equipment_group_images e where e\.object_path=name\)/);
+assert.doesNotMatch(sql,/for update on storage\.objects|for update to authenticated.*bucket_id/);
+console.log('OK Storage: tamanho/MIME/caminhos restritos, metadados leves, anônimo sem escrita, editor com e-mail assinado, referência ativa não deletável.');

@@ -1,0 +1,9 @@
+# Auditoria v10.25 — Carreta Tanque Vinhaça no escopo de Lavagem/Lubrificação
+## Correção
+`Carreta Tanque Vinhaça` foi incluído em `HIDDEN_LAVAGEM_GROUPS` (`src/lib/lavagemEquipmentScope.ts`), a mesma lista que já controla Carretas Canavieiras, Trator Transbordo, Colhedoras, Carretas Rodomuda e Dolly Canavieiros. A regra é aplicada às listas geral/manual/PCM que usam este helper (Programações, painéis de integração e histórico PCM) e o aviso "Controle dos demais equipamentos" da tela passa a citar o novo grupo oculto. Nenhum registro é alterado, excluído ou sincronizado.
+## Escopo da regra
+O reconhecimento aceita singular/plural, "de" opcional, caixa, acentuação da fonte e o nome compacto do Apoio (`Carreta Tanque Vinhaça`, `Carretas Tanque de Vinhaça`, `CarretaTanqueVinhaça`, `Tanque Vinhaça`). A condição exige o par tanque + vinhaça, o que mantém visíveis Caminhão Pipa, tanques de água, Tanque Água e grupos desconhecidos. O fallback por frota legada permanece restrito às três categorias estáticas já existentes, pois não há mapa local de frotas de vinhaça; sem grupo informado pela RPC, o legado não é classificado por semelhança.
+## Fora do escopo
+A classificação de `maintenanceTracking` não foi alterada: Preventivas e Lubrificação — Carretas Canavieiras continuam reconhecendo a Carreta Tanque Vinhaça pela regra `carreta(s) tanque (de) vinhaça`.
+## Validação
+`npm run test:escopo-lavagem` passou cobrindo a matriz PCM/manual e aberto/encerrado para todas as variações do grupo, a listagem em `HIDDEN_LAVAGEM_GROUPS` e a permanência de Caminhão Pipa, Tanque Água e Carreta Carga Seca. `node tests/maintenanceTracking.test.mjs` passou mantendo vinhaça e Dolly nos dois menus específicos. `npm run check` passou. Também passaram `test:encerradas`, `test:acompanhamento`, `test:menu`, `test:sql`, `test:filtros-apoio` e `test:central`.

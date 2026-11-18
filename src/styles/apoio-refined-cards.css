@@ -1,0 +1,74 @@
+/* v10.6 — acabamento local. Não altera tabela, fonte ou lógica operacional. */
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order {
+  --apoio-card-border:color-mix(in srgb,var(--text-primary,#173d28) 12%,var(--bg-card,#fff) 88%);
+  --apoio-card-soft:color-mix(in srgb,var(--bg-card,#fff) 96%,var(--brand-green,#1f6b45) 4%);
+  padding:16px !important;border:1px solid var(--apoio-card-border,#dce6df) !important;border-left-width:1px !important;border-radius:14px !important;
+  background:var(--bg-card,#fff) !important;background-image:none !important;box-shadow:0 3px 13px rgba(23,54,37,.065) !important;
+  min-width:0;height:auto;overflow:hidden;transition:box-shadow .18s ease,border-color .18s ease;
+}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order::before,
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order::after {display:none !important;content:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order:hover {border-color:#a7c0b0 !important;box-shadow:0 6px 19px rgba(23,54,37,.11) !important;transform:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-closed {border-top:3px solid var(--brand-green,#1f6b45) !important;border-left-width:1px !important;background:var(--bg-card,#fff) !important;box-shadow:0 3px 13px rgba(23,54,37,.065) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-top {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:nowrap;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-fleet-title {min-width:0;flex:1;font-size:22px !important;color:var(--text-primary,#173d28) !important;line-height:1.2;display:flex;flex-direction:column;gap:4px;margin:0;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-fleet-title>span {font-size:10px;letter-spacing:1px;font-weight:700;color:var(--text-secondary,#6a7c70);}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-fleet-title>strong {font-size:23px;letter-spacing:-.5px;font-weight:800;overflow-wrap:anywhere;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-days {display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1px;flex:0 0 auto;min-width:60px;max-width:106px;min-height:52px;padding:6px 10px !important;border:1px solid var(--apoio-card-border,#dce6df) !important;border-radius:10px !important;background:var(--apoio-card-soft,#f4f8f5) !important;color:var(--text-primary,#244f34) !important;box-shadow:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-days strong {font-size:22px !important;font-weight:800;line-height:1.1;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-days span {font-size:10px !important;line-height:1.25;white-space:normal;text-align:center;color:var(--text-secondary,#6a7c70);}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-days.apoio-age-critical {background:#fff2ef !important;border-color:#efd5cf !important;color:#a74f46 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-days.apoio-age-warning {background:#fff8e9 !important;border-color:#e9dec1 !important;color:#866928 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-model {margin:10px 0 0;font-size:12px !important;font-weight:600;line-height:1.5;color:var(--text-secondary,#6a7c70) !important;overflow-wrap:anywhere;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-os {font-size:11px;font-weight:600;color:var(--text-secondary,#6a7c70) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-badges {display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;width:100%;gap:5px;margin-top:10px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status,
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status-detail,
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-closed-seal {min-height:26px;font-size:10px !important;line-height:1.25;border:1px solid var(--apoio-card-border,#dce6df) !important;border-radius:6px !important;padding:4px 7px !important;box-shadow:none !important;white-space:normal;overflow-wrap:anywhere;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status {font-weight:700;background:var(--apoio-card-soft,#f4f8f5) !important;color:var(--text-primary,#375e43) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status-progress {background:#edf7f0 !important;color:#28764c !important;border-color:#cfe6d8 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status-scheduled {background:#edf3fb !important;color:#426e9b !important;border-color:#d5e2f2 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status-waiting {background:#fff6df !important;color:#8d722e !important;border-color:#e9dcb7 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status-detail {color:var(--text-secondary,#6a7c70) !important;background:var(--apoio-card-soft,#f4f8f5) !important;font-weight:500;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-status-closed,
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-closed-seal {display:inline-flex;gap:4px;align-items:center;background:#eaf4ee !important;color:#2c6844 !important;border-color:#cce2d3 !important;font-weight:800;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px !important;margin:13px 0 0;border:0 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields>div {display:grid;grid-template-columns:18px minmax(0,1fr) !important;align-items:start;gap:7px !important;padding:9px 8px !important;min-width:0;border:1px solid var(--apoio-card-border,#dce6df) !important;border-radius:8px;background:var(--apoio-card-soft,#f4f8f5);}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields>div>svg {width:18px !important;height:18px !important;stroke:var(--text-secondary,#72917d) !important;filter:none !important;stroke-width:1.7;margin-top:1px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields dt {font-size:10px !important;font-weight:600;line-height:1.3;color:var(--text-secondary,#76877b) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields dd {font-size:11px !important;font-weight:600;line-height:1.45;margin-top:3px;overflow-wrap:anywhere;color:var(--text-primary,#385941);}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-preview-late dd {color:#aa534b !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-narrative-section {margin-top:12px;padding:10px 11px !important;background:var(--apoio-card-soft,#f4f8f5) !important;border:1px solid var(--apoio-card-border,#dce6df) !important;border-left-width:1px !important;border-radius:9px !important;box-shadow:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-label {font-size:10px !important;font-weight:700;letter-spacing:.4px;color:var(--text-secondary,#728476) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-narrative {font-size:12px !important;line-height:1.5;color:var(--text-primary,#385941) !important;margin-top:4px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-bottom {display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px;margin-top:13px;border:0 !important;padding-top:0;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-group {display:block !important;min-width:0;font-size:10px !important;color:var(--text-secondary,#728476);}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-group>span {display:block;font-size:10px;font-weight:700;margin-bottom:4px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-group-select {display:block;width:100% !important;max-width:100%;min-height:38px;margin:0 !important;padding:7px 8px !important;border:1px solid var(--apoio-card-border,#dce6df) !important;border-radius:8px !important;background:var(--bg-card,#fff) !important;color:var(--text-primary,#385941) !important;box-shadow:none !important;font-size:11px !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-bottom .apoio-details-button {margin:0 !important;min-height:38px;padding:8px 10px !important;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid #1f6b45 !important;border-radius:8px !important;background:#1f6b45 !important;color:#fff !important;font-size:11px !important;font-weight:700;box-shadow:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-history-note {border:1px solid var(--apoio-card-border,#dce6df) !important;border-left:3px solid #4b8e65 !important;background:var(--apoio-card-soft,#f4f8f5) !important;border-radius:8px !important;color:var(--text-primary,#385941) !important;font-size:11px !important;padding:9px !important;margin-top:12px;line-height:1.5;box-shadow:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-unconfirmed-note {border-left-color:#b79341 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-observations:not([hidden]) {border:1px solid var(--apoio-card-border,#dce6df) !important;border-radius:10px !important;margin-top:13px;background:var(--bg-card,#fff) !important;}
+@media(max-width:430px){.apoio-module.apoio-reference .apoio-compact-cards .apoio-order{padding:14px !important}.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-bottom{grid-template-columns:minmax(0,1fr)}.apoio-module.apoio-reference .apoio-compact-cards .apoio-group-select,.apoio-module.apoio-reference .apoio-compact-cards .apoio-details-button{min-height:42px}.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields{gap:7px}}
+
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-header {padding:12px 14px !important;background:var(--apoio-card-soft,#f4f8f5) !important;border-bottom:1px solid var(--apoio-card-border,#dce6df) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-header strong {font-size:18px !important;color:var(--text-primary) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-header span {font-size:11px !important;color:var(--text-secondary) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline {margin:15px 14px 0 28px !important;padding-left:14px;border-left-color:#7aac88 !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-event {padding-bottom:12px !important;font-size:12px !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-event strong {font-size:12px !important;color:var(--text-primary) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-event span,.apoio-module.apoio-reference .apoio-compact-cards .apoio-timeline-event small {font-size:11px !important;color:var(--text-secondary) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-full-history {margin:10px 14px 14px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-full-history>summary {padding:9px 11px;min-height:38px;background:var(--apoio-card-soft,#f4f8f5) !important;border:1px solid var(--apoio-card-border,#dce6df) !important;border-radius:8px !important;color:var(--text-primary) !important;font-size:12px !important;box-shadow:none !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-detail-meta {gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-detail-meta dt {font-size:10px !important;color:var(--text-secondary) !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-detail-meta dd {font-size:11px !important;line-height:1.45;color:var(--text-primary) !important;}
+
+/* Alinha cartões recolhidos, sem forçar vizinhos a acompanhar uma expansão. */
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-list{align-items:stretch !important;gap:12px !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order{display:flex;flex-direction:column;height:100% !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-top{min-height:64px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-model{min-height:36px;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-card-bottom{margin-top:auto !important;padding-top:13px !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-list:has(.is-expanded){align-items:start !important;}
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-list:has(.is-expanded) .apoio-order{height:auto !important;}

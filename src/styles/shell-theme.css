@@ -1,0 +1,513 @@
+/* Shell visual tokens
+ *
+ * Este arquivo fica separado do tema de conteúdo para que o layout comum possa
+ * compartilhar o acabamento institucional sem alterar os temas alternativos.
+ */
+
+/* Fallbacks for the existing dark and alternate themes. */
+.app-shell {
+  --shell-header-bg: var(--bg-secondary);
+  --shell-header-text: var(--text-primary);
+  --shell-header-muted: var(--text-tertiary);
+  --shell-header-action: var(--brand-green);
+  --shell-header-action-bg: var(--bg-hover);
+  --shell-header-action-border: var(--border-accent);
+  --shell-header-border: var(--border-primary);
+  --shell-popover-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.38);
+}
+
+/* Reference palette: Gestão de Ordens / Controle Apoio light mode. */
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-rose):not(.theme-arctic):not(.theme-lavender):not(.theme-glass) {
+  --brand-green: #1F6B45 !important;
+  --brand-green-light: #2E8B57 !important;
+  --brand-yellow: #B7791F !important;
+  --brand-red: #C0392B !important;
+  --brand-dark: #14482F !important;
+  --brand-accent: #1F6B45 !important;
+
+  --bg-primary: #F5F9F6 !important;
+  --bg-secondary: #FFFFFF !important;
+  --bg-tertiary: #F5F9F6 !important;
+  --bg-card: #FFFFFF !important;
+
+  --bg-sidebar: linear-gradient(180deg, #14482F 0%, #1F6B45 58%, #14482F 100%) !important;
+  --sidebar-text: #FFFFFF !important;
+  --sidebar-text-muted: #D8EDE0 !important;
+  --sidebar-active-bg: rgba(255, 255, 255, 0.16) !important;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.10) !important;
+  --sidebar-border: rgba(255, 255, 255, 0.20) !important;
+  --sidebar-logo-ring: #E8F4EC !important;
+
+  --bg-hover: rgba(31, 107, 69, 0.08) !important;
+  --bg-accent: #E8F4EC !important;
+
+  --text-primary: #1B2A22 !important;
+  --text-secondary: #5F7268 !important;
+  --text-tertiary: #5F7268 !important;
+  --text-muted: #5F7268 !important;
+  --text-inverse: #FFFFFF !important;
+
+  --border-primary: #E2EBE5 !important;
+  --border-secondary: #E2EBE5 !important;
+  --border-accent: rgba(31, 107, 69, 0.30) !important;
+
+  --status-atrasado-bg: #FBE6E3 !important;
+  --status-atrasado-text: #C0392B !important;
+  --status-atrasado-border: #F1C3BD !important;
+  --status-pendente-bg: #FDF3DC !important;
+  --status-pendente-text: #8A5A00 !important;
+  --status-pendente-border: #E8D39C !important;
+  --status-programado-bg: #E6EEF9 !important;
+  --status-programado-text: #1F5FA8 !important;
+  --status-programado-border: #C9D9EE !important;
+  --status-encerrado-bg: #E8F4EC !important;
+  --status-encerrado-text: #14482F !important;
+  --status-encerrado-border: #CFE5D7 !important;
+
+  --scrollbar-track: #F5F9F6 !important;
+  --scrollbar-thumb: #1F6B45 !important;
+  --scrollbar-thumb-hover: #14482F !important;
+  --glass-card-bg: rgba(255, 255, 255, 0.94) !important;
+  --glass-card-border: #E2EBE5 !important;
+  --glass-card-shadow: 0 4px 16px -4px rgba(20, 72, 47, 0.10) !important;
+  --glass-input-bg: #FFFFFF !important;
+  --glass-input-border: #E2EBE5 !important;
+}
+
+/* The Apoio module keeps its green institutional identity in every theme. */
+.app-shell.app-shell--apoio,
+.app-shell.app-shell--lub {
+  --shell-header-bg: #1F6B45;
+  --shell-header-text: #FFFFFF;
+  --shell-header-muted: rgba(255, 255, 255, 0.84);
+  --shell-header-action: #FFFFFF;
+  --shell-header-action-bg: rgba(255, 255, 255, 0.14);
+  --shell-header-action-border: rgba(255, 255, 255, 0.28);
+  --shell-header-border: rgba(255, 255, 255, 0.24);
+}
+
+/* The base light theme also uses the reference green header. Alternate light
+ * themes continue to resolve through their existing theme variables. */
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-rose):not(.theme-arctic):not(.theme-lavender):not(.theme-glass) .app-shell {
+  --shell-header-bg: #1F6B45;
+  --shell-header-text: #FFFFFF;
+  --shell-header-muted: rgba(255, 255, 255, 0.84);
+  --shell-header-action: #FFFFFF;
+  --shell-header-action-bg: rgba(255, 255, 255, 0.14);
+  --shell-header-action-border: rgba(255, 255, 255, 0.28);
+  --shell-header-border: rgba(255, 255, 255, 0.24);
+}
+
+.shell-header {
+  color: var(--shell-header-text);
+  background-color: var(--shell-header-bg);
+  border-bottom-color: var(--shell-header-border);
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.shell-header__title {
+  color: var(--shell-header-text);
+}
+
+.shell-header__subtitle {
+  color: var(--shell-header-muted);
+}
+
+.shell-header__icon-button,
+.shell-header__theme-button,
+.shell-header__sync-button {
+  color: var(--shell-header-action);
+  border-color: var(--shell-header-action-border);
+}
+
+.shell-header__theme-button,
+.shell-header__sync-button {
+  background: var(--shell-header-action-bg);
+  border: 1px solid var(--shell-header-action-border);
+}
+
+.shell-header__icon-button:hover,
+.shell-header__theme-button:hover,
+.shell-header__sync-button:hover {
+  background: var(--shell-header-action-bg);
+  color: var(--shell-header-text);
+}
+
+.shell-header__notification > div > button {
+  color: var(--shell-header-action) !important;
+}
+
+.shell-header__notification > div > button:hover {
+  background: var(--shell-header-action-bg) !important;
+  color: var(--shell-header-text) !important;
+}
+
+.shell-header__notification > div > button:focus-visible,
+.shell-header__icon-button:focus-visible,
+.shell-header__theme-button:focus-visible,
+.shell-header__sync-button:focus-visible,
+.shell-theme-option:focus-visible,
+.shell-sidebar-close:focus-visible {
+  outline: 2px solid var(--shell-header-action);
+  outline-offset: 2px;
+}
+
+.shell-theme-picker {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+  color: var(--text-primary);
+  box-shadow: var(--shell-popover-shadow) !important;
+  backdrop-filter: saturate(150%) blur(20px);
+  -webkit-backdrop-filter: saturate(150%) blur(20px);
+}
+
+.shell-theme-picker__heading {
+  border-bottom: 1px solid var(--border-secondary);
+  color: var(--text-secondary);
+}
+
+.shell-theme-option {
+  color: var(--text-primary);
+  border-color: transparent;
+}
+
+.shell-theme-option:hover {
+  background: var(--bg-hover);
+}
+
+.shell-theme-option__label {
+  color: var(--text-primary);
+}
+
+.shell-theme-option__description {
+  color: var(--text-secondary);
+}
+
+.shell-theme-preview {
+  border: 1px solid var(--border-primary);
+}
+
+.shell-sidebar-close {
+  color: var(--sidebar-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell *,
+  .app-shell *::before,
+  .app-shell *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Organização de módulos — manutenção integrada */
+.shell-nav-section{font-size:9px;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;color:var(--sidebar-text-muted);opacity:.78;padding:17px 12px 7px;margin:0}.shell-nav-section:first-child{padding-top:2px}
+.app-shell{height:100dvh;min-height:0}
+.app-shell aside nav button>svg{flex-shrink:0}
+.app-shell aside nav button>span:first-of-type{text-align:left;line-height:1.5}
+@media(max-width:600px){.shell-header{gap:8px!important;padding:10px 12px!important}.shell-header__title{font-size:13px!important;line-height:1.25!important;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.shell-header__subtitle{font-size:9px!important}.shell-header__sync-button{font-size:0!important;gap:0!important;width:40px;height:40px;min-height:40px;min-width:40px;padding:0!important;justify-content:center}.shell-header__sync-button svg{width:17px;height:17px;flex-shrink:0}.shell-header__theme-button,.shell-header__closed-button,.shell-header__notification>div>button{min-width:40px!important;min-height:40px!important;padding:8px!important}.shell-header>.flex-1{min-width:0}.shell-header>.flex.items-center{gap:6px!important}}
+
+.shell-header__closed-button { display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:8px;border:1px solid currentColor;border-radius:12px;color:inherit;background:transparent;font-size:12px;font-weight:700;flex-shrink:0; }
+.shell-header__closed-button:focus-visible { outline:3px solid #f0df93;outline-offset:3px; }
+
+/* v10.7 — seções visíveis e hierarquia da navegação institucional. */
+.shell-nav-section {display:flex;align-items:center;gap:8px;min-height:35px;padding:9px 10px;margin:15px 0 6px;border:1px solid var(--sidebar-border);border-left:3px solid #8dc7a5;border-radius:8px;background:rgba(255,255,255,.075);color:var(--sidebar-text);font-size:11px;font-weight:800;letter-spacing:.15px;line-height:1.35;text-transform:none;opacity:1;}
+.shell-nav-section:first-child{margin-top:0;padding-top:9px;}
+.shell-nav-section__marker{width:5px;height:5px;flex:0 0 5px;border-radius:50%;background:#a3d4b7;}
+.shell-nav-section.is-current-section{background:rgba(255,255,255,.16);border-color:rgba(218,243,226,.42);border-left-color:#b7e2c7;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.shell-nav-item{font-weight:600;}
+.shell-nav-item:focus-visible{outline:2px solid var(--sidebar-text);outline-offset:2px;}
+.shell-header__title{font-weight:800;letter-spacing:-.015em;}
+
+/* ── Detailed Offline & Reconnection Visual Indicator ─────────────────────── */
+.shell-header__offline-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 160ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.shell-header__offline-pill.is-offline {
+  background: rgba(245, 158, 11, 0.20);
+  border: 1px solid rgba(251, 191, 36, 0.48);
+  color: #fde68a;
+  cursor: pointer;
+}
+
+.shell-header__offline-pill.is-offline:hover {
+  transform: translateY(-1px);
+  background: rgba(245, 158, 11, 0.28);
+}
+
+.shell-header__offline-pill.is-offline:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+}
+
+.shell-header__offline-pill.is-reconnecting {
+  background: rgba(34, 197, 94, 0.20);
+  border: 1px solid rgba(74, 222, 128, 0.48);
+  color: #bbf7d0;
+}
+
+:is(html.theme-rose, html.theme-arctic, html.theme-lavender, html.theme-glass) .app-shell:not(.app-shell--lub):not(.app-shell--apoio) .shell-header__offline-pill.is-offline {
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(217, 119, 6, 0.48);
+  color: #92400e;
+}
+
+:is(html.theme-rose, html.theme-arctic, html.theme-lavender, html.theme-glass) .app-shell:not(.app-shell--lub):not(.app-shell--apoio) .shell-header__offline-pill.is-reconnecting {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(22, 163, 74, 0.45);
+  color: #166534;
+}
+
+.shell-offline-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  backdrop-filter: saturate(145%) blur(18px);
+  -webkit-backdrop-filter: saturate(145%) blur(18px);
+  box-shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.45);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.shell-offline-banner.is-fullscreen-child {
+  margin: 12px 12px 0;
+}
+
+@media (min-width: 640px) {
+  .shell-offline-banner.is-fullscreen-child {
+    margin: 16px 16px 0;
+  }
+}
+
+.shell-offline-banner.is-offline {
+  background: linear-gradient(135deg, rgba(120, 53, 15, 0.42) 0%, rgba(45, 28, 12, 0.68) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.42);
+  border-left: 4px solid #f59e0b;
+  color: #fef3c7;
+}
+
+.shell-offline-banner.is-reconnecting {
+  background: linear-gradient(135deg, rgba(20, 83, 45, 0.45) 0%, rgba(12, 46, 28, 0.68) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.42);
+  border-left: 4px solid #22c55e;
+  color: #dcfce7;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-offline {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #f59e0b;
+  border-left: 4px solid #d97706;
+  color: #78350f;
+  box-shadow: 0 8px 24px -10px rgba(180, 83, 9, 0.22);
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-reconnecting {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #22c55e;
+  border-left: 4px solid #16a34a;
+  color: #14532d;
+  box-shadow: 0 8px 24px -10px rgba(22, 163, 74, 0.20);
+}
+
+.shell-offline-banner__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 12px;
+}
+
+.shell-offline-banner.is-offline .shell-offline-banner__icon {
+  background: rgba(245, 158, 11, 0.22);
+  border: 1px solid rgba(251, 191, 36, 0.42);
+  color: #fbbf24;
+}
+
+.shell-offline-banner.is-reconnecting .shell-offline-banner__icon {
+  background: rgba(34, 197, 94, 0.22);
+  border: 1px solid rgba(74, 222, 128, 0.42);
+  color: #4ade80;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-offline .shell-offline-banner__icon {
+  background: rgba(217, 119, 6, 0.14);
+  color: #b45309;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-reconnecting .shell-offline-banner__icon {
+  background: rgba(22, 163, 74, 0.14);
+  color: #15803d;
+}
+
+.shell-offline-banner__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.shell-offline-banner__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.shell-offline-banner__title {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.shell-offline-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.shell-offline-banner.is-offline .shell-offline-banner__badge {
+  background: rgba(245, 158, 11, 0.24);
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  color: #fde68a;
+}
+
+.shell-offline-banner.is-reconnecting .shell-offline-banner__badge {
+  background: rgba(34, 197, 94, 0.24);
+  border: 1px solid rgba(74, 222, 128, 0.45);
+  color: #bbf7d0;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-offline .shell-offline-banner__badge {
+  background: rgba(217, 119, 6, 0.14);
+  border-color: rgba(217, 119, 6, 0.35);
+  color: #92400e;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-reconnecting .shell-offline-banner__badge {
+  background: rgba(22, 163, 74, 0.14);
+  border-color: rgba(22, 163, 74, 0.35);
+  color: #166534;
+}
+
+.shell-offline-banner__description {
+  margin: 5px 0 0;
+  font-size: 13px;
+  line-height: 1.48;
+  opacity: 0.94;
+}
+
+.shell-offline-banner__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 10px;
+}
+
+.shell-offline-banner__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner__meta-item {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(0, 0, 0, 0.10);
+}
+
+.shell-offline-banner__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(251, 191, 36, 0.36);
+  background: rgba(0, 0, 0, 0.18);
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.shell-offline-banner__dismiss:hover {
+  background: rgba(0, 0, 0, 0.30);
+}
+
+.shell-offline-banner__dismiss:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner__dismiss {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(180, 83, 9, 0.32);
+}
+
+@media (max-width: 639px) {
+  .shell-header__offline-pill {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .shell-offline-banner {
+    gap: 10px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .shell-offline-banner__icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .shell-offline-banner__title {
+    font-size: 13px;
+  }
+
+  .shell-offline-banner__description {
+    font-size: 12px;
+  }
+
+  .shell-offline-banner__meta-item {
+    font-size: 11px;
+  }
+}
+

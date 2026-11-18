@@ -1,0 +1,10 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import ControleApoio from '../src/pages/ControleApoio';
+import AcompanhamentoManutencao from '../src/pages/AcompanhamentoManutencao';
+import Layout from '../src/components/Layout';
+import {ThemeProvider} from '../src/contexts/ThemeContext';
+import '../src/index.css';
+import '../src/styles/operational-compact.css';
+const reference=new URLSearchParams(location.search).get('reference')==='1';
+createRoot(document.getElementById('root')!).render(<ThemeProvider><Layout currentPage={reference?'reformas-apoio':'controle-apoio'} onNavigate={()=>{}} onRefresh={()=>{}} syncing={false} lastSync={null} alertCount={0} alerts={[]} unreadCount={0} browserPermission="default" onRequestPermission={()=>{}} onMarkAsRead={()=>{}} onMarkAllAsRead={()=>{}} onClearAll={()=>{}}>{reference?<AcompanhamentoManutencao module="reformas"/>:<ControleApoio/>}</Layout><div style={{position:"fixed",bottom:10,right:10,zIndex:80,padding:"5px 9px",borderRadius:6,color:"#fff",background:"#0b321f",fontSize:11}}>PRÉVIA · DADOS SIMULADOS</div></ThemeProvider>);

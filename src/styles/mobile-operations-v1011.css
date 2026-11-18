@@ -1,0 +1,271 @@
+/* v10.11 — correções de layout das operações, isoladas das demais telas. */
+.apoio-operations-v1011,
+.lub-operations-v1011 {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* O filtro do Controle Apoio contém blocos compostos. Ele não pode herdar o
+   grid de quatro colunas usado pelo filtro simples de Acompanhamento. */
+.apoio-operations-v1011 .apoio-filter-center .mt-filter-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
+}
+.apoio-operations-v1011 .apoio-filter-center .mt-filter-body > * {
+  min-width: 0;
+  width: 100%;
+}
+.apoio-operations-v1011 .apoio-direct-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+  min-width: 0;
+}
+.apoio-operations-v1011 .apoio-direct-search-label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  color: var(--mt-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+.apoio-operations-v1011 .apoio-direct-search-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--mt-gold);
+  border-radius: 9px;
+  background: var(--mt-ivory);
+}
+.apoio-operations-v1011 .apoio-direct-search-control input {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 8px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--mt-text);
+}
+.apoio-operations-v1011 .apoio-direct-clear {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--mt-gold);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--mt-green);
+  white-space: nowrap;
+}
+.apoio-operations-v1011 .apoio-direct-count {
+  grid-column: 1 / -1;
+  color: var(--mt-muted);
+  font-size: 12px;
+}
+.apoio-operations-v1011 .apoio-filter-center .apoio-order-filters {
+  display: grid;
+  gap: 16px;
+}
+.apoio-operations-v1011 .apoio-multiselect-grid,
+.apoio-operations-v1011 .apoio-recency-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+}
+.apoio-operations-v1011 .apoio-recency-panel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--border-primary);
+  border-radius: 14px;
+  background: var(--bg-card);
+}
+.apoio-operations-v1011 .apoio-recency-panel .apoio-panel-heading {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.apoio-operations-v1011 .apoio-recency-panel .apoio-recency-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: 4px;
+}
+.apoio-operations-v1011 .apoio-recency-panel .apoio-recency-shortcuts button {
+  white-space: normal;
+  text-align: left;
+  min-height: 42px;
+  line-height: 1.3;
+}
+.apoio-operations-v1011 .apoio-recency-panel .apoio-recency-fields > * {
+  min-width: 0;
+}
+.apoio-operations-v1011 .apoio-recency-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(248, 113, 113, 0.36);
+  color: #b91c1c;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.apoio-operations-v1011 .mt-status-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 8px;
+  min-height: 0;
+}
+.apoio-operations-v1011 .mt-status-tabs button {
+  flex: 0 0 auto;
+  width: auto;
+}
+.apoio-operations-v1011 .mt-results,
+.apoio-operations-v1011 .apoio-orders-panel,
+.apoio-operations-v1011 .apoio-shared-card-container,
+.apoio-operations-v1011 .mt-card-grid {
+  min-width: 0;
+}
+.apoio-operations-v1011 .apoio-shared-card-container .mt-card-grid {
+  align-items: start;
+}
+.apoio-operations-v1011 .apoio-shared-card-container .mt-order {
+  height: auto;
+  min-height: 0;
+  align-self: start;
+}
+.apoio-operations-v1011 .apoio-shared-card-container .mt-order-bottom {
+  margin-top: 14px;
+}
+
+/* Lubrificação: no modo tabela a tabela continua sendo uma tabela real, com
+   thead visível e uma única região horizontal com gesto de toque. */
+.lub-operations-v1011 .lub-table-scroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y pinch-zoom;
+  overscroll-behavior-x: contain;
+}
+.lub-operations-v1011 .lub-table {
+  display: table;
+  min-width: 1040px;
+  width: 100%;
+  table-layout: auto;
+}
+.lub-operations-v1011 .lub-table thead { display: table-header-group; }
+.lub-operations-v1011 .lub-table tbody { display: table-row-group; }
+.lub-operations-v1011 .lub-table tr { display: table-row; }
+.lub-operations-v1011 .lub-table th,
+.lub-operations-v1011 .lub-table td { display: table-cell; }
+
+/* Cartões compactos: ações e detalhes permanecem disponíveis sem a faixa
+   vazia criada por equal-height rows. */
+.lub-operations-v1011 .lub-schedule-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  align-items: start;
+  gap: 10px;
+  padding: 12px;
+}
+.lub-operations-v1011 .lub-schedule-card {
+  min-width: 0;
+  height: auto;
+  align-self: start;
+  padding: 13px;
+  border: 1px solid var(--lub-line);
+  border-left: 4px solid var(--lub-green);
+  border-radius: 11px;
+  background: var(--lub-surface);
+  color: var(--lub-text);
+  box-shadow: 0 2px 8px rgba(20,72,47,.05);
+}
+.lub-operations-v1011 .lub-schedule-card[data-status="ATRASADO"] { border-left-color: #cd6a55; }
+.lub-operations-v1011 .lub-schedule-card[data-status="ANDAMENTO"] { border-left-color: #9774b9; }
+.lub-operations-v1011 .lub-schedule-card[data-status="ENCERRADO"] { border-left-color: #2e8b57; }
+.lub-operations-v1011 .lub-schedule-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+.lub-operations-v1011 .lub-schedule-card-identity { min-width: 0; }
+.lub-operations-v1011 .lub-schedule-card .lub-fleet { font-size: 15px; }
+.lub-operations-v1011 .lub-schedule-card .lub-service { max-width: none; margin-top: 9px; }
+.lub-operations-v1011 .lub-schedule-card-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 11px;
+}
+.lub-operations-v1011 .lub-schedule-card-field {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--lub-line);
+  border-radius: 8px;
+  background: var(--lub-soft);
+}
+.lub-operations-v1011 .lub-schedule-card-field > span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--lub-muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.lub-operations-v1011 .lub-schedule-card-field > strong,
+.lub-operations-v1011 .lub-schedule-card-field > div { overflow-wrap: anywhere; }
+.lub-operations-v1011 .lub-schedule-card-observation {
+  margin-top: 9px;
+  padding: 9px;
+  border-radius: 8px;
+  background: var(--lub-soft);
+}
+.lub-operations-v1011 .lub-schedule-card-observation .lub-observation { margin: 0; }
+.lub-operations-v1011 .lub-schedule-card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+.lub-operations-v1011 .lub-schedule-card-actions .lub-edit { min-height: 34px; }
+.lub-operations-v1011 .lub-schedule-card-actions .lub-quick-actions { margin-left: auto; }
+
+@media (max-width: 900px) {
+  .apoio-operations-v1011 .apoio-multiselect-grid,
+  .apoio-operations-v1011 .apoio-recency-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 719px) {
+  .apoio-operations-v1011 .apoio-direct-toolbar { grid-template-columns: minmax(0, 1fr); }
+  .apoio-operations-v1011 .apoio-direct-clear { width: 100%; }
+  .apoio-operations-v1011 .apoio-direct-count { grid-column: auto; }
+  .apoio-operations-v1011 .apoio-multiselect-grid,
+  .apoio-operations-v1011 .apoio-recency-fields { grid-template-columns: minmax(0, 1fr); }
+  .apoio-operations-v1011 .apoio-filter-center > summary { flex-wrap: wrap; gap: 6px; padding: 12px 14px; }
+  .apoio-operations-v1011 .apoio-filter-center .mt-filter-body { padding: 10px !important; gap: 12px; }
+  .apoio-operations-v1011 .apoio-filter-center .apoio-order-filters { padding: 12px !important; gap: 12px; }
+  .apoio-operations-v1011 .apoio-recency-panel { padding: 12px !important; gap: 10px; }
+  .apoio-operations-v1011 .mt-status-tabs { gap: 6px; }
+  .apoio-operations-v1011 .mt-status-tabs button { min-height: 40px; padding: 7px 10px; }
+  .lub-operations-v1011 .lub-schedule-cards { grid-template-columns: minmax(0, 1fr); padding: 10px; }
+}
+@media (min-width: 720px) {
+  .apoio-operations-v1011 .apoio-filter-center .mt-filter-body { padding-inline: 18px; }
+}

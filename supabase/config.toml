@@ -1,0 +1,5 @@
+# A Edge Function valida origem/segredo e usa o RPC service_role para o trabalho.
+# Não há gate JWT nesta versão pública; anon/authenticated só podem iniciar o
+# fluxo pela rota e nunca recebem acesso ao RPC ou às credenciais do servidor.
+[functions.sync-ordens]
+verify_jwt = false

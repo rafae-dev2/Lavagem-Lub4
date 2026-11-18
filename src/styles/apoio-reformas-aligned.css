@@ -1,0 +1,24 @@
+/* Apoio reutiliza a mesma base de Reformas; não criar overrides de mt-order/mt-card-grid. */
+.maintenance-tracking.apoio-like-reformas {
+  --apoio-green:var(--mt-green);--apoio-medium:var(--mt-green-mid);--apoio-heading:var(--mt-green);
+  --apoio-soft:var(--mt-ivory);--apoio-line:var(--mt-line);--apoio-surface:#fff;--apoio-muted:var(--mt-muted);
+  --apoio-danger:#9d4a39;--apoio-warning:#b38e43;--brand-green:var(--mt-green-mid);
+  max-width:none;margin:0 auto;
+}
+.apoio-like-reformas .apoio-orders-panel {background:transparent;border:0;border-radius:0;box-shadow:none;}
+.apoio-like-reformas .apoio-filter-title {display:flex;align-items:center;gap:8px;font-weight:800;}
+.apoio-like-reformas .apoio-direct-toolbar {width:100%;margin:0;padding:0;border:0;box-shadow:none;background:transparent;}
+.apoio-like-reformas .apoio-direct-count {color:var(--mt-muted);font-size:12px;}
+.apoio-like-reformas .apoio-extra-tools {margin-top:4px;}
+.apoio-like-reformas .apoio-sync,.apoio-like-reformas .apoio-sync-note {color:var(--mt-muted);margin:0;padding:0;border:0;}
+.apoio-like-reformas .apoio-view-toggle {display:inline-flex;gap:4px;padding:4px;border:1px solid var(--mt-gold);border-radius:9px;background:#fff;}
+.apoio-like-reformas .apoio-view-toggle button {min-height:36px;padding:6px 10px;border-radius:6px;color:var(--mt-green);background:#fff;}
+.apoio-like-reformas .apoio-view-toggle button[aria-pressed="true"] {background:var(--mt-green);color:#fff;}
+.apoio-like-reformas .apoio-command-content {min-width:0;}
+.apoio-like-reformas .apoio-footer {padding:14px 0;font-size:11px;color:var(--mt-muted);text-align:center;}
+.apoio-like-reformas .apoio-assignment-details {display:grid;gap:6px;margin:14px;font-size:12px;color:var(--mt-green);}
+.apoio-like-reformas .apoio-assignment-details select {width:100%;min-height:40px;padding:8px 10px;border:1px solid var(--mt-gold);border-radius:8px;}
+/* A tabela acompanha a paleta marfim/verde/dourado da mesma referência. */
+.apoio-like-reformas .apoio-table-scroll {border:1px solid var(--mt-gold);border-radius:12px;background:#fff;}
+.apoio-like-reformas .apoio-orders-table thead th {background:var(--mt-ivory);color:var(--mt-green);border-bottom-color:var(--mt-gold);}
+.apoio-like-reformas .apoio-table-details-button {background:var(--mt-green);color:#fff;border-color:var(--mt-gold);}

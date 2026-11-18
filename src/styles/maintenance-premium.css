@@ -1,0 +1,524 @@
+/* Identidade local da manutenção: marfim, verde institucional e dourado do Apoio. */
+.maintenance-tracking,
+html.dark .maintenance-tracking,
+html.glassy .maintenance-tracking,
+html.theme-glassy-v18 .maintenance-tracking {
+  --mt-ivory: #f4f0e3 !important;
+  --mt-green: #0b321f !important;
+  --mt-green-deep: #062414 !important;
+  --mt-green-mid: #18733d !important;
+  --mt-gold: #b38e43 !important;
+  --mt-gold-light: #f0df93 !important;
+  --mt-text: #173325 !important;
+  --mt-muted: #5e6e63 !important;
+  --mt-line: #d8c794 !important;
+  --bg-primary: #f4f0e3 !important;
+  --bg-card: #ffffff !important;
+  --bg-secondary: #eee7d3 !important;
+  --bg-hover: #eee7d3 !important;
+  --border-primary: #b38e43 !important;
+  --text-primary: #173325 !important;
+  --text-secondary: #5e6e63 !important;
+  background-color: #f4f0e3 !important;
+  color: #173325 !important;
+  color-scheme: light !important;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+html.dark .maintenance-tracking,
+html.glassy .maintenance-tracking,
+html.theme-glassy-v18 .app-shell .maintenance-tracking {
+  background: #f4f0e3 !important;
+  color: #173325 !important;
+}
+
+.maintenance-tracking > .mt-ribbon-layer {
+  background-image: url("/apoio-reference-ribbons.svg") !important;
+  background-color: #f4f0e3 !important;
+  background-size: 100% 1560px !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  opacity: 0.93;
+}
+
+.maintenance-tracking .mt-hero,
+html.dark .maintenance-tracking .mt-hero,
+html.theme-glassy-v18 .app-shell .maintenance-tracking .mt-hero {
+  background-color: #0b321f !important;
+  background-image: url("/apoio-reference-header.svg") !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(240, 223, 147, 0.35), 0 14px 28px rgba(11, 50, 31, 0.18);
+}
+
+.maintenance-tracking .mt-hero h2,
+.maintenance-tracking .mt-hero .mt-eyebrow,
+.maintenance-tracking .mt-hero .mt-hero-description,
+.maintenance-tracking .mt-hero .mt-source-tag {
+  color: #fffdf3 !important;
+}
+
+.maintenance-tracking .mt-hero .mt-eyebrow {
+  color: #f0df93 !important;
+}
+
+.maintenance-tracking :is(.mt-kpi, .mt-filters) {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.80) 0%, rgba(250, 247, 238, 0.68) 100%) !important;
+  border-color: #b38e43 !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+  box-shadow: 0 14px 30px -12px rgba(11, 50, 31, 0.14), inset 0 1.5px 0 rgba(255, 255, 255, 0.90) !important;
+}
+
+.maintenance-tracking :is(.mt-order, .mt-table-scroll, .mt-pagination, .mt-empty) {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border-color: #b38e43 !important;
+  backdrop-filter: blur(14px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+}
+
+.maintenance-tracking :is(.mt-filter-body, .mt-quadrants, .mt-narrative-section, .mt-observations) {
+  background-color: #f4f0e3 !important;
+}
+
+.maintenance-tracking :is(input, select, textarea, select option) {
+  background-color: #f4f0e3 !important;
+  border-color: #b38e43 !important;
+  color: #173325 !important;
+  color-scheme: light !important;
+}
+
+.maintenance-tracking :is(h2, h3, h4, strong, dt, label) {
+  color: #0b321f;
+}
+
+.maintenance-tracking .mt-hero :is(h2, strong) {
+  color: #fffdf3 !important;
+}
+
+.maintenance-tracking .mt-fleet-title strong,
+.maintenance-tracking .mt-toolbar h3,
+.maintenance-tracking .mt-empty h4,
+.maintenance-tracking .mt-method strong,
+.maintenance-tracking .mt-status-tabs button,
+.maintenance-tracking .mt-table th,
+.maintenance-tracking .mt-table td:first-child strong {
+  color: #0b321f !important;
+}
+
+.maintenance-tracking .mt-order {
+  border-width: 2px !important;
+  border-left-width: 7px !important;
+  box-shadow: -4px 3px 0 #b38e43, 0 10px 22px rgba(25, 50, 35, 0.14) !important;
+}
+
+.maintenance-tracking .mt-order:hover,
+.maintenance-tracking .mt-order.is-expanded {
+  border-color: #18733d !important;
+  box-shadow: -4px 3px 0 #b38e43, 0 14px 28px rgba(11, 50, 31, 0.18) !important;
+}
+
+.maintenance-tracking .mt-order--late {
+  border-left-color: #9d4a39 !important;
+}
+
+.maintenance-tracking .mt-quadrant:nth-child(even),
+.maintenance-tracking .mt-quadrant:nth-child(n + 3),
+.maintenance-tracking .mt-order-bottom,
+.maintenance-tracking .mt-table td,
+.maintenance-tracking .mt-table th {
+  border-color: #b38e43 !important;
+}
+
+.maintenance-tracking .mt-narrative-section {
+  border-left-color: #18733d !important;
+}
+
+.maintenance-tracking .mt-btn-primary {
+  border-color: #f0df93 !important;
+  background: linear-gradient(108deg, #b38e43, #f0df93 39%, #ad842f) !important;
+  color: #102116 !important;
+}
+
+.maintenance-tracking .mt-order-bottom button,
+.maintenance-tracking .mt-full-history > summary {
+  border-color: #b38e43 !important;
+  background: linear-gradient(180deg, #247d43, #0c4224) !important;
+  color: #f8e49a !important;
+}
+
+.maintenance-tracking .mt-status--programado {
+  background: #e4efeb !important;
+  color: #285b57 !important;
+  border-color: #477c78 !important;
+}
+
+.maintenance-tracking .mt-status--andamento {
+  background: #e8f2e5 !important;
+  color: #0b321f !important;
+  border-color: #18733d !important;
+}
+
+.maintenance-tracking .mt-status--encerrado {
+  background: #fbf3d9 !important;
+  color: #75571b !important;
+  border-color: #b38e43 !important;
+}
+
+.maintenance-tracking .mt-status--outros {
+  background: #f1eee4 !important;
+  color: #4d5d51 !important;
+  border-color: #8a958a !important;
+}
+
+.maintenance-tracking .mt-days {
+  border-color: #b38e43 !important;
+  background: linear-gradient(110deg, #b59045, #ead78c 44%, #b89546) !important;
+  color: #182015 !important;
+}
+
+.maintenance-tracking .mt-days--late {
+  border-color: #9d4a39 !important;
+  background: #f9e5df !important;
+  color: #8d2f2d !important;
+}
+
+.maintenance-tracking .mt-timeline-header {
+  background: linear-gradient(150deg, #0b321f 42%, #1b6939 75%, #c9a64f 76%, #f1df93 84%, #0b321f 85%) !important;
+}
+
+.maintenance-tracking .mt-timeline-header strong,
+.maintenance-tracking .mt-timeline-header span {
+  color: #fff !important;
+}
+
+.maintenance-tracking .mt-source-line,
+.maintenance-tracking .mt-toolbar > div > p:not(.mt-eyebrow),
+.maintenance-tracking .mt-method,
+.maintenance-tracking .mt-date-note,
+.maintenance-tracking .mt-source-fact,
+.maintenance-tracking .mt-quadrant small,
+.maintenance-tracking .mt-detail-meta dt {
+  color: #5e6e63 !important;
+}
+
+.maintenance-tracking .mt-eyebrow,
+.maintenance-tracking .mt-card-kicker,
+.maintenance-tracking .mt-label {
+  color: #18733d !important;
+}
+
+.maintenance-tracking .mt-hero .mt-eyebrow {
+  color: #f0df93 !important;
+}
+
+.maintenance-tracking .mt-connection-dot {
+  background: #18733d !important;
+  box-shadow: 0 0 0 3px rgba(24, 115, 61, 0.14) !important;
+}
+
+.maintenance-tracking .mt-connection-dot--warning {
+  background: #b38e43 !important;
+  box-shadow: 0 0 0 3px rgba(179, 142, 67, 0.16) !important;
+}
+
+.maintenance-tracking .mt-table tbody tr:hover {
+  background: #fffaf0 !important;
+}
+
+@container maintenance-workspace (max-width: 620px) {
+  .maintenance-tracking > .mt-ribbon-layer {
+    background-size: auto 1500px !important;
+    background-position: center top !important;
+  }
+
+  .maintenance-tracking .mt-hero {
+    min-height: 164px;
+    padding-bottom: 46px;
+  }
+}
+
+@media print {
+  .maintenance-tracking .mt-hero {
+    background: #0b321f !important;
+  }
+}
+
+/* O estado ativo mantém texto claro sobre verde, mesmo com o override local. */
+.maintenance-tracking .mt-status-tabs button[aria-pressed="true"] { color: #fffdf3 !important; }
+.maintenance-tracking .mt-status-tabs button[aria-pressed="true"] b { color: #f0df93 !important; }
+
+/* Visibilidade operacional compartilhada e destaque factual de encerradas. */
+.maintenance-tracking .mt-visibility-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px 15px;
+  border: 1px solid #b38e43 !important;
+  border-left: 5px solid #b38e43 !important;
+  border-radius: 12px;
+  background: #fff8df !important;
+  color: #634d1d !important;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.maintenance-tracking .mt-visibility-bar > svg {
+  flex: 0 0 auto;
+  color: #99713d !important;
+}
+
+.maintenance-tracking .mt-visibility-bar > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.maintenance-tracking .mt-visibility-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 6px;
+  min-height: 40px;
+  margin-left: auto;
+  padding: 8px 16px;
+  border: 1px solid #b38e43;
+  border-radius: 9px;
+  background: #0b321f;
+  color: #f0df93;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.maintenance-tracking .mt-visibility-action:hover,
+.maintenance-tracking .mt-visibility-action:focus-visible {
+  background: #18733d;
+}
+
+.maintenance-tracking .mt-visibility-toggle {
+  border-color: #18733d !important;
+  background: #eaf3e9 !important;
+  color: #0b321f !important;
+}
+
+.maintenance-tracking .mt-history-summary {
+  margin: -7px 0 0;
+  color: #5e6e63 !important;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.maintenance-tracking .mt-history-summary strong {
+  color: #0b321f !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.maintenance-tracking .mt-order--closed {
+  border-color: #b38e43 !important;
+  border-left-color: #18733d !important;
+  background: linear-gradient(180deg, #fffdf3 0%, #fff 22%) !important;
+  box-shadow: -4px 3px 0 #b38e43, 0 12px 26px rgba(11, 50, 31, 0.16) !important;
+}
+
+.maintenance-tracking .mt-order--closed::before {
+  background: linear-gradient(180deg, #b38e43 0%, #f0df93 28%, #18733d 63%, #0b321f 100%) !important;
+}
+
+.maintenance-tracking .mt-order--closed:hover,
+.maintenance-tracking .mt-order--closed.is-expanded {
+  border-color: #18733d !important;
+  box-shadow: -4px 3px 0 #b38e43, 0 16px 31px rgba(11, 50, 31, 0.2) !important;
+}
+
+.maintenance-tracking .mt-closed-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 16px 7px 19px;
+  border-bottom: 1px solid #d8c794;
+  background: linear-gradient(100deg, #0b321f 0%, #18733d 72%, #b38e43 72%, #f0df93 100%);
+  color: #fffdf3;
+  line-height: 1.25;
+}
+
+.maintenance-tracking .mt-closed-ribbon strong {
+  color: #fffdf3 !important;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+
+.maintenance-tracking .mt-closed-ribbon span {
+  color: #fffdf3;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.maintenance-tracking .mt-order--closed .mt-status--encerrado {
+  border-color: #18733d !important;
+  background: #eaf3e9 !important;
+  color: #0b321f !important;
+}
+
+.maintenance-tracking .mt-closure-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 17px 19px 0;
+  overflow: hidden;
+  border: 1px solid #b38e43;
+  border-radius: 13px;
+  background: #f4f0e3;
+}
+
+.maintenance-tracking .mt-closure-fact {
+  min-width: 0;
+  padding: 12px 13px;
+  border-left: 1px solid #d8c794;
+}
+
+.maintenance-tracking .mt-closure-fact:first-child {
+  border-left: 0;
+}
+
+.maintenance-tracking .mt-closure-fact span {
+  display: block;
+  color: #18733d;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1.25;
+}
+
+.maintenance-tracking .mt-closure-fact strong {
+  display: block;
+  margin-top: 5px;
+  color: #0b321f !important;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.maintenance-tracking .mt-closure-fact small {
+  display: block;
+  margin-top: 4px;
+  color: #5e6e63 !important;
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.maintenance-tracking .mt-closure-fact--detection {
+  background: #fff8df;
+}
+
+.maintenance-tracking .mt-closure-fact--detection span {
+  color: #99713d;
+}
+
+.maintenance-tracking .mt-closure-fact--clear strong {
+  color: #18733d !important;
+}
+
+.maintenance-tracking .mt-table-row--closed > td {
+  background: #fffdf3;
+  border-bottom-color: #b38e43 !important;
+}
+
+.maintenance-tracking .mt-table-row--closed > td:first-child {
+  border-left: 5px solid #18733d;
+}
+
+.maintenance-tracking .mt-table-closed-ribbon {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 7px;
+  padding: 4px 7px;
+  border: 1px solid #b38e43;
+  border-radius: 6px;
+  background: #0b321f;
+  color: #f0df93;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.maintenance-tracking .mt-table-closure-facts {
+  display: grid;
+  gap: 3px;
+  margin-top: 7px;
+  padding: 7px 8px;
+  border-left: 3px solid #b38e43;
+  border-radius: 6px;
+  background: #f4f0e3;
+  color: #5e6e63;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.maintenance-tracking .mt-table-closure-facts strong {
+  display: inline;
+  color: #18733d !important;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+@container maintenance-card (max-width: 460px) {
+  .maintenance-tracking .mt-closed-ribbon {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+    padding-right: 13px;
+  }
+
+  .maintenance-tracking .mt-closed-ribbon span {
+    text-align: left;
+  }
+
+  .maintenance-tracking .mt-closure-fact {
+    padding: 10px 9px;
+  }
+}
+
+@container maintenance-card (max-width: 350px) {
+  .maintenance-tracking .mt-closure-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .maintenance-tracking .mt-closure-fact,
+  .maintenance-tracking .mt-closure-fact:first-child {
+    border-top: 1px solid #d8c794;
+    border-left: 0;
+  }
+
+  .maintenance-tracking .mt-closure-fact:first-child {
+    border-top: 0;
+  }
+}
+
+@container maintenance-workspace (max-width: 560px) {
+  .maintenance-tracking .mt-visibility-bar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .maintenance-tracking .mt-visibility-bar > span {
+    flex: 1 1 calc(100% - 34px);
+  }
+
+  .maintenance-tracking .mt-visibility-action {
+    width: 100%;
+    margin-left: 0;
+  }
+}

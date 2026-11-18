@@ -1,0 +1,58 @@
+{
+  "ok": true,
+  "atualizado": "2026-11-04T09:40:03-03:00",
+  "total": 3,
+  "ordens": [
+    {
+      "os": "159331192",
+      "entrada": "2026-11-04T07:00:00",
+      "prev": "2026-11-05T06:59:59",
+      "eq": "4588",
+      "modelo": "MB 2638 6x4 Munck",
+      "grupo": "Caminhões Muck",
+      "cdPonto": "99",
+      "ponto": "Lub Lavador 99 BP",
+      "setor": "Lavador&Lubrificação",
+      "motivo": "Motivo 10",
+      "classe": "Classe 10",
+      "origem": "Oficina",
+      "prestador": "",
+      "status": "Programada",
+      "narrativa": "Lavagem e manutenção semanal."
+    },
+    {
+      "os": "159330811",
+      "entrada": "2026-11-04T07:00:00",
+      "prev": "2026-11-04T07:30:00",
+      "eq": "4508",
+      "modelo": "MB 2219 6x4 muck",
+      "grupo": "Caminhões Muck",
+      "cdPonto": "99",
+      "ponto": "Lub Lavador 99 BP",
+      "setor": "Lavador&Lubrificação",
+      "motivo": "PREVENTIVA",
+      "classe": "MANUT PREVENTIVA",
+      "origem": "Oficina",
+      "prestador": "",
+      "status": "Programada",
+      "narrativa": "Execução plano: Plano Manutencao Preventiva 604LUB Ordem de Serviço programada para o(s) Plano(s) de Manutenção: 604/302"
+    },
+    {
+      "os": "159329765",
+      "entrada": "2026-11-01T07:00:00",
+      "prev": "2026-11-02T06:59:59",
+      "eq": "4508",
+      "modelo": "MB 2219 6x4 muck",
+      "grupo": "Caminhões Muck",
+      "cdPonto": "99",
+      "ponto": "Lub Lavador 99 BP",
+      "setor": "Lavador&Lubrificação",
+      "motivo": "Motivo 10",
+      "classe": "Classe 10",
+      "origem": "Oficina",
+      "prestador": "",
+      "status": "Programada",
+      "narrativa": "Lavagem e manutenção semanal."
+    }
+  ]
+}

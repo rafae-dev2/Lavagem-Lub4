@@ -1,0 +1,17 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import AcompanhamentoManutencao from '../src/pages/AcompanhamentoManutencao';
+import '../src/index.css';
+import '../src/styles/glassy-v18.css';
+import '../src/styles/glassy-v18-refinements.css';
+import '../src/styles/apoio-premium.css';
+import '../src/styles/apoio-reference.css';
+import '../src/styles/apoio-devices.css';
+import '../src/styles/operational-compact.css';
+import type { TrackingModule } from '../src/lib/maintenanceTracking';
+const params = new URLSearchParams(location.search);
+const theme = params.get('theme') || 'light';
+document.documentElement.classList.toggle('dark', theme !== 'light');
+document.documentElement.classList.toggle('theme-glassy-v18', theme === 'glassy-v18');
+const module = (params.get('module') || 'preventivas') as TrackingModule;
+createRoot(document.getElementById('root')!).render(<div className="app-shell"><main style={{ width:'100%',padding:0 }}><AcompanhamentoManutencao module={module}/></main></div>);

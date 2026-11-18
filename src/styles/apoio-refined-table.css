@@ -1,0 +1,51 @@
+/* Tabela e grade refinadas, sempre escopadas ao Controle de Equipamentos — Apoio. */
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)) !important; justify-content: start; gap: 14px !important; padding-inline: 14px; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order { border: 1px solid #1f6b45 !important; border-left-width: 1px !important; border-radius: 12px !important; font-size: 14px; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order.apoio-order-forecast-late { border: 2px solid #b54b4b !important; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order.apoio-order-closed { border: 1px solid #1f6b45 !important; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields dt { font-size: 11px !important; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order-fields dd { font-size: 12px !important; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-narrative { font-size: 13px !important; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-days.apoio-age-warning { color: #496b57 !important; background: color-mix(in srgb, var(--apoio-soft) 76%, var(--bg-card)) !important; border-color: #a9c8b4 !important; }
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-forecast-badge { display: inline-flex; align-items: center; gap: 4px; min-height: 26px; padding: 4px 8px; border: 1px solid #b54b4b; border-radius: 6px; background: color-mix(in srgb, #b54b4b 12%, var(--bg-card)); color: #963f3f; font-size: 11px; font-weight: 800; }
+
+.apoio-module.apoio-reference .apoio-table-scroll { border: 1px solid #1f6b45; border-radius: 10px; background: var(--bg-card); }
+.apoio-module.apoio-reference .apoio-orders-table { min-width: 1160px; background: var(--bg-card); color: var(--text-primary); font-size: 13px; }
+.apoio-module.apoio-reference .apoio-orders-table thead th { background: #e8f4ec; color: #14482f; border-bottom: 2px solid #1f6b45; font-size: 11px; letter-spacing: .035em; }
+.apoio-module.apoio-reference .apoio-orders-table thead th:first-child { left: 0; z-index: 4; background: #e8f4ec; }
+.apoio-module.apoio-reference .apoio-table-row { background: var(--bg-card); }
+.apoio-module.apoio-reference .apoio-table-row.is-odd { background: color-mix(in srgb, var(--bg-primary) 38%, var(--bg-card)); }
+.apoio-module.apoio-reference .apoio-table-row:hover { background: color-mix(in srgb, var(--apoio-soft) 68%, var(--bg-card)); }
+.apoio-module.apoio-reference .apoio-table-row > .apoio-table-fleet-cell { left: 0; background: inherit; box-shadow: 2px 0 5px rgba(21, 61, 37, .1); }
+.apoio-module.apoio-reference .apoio-table-row-forecast-late { box-shadow: inset 3px 0 0 #b54b4b; }
+.apoio-module.apoio-reference .apoio-table-row-forecast-late > .apoio-table-fleet-cell { box-shadow: inset 3px 0 0 #b54b4b, 2px 0 5px rgba(21, 61, 37, .1); }
+.apoio-module.apoio-reference .apoio-table-row-closed { background: color-mix(in srgb, var(--bg-hover) 52%, var(--bg-card)); }
+.apoio-module.apoio-reference .apoio-table-row-closed > .apoio-table-fleet-cell { background: inherit; box-shadow: inset 3px 0 0 #1f6b45, 2px 0 5px rgba(21, 61, 37, .1); }
+.apoio-module.apoio-reference .apoio-table-forecast-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; padding: 3px 6px; border: 1px solid #b54b4b; border-radius: 5px; background: color-mix(in srgb, #b54b4b 12%, var(--bg-card)); color: #963f3f; font-size: 10px; font-weight: 800; white-space: nowrap; }
+.apoio-module.apoio-reference .apoio-table-late { color: #963f3f; font-weight: 800; }
+.apoio-module.apoio-reference .apoio-table-details-button:focus-visible,
+.apoio-module.apoio-reference .apoio-orders-table a:focus-visible,
+.apoio-module.apoio-reference .apoio-table-assignment select:focus-visible { outline: 3px solid #2e8b57; outline-offset: 2px; }
+@media (max-width: 719px) { .apoio-module.apoio-reference .apoio-compact-cards .apoio-order-list { grid-template-columns: minmax(0, 1fr) !important; padding-inline: 12px; } }
+
+.apoio-module.apoio-reference .apoio-compact-cards .apoio-order {max-width:360px;width:100%;justify-self:center;}
+
+/* Cabeçalho e células têm paleta local opaca: não herdar o dourado da referência antiga. */
+.apoio-module.apoio-reference .apoio-orders-table {min-width:1280px;background:#fff !important;color:#244934 !important;}
+.apoio-module.apoio-reference .apoio-orders-table thead th {background:#14482f !important;color:#fff !important;border-bottom:2px solid #2e8b57 !important;padding:12px !important;font-size:11px !important;font-weight:700;text-transform:none !important;letter-spacing:.02em;}
+.apoio-module.apoio-reference .apoio-orders-table thead th:first-child {background:#14482f !important;}
+.apoio-module.apoio-reference .apoio-table-row {background:#fff !important;color:#244934 !important;}
+.apoio-module.apoio-reference .apoio-table-row.is-odd {background:#f6faf7 !important;}
+.apoio-module.apoio-reference .apoio-table-row:hover {background:#edf5ef !important;}
+.apoio-module.apoio-reference .apoio-table-row>th,.apoio-module.apoio-reference .apoio-table-row>td {border-bottom:1px solid #dfe9e2 !important;padding:12px !important;color:#244934 !important;}
+.apoio-module.apoio-reference .apoio-table-row>.apoio-table-fleet-cell {background:inherit !important;}
+.apoio-module.apoio-reference .apoio-table-equipment-cell {min-width:180px;max-width:230px;}
+.apoio-module.apoio-reference .apoio-table-group-cell {min-width:220px;max-width:260px;}
+.apoio-module.apoio-reference .apoio-table-date-cell {min-width:210px;}
+.apoio-module.apoio-reference .apoio-table-equipment,.apoio-module.apoio-reference .apoio-table-group,.apoio-module.apoio-reference .apoio-table-fleet-cell strong,.apoio-module.apoio-reference .apoio-table-os-cell {color:#244934 !important;}
+.apoio-module.apoio-reference .apoio-table-secondary,.apoio-module.apoio-reference .apoio-table-date-cell strong {color:#657b6e !important;}
+.apoio-module.apoio-reference .apoio-table-narrative-summary {color:#365742 !important;}
+.apoio-module.apoio-reference .apoio-table-assignment select {min-height:36px;background:#fff !important;color:#365742 !important;border:1px solid #d3e0d7 !important;border-radius:7px;}
+.apoio-module.apoio-reference .apoio-table-status-progress {background:#eaf5ed !important;color:#2f704a !important;}
+.apoio-module.apoio-reference .apoio-table-status-scheduled {background:#edf3fb !important;color:#426e9b !important;}
+.apoio-module.apoio-reference .apoio-table-row-closed {background:#f1f7f3 !important;}

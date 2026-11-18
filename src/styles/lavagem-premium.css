@@ -1,0 +1,995 @@
+/*
+ * Lavagem / Lubrificação — composição premium inspirada em Apoio.
+ *
+ * Este arquivo é deliberadamente local: não altera o shell inteiro nem os
+ * componentes de outras áreas. A identidade clara continua válida quando o
+ * documento está em html.dark ou html.theme-glassy-v18.
+ */
+
+.lavagem-premium,
+html.dark .lavagem-premium,
+html.theme-glassy-v18 .lavagem-premium {
+  --lavagem-ivory: #f4f0e3 !important;
+  --lavagem-ivory-deep: #eee7d3 !important;
+  --lavagem-surface: #ffffff !important;
+  --lavagem-surface-soft: #fffdf7 !important;
+  --lavagem-cream: #f7f1df !important;
+  --lavagem-green: #0b321f !important;
+  --lavagem-green-deep: #062414 !important;
+  --lavagem-green-medium: #18733d !important;
+  --lavagem-green-soft: #e8f0e6 !important;
+  --lavagem-gold: #9c7937 !important;
+  --lavagem-gold-mid: #b38e43 !important;
+  --lavagem-gold-light: #f0df93 !important;
+  --lavagem-ink: #173325 !important;
+  --lavagem-muted: #5e6e63 !important;
+  --lavagem-line: #d6c596 !important;
+  --lavagem-warning: #76591e !important;
+  --lavagem-warning-bg: #fbf3d9 !important;
+  --lavagem-danger: #963d32 !important;
+  --lavagem-danger-bg: #f9e5df !important;
+  --lavagem-blue: #315f86 !important;
+  --lavagem-blue-bg: #e4efeb !important;
+  --lub-surface: #ffffff !important;
+  --lub-soft: #f7f1df !important;
+  --lub-line: #d6c596 !important;
+  --lub-text: #173325 !important;
+  --lub-muted: #5e6e63 !important;
+  --lub-green: #0b321f !important;
+  --lub-hover: #faf6e9 !important;
+  --bg-primary: #f4f0e3 !important;
+  --bg-secondary: #eee7d3 !important;
+  --bg-tertiary: #eee7d3 !important;
+  --bg-card: #ffffff !important;
+  --bg-hover: #eee7d3 !important;
+  --border-primary: #d6c596 !important;
+  --border-secondary: #e5d9b9 !important;
+  --text-primary: #173325 !important;
+  --text-secondary: #365037 !important;
+  --text-muted: #5e6e63 !important;
+  --glass-card-bg: #ffffff !important;
+  --glass-card-border: #b38e43 !important;
+  --glass-input-bg: #f4f0e3 !important;
+  --glass-input-border: #b38e43 !important;
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  overflow-x: clip;
+  background: var(--lavagem-ivory) !important;
+  color: var(--lavagem-ink) !important;
+  color-scheme: light !important;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  line-height: 1.45;
+}
+
+.lavagem-premium,
+.lavagem-premium *,
+.lavagem-premium *::before,
+.lavagem-premium *::after,
+.lub-premium-modal,
+.lub-premium-modal *,
+.lub-premium-modal *::before,
+.lub-premium-modal *::after {
+  box-sizing: border-box;
+}
+
+/* O conteúdo do shell também recebe a superfície marfim, atrás do wrapper. */
+.app-shell--lub > div > main,
+html.dark .app-shell--lub > div > main,
+html.theme-glassy-v18 .app-shell--lub > div > main,
+html.dark.theme-glassy-v18 .app-shell--lub > div > main {
+  padding: 0 !important;
+  background-color: #f4f0e3 !important;
+  background-image: url('/apoio-reference-ribbons.svg') !important;
+  background-size: 100% 1560px !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  color: #173325 !important;
+}
+
+/* A faixa é uma única composição contínua; nunca vira uma camada de leitura. */
+.lavagem-premium > .lavagem-premium-ribbons {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  margin: 0 !important;
+  pointer-events: none;
+  background: url('/apoio-reference-ribbons.svg') center top / 100% 1560px no-repeat;
+}
+
+.lavagem-premium > :not(.lavagem-premium-ribbons) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Cabeçalho premium
+   ────────────────────────────────────────────────────────────────────────── */
+.lavagem-premium > .lavagem-premium-hero,
+html.theme-glassy-v18 .app-shell .lavagem-premium > .lavagem-premium-hero {
+  display: flex;
+  min-width: 0;
+  min-height: 200px;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 2.4vw, 28px);
+  margin-top: 0 !important;
+  padding: 40px max(24px, calc((100% - 1120px) / 2)) 78px !important;
+  overflow: visible;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: url('/apoio-reference-header.svg') center top / 100% 100% no-repeat !important;
+  box-shadow: none !important;
+  color: #fffdf3 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lavagem-premium .lavagem-premium-brand {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.lavagem-premium .lavagem-premium-brand img {
+  width: 60px !important;
+  height: 60px !important;
+  flex: 0 0 60px;
+  object-fit: contain;
+  border: 1.5px solid rgba(240, 223, 147, 0.62) !important;
+  border-radius: 9999px !important;
+  background: radial-gradient(circle at 35% 30%, rgba(28, 74, 44, 0.88), rgba(7, 20, 11, 0.94)) !important;
+  padding: 2px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .14);
+}
+
+.lavagem-premium .lavagem-premium-brand > div {
+  min-width: 0;
+}
+
+.lavagem-premium .lavagem-premium-brand h2 {
+  margin: 0 !important;
+  color: #fffdf3 !important;
+  font: 600 clamp(21px, 2.45vw, 34px) / 1.2 "Segoe UI", Arial, sans-serif !important;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+
+.lavagem-premium .lavagem-premium-brand p {
+  margin: 7px 0 0;
+  color: #ebe7c8 !important;
+  font-size: clamp(14px, 1.8vw, 23px) !important;
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.lavagem-premium .lavagem-premium-sync {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 48px;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px !important;
+  border: 2px solid #c4a25b !important;
+  border-radius: 16px !important;
+  background: linear-gradient(108deg, #b38c36 0%, #efdc91 39%, #ad842f 100%) !important;
+  color: #10170d !important;
+  box-shadow: inset 0 2px 3px rgba(255, 240, 184, .62), 0 4px 8px rgba(0, 0, 0, .20) !important;
+  font: 500 clamp(14px, 1.8vw, 21px) / 1.2 "Segoe UI", Arial, sans-serif !important;
+  text-align: center;
+  text-shadow: none !important;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+
+.lavagem-premium .lavagem-premium-sync svg {
+  color: currentColor !important;
+  flex: 0 0 auto;
+}
+
+.lavagem-premium .lavagem-premium-sync:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: inset 0 2px 3px rgba(255, 240, 184, .72), 0 7px 15px rgba(11, 50, 31, .22) !important;
+  filter: saturate(1.08);
+}
+
+.lavagem-premium .lavagem-premium-sync:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Corpo, abas e superfícies compartilhadas pelas quatro telas
+   ────────────────────────────────────────────────────────────────────────── */
+.lavagem-premium > .lavagem-premium-body {
+  min-width: 0;
+  padding: 0 clamp(14px, 3.8vw, 48px) clamp(24px, 4vw, 44px) !important;
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lavagem-premium-body > * {
+  min-width: 0;
+}
+
+.lavagem-premium .lavagem-premium-tabs {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  margin: 0 auto clamp(14px, 2vw, 22px) !important;
+  padding: 5px !important;
+  overflow-x: auto;
+  border: 1px solid rgba(214, 197, 150, .82) !important;
+  border-radius: 15px !important;
+  background: rgba(245, 241, 230, .74) !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+  box-shadow: 0 10px 26px -10px rgba(11, 50, 31, .14), inset 0 1.5px 0 rgba(255, 255, 255, .86) !important;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lavagem-premium .lavagem-premium-tabs > button {
+  display: inline-flex;
+  min-height: 38px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px !important;
+  border: 1px solid transparent !important;
+  border-radius: 11px !important;
+  background: transparent !important;
+  color: var(--lavagem-muted) !important;
+  font: 600 13px / 1.2 "Segoe UI", Arial, sans-serif !important;
+  white-space: nowrap;
+  transition: background .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease;
+}
+
+.lavagem-premium .lavagem-premium-tabs > button:hover:not(:disabled) {
+  border-color: rgba(179, 142, 67, .42) !important;
+  background: rgba(255, 255, 255, .68) !important;
+  color: var(--lavagem-green) !important;
+}
+
+/* A aba ativa pode vir com classes Tailwind claras ou escuras. */
+.lavagem-premium .lavagem-premium-tabs > button[class*="bg-white"],
+.lavagem-premium .lavagem-premium-tabs > button[class*="bg-[var(--brand-green)]"] {
+  border-color: var(--lavagem-gold-mid) !important;
+  background: linear-gradient(180deg, #247d43 0%, #0c4224 100%) !important;
+  color: #f8e49a !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .28), 0 3px 8px rgba(11, 50, 31, .16) !important;
+}
+
+/* O contador vermelho permanece branco e legível; não há cor genérica de span. */
+.lavagem-premium .lavagem-premium-tabs > button > span[class*="text-white"] {
+  min-width: 18px;
+  color: #ffffff !important;
+  background: #963d32 !important;
+}
+
+/* Neutraliza vidro somente nas superfícies que pertencem às telas agrupadas. */
+.lavagem-premium .lavagem-premium-body .glass-card,
+.lavagem-premium .lavagem-premium-body [class*="glass-card"],
+.lavagem-premium .lavagem-premium-body .backdrop-blur-2xl,
+.lavagem-premium .lavagem-premium-body [class*="backdrop-blur"] {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .86) 0%, rgba(250, 247, 238, .76) 100%) !important;
+  border-color: var(--lavagem-gold-mid) !important;
+  box-shadow: 0 14px 32px -12px rgba(11, 50, 31, .14), inset 0 1.5px 0 rgba(255, 255, 255, .92), inset 0 0 0 1px rgba(240, 223, 147, .20) !important;
+  backdrop-filter: blur(18px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+}
+
+/* Raízes de Dashboard/Importar/Exportar mantêm os grids já definidos pelos componentes. */
+.lavagem-premium .lavagem-premium-body > :is(.space-y-6, .space-y-5, .space-y-4) {
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lavagem-premium-body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--lavagem-green) !important;
+  overflow-wrap: anywhere;
+}
+
+.lavagem-premium .lavagem-premium-body :is(label, dt) {
+  color: var(--lavagem-green) !important;
+}
+
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-primary)]"],
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-secondary)]"],
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-muted)]"] {
+  color: var(--lavagem-ink) !important;
+}
+
+/* Utilitários escuros são neutralizados apenas em blocos de leitura; badges
+   continuam fora desta regra para conservar o contraste de cada situação. */
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class~="text-white"],
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-primary)]"],
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-secondary)]"],
+.lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-muted)]"] {
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/5"],
+.lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/10"],
+.lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-tertiary)]"],
+.lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-secondary)]"] {
+  background: var(--lavagem-surface-soft) !important;
+  border-color: var(--lavagem-line) !important;
+}
+
+/* Campos sempre creme, opacos e legíveis, inclusive em html.dark. */
+.lavagem-premium :is(input, select, textarea),
+html.theme-glassy-v18 .app-shell .lavagem-premium :is(input, select, textarea) {
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--lavagem-gold-mid) !important;
+  border-radius: 9px !important;
+  background: var(--lavagem-ivory) !important;
+  color: var(--lavagem-ink) !important;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  box-shadow: inset 0 1px 2px rgba(11, 50, 31, .05) !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lavagem-premium :is(input, select, textarea)::placeholder {
+  color: #6a7468 !important;
+  opacity: 1 !important;
+}
+
+.lavagem-premium select option,
+html.theme-glassy-v18 .app-shell .lavagem-premium select option {
+  background: #f4f0e3 !important;
+  color: #173325 !important;
+}
+
+.lavagem-premium :is(button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(179, 142, 67, .55) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--lavagem-green) !important;
+}
+
+.lavagem-premium .lavagem-premium-body button {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+/* Botões primários: verde profundo com filete metálico. */
+.lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
+.lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"],
+.lavagem-premium .lavagem-premium-body .lub-edit,
+.lavagem-premium .lavagem-premium-body .lub-detail {
+  border-color: var(--lavagem-gold-mid) !important;
+  background: linear-gradient(180deg, #247d43 0%, #0c4224 100%) !important;
+  color: #f8e49a !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .22), 0 3px 8px rgba(11, 50, 31, .14) !important;
+}
+
+.lavagem-premium .lavagem-premium-body button[class*="bg-green-600"]:hover:not(:disabled),
+.lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"]:hover:not(:disabled),
+.lavagem-premium .lavagem-premium-body .lub-edit:hover:not(:disabled),
+.lavagem-premium .lavagem-premium-body .lub-detail:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2d8b4c 0%, #0f4c2a 100%) !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .28), 0 6px 13px rgba(11, 50, 31, .18) !important;
+}
+
+.lavagem-premium .lavagem-premium-body button:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Programações / lub-module
+   ────────────────────────────────────────────────────────────────────────── */
+.lavagem-premium .lub-module {
+  min-width: 0;
+  color: var(--lub-text) !important;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+/* O cabeçalho próprio do módulo já foi substituído pelo hero do wrapper. */
+.lavagem-premium .lub-module > .lub-hero {
+  display: none !important;
+}
+
+/* O resumo operacional interno permanece visível, apenas assume a pele clara. */
+.lavagem-premium .lub-module .lub-hero {
+  border: 2px solid var(--lavagem-gold-mid) !important;
+  border-radius: 15px !important;
+  background: linear-gradient(115deg, #1f7d3d 0%, #0b321f 100%) !important;
+  box-shadow: 0 8px 20px rgba(11, 50, 31, .14), inset 0 1px 0 rgba(240, 223, 147, .25) !important;
+  color: #fffdf3 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lavagem-premium .lub-module .lub-hero h2,
+.lavagem-premium .lub-module .lub-hero strong {
+  color: #fffdf3 !important;
+}
+
+.lavagem-premium .lub-module .lub-hero p:not(.lub-eyebrow),
+.lavagem-premium .lub-module .lub-eyebrow,
+.lavagem-premium .lub-module .lub-hero-total span {
+  color: #ebe7c8 !important;
+}
+
+.lavagem-premium .lub-module .lub-toolbar-title,
+.lavagem-premium .lub-module .lub-filter-title strong,
+.lavagem-premium .lub-module .lub-table-caption strong {
+  color: var(--lavagem-green) !important;
+}
+
+.lavagem-premium .lub-module .lub-toolbar small,
+.lavagem-premium .lub-module .lub-filter-title span,
+.lavagem-premium .lub-module .lub-table-caption span {
+  color: var(--lavagem-muted) !important;
+}
+
+.lavagem-premium .lub-module .lub-kpi {
+  border: 1px solid var(--lavagem-gold-mid) !important;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .82) 0%, rgba(250, 247, 238, .70) 100%) !important;
+  box-shadow: 0 14px 30px -12px rgba(11, 50, 31, .14), inset 0 1.5px 0 rgba(255, 255, 255, .94), inset 0 0 0 1px rgba(240, 223, 147, .22) !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+
+.lavagem-premium .lub-module .lub-filter-panel,
+.lavagem-premium .lub-module .lub-table-panel {
+  border: 1px solid var(--lavagem-gold-mid) !important;
+  background: rgba(255, 255, 255, .90) !important;
+  box-shadow: 0 12px 28px -10px rgba(11, 50, 31, .11), inset 0 1px 0 rgba(255, 255, 255, .88), inset 0 0 0 1px rgba(240, 223, 147, .16) !important;
+  backdrop-filter: blur(14px) saturate(135%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(135%) !important;
+}
+
+/* O trim superior continua codificando o status via --lub-kpi-color. */
+.lavagem-premium .lub-module .lub-kpi {
+  border-top: 3px solid var(--lub-kpi-color, var(--lavagem-green)) !important;
+  border-radius: 13px !important;
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-kpi:hover {
+  border-color: var(--lavagem-gold) !important;
+  border-top-color: var(--lub-kpi-color, var(--lavagem-green)) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 11px 23px rgba(11, 50, 31, .12), inset 0 0 0 1px rgba(240, 223, 147, .28) !important;
+}
+
+.lavagem-premium .lub-module .lub-kpi.is-selected {
+  border-color: var(--lavagem-gold) !important;
+  border-top-color: var(--lub-kpi-color, var(--lavagem-green)) !important;
+  box-shadow: 0 0 0 2px var(--lavagem-green), 0 8px 18px rgba(11, 50, 31, .12) !important;
+}
+
+.lavagem-premium .lub-module .lub-kpi-label,
+.lavagem-premium .lub-module .lub-kpi small {
+  color: var(--lavagem-muted) !important;
+}
+
+.lavagem-premium .lub-module .lub-kpi strong {
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-filter-panel {
+  border-radius: 14px !important;
+}
+
+.lavagem-premium .lub-module .lub-filter-title {
+  border-bottom-color: var(--lavagem-line) !important;
+}
+
+.lavagem-premium .lub-module .lub-table-panel {
+  overflow: hidden;
+  border-radius: 14px !important;
+}
+
+.lavagem-premium .lub-module .lub-table-caption {
+  border-bottom: 1px solid var(--lavagem-line) !important;
+  background: #fffdf7 !important;
+}
+
+.lavagem-premium .lub-module .lub-table-scroll {
+  overflow-x: auto !important;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.lavagem-premium .lub-module .lub-table-scroll:focus-visible {
+  outline: 2px solid var(--lavagem-green) !important;
+  outline-offset: 3px;
+}
+
+/* Tabela continua horizontal; não é convertida em cards. */
+.lavagem-premium .lub-module .lub-table {
+  min-width: 1040px !important;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-table th {
+  border-bottom: 2px solid var(--lavagem-gold-light) !important;
+  background: linear-gradient(180deg, #174d31 0%, #0b321f 100%) !important;
+  color: #f0df93 !important;
+}
+
+.lavagem-premium .lub-module .lub-table th button {
+  color: #f0df93 !important;
+}
+
+.lavagem-premium .lub-module .lub-table td {
+  background: #ffffff !important;
+  border-bottom-color: #e5d9b9 !important;
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-table tbody tr:hover td {
+  background: #faf6e9 !important;
+}
+
+.lavagem-premium .lub-module .lub-table tbody tr:last-child td {
+  border-bottom-color: transparent !important;
+}
+
+.lavagem-premium .lub-module .lub-fleet,
+.lavagem-premium .lub-module .lub-date.is-complete,
+.lavagem-premium .lub-module .lub-detail {
+  color: var(--lavagem-green) !important;
+}
+
+.lavagem-premium .lub-module .lub-service {
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-secondary,
+.lavagem-premium .lub-module .lub-os,
+.lavagem-premium .lub-module .lub-group {
+  color: var(--lavagem-muted) !important;
+}
+
+.lavagem-premium .lub-module .lub-origin {
+  border-color: var(--lavagem-line) !important;
+  background: var(--lavagem-cream) !important;
+  color: var(--lavagem-muted) !important;
+}
+
+.lavagem-premium .lub-module .lub-origin.is-pcm {
+  color: var(--lavagem-green) !important;
+}
+
+.lavagem-premium .lub-module .lub-narrative {
+  background: var(--lavagem-cream) !important;
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-narrative strong {
+  color: var(--lavagem-muted) !important;
+}
+
+/* Observações ocupam sua própria coluna; Ações são sticky e sempre opacas. */
+.lavagem-premium .lub-module .lub-observation-cell {
+  min-width: 170px;
+  max-width: 255px;
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-observation {
+  color: var(--lavagem-ink) !important;
+}
+
+.lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  position: sticky;
+  right: 0;
+  z-index: 3;
+  min-width: 112px;
+  width: 112px;
+  border-left: 1px solid var(--lavagem-line) !important;
+  background: #ffffff !important;
+  box-shadow: -6px 0 10px -7px rgba(11, 50, 31, .27) !important;
+}
+
+.lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  z-index: 5;
+  background: #0b321f !important;
+  color: #f0df93 !important;
+  text-align: center;
+}
+
+.lavagem-premium .lub-module .lub-row:hover .lub-actions-cell {
+  background: #faf6e9 !important;
+}
+
+.lavagem-premium .lub-module .lub-row-actions {
+  align-items: center;
+}
+
+.lavagem-premium .lub-module .lub-edit {
+  min-height: 34px;
+  border-radius: 8px !important;
+  color: #f8e49a !important;
+}
+
+/* Cada atalho mantém sua indicação: andamento, encerramento, adiar, reabrir e excluir. */
+.lavagem-premium .lub-module .lub-quick-actions button {
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: var(--lavagem-muted) !important;
+}
+
+.lavagem-premium .lub-module .lub-quick-actions button:nth-child(1):hover:not(:disabled) {
+  border-color: #9774b9 !important;
+  background: #f2eaf8 !important;
+  color: #6c4790 !important;
+}
+
+.lavagem-premium .lub-module .lub-quick-actions button:nth-child(2):hover:not(:disabled),
+.lavagem-premium .lub-module .lub-quick-actions button:nth-child(2):focus-visible {
+  border-color: #2e8b57 !important;
+  background: #e8f3e9 !important;
+  color: #1e6c40 !important;
+}
+
+.lavagem-premium .lub-module .lub-quick-actions button:nth-child(3):hover:not(:disabled) {
+  border-color: var(--lavagem-gold-mid) !important;
+  background: var(--lavagem-warning-bg) !important;
+  color: var(--lavagem-warning) !important;
+}
+
+.lavagem-premium .lub-module .lub-row-encerrado .lub-quick-actions button:first-child:hover:not(:disabled) {
+  border-color: var(--lavagem-blue) !important;
+  background: var(--lavagem-blue-bg) !important;
+  color: var(--lavagem-blue) !important;
+}
+
+.lavagem-premium .lub-module .lub-quick-actions .lub-delete:hover:not(:disabled) {
+  border-color: #c36b5d !important;
+  background: var(--lavagem-danger-bg) !important;
+  color: var(--lavagem-danger) !important;
+}
+
+.lavagem-premium .lub-module .lub-empty {
+  color: var(--lavagem-muted) !important;
+}
+
+.lavagem-premium .lub-module .lub-empty strong {
+  color: var(--lavagem-green) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Modal por portal — a classe é o único ponto fora do wrapper autorizado.
+   ────────────────────────────────────────────────────────────────────────── */
+.lub-premium-modal,
+html.dark .lub-premium-modal,
+html.theme-glassy-v18 .lub-premium-modal {
+  --lavagem-ivory: #f4f0e3 !important;
+  --lavagem-surface: #ffffff !important;
+  --lavagem-cream: #f7f1df !important;
+  --lavagem-green: #0b321f !important;
+  --lavagem-gold: #9c7937 !important;
+  --lavagem-gold-mid: #b38e43 !important;
+  --lavagem-gold-light: #f0df93 !important;
+  --lavagem-ink: #173325 !important;
+  --lavagem-muted: #5e6e63 !important;
+  --lavagem-line: #d6c596 !important;
+  color-scheme: light !important;
+  color: var(--lavagem-ink) !important;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+.lub-premium-modal .lub-modal,
+html.theme-glassy-v18 .app-shell .lub-premium-modal .lub-modal {
+  border: 1px solid var(--lavagem-gold-mid) !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  color: var(--lavagem-ink) !important;
+  box-shadow: 0 22px 55px rgba(11, 50, 31, .24), inset 0 0 0 1px rgba(240, 223, 147, .20) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lub-premium-modal .lub-modal > :is(div):first-child {
+  border-bottom-color: var(--lavagem-line) !important;
+  background: var(--lavagem-cream) !important;
+}
+
+.lub-premium-modal .lub-modal > :is(div):last-child {
+  border-top-color: var(--lavagem-line) !important;
+  background: #fffdf7 !important;
+}
+
+.lub-premium-modal .lub-modal h3,
+.lub-premium-modal .lub-modal label {
+  color: var(--lavagem-green) !important;
+}
+
+.lub-premium-modal .lub-modal :is(input, select, textarea) {
+  border-color: var(--lavagem-gold-mid) !important;
+  background: var(--lavagem-ivory) !important;
+  color: var(--lavagem-ink) !important;
+  border-radius: 9px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lub-premium-modal .lub-modal select option {
+  background: #f4f0e3 !important;
+  color: #173325 !important;
+}
+
+.lub-premium-modal .lub-modal .lub-modal-note {
+  border-color: var(--lavagem-line) !important;
+  background: var(--lavagem-cream) !important;
+  color: var(--lavagem-muted) !important;
+}
+
+.lub-premium-modal .lub-modal .lub-modal-note strong {
+  color: var(--lavagem-green) !important;
+}
+
+.lub-premium-modal .lub-modal .lub-modal-error {
+  border: 1px solid #c36b5d;
+  background: var(--lavagem-danger-bg) !important;
+  color: #842936 !important;
+}
+
+.lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  border: 1px solid var(--lavagem-gold-mid) !important;
+  background: linear-gradient(180deg, #247d43 0%, #0c4224 100%) !important;
+  color: #f8e49a !important;
+}
+
+.lub-premium-modal .lub-modal button:not([class*="bg-green-600"]) {
+  border-color: var(--lavagem-line) !important;
+  color: var(--lavagem-green) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Responsividade
+   ────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 719px) {
+  .lavagem-premium > .lavagem-premium-hero {
+    min-height: 156px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 24px 17px 50px !important;
+  }
+
+  .lavagem-premium .lavagem-premium-brand {
+    flex-basis: 100%;
+    gap: 10px;
+  }
+
+  .lavagem-premium .lavagem-premium-brand img {
+    width: 50px !important;
+    height: 50px !important;
+    flex-basis: 50px;
+    border-radius: 12px !important;
+  }
+
+  .lavagem-premium .lavagem-premium-brand h2 {
+    font-size: 18px !important;
+  }
+
+  .lavagem-premium .lavagem-premium-brand p {
+    margin-top: 4px;
+    font-size: 13px !important;
+  }
+
+  .lavagem-premium .lavagem-premium-sync {
+    min-height: 40px;
+    flex: 1 1 150px;
+    padding: 8px 12px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+  }
+
+  .lavagem-premium > .lavagem-premium-body {
+    padding-inline: clamp(10px, 4vw, 18px) !important;
+  }
+
+  .lavagem-premium .lavagem-premium-tabs > button {
+    min-height: 36px;
+    padding-inline: 12px !important;
+    font-size: 12px !important;
+  }
+
+  .lavagem-premium .lub-module .lub-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lavagem-premium .lub-module .lub-kpi {
+    padding: 12px !important;
+  }
+
+  .lavagem-premium .lub-module .lub-kpi strong {
+    font-size: 25px;
+  }
+
+  .lavagem-premium .lub-module .lub-filter-panel {
+    padding: 13px !important;
+  }
+
+  .lavagem-premium .lub-module .lub-table-caption {
+    flex-wrap: wrap;
+    padding: 14px !important;
+  }
+
+  .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+    min-width: 94px;
+    width: 94px;
+  }
+
+  .lavagem-premium .lub-module .lub-table td {
+    padding: 13px !important;
+  }
+
+  /* No celular Ações não cobre Observações: o usuário chega a ela rolando. */
+  .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+    position: static;
+    right: auto;
+    z-index: auto;
+    box-shadow: none !important;
+  }
+
+  .lavagem-premium .lavagem-premium-body .grid.grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 380px) {
+  .lavagem-premium .lavagem-premium-body .grid.grid-cols-5 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lavagem-premium .lavagem-premium-tabs > button {
+    padding-inline: 10px !important;
+  }
+}
+
+@media (min-width: 720px) {
+  .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+    position: sticky;
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lavagem-premium *,
+  .lavagem-premium *::before,
+  .lavagem-premium *::after,
+  .lub-premium-modal *,
+  .lub-premium-modal *::before,
+  .lub-premium-modal *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Prioridade final sobre a camada Glassy global; sem alterar cores das situações. */
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-table td {
+  background: #fff !important; color: #173325 !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-table th {
+  background: linear-gradient(180deg,#194d2f,#0b321f) !important;
+  color: #f0df93 !important; border-color: #b38e43 !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  background: #fff !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  background: #0b321f !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium :is(.lub-kpi,.lub-table-panel,.lub-filter-panel,.glass-card) {
+  background: #fff !important; border-color: #b38e43 !important;
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+}
+.lavagem-premium .lavagem-premium-tabs button[aria-current="page"] {
+  background: linear-gradient(108deg,#b8923f,#f0df93 45%,#bd9846) !important;
+  color: #0b321f !important; border-color: #c4a357 !important;
+  box-shadow: inset 0 1px 0 #fff8,0 3px 8px #31271524 !important;
+}
+.lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]) {
+  background: linear-gradient(180deg,#1d6737,#0b321f) !important;
+  color: #f0df93 !important;
+}
+
+/* Links de narrativa permanecem links legíveis, não pequenos botões sem área útil. */
+.lavagem-premium .lavagem-premium-body .lub-detail,
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-detail {
+  background: none !important; color: #155c32 !important;
+  box-shadow: none !important; border: 0 !important;
+  padding: 5px 0; min-height: 32px;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-edit {
+  background: linear-gradient(180deg,#247d43,#0c4224) !important;
+  color: #f8e49a !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-toolbar p {
+  color: #5e6e63 !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-toolbar p > span {
+  color: #805b17 !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-toolbar button[class*="bg-amber-"] {
+  color: #805b17 !important; background: #fbf3d9 !important;
+}
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-toolbar button[class*="bg-amber-"] > span {
+  color: inherit !important;
+}
+
+@keyframes lavagemTabEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lavagem-premium .lavagem-premium-tab-panel {
+  min-width: 0;
+  animation: lavagemTabEnter 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lavagem-premium .lavagem-perf-soft-warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: rgba(251, 243, 217, 0.92);
+  border: 1px solid rgba(180, 130, 38, 0.38);
+  color: #6b4c14;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  box-shadow: 0 6px 18px -8px rgba(49, 39, 21, 0.22);
+  animation: lavagemTabEnter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lavagem-premium .lavagem-perf-soft-warning__icon {
+  flex: 0 0 auto;
+  color: #b7791f;
+}
+
+.lavagem-premium .lavagem-perf-soft-warning__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.lavagem-premium .lavagem-perf-soft-warning__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  padding: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(180, 130, 38, 0.28);
+  background: rgba(255, 255, 255, 0.65);
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lavagem-premium .lavagem-premium-tab-panel,
+  .lavagem-premium .lavagem-perf-soft-warning {
+    animation: none !important;
+  }
+}

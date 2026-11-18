@@ -1,0 +1,257 @@
+/* Refinamento fiel à composição enviada: marfim, faixas curvas e metal dourado. */
+.app-shell--apoio { --bg-primary: #f4f0e3; }
+.app-shell--apoio > div > main,
+html.theme-glassy-v18 .app-shell--apoio > div > main {
+  padding: 0 !important;
+  background-color: #f4f0e3 !important;
+  background-image: url('/apoio-reference-ribbons.svg') !important;
+  background-size: 100% auto !important;
+  background-position: center 180px !important;
+  background-repeat: repeat-y !important;
+}
+.apoio-reference {
+  padding: 0 0 32px !important;
+  max-width: none !important;
+  min-height: 100vh;
+  background: #f4f0e3 !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+.apoio-reference::before,
+.apoio-reference::after { display: none !important; }
+.apoio-reference > .apoio-ribbon-layer {
+  position: absolute; z-index: 0; inset: 0;
+  margin: 0 !important; pointer-events: none;
+  background: url('/apoio-reference-ribbons.svg') center 160px / 100% auto repeat-y;
+}
+.apoio-reference > :not(.apoio-ribbon-layer) { position: relative; z-index: 1; }
+.apoio-reference > .apoio-hero,
+html.theme-glassy-v18 .app-shell .apoio-reference > .apoio-hero {
+  margin-top: 0 !important;
+  background: url('/apoio-reference-header.svg') center top / 100% 100% no-repeat !important;
+  min-height: 200px;
+  padding: 40px max(24px, calc((100% - 790px)/2)) 78px !important;
+  border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  overflow: visible;
+}
+.apoio-reference .apoio-hero::before,
+.apoio-reference .apoio-hero::after { display: none !important; }
+.apoio-reference .apoio-hero-main { flex-wrap: nowrap; align-items: center; gap: 20px; }
+.apoio-reference .apoio-brand { flex: 1 1 auto; min-width: 0; }
+.apoio-reference .apoio-logo,
+.apoio-reference .apoio-eyebrow { display: none; }
+.apoio-reference .apoio-hero h2 { font: 600 clamp(20px, 2.45vw, 34px)/1.2 'Segoe UI', Arial, sans-serif !important; letter-spacing: -.02em; margin: 0; }
+.apoio-reference .apoio-hero-description { font-size: clamp(16px, 2vw, 28px) !important; margin-top: 7px; }
+.apoio-reference .apoio-hero-tools { width: auto; flex: 0 0 auto; }
+.apoio-reference .apoio-sync-button { min-height: 52px; font-size: clamp(15px, 2vw, 23px); font-weight: 500; padding: 9px 18px !important; border-radius: 16px !important; background: linear-gradient(108deg,#b38c36,#efdc91 39%,#ad842f 100%) !important; color: #10170d !important; }
+.apoio-reference .apoio-sync-button svg { display: none; }
+.apoio-reference > :is(.apoio-command-center, .apoio-filter-center) {
+  width: min(790px, 78%); margin: 10px auto !important;
+  border-radius: 11px; background: #f5f1e6e8;
+  border: 1px solid #d6c596;
+}
+.apoio-reference :is(.apoio-command-center, .apoio-filter-center) > summary {
+  cursor: pointer; padding: 9px 15px; font-size: 12px; font-weight: 600;
+  color: #385238; list-style-position: inside;
+}
+.apoio-reference :is(.apoio-command-center, .apoio-filter-center) > summary span { float: right; font-weight: 400; font-size: 11px; color: #5d6557; margin-left: 10px; }
+.apoio-reference .apoio-command-content { padding: 16px; border-top: 1px solid #d6c596; }
+.apoio-reference .apoio-command-content .apoio-sync { color: #304834; border-color: #d6c596; margin-top: 0; }
+.apoio-reference .apoio-command-content .apoio-sync strong { color: #173325 !important; }
+.apoio-reference .apoio-command-content .apoio-sync-note { color: #53604f; }
+.apoio-reference > .apoio-orders-panel { margin-top: 20px !important; }
+.apoio-reference .apoio-list-heading,
+.apoio-reference .apoio-legend { width: min(790px, 78%); margin: 0 auto; padding-inline: 0; background: transparent; }
+.apoio-reference .apoio-list-heading { padding-block: 0 8px; }
+.apoio-reference .apoio-list-heading h3 { font-size: 12px; }
+.apoio-reference .apoio-list-heading > span { font-size: 10px; }
+.apoio-reference .apoio-legend { font-size: 9px; gap: 8px; padding-bottom: 12px; }
+.apoio-reference .apoio-order-list { width: min(790px, 78%); grid-template-columns: minmax(0,1fr) !important; padding: 0 0 16px !important; margin: 0 auto; gap: 30px; }
+.apoio-reference .apoio-order { padding: clamp(18px, 3vw, 34px) !important; border-radius: 30px !important; border: 3px solid #ae8e4b !important; border-left-width: 10px !important; box-shadow: -6px 0 0 #c3a45e, 0 12px 18px #2a301f35 !important; }
+.apoio-reference .apoio-order::before { width: 8px; background: linear-gradient(180deg,#ae893e 0%,#f5e79d 28%,#10753a 65%,#0c331f 100%); }
+.apoio-reference .apoio-fleet-title { font-size: clamp(25px, 3vw, 42px) !important; color: #061e12 !important; }
+.apoio-reference .apoio-order-top { flex-wrap: nowrap; gap: 15px; }
+.apoio-reference .apoio-order-top > .apoio-fleet-title { flex: 1 1 auto; }
+.apoio-reference .apoio-card-badges { width: auto; flex: 0 1 auto; justify-content: end; gap: 12px; flex-wrap: nowrap; }
+.apoio-reference .apoio-status { font-size: clamp(10px, 1.8vw, 21px); font-weight: 500; padding: 7px 12px; white-space: normal; }
+.apoio-reference .apoio-days { font-size: clamp(10px, 1.8vw, 21px); white-space: nowrap; padding: 7px 11px; border-radius: 14px; }
+.apoio-reference .apoio-days strong { font-size: inherit; font-weight: 600; }
+.apoio-reference .apoio-days span { font-size: inherit; font-weight: 500; }
+.apoio-reference .apoio-model { font-size: clamp(14px, 2vw, 27px); margin-top: 10px; }
+.apoio-reference .apoio-order-fields { margin-top: 24px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.apoio-reference .apoio-order-fields > div { padding: 18px 8px; }
+.apoio-reference .apoio-order-fields > div:has(> svg) { grid-template-columns: 36px minmax(0,1fr); align-items: center; gap: 12px; }
+.apoio-reference .apoio-order-fields > div > svg { width: 32px; height: 32px; stroke: #99713d; stroke-width: 1.75; filter: drop-shadow(0 1px 0 #d5b987); }
+.apoio-reference .apoio-order-fields dt { font-size: clamp(10px, 1.7vw, 23px); }
+.apoio-reference .apoio-order-fields dd { font-size: clamp(13px, 2.05vw, 27px); }
+.apoio-reference .apoio-preview-late dd { color: #842936 !important; }
+.apoio-reference .apoio-narrative-section { border-radius: 22px; padding: 18px 22px !important; margin-top: 25px; }
+.apoio-reference .apoio-narrative-section .apoio-label { font-size: clamp(12px, 1.8vw, 23px); }
+.apoio-reference .apoio-narrative { font-size: clamp(14px, 2vw, 27px); line-height: 1.35; }
+.apoio-reference .apoio-card-bottom { grid-template-columns: minmax(0,1fr) auto; align-items: center; margin-top: 25px; }
+.apoio-reference .apoio-card-group { display: flex !important; align-items: center; gap: 7px; font-size: clamp(13px, 1.85vw, 24px); }
+.apoio-reference .apoio-group-select { font-size: clamp(12px, 1.8vw, 23px) !important; margin-top: 0 !important; width: 100%; }
+.apoio-reference .apoio-card-bottom .apoio-details-button { font-size: clamp(13px, 1.8vw, 23px); padding: 11px 16px; border: 3px solid #b39450 !important; border-radius: 17px !important; min-width: 0; }
+.apoio-reference .apoio-observations:not([hidden]) { margin-top: 28px; border: 2px solid #b39450; border-radius: 22px; }
+.apoio-reference .apoio-timeline-header { padding: 26px 22px; }
+.apoio-reference .apoio-timeline-header strong { font-size: clamp(26px, 3vw, 40px); }
+.apoio-reference .apoio-timeline-header span { font-size: clamp(15px, 2vw, 26px); font-weight: 400; }
+.apoio-reference .apoio-timeline { margin-top: 24px; margin-left: 44px; }
+.apoio-reference .apoio-timeline-event { padding-bottom: 22px; }
+.apoio-reference .apoio-timeline-event strong { font-size: clamp(17px, 2vw, 27px); }
+.apoio-reference .apoio-timeline-event span { font-size: clamp(15px, 1.7vw, 23px); }
+.apoio-reference .apoio-orders-panel > :last-child:not(.apoio-order-list) { width: min(790px,78%); margin-inline: auto; }
+@media(max-width:719px) {
+  .apoio-reference > .apoio-hero { min-height: 156px; padding: 24px 17px 50px !important; }
+  .apoio-reference .apoio-hero-main { gap: 12px; }
+  .apoio-reference .apoio-hero h2 { font-size: 18px !important; }
+  .apoio-reference .apoio-hero-description { font-size: 13px !important; }
+  .apoio-reference .apoio-sync-button { padding: 8px 10px !important; min-height: 40px; font-size: 13px; }
+  .apoio-reference :is(.apoio-order-list,.apoio-list-heading,.apoio-legend),
+  .apoio-reference > :is(.apoio-command-center,.apoio-filter-center) { width: 86%; }
+  .apoio-reference .apoio-order { border-radius: 21px !important; padding: 16px !important; }
+  .apoio-reference .apoio-order-top { flex-wrap: wrap; }
+  .apoio-reference .apoio-order-top > .apoio-fleet-title { flex-basis: 100%; font-size: 26px !important; }
+  .apoio-reference .apoio-card-badges { justify-content: start; gap: 8px; }
+  .apoio-reference .apoio-status { font-size: 11px; }
+  .apoio-reference .apoio-days { font-size: 12px; }
+  .apoio-reference .apoio-order-fields > div { padding: 13px 5px; }
+  .apoio-reference .apoio-order-fields > div:has(> svg) { grid-template-columns: 21px minmax(0,1fr); gap: 7px; }
+  .apoio-reference .apoio-order-fields > div > svg { width: 20px; height: 20px; }
+  .apoio-reference .apoio-order-fields .apoio-preview-late { padding: 13px 5px; }
+  .apoio-reference .apoio-order-fields dt { font-size: 10px; }
+  .apoio-reference .apoio-order-fields dd { font-size: 13px; }
+  .apoio-reference .apoio-narrative-section { padding: 13px 14px !important; }
+  .apoio-reference .apoio-narrative { font-size: 14px; }
+  .apoio-reference .apoio-card-bottom { grid-template-columns: minmax(0,1fr); gap: 12px; }
+  .apoio-reference .apoio-card-group { font-size: 14px; }
+  .apoio-reference .apoio-card-bottom .apoio-details-button { width: 100%; }
+  .apoio-reference .apoio-timeline { margin-left: 32px; }
+  .apoio-reference :is(.apoio-command-center,.apoio-filter-center) > summary span { float: none; display: block; margin-left: 14px; margin-top: 3px; }
+}
+@media(max-width:380px) {
+  .apoio-reference .apoio-order-fields { grid-template-columns: minmax(0,1fr); }
+  .apoio-reference .apoio-order-fields > div:nth-child(2n) { border-left: none !important; }
+  .apoio-reference .apoio-order-fields > div:nth-child(n+2) { border-top: 1px solid #b38e43 !important; }
+}
+@media(prefers-reduced-motion:reduce) { .apoio-reference *, .apoio-reference *::before, .apoio-reference *::after { transition: none !important; animation: none !important; } }
+
+html.theme-glassy-v18 .app-shell .apoio-module.apoio-premium.apoio-reference > .apoio-hero {
+  background: url('/apoio-reference-header.svg') center top / 100% 100% no-repeat !important;
+  border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+}
+
+/* Uma composição contínua por tela; não mosaicos de ondas em celulares. */
+.apoio-reference > .apoio-ribbon-layer {
+  background-position: center top;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.app-shell--apoio > div > main,
+html.theme-glassy-v18 .app-shell--apoio > div > main {
+  background-size: 100% 1560px !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+}
+.apoio-reference .apoio-card-group > span { flex: 0 0 auto; white-space: nowrap; }
+.apoio-reference .apoio-card-group > select { flex: 1 1 0%; min-width: 0; width: 0; }
+
+.apoio-reference .apoio-full-history { margin: 0 16px 14px; }
+.apoio-reference .apoio-full-history > summary {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer; list-style: none; border: 3px solid #ae914e;
+  border-radius: 999px; padding: 11px 15px;
+  background: linear-gradient(180deg,#1f7d3d,#0b3f24); color: #f0de95;
+  box-shadow: inset 0 1px 1px #fff6, 0 4px 8px #29231140;
+  font-size: clamp(13px,1.9vw,25px); font-weight: 500; text-align: center;
+}
+.apoio-reference .apoio-full-history > summary::-webkit-details-marker { display: none; }
+.apoio-reference .apoio-full-history[open] > summary svg { transform: rotate(180deg); }
+.apoio-reference .apoio-full-history .apoio-history-narrative { margin-top: 18px; }
+.apoio-reference .apoio-full-history .apoio-detail-meta,
+.apoio-reference .apoio-full-history > .apoio-date-note { margin-inline: 0; }
+.apoio-reference summary:focus-visible { outline: 3px solid #96712c; outline-offset: 3px; }
+
+/* A decoração nunca deve competir com informação de navegação. */
+.apoio-reference .apoio-orders-panel > .p-4:last-child {
+  background: #f4f0e3f7 !important;
+  border: 1px solid #d6c596 !important;
+  border-radius: 12px;
+}
+.apoio-reference .apoio-footer {
+  width: min(790px, 86%);
+  margin: 20px auto 0 !important;
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: #f4f0e3f7;
+  color: #365037 !important;
+}
+
+
+/* Estado operacional de encerramento: faixa forte, origem explícita e sem inferência de execução. */
+.apoio-reference .apoio-closed-toggle {
+  width: min(790px, 78%);
+  margin: 12px auto 18px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  border: 1px solid #b39450;
+  border-radius: 12px;
+  background: #f8f2dfed;
+  color: #385238;
+  font-size: 11px;
+}
+.apoio-reference .apoio-closed-toggle .apoio-button { border: 1px solid #9b7c38; }
+.apoio-reference .apoio-order-closed {
+  position: relative;
+  border-color: #2e8b57 !important;
+  border-left-color: #125c35 !important;
+  box-shadow: -9px 0 0 #125c35, 0 12px 18px #173c2650 !important;
+}
+.apoio-reference .apoio-order-closed::before {
+  background: linear-gradient(180deg, #0b3f24 0%, #2e8b57 48%, #b39450 100%) !important;
+}
+.apoio-reference .apoio-status-closed,
+.apoio-reference .apoio-closed-seal {
+  background: linear-gradient(135deg, #125c35, #2e8b57) !important;
+  border: 1px solid #0b3f24 !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.apoio-reference .apoio-closed-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: clamp(9px, 1.4vw, 16px);
+  white-space: nowrap;
+}
+.apoio-reference .apoio-status-detail {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid #b9c9bd;
+  background: #edf4ee;
+  color: #385238;
+  font-size: clamp(9px, 1.3vw, 15px);
+  line-height: 1.15;
+  text-align: center;
+}
+.apoio-reference .apoio-status-detail-closed { background: #e5f2e8; border-color: #8dbb9b; color: #125c35; }
+.apoio-reference .apoio-status-detail-unconfirmed { background: #fff6df; border-color: #c49b45; color: #74551d; }
+.apoio-reference .apoio-closure-note { border: 1px solid #8dbb9b; background: #e9f5ec; color: #174c2c; }
+.apoio-reference .apoio-unconfirmed-note { border: 1px solid #c49b45; background: #fff6df; color: #74551d; }
+.apoio-reference .apoio-timeline-closed::before { background: #2e8b57; }
+@media(max-width:719px) {
+  .apoio-reference .apoio-closed-toggle { width: 86%; align-items: flex-start; }
+  .apoio-reference .apoio-closed-toggle > span { width: 100%; }
+  .apoio-reference .apoio-status-detail,
+  .apoio-reference .apoio-closed-seal { font-size: 10px; }
+}

@@ -1,0 +1,80 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "Branco Peres — Controle de Manutenção"
+    },
+    {
+      "path": "/#gestao-ordens-manutencao",
+      "title": "Gestão de Ordens Manutenção"
+    },
+    {
+      "path": "/#controle-apoio",
+      "title": "Controle de Equipamentos — Apoio"
+    },
+    {
+      "path": "/#reformas-apoio",
+      "title": "Reformas — Equipamentos Apoio"
+    },
+    {
+      "path": "/#preventivas-canavieiras",
+      "title": "Preventivas — Carretas Canavieiras"
+    },
+    {
+      "path": "/#lubrificacao-canavieiras",
+      "title": "Lubrificação — Carretas Canavieiras"
+    },
+    {
+      "path": "/#programacoes",
+      "title": "Lavagem / Lubrificação"
+    },
+    {
+      "path": "/#dashboard",
+      "title": "Dashboard Lavagem"
+    },
+    {
+      "path": "/#importar",
+      "title": "Importar Lavagem"
+    },
+    {
+      "path": "/#exportar",
+      "title": "Exportar Lavagem"
+    },
+    {
+      "path": "/#calendario",
+      "title": "Calendário"
+    },
+    {
+      "path": "/#modo-tv",
+      "title": "Modo TV — Emergências"
+    },
+    {
+      "path": "/#modo-tv-externas",
+      "title": "Modo TV — Ordens Externas"
+    },
+    {
+      "path": "/#configuracoes",
+      "title": "Configurações"
+    },
+    {
+      "path": "/#reformas-rodomuda",
+      "title": "Controle de Reforma Carretas Rodomuda"
+    },
+    {
+      "path": "/#reformas-colhedoras",
+      "title": "Controle de Reforma Colhedora"
+    },
+    {
+      "path": "/#reformas-trator-transbordo",
+      "title": "Controle Reforma Trator Transbordo"
+    },
+    {
+      "path": "/#reformas-trator-reboque",
+      "title": "Controle Reforma Trator Reboque"
+    },
+    {
+      "path": "/#central-gerencial",
+      "title": "Central Gerencial — Inteligência de Manutenção"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+// Validação local de apresentação. Não consulta nem altera dados remotos.
+const assert = require('node:assert/strict');
+const { buildSync } = require('esbuild');
+const React = require('react');
+const { renderToStaticMarkup } = require('react-dom/server');
+const fs = require('node:fs');
+const path = require('node:path');
+const temp = path.resolve('tests/.tmp-visual');
+fs.mkdirSync(temp, { recursive: true });
+try {
+  buildSync({ entryPoints: ['src/components/ApoioOrderCard.tsx'], outfile: path.join(temp, 'card.cjs'), bundle: true, platform: 'node', format: 'cjs', packages: 'external', jsx: 'automatic' });
+  const Card = require(path.join(temp, 'card.cjs')).default;
+  const now = new Date();
+  const date = new Date(now); date.setDate(date.getDate() - 45);
+  const day = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const order = { chave: 'TESTE|OS', os: 'OS-TESTE', frota: 'FROTA-TESTE', equipamento: 'Equipamento de teste', modelo: 'Modelo', grupo_fonte: 'Grupo na fonte', setor: 'Setor teste', ponto: 'Ponto teste', origem: 'Terceiro', prestador: 'Oficina teste', status: 'Aguardando Peça', entrada: `${day}T10:00:00`, previsao: '', narrativa: '<script>Texto longo & seguro</script>', ativo: true, primeira_vista: `${day}T10:00:00`, ultima_vista: now.toISOString(), ausente_desde: null, apoio: 'Grupo Apoio' };
+  const props = { order, groups: [{ id: 'g1', nome: 'Grupo Apoio', cor: '#1f6b45' }], groupId: 'g1', busy: false, expanded: true, onToggle() {}, onAssign() {} };
+  const render = (changes = {}) => renderToStaticMarkup(React.createElement(Card, { ...props, ...changes }));
+  let html = render();
+  for (const text of ['OS-TESTE', 'FROTA-TESTE', 'Equipamento de teste', 'Setor teste', 'Ponto teste', 'Oficina teste', 'Grupo na fonte', 'Primeira observação', 'Última observação']) assert.ok(html.includes(text), `Campo preservado: ${text}`);
+  assert.ok(html.includes('apoio-age-critical'));
+  assert.ok(html.includes('apoio-status-waiting'));
+  assert.ok(html.includes('&lt;script&gt;'));
+  assert.ok(!html.includes('<script>'));
+  assert.ok(html.includes('aria-expanded="true"'));
+  assert.ok(html.includes('value="g1" selected'));
+  html = render({ order: { ...order, status: 'Programada', entrada: '' }, expanded: false });
+  assert.ok(html.includes('apoio-status-scheduled'));
+  assert.ok(html.includes('apoio-age-unknown'));
+  assert.ok(html.includes('Sem data de entrada'));
+  assert.ok(html.includes('aria-expanded="false"'));
+  html = render({ order: { ...order, status: 'Andamento', ativo: false, ausente_desde: now.toISOString() } });
+  assert.ok(html.includes('apoio-status-closed'));
+  assert.ok(html.includes('ENCERRADA'));
+  assert.ok(html.includes('dias observados'));
+  assert.ok(html.includes('Execução não inferida'));
+  html = render({ order: { ...order, frota: 'SEM-FROTA' }, busy: false });
+  assert.ok(html.includes('disabled=""'));
+  const page = fs.readFileSync('src/pages/ControleApoio.tsx', 'utf8');
+  assert.ok(page.includes('src="/logo.png"'));
+  assert.ok(page.includes('ApoioOrderCard key={order.chave}'));
+  assert.ok(page.includes("exportApoioPDF(exportOptions)"));
+  assert.ok(page.includes("exportApoioExcel(exportOptions)"));
+  assert.ok(page.includes('exportApoioImages(exportOptions'));
+  assert.ok(page.includes('ApoioWhatsAppPanel options={exportOptions}'));
+  buildSync({ entryPoints: ['src/lib/apoioDate.ts'], outfile: path.join(temp, 'dates.cjs'), bundle: true, platform: 'node', format: 'cjs' });
+  const { formatApoioDate, isApoioSourceStale } = require(path.join(temp, 'dates.cjs'));
+  assert.equal(formatApoioDate('2026-02-31T10:00:00'), 'Data inválida na fonte');
+  assert.equal(formatApoioDate('2026-11-04'), '04/11/2026');
+  assert.equal(isApoioSourceStale('data inválida'), true);
+  assert.equal(isApoioSourceStale('2026-02-31T10:00:00'), true);
+  assert.equal(isApoioSourceStale(now.toISOString(), now.getTime()), false);
+  assert.equal(isApoioSourceStale(new Date(now.getTime() - 76 * 60000).toISOString(), now.getTime()), true);
+  console.log('OK: cartões, campos, status, datas, histórico, escape de texto, acessibilidade, logotipo e exportações.');
+} finally {
+  fs.rmSync(temp, { recursive: true, force: true });
+}

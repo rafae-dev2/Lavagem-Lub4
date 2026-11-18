@@ -1,0 +1,112 @@
+/* Ajuste por largura real do módulo (desconta sidebar), não por tipo de aparelho. */
+.apoio-reference {
+  container: apoio-workspace / inline-size;
+  --apoio-content-width: min(1600px, calc(100% - 48px));
+}
+.apoio-reference .apoio-logo {
+  display: block !important;
+  object-fit: contain;
+  width: 60px !important; height: 60px !important;
+  padding: 2px;
+  border: 1.5px solid rgba(217, 189, 112, 0.65) !important;
+  border-radius: 9999px !important;
+  background: radial-gradient(circle at 35% 30%, rgba(28, 74, 44, 0.88), rgba(7, 20, 11, 0.94)) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .24);
+  flex: 0 0 auto;
+}
+.apoio-reference .apoio-brand { display: flex; align-items: center; gap: 18px; }
+.apoio-reference .apoio-brand > div { min-width: 0; }
+.apoio-reference > .apoio-hero {
+  padding: 32px max(24px, calc((100% - 1600px)/2)) 78px !important;
+}
+.apoio-reference .apoio-hero h2 { font-size: clamp(20px,2.2vw,30px) !important; }
+.apoio-reference .apoio-hero-description { font-size: 19px !important; }
+.apoio-reference :is(.apoio-order-list,.apoio-list-heading,.apoio-legend),
+.apoio-reference > :is(.apoio-command-center,.apoio-filter-center),
+.apoio-reference .apoio-orders-panel > :last-child:not(.apoio-order-list),
+.apoio-reference .apoio-footer { width: var(--apoio-content-width); }
+.apoio-reference .apoio-order-list {
+  grid-template-columns: minmax(0,1fr) !important;
+  align-items: start;
+  gap: 24px;
+}
+.apoio-reference .apoio-order {
+  container: apoio-card / inline-size;
+  padding: 22px !important;
+  height: auto !important;
+  min-width: 0;
+  border-radius: 24px !important;
+}
+.apoio-reference .apoio-order-top { flex-wrap: wrap; gap: 12px; }
+.apoio-reference .apoio-order-top > .apoio-fleet-title { flex: 1 1 180px; }
+.apoio-reference .apoio-fleet-title { font-size: 30px !important; line-height: 1.1; }
+.apoio-reference .apoio-card-badges { flex-wrap: wrap; gap: 8px; max-width: 100%; }
+.apoio-reference .apoio-status { font-size: 12px; padding: 7px 10px; }
+.apoio-reference .apoio-days { font-size: 13px; padding: 7px 10px; }
+.apoio-reference .apoio-model { font-size: 17px; line-height: 1.4; }
+.apoio-reference .apoio-order-fields { margin-top: 20px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.apoio-reference .apoio-order-fields > div { padding: 16px 8px; }
+.apoio-reference .apoio-order-fields > div:has(> svg) { grid-template-columns: 25px minmax(0,1fr); gap: 9px; }
+.apoio-reference .apoio-order-fields > div > svg { width: 24px; height: 24px; }
+.apoio-reference .apoio-order-fields dt { font-size: 12px; }
+.apoio-reference .apoio-order-fields dd { font-size: 16px; }
+.apoio-reference .apoio-order-fields .apoio-preview-late { padding: 16px 8px; }
+.apoio-reference .apoio-narrative-section { padding: 15px 18px !important; margin-top: 20px; }
+.apoio-reference .apoio-narrative-section .apoio-label { font-size: 13px; }
+.apoio-reference .apoio-narrative { font-size: 16px; line-height: 1.5; }
+.apoio-reference .apoio-card-bottom { grid-template-columns: minmax(0,1fr) auto; gap: 12px; margin-top: 20px; }
+.apoio-reference .apoio-card-group { font-size: 15px; }
+.apoio-reference .apoio-group-select { font-size: 14px !important; min-height: 44px; }
+.apoio-reference .apoio-card-bottom .apoio-details-button { font-size: 14px; padding: 10px 13px; min-height: 44px; width: auto; }
+.apoio-reference .apoio-timeline-header { padding: 22px 18px; }
+.apoio-reference .apoio-timeline-header strong { font-size: 28px; }
+.apoio-reference .apoio-timeline-header span { font-size: 16px; }
+.apoio-reference .apoio-timeline-event strong { font-size: 17px; }
+.apoio-reference .apoio-timeline-event span { font-size: 15px; }
+.apoio-reference .apoio-full-history > summary { font-size: 15px; }
+.apoio-reference .apoio-list-heading { flex-wrap: wrap; gap: 8px; }
+.apoio-reference .apoio-legend { flex-wrap: wrap; }
+/* Base conservadora também funciona sem suporte às container queries. */
+@container apoio-workspace (min-width: 860px) {
+  .apoio-reference .apoio-order-list { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+}
+@container apoio-workspace (min-width: 1420px) {
+  .apoio-reference .apoio-order-list { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
+}
+@container apoio-workspace (max-width: 859px) {
+  .apoio-reference .apoio-order-list { max-width: 760px; }
+}
+@container apoio-workspace (max-width: 620px) {
+  .apoio-reference .apoio-hero-main { flex-wrap: wrap; gap: 16px; }
+  .apoio-reference .apoio-brand { flex-basis: 100%; gap: 12px; }
+  .apoio-reference .apoio-logo { width: 50px !important; height: 50px !important; border-radius: 9999px !important; }
+  .apoio-reference .apoio-hero-tools { margin-left: 62px; }
+  .apoio-reference .apoio-hero h2 { font-size: 20px !important; }
+  .apoio-reference .apoio-hero-description { font-size: 14px !important; }
+}
+@container apoio-card (max-width: 420px) {
+  .apoio-order .apoio-fleet-title { flex-basis: 100%; font-size: 27px !important; }
+  .apoio-order .apoio-card-badges { justify-content: start; }
+  .apoio-order .apoio-card-bottom { grid-template-columns: minmax(0,1fr); }
+  .apoio-order .apoio-card-bottom .apoio-details-button { width: 100%; }
+  .apoio-order .apoio-order-fields dd { font-size: 14px; }
+  .apoio-order .apoio-order-fields dt { font-size: 11px; }
+  .apoio-order .apoio-order-fields > div:has(> svg) { grid-template-columns: 20px minmax(0,1fr); gap: 7px; }
+  .apoio-order .apoio-order-fields > div > svg { width: 19px; height: 19px; }
+}
+@container apoio-card (max-width: 275px) {
+  .apoio-order .apoio-order-fields { grid-template-columns: minmax(0,1fr); }
+  .apoio-order .apoio-order-fields > div:nth-child(2n) { border-left: none !important; }
+  .apoio-order .apoio-order-fields > div:nth-child(n+2) { border-top: 1px solid #b38e43 !important; }
+}
+@media(max-width:719px) {
+  .apoio-reference { --apoio-content-width: calc(100% - 36px); }
+  .apoio-reference > .apoio-hero { padding: 24px 18px 60px !important; }
+  .apoio-reference .apoio-order { padding: 16px !important; }
+}
+
+.apoio-reference .apoio-recency-panel {padding:16px;border:1px solid #d6c596;border-radius:14px;background:#f7f3e8;display:grid;gap:14px;}
+.apoio-reference .apoio-recency-shortcuts {display:flex;flex-wrap:wrap;gap:8px;}
+.apoio-reference .apoio-recency-shortcuts button {white-space:normal;text-align:left;min-height:44px;}
+.apoio-reference .apoio-recency-summary {width:var(--apoio-content-width);margin:0 auto 12px;padding:10px 14px;border:1px solid #d6c596;border-radius:10px;background:#f4f0e3f7;color:#365037 !important;font-size:12px;line-height:1.5;overflow-wrap:anywhere;}
+.apoio-reference .apoio-recency-error {color:#842936 !important;background:#fbe9e6;padding:10px 12px;border-radius:8px;font-size:13px;}

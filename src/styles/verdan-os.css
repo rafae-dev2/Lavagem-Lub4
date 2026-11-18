@@ -1,0 +1,2795 @@
+/* ============================================================================
+ * Verdan Farm OS Visual & Motion Layer
+ * Dark botanical glassmorphism, chartreuse-lime luminous accents (#b7ed40),
+ * aerial contour backdrop, and spring-eased data choreography.
+ * Strictly scoped to html.theme-verdan so other themes & PDF exports stay intact.
+ * ============================================================================ */
+
+html.theme-verdan {
+  --verdan-bg-deep: #050c08;
+  --verdan-bg-forest: #0a180f;
+  --verdan-glass: rgba(11, 22, 15, 0.72);
+  --verdan-glass-elevated: rgba(14, 27, 19, 0.82);
+  --verdan-glass-soft: rgba(18, 34, 24, 0.56);
+  --verdan-glass-border: rgba(208, 236, 182, 0.13);
+  --verdan-glass-border-hover: rgba(183, 237, 64, 0.36);
+  --verdan-glass-specular: rgba(255, 255, 255, 0.085);
+  --verdan-lime: #b7ed40;
+  --verdan-lime-bright: #ccf76a;
+  --verdan-lime-deep: #98dc24;
+  --verdan-lime-ink: #07140b;
+  --verdan-emerald: #4ade80;
+  --verdan-amber: #fbbf24;
+  --verdan-coral: #f87171;
+  --verdan-sky: #38bdf8;
+  --verdan-violet: #a78bfa;
+
+  /* Override global semantic tokens when theme-verdan is active */
+  --bg-primary: #060e09 !important;
+  --bg-secondary: rgba(11, 22, 15, 0.82) !important;
+  --bg-tertiary: rgba(15, 30, 20, 0.78) !important;
+  --bg-card: rgba(12, 24, 17, 0.74) !important;
+  --bg-sidebar: rgba(8, 17, 12, 0.78) !important;
+  --bg-hover: rgba(183, 237, 64, 0.09) !important;
+  --bg-accent: rgba(183, 237, 64, 0.14) !important;
+
+  --text-primary: #f2f7f0 !important;
+  --text-secondary: #b9cbb8 !important;
+  --text-tertiary: #849a89 !important;
+  --text-muted: #849a89 !important;
+  --text-inverse: #07140b !important;
+
+  --border-primary: rgba(208, 236, 182, 0.13) !important;
+  --border-secondary: rgba(208, 236, 182, 0.08) !important;
+  --border-accent: rgba(183, 237, 64, 0.36) !important;
+
+  --brand-green: #b7ed40 !important;
+  --brand-green-light: #4ade80 !important;
+  --brand-yellow: #fbbf24 !important;
+  --brand-red: #f87171 !important;
+  --brand-dark: #07140b !important;
+  --brand-accent: #b7ed40 !important;
+
+  --sidebar-text: #eef6eb !important;
+  --sidebar-text-muted: #93aa98 !important;
+  --sidebar-active-bg: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  --sidebar-hover-bg: rgba(183, 237, 64, 0.1) !important;
+  --sidebar-border: rgba(208, 236, 182, 0.13) !important;
+  --sidebar-logo-ring: #b7ed40 !important;
+
+  --glass-card-bg: rgba(11, 22, 15, 0.74) !important;
+  --glass-card-border: rgba(208, 236, 182, 0.14) !important;
+  --glass-card-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  --glass-input-bg: rgba(7, 15, 10, 0.78) !important;
+  --glass-input-border: rgba(208, 236, 182, 0.16) !important;
+
+  --scrollbar-track: #07110b !important;
+  --scrollbar-thumb: rgba(183, 237, 64, 0.35) !important;
+  --scrollbar-thumb-hover: rgba(183, 237, 64, 0.6) !important;
+
+  color-scheme: dark;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html.theme-verdan body {
+  background: #050c08 !important;
+  color: #f2f7f0 !important;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html.theme-verdan h1,
+html.theme-verdan h2,
+html.theme-verdan h3,
+html.theme-verdan h4,
+html.theme-verdan .font-display {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+html.theme-verdan .tabular-nums,
+html.theme-verdan .lub-kpi strong,
+html.theme-verdan .bi-kpi > strong,
+html.theme-verdan .dashboard-kpi p:last-child,
+html.theme-verdan .lub-date,
+html.theme-verdan .lub-os {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Aerial Botanical Field & Topographic Glow Backdrop ───────────────────── */
+html.theme-verdan .app-shell {
+  position: relative;
+  isolation: isolate;
+  background-color: #050d08 !important;
+  background-image:
+    radial-gradient(64% 52% at 24% 18%, rgba(44, 118, 56, 0.38) 0%, rgba(16, 48, 25, 0.14) 55%, transparent 100%),
+    radial-gradient(52% 48% at 78% 26%, rgba(183, 237, 64, 0.14) 0%, rgba(28, 72, 36, 0.12) 48%, transparent 100%),
+    radial-gradient(56% 50% at 52% 88%, rgba(30, 88, 45, 0.28) 0%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' fill='none'%3E%3Cpath d='M-120 740C180 580 420 690 710 500C980 322 1190 360 1540 160' stroke='%23b7ed40' stroke-opacity='0.075' stroke-width='1.5'/%3E%3Cpath d='M-100 810C220 650 470 745 770 555C1040 385 1230 415 1560 220' stroke='%234ade80' stroke-opacity='0.065' stroke-width='1.2'/%3E%3Cpath d='M-140 660C150 510 390 615 670 430C935 255 1160 295 1510 100' stroke='%239ee22b' stroke-opacity='0.055' stroke-width='1'/%3E%3Cpath d='M160 -40C290 210 190 420 410 610C620 790 890 760 1240 940' stroke='%234ade80' stroke-opacity='0.05' stroke-width='1.2'/%3E%3Cellipse cx='620' cy='470' rx='310' ry='195' transform='rotate(-14 620 470)' stroke='%23b7ed40' stroke-opacity='0.07' stroke-width='1.4' stroke-dasharray='8 10'/%3E%3Cellipse cx='620' cy='470' rx='225' ry='138' transform='rotate(-14 620 470)' stroke='%234ade80' stroke-opacity='0.055' stroke-width='1'/%3E%3C/svg%3E") !important;
+  background-size: cover, cover, cover, cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+/* Override forced ivory backgrounds on main containers inside theme-verdan */
+html.theme-verdan .app-shell--lub > div > main,
+html.theme-verdan .app-shell--apoio > div > main,
+html.theme-verdan .app-shell--apoio-reference > div > main,
+html.theme-verdan .app-shell > div > main {
+  background: transparent !important;
+  background-image: none !important;
+  color: #f2f7f0 !important;
+}
+
+/* ── Floating Glass Sidebar (Verdan Video Signature) ──────────────────────── */
+@media (min-width: 1024px) and (pointer: fine) {
+  html.theme-verdan .app-shell .shell-sidebar {
+    flex: 0 0 88px;
+    width: 88px;
+    min-width: 88px;
+    padding: 12px 0 12px 12px;
+  }
+
+  html.theme-verdan .app-shell .shell-sidebar__panel {
+    inset: 12px auto 12px 12px;
+    min-height: calc(100% - 24px);
+    height: calc(100% - 24px);
+    border-radius: 22px;
+    border: 1px solid var(--verdan-glass-border) !important;
+    background: rgba(8, 17, 11, 0.76) !important;
+    box-shadow:
+      0 24px 54px -16px rgba(0, 0, 0, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+    backdrop-filter: blur(26px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(150%) !important;
+  }
+
+  html.theme-verdan .app-shell .shell-sidebar__panel:hover,
+  html.theme-verdan .app-shell .shell-sidebar__panel:focus-within,
+  html.theme-verdan .app-shell .shell-sidebar__panel.has-popout {
+    width: 266px;
+    background: rgba(6, 14, 9, 0.95) !important;
+    box-shadow:
+      16px 24px 56px -14px rgba(0, 0, 0, 0.92),
+      0 0 0 1px rgba(183, 237, 64, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+@media (max-width: 1023px), (pointer: coarse) {
+  html.theme-verdan .app-shell .shell-sidebar__panel {
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+    background: rgba(6, 14, 9, 0.96) !important;
+    border-right: 1px solid rgba(208, 236, 182, 0.16) !important;
+  }
+
+  html.theme-verdan .app-shell .shell-sidebar__nav::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  html.theme-verdan .app-shell .shell-sidebar__nav::-webkit-scrollbar-track {
+    background: rgba(208, 236, 182, 0.06);
+    border-radius: 999px;
+  }
+
+  html.theme-verdan .app-shell .shell-sidebar__nav::-webkit-scrollbar-thumb {
+    background: rgba(183, 237, 64, 0.52);
+    border-radius: 999px;
+  }
+}
+
+html.theme-verdan .app-shell .shell-sidebar__logo {
+  border: 1.5px solid rgba(183, 237, 64, 0.58) !important;
+  border-radius: 9999px !important;
+  background: radial-gradient(circle at 35% 30%, rgba(28, 68, 40, 0.92), rgba(7, 18, 11, 0.96)) !important;
+  padding: 2px !important;
+  box-shadow:
+    0 0 22px rgba(183, 237, 64, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-verdan .app-shell .shell-sidebar__brand-name {
+  color: #f4f9f1 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+html.theme-verdan .app-shell .shell-sidebar__brand-subtitle {
+  color: #8ca391 !important;
+}
+
+html.theme-verdan .app-shell .shell-nav-section {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(208, 236, 182, 0.09) !important;
+  border-left: 3px solid rgba(183, 237, 64, 0.55) !important;
+  border-radius: 10px !important;
+  color: #a6baa9 !important;
+}
+
+html.theme-verdan .app-shell .shell-nav-section__marker {
+  background: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .shell-nav-section.is-current-section {
+  background: rgba(183, 237, 64, 0.1) !important;
+  border-color: rgba(183, 237, 64, 0.28) !important;
+  border-left-color: #b7ed40 !important;
+  color: #eaf7df !important;
+}
+
+html.theme-verdan .app-shell .shell-nav-item {
+  border-radius: 14px !important;
+  color: #9bb19f !important;
+  transition:
+    width 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 180ms ease,
+    color 180ms ease,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease !important;
+}
+
+html.theme-verdan .app-shell .shell-nav-item:hover,
+html.theme-verdan .app-shell .shell-nav-item:focus-visible {
+  background: rgba(183, 237, 64, 0.1) !important;
+  border-color: rgba(183, 237, 64, 0.22) !important;
+  color: #f4f9f1 !important;
+}
+
+/* Signature glowing chartreuse active pill from Verdan Farm OS video */
+html.theme-verdan .app-shell .shell-nav-item.is-active {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.72) !important;
+  color: #07140b !important;
+  font-weight: 700 !important;
+  box-shadow:
+    0 10px 26px -8px rgba(183, 237, 64, 0.56),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: none !important;
+}
+
+html.theme-verdan .app-shell .shell-nav-item.is-active .shell-nav-item__icon,
+html.theme-verdan .app-shell .shell-nav-item.is-active .shell-nav-item__chevron {
+  color: #07140b !important;
+}
+
+html.theme-verdan .shell-sidebar__popup {
+  background: rgba(9, 19, 13, 0.88) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 24px 52px -12px rgba(0, 0, 0, 0.85) !important;
+}
+
+html.theme-verdan .shell-sidebar__popup-item[aria-current="page"] {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  color: #07140b !important;
+}
+
+html.theme-verdan .shell-sidebar__popup-item[aria-current="page"] .shell-sidebar__popup-item-icon {
+  color: #07140b !important;
+}
+
+/* ── Top Glass Header ─────────────────────────────────────────────────────── */
+html.theme-verdan .app-shell .shell-header,
+html.theme-verdan .app-shell.app-shell--lub .shell-header,
+html.theme-verdan .app-shell.app-shell--apoio .shell-header,
+html.theme-verdan .app-shell.app-shell--apoio-reference .shell-header {
+  --shell-header-bg: rgba(9, 18, 12, 0.58) !important;
+  --shell-header-text: #f3f8f1 !important;
+  --shell-header-muted: #8ea593 !important;
+  --shell-header-action: #eef6eb !important;
+  --shell-header-action-bg: rgba(255, 255, 255, 0.055) !important;
+  --shell-header-action-border: rgba(208, 236, 182, 0.14) !important;
+  --shell-header-border: rgba(208, 236, 182, 0.11) !important;
+  background: rgba(9, 18, 12, 0.58) !important;
+  backdrop-filter: blur(20px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+  border-bottom: 1px solid rgba(208, 236, 182, 0.11) !important;
+}
+
+html.theme-verdan .shell-header__theme-button,
+html.theme-verdan .shell-header__closed-button,
+html.theme-verdan .shell-header__notification > div > button {
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.055) !important;
+  border: 1px solid rgba(208, 236, 182, 0.15) !important;
+  color: #e6f2e4 !important;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease, background 180ms ease !important;
+}
+
+html.theme-verdan .shell-header__theme-button:hover,
+html.theme-verdan .shell-header__closed-button:hover,
+html.theme-verdan .shell-header__notification > div > button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(183, 237, 64, 0.42) !important;
+  background: rgba(183, 237, 64, 0.12) !important;
+}
+
+html.theme-verdan .shell-header__sync-button {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px !important;
+  padding-inline: 16px !important;
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border: 1px solid rgba(235, 255, 175, 0.65) !important;
+  color: #07140b !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 22px -8px rgba(183, 237, 64, 0.55) !important;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease !important;
+}
+
+@media (max-width: 600px) {
+  html.theme-verdan .shell-header__sync-button {
+    padding-inline: 0 !important;
+  }
+}
+
+html.theme-verdan .shell-header__sync-button::after,
+html.theme-verdan .bi-button-primary::after,
+html.theme-verdan .app-shell .maintenance-tracking .mt-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+  pointer-events: none;
+}
+
+html.theme-verdan .shell-header__sync-button:hover:not(:disabled)::after,
+html.theme-verdan .bi-button-primary:hover:not(:disabled)::after,
+html.theme-verdan .app-shell .maintenance-tracking .mt-btn-primary:hover:not(:disabled)::after {
+  animation: verdanSheen 750ms ease;
+}
+
+html.theme-verdan .shell-header__sync-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -6px rgba(183, 237, 64, 0.68) !important;
+}
+
+html.theme-verdan .shell-theme-picker {
+  background: rgba(10, 20, 14, 0.9) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  color: #f2f7f0 !important;
+  border-radius: 20px !important;
+}
+
+/* ── Page Stage & Staggered Entrance Animations ───────────────────────────── */
+@keyframes verdanStageIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes verdanCardRise {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.982);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes verdanSparkDraw {
+  0% {
+    stroke-dashoffset: 380;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes verdanAreaFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes verdanBlockSweep {
+  0% {
+    opacity: 0.25;
+    transform: scaleX(0.35);
+    transform-origin: left center;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+@keyframes verdanStemRise {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.15);
+    transform-origin: bottom center;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom center;
+  }
+}
+
+@keyframes verdanPillRise {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.08);
+    transform-origin: bottom center;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom center;
+  }
+}
+
+@keyframes verdanSheen {
+  0% {
+    transform: translateX(-140%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(240%) skewX(-18deg);
+  }
+}
+
+html.theme-verdan .shell-page-stage {
+  animation: verdanStageIn 460ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+html.theme-verdan .lavagem-premium .lub-module.lub-fullscreen {
+  background:
+    radial-gradient(960px 620px at 14% -8%, rgba(183, 237, 64, 0.16), transparent 62%),
+    radial-gradient(760px 520px at 88% 12%, rgba(74, 222, 128, 0.1), transparent 58%),
+    #07140b !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Lavagem / Lubrificação Module — Verdan Dark Botanical Glass Override ── */
+html.theme-verdan .lavagem-premium {
+  --lavagem-ivory: transparent !important;
+  --lavagem-ivory-deep: rgba(11, 22, 15, 0.72) !important;
+  --lavagem-surface: rgba(12, 24, 17, 0.74) !important;
+  --lavagem-surface-soft: rgba(16, 31, 22, 0.68) !important;
+  --lavagem-cream: rgba(18, 34, 24, 0.64) !important;
+  --lavagem-green: #b7ed40 !important;
+  --lavagem-green-deep: #07140b !important;
+  --lavagem-green-medium: #4ade80 !important;
+  --lavagem-green-soft: rgba(183, 237, 64, 0.14) !important;
+  --lavagem-gold: #b7ed40 !important;
+  --lavagem-gold-mid: rgba(208, 236, 182, 0.15) !important;
+  --lavagem-gold-light: rgba(183, 237, 64, 0.35) !important;
+  --lavagem-ink: #eef6ec !important;
+  --lavagem-muted: #93aa99 !important;
+  --lavagem-line: rgba(208, 236, 182, 0.13) !important;
+  --lub-surface: rgba(12, 24, 17, 0.74) !important;
+  --lub-soft: rgba(18, 34, 24, 0.65) !important;
+  --lub-line: rgba(208, 236, 182, 0.13) !important;
+  --lub-text: #eef6ec !important;
+  --lub-muted: #93aa99 !important;
+  --lub-green: #b7ed40 !important;
+  --lub-hover: rgba(183, 237, 64, 0.08) !important;
+  --bg-primary: transparent !important;
+  --bg-secondary: rgba(12, 24, 17, 0.76) !important;
+  --bg-tertiary: rgba(15, 29, 20, 0.76) !important;
+  --bg-card: rgba(12, 24, 17, 0.74) !important;
+  --bg-hover: rgba(183, 237, 64, 0.09) !important;
+  --border-primary: rgba(208, 236, 182, 0.13) !important;
+  --border-secondary: rgba(208, 236, 182, 0.08) !important;
+  --text-primary: #eef6ec !important;
+  --text-secondary: #b7cbb8 !important;
+  --text-muted: #8ea594 !important;
+  --glass-card-bg: rgba(12, 24, 17, 0.74) !important;
+  --glass-card-border: rgba(208, 236, 182, 0.14) !important;
+  --glass-input-bg: rgba(7, 15, 10, 0.8) !important;
+  --glass-input-border: rgba(208, 236, 182, 0.18) !important;
+  background: transparent !important;
+  color: #eef6ec !important;
+  color-scheme: dark !important;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+}
+
+html.theme-verdan .lavagem-premium > .lavagem-premium-ribbons {
+  display: none !important;
+}
+
+/* Hero Card */
+html.theme-verdan .app-shell .lavagem-premium > .lavagem-premium-hero {
+  min-height: 118px !important;
+  margin: 14px clamp(14px, 3vw, 36px) 18px !important;
+  padding: 20px 26px !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(208, 236, 182, 0.15) !important;
+  background:
+    radial-gradient(60% 120% at 88% 10%, rgba(183, 237, 64, 0.16) 0%, transparent 65%),
+    linear-gradient(125deg, rgba(13, 27, 18, 0.86) 0%, rgba(9, 19, 13, 0.78) 100%) !important;
+  box-shadow:
+    0 24px 48px -22px rgba(0, 0, 0, 0.82),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+  animation: verdanCardRise 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-brand img,
+html.theme-verdan .lavagem-premium .lub-module .lub-brand img,
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero-brand img,
+html.theme-verdan .bi-brand img,
+html.theme-verdan .tv-brand img {
+  border: 1.5px solid rgba(183, 237, 64, 0.56) !important;
+  border-radius: 9999px !important;
+  background: radial-gradient(circle at 35% 30%, rgba(28, 68, 40, 0.92), rgba(7, 18, 11, 0.96)) !important;
+  padding: 2px !important;
+  box-shadow:
+    0 10px 26px -6px rgba(0, 0, 0, 0.72),
+    0 0 22px rgba(183, 237, 64, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 240ms ease;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-brand img {
+  width: 56px !important;
+  height: 56px !important;
+  flex-basis: 56px !important;
+}
+
+@media (max-width: 720px) {
+  html.theme-verdan .app-shell .lavagem-premium > .lavagem-premium-hero {
+    margin: 6px 0 14px !important;
+    padding: 16px !important;
+    border-radius: 18px !important;
+  }
+
+  html.theme-verdan .app-shell .lavagem-premium > .lavagem-premium-body {
+    padding: 0 0 28px !important;
+  }
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-brand h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: clamp(20px, 2.1vw, 28px) !important;
+  font-weight: 800 !important;
+  color: #f4f9f1 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-brand p {
+  margin-top: 3px !important;
+  font-size: 12px !important;
+  letter-spacing: 0.14em !important;
+  font-weight: 700 !important;
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-sync {
+  position: relative;
+  overflow: hidden;
+  min-height: 44px !important;
+  padding: 10px 20px !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(235, 255, 175, 0.6) !important;
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  color: #07140b !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 12px 26px -10px rgba(183, 237, 64, 0.55) !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-sync::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+  pointer-events: none;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-sync:hover:not(:disabled)::after {
+  animation: verdanSheen 750ms ease;
+}
+
+html.theme-verdan .lavagem-premium > .lavagem-premium-body {
+  padding: 0 clamp(14px, 3vw, 36px) 36px !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-perf-soft-warning {
+  background: rgba(251, 191, 36, 0.14) !important;
+  border: 1px solid rgba(251, 191, 36, 0.34) !important;
+  color: #fde68a !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-perf-soft-warning__icon {
+  color: #fbbf24 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-perf-soft-warning__close {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(251, 191, 36, 0.34) !important;
+  color: #fde68a !important;
+}
+
+/* ── Glass Pill Navigation Tabs ───────────────────────────────────────────── */
+html.theme-verdan .lavagem-premium .lavagem-premium-tabs {
+  background: rgba(10, 20, 14, 0.72) !important;
+  border: 1px solid rgba(208, 236, 182, 0.13) !important;
+  border-radius: 18px !important;
+  padding: 5px !important;
+  gap: 6px !important;
+  backdrop-filter: blur(20px) saturate(140%) !important;
+  box-shadow: 0 14px 32px -18px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-tabs > button {
+  border-radius: 13px !important;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif !important;
+  font-weight: 600 !important;
+  transition: all 200ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-tabs > button:not([aria-current="page"]) {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #93aa99 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-tabs > button:not([aria-current="page"]):hover {
+  background: rgba(183, 237, 64, 0.09) !important;
+  border-color: rgba(183, 237, 64, 0.2) !important;
+  color: #f2f7f0 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-tabs > button[aria-current="page"] {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.65) !important;
+  color: #07140b !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 22px -8px rgba(183, 237, 64, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+@media (max-width: 639px) {
+  html.theme-verdan .lavagem-premium .lavagem-premium-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    overflow-x: visible !important;
+    gap: 6px !important;
+  }
+
+  html.theme-verdan .lavagem-premium .lavagem-premium-tabs > button {
+    width: 100% !important;
+    min-height: 40px !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── Glass Surfaces Across Modules ────────────────────────────────────────── */
+html.theme-verdan .lavagem-premium .lavagem-premium-body .glass-card,
+html.theme-verdan .lavagem-premium .lavagem-premium-body [class*="glass-card"],
+html.theme-verdan .app-shell .glass-card,
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi,
+html.theme-verdan .lavagem-premium .lub-module .lub-filter-panel,
+html.theme-verdan .lavagem-premium .lub-module .lub-table-panel,
+html.theme-verdan .lavagem-premium .dashboard-panel,
+html.theme-verdan .lavagem-premium .dashboard-kpi {
+  background: rgba(11, 22, 15, 0.66) !important;
+  border: 1px solid rgba(208, 236, 182, 0.13) !important;
+  border-radius: 20px !important;
+  color: #eef6ec !important;
+  box-shadow:
+    0 20px 46px -22px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 240ms ease !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi:hover,
+html.theme-verdan .lavagem-premium .dashboard-kpi:hover,
+html.theme-verdan .lavagem-premium .dashboard-panel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 237, 64, 0.34) !important;
+  box-shadow:
+    0 26px 52px -20px rgba(0, 0, 0, 0.88),
+    0 0 28px -12px rgba(183, 237, 64, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+/* KPI Staggered Choreography */
+html.theme-verdan .lub-kpis > .lub-kpi,
+html.theme-verdan .dashboard-kpi,
+html.theme-verdan .verdan-stagger-item {
+  animation: verdanCardRise 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.theme-verdan .lub-kpis > .lub-kpi:nth-child(1),
+html.theme-verdan .dashboard-kpi:nth-child(1),
+html.theme-verdan .verdan-stagger-item:nth-child(1) { animation-delay: 40ms; }
+html.theme-verdan .lub-kpis > .lub-kpi:nth-child(2),
+html.theme-verdan .dashboard-kpi:nth-child(2),
+html.theme-verdan .verdan-stagger-item:nth-child(2) { animation-delay: 90ms; }
+html.theme-verdan .lub-kpis > .lub-kpi:nth-child(3),
+html.theme-verdan .dashboard-kpi:nth-child(3),
+html.theme-verdan .verdan-stagger-item:nth-child(3) { animation-delay: 140ms; }
+html.theme-verdan .lub-kpis > .lub-kpi:nth-child(4),
+html.theme-verdan .dashboard-kpi:nth-child(4),
+html.theme-verdan .verdan-stagger-item:nth-child(4) { animation-delay: 190ms; }
+html.theme-verdan .lub-kpis > .lub-kpi:nth-child(5),
+html.theme-verdan .dashboard-kpi:nth-child(5) { animation-delay: 240ms; }
+html.theme-verdan .dashboard-kpi:nth-child(6) { animation-delay: 290ms; }
+
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi {
+  border-top: 2px solid var(--lub-kpi-color, #b7ed40) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi.is-selected {
+  border-color: rgba(183, 237, 64, 0.72) !important;
+  box-shadow:
+    0 0 0 2px rgba(183, 237, 64, 0.35),
+    0 18px 40px -16px rgba(183, 237, 64, 0.35) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi-label,
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi small {
+  color: #93aa99 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-kpi strong {
+  color: #f4f9f1 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Text & Headings inside dark Verdan glass */
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(h1, h2, h3, h4, h5, h6) {
+  color: #f3f8f1 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(label, dt) {
+  color: #b7cbb8 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-primary)]"],
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class~="text-white"] {
+  color: #f3f8f1 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-secondary)]"] {
+  color: #c2d4c2 !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, p, small, dd, li)[class*="text-[var(--text-muted)]"],
+html.theme-verdan .lavagem-premium .lub-toolbar p {
+  color: #8ca391 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-toolbar p > span {
+  color: #fbbf24 !important;
+}
+
+/* Secondary surface pills inside dark glass */
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/5"],
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/10"],
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-tertiary)]"],
+html.theme-verdan .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-secondary)]"] {
+  background: rgba(19, 36, 25, 0.72) !important;
+  border-color: rgba(208, 236, 182, 0.14) !important;
+  color: #dbe8d9 !important;
+}
+
+/* Primary Action Buttons (Chartreuse Pill CTA) */
+html.theme-verdan .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
+html.theme-verdan .lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"],
+html.theme-verdan .lavagem-premium .lavagem-premium-body .lub-edit {
+  border-color: rgba(235, 255, 175, 0.65) !important;
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  color: #07140b !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 20px -8px rgba(183, 237, 64, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+html.theme-verdan .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"]:hover:not(:disabled),
+html.theme-verdan .lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"]:hover:not(:disabled),
+html.theme-verdan .lavagem-premium .lavagem-premium-body .lub-edit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px -6px rgba(183, 237, 64, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-toolbar button[class*="bg-amber-"] {
+  background: rgba(251, 191, 36, 0.14) !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+  color: #fcd34d !important;
+}
+
+/* Inputs & Selects */
+html.theme-verdan .lavagem-premium :is(input, select, textarea) {
+  border: 1px solid rgba(208, 236, 182, 0.18) !important;
+  border-radius: 12px !important;
+  background: rgba(7, 15, 10, 0.8) !important;
+  color: #eef6ec !important;
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+}
+
+html.theme-verdan .lavagem-premium :is(input, select, textarea)::placeholder {
+  color: #708675 !important;
+}
+
+html.theme-verdan .lavagem-premium select option {
+  background: #0b1710 !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .lavagem-premium :is(button, input, select, textarea):focus-visible {
+  outline: 2px solid #b7ed40 !important;
+  outline-offset: 2px;
+}
+
+/* Table Glass Styling */
+html.theme-verdan .lavagem-premium .lub-module .lub-table-caption {
+  background: rgba(14, 28, 19, 0.72) !important;
+  border-bottom: 1px solid rgba(208, 236, 182, 0.12) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table-caption strong {
+  color: #f3f8f1 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table-caption span {
+  color: #8ca391 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table {
+  color: #e6f0e4 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table th {
+  background: rgba(9, 20, 13, 0.94) !important;
+  border-bottom: 1px solid rgba(183, 237, 64, 0.25) !important;
+  color: #b7ed40 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table th button {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table td {
+  background: rgba(11, 22, 15, 0.56) !important;
+  border-bottom: 1px solid rgba(208, 236, 182, 0.08) !important;
+  color: #e6f0e4 !important;
+  transition: background 160ms ease;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr {
+  animation: verdanCardRise 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(1) { animation-delay: 20ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(2) { animation-delay: 45ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(3) { animation-delay: 70ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(4) { animation-delay: 95ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(5) { animation-delay: 120ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(6) { animation-delay: 145ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(7) { animation-delay: 170ms; }
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:nth-child(8) { animation-delay: 195ms; }
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table tbody tr:hover td {
+  background: rgba(183, 237, 64, 0.07) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  background: rgba(10, 20, 14, 0.94) !important;
+  border-left: 1px solid rgba(208, 236, 182, 0.12) !important;
+  box-shadow: -8px 0 18px -6px rgba(0, 0, 0, 0.72) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  background: rgba(8, 17, 11, 0.98) !important;
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-row:hover .lub-actions-cell {
+  background: rgba(20, 38, 25, 0.96) !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-fleet {
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-date.is-complete {
+  color: #4ade80 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-service,
+html.theme-verdan .lavagem-premium .lub-module .lub-observation {
+  color: #edf5eb !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-secondary,
+html.theme-verdan .lavagem-premium .lub-module .lub-os,
+html.theme-verdan .lavagem-premium .lub-module .lub-group {
+  color: #8ca391 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-origin {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(208, 236, 182, 0.16) !important;
+  color: #a9beac !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-origin.is-pcm {
+  background: rgba(183, 237, 64, 0.14) !important;
+  border-color: rgba(183, 237, 64, 0.34) !important;
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-detail {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-narrative {
+  background: rgba(8, 16, 11, 0.84) !important;
+  border: 1px solid rgba(208, 236, 182, 0.14) !important;
+  color: #e4efe3 !important;
+}
+
+html.theme-verdan .lavagem-premium .lub-module .lub-schedule-card {
+  background: rgba(12, 24, 17, 0.78) !important;
+  border: 1px solid rgba(208, 236, 182, 0.14) !important;
+  border-radius: 18px !important;
+}
+
+/* Modal Glass */
+html.theme-verdan .lub-premium-modal .lub-modal,
+html.theme-verdan .historico-frota-modal .historico-frota-card {
+  background: rgba(10, 21, 14, 0.9) !important;
+  border: 1px solid rgba(208, 236, 182, 0.18) !important;
+  border-radius: 22px !important;
+  color: #eef6ec !important;
+  backdrop-filter: blur(26px) saturate(145%) !important;
+  box-shadow: 0 32px 72px -18px rgba(0, 0, 0, 0.9) !important;
+}
+
+html.theme-verdan .lub-premium-modal .lub-modal > :is(div):first-child,
+html.theme-verdan .lub-premium-modal .lub-modal > :is(div):last-child {
+  background: rgba(15, 30, 20, 0.76) !important;
+  border-color: rgba(208, 236, 182, 0.12) !important;
+}
+
+html.theme-verdan .lub-premium-modal .lub-modal h3,
+html.theme-verdan .lub-premium-modal .lub-modal label {
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .lub-premium-modal .lub-modal :is(input, select, textarea) {
+  background: rgba(6, 14, 9, 0.85) !important;
+  border-color: rgba(208, 236, 182, 0.18) !important;
+  color: #eef6ec !important;
+  color-scheme: dark !important;
+}
+
+html.theme-verdan .lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.65) !important;
+  color: #07140b !important;
+  font-weight: 700 !important;
+}
+
+/* ── Other Modules: Central Gerencial, Apoio, Manutenção ─────────────────── */
+html.theme-verdan .bi-root {
+  --bi-ink: #eef6ec !important;
+  --bi-muted: #93aa99 !important;
+  --bi-green: #b7ed40 !important;
+  --bi-line: rgba(208, 236, 182, 0.14) !important;
+  --bi-bg: transparent !important;
+  --bi-gold: #b7ed40 !important;
+  --text-primary: #eef6ec !important;
+  --text-secondary: #b7cbb8 !important;
+  --bg-card: rgba(11, 22, 15, 0.74) !important;
+  --bg-primary: transparent !important;
+  background: transparent !important;
+  color: #eef6ec !important;
+  color-scheme: dark !important;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+}
+
+html.theme-verdan .bi-header,
+html.theme-verdan .bi-filter-panel,
+html.theme-verdan .bi-kpi,
+html.theme-verdan .bi-panel,
+html.theme-verdan .bi-view-toolbar nav,
+html.theme-verdan .bi-empty-callout,
+html.theme-verdan .bi-loading,
+html.theme-verdan .bi-select-popover,
+html.theme-verdan .bi-method-note {
+  background: rgba(11, 22, 15, 0.74) !important;
+  border: 1px solid rgba(208, 236, 182, 0.13) !important;
+  border-radius: 18px !important;
+  color: #eef6ec !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-verdan .bi-header {
+  border-top: 2px solid #b7ed40 !important;
+  animation: verdanCardRise 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.theme-verdan .bi-filter-panel {
+  animation: verdanCardRise 480ms cubic-bezier(0.22, 1, 0.36, 1) 45ms both;
+}
+
+html.theme-verdan .bi-kpi {
+  animation: verdanCardRise 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, box-shadow 220ms ease !important;
+}
+
+html.theme-verdan .bi-kpi:nth-child(1) { animation-delay: 40ms; }
+html.theme-verdan .bi-kpi:nth-child(2) { animation-delay: 80ms; }
+html.theme-verdan .bi-kpi:nth-child(3) { animation-delay: 120ms; }
+html.theme-verdan .bi-kpi:nth-child(4) { animation-delay: 160ms; }
+html.theme-verdan .bi-kpi:nth-child(5) { animation-delay: 200ms; }
+html.theme-verdan .bi-kpi:nth-child(6) { animation-delay: 240ms; }
+html.theme-verdan .bi-kpi:nth-child(7) { animation-delay: 280ms; }
+html.theme-verdan .bi-kpi:nth-child(8) { animation-delay: 320ms; }
+
+html.theme-verdan .bi-kpi:hover,
+html.theme-verdan .bi-chart-panel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 237, 64, 0.34) !important;
+  box-shadow:
+    0 24px 48px -20px rgba(0, 0, 0, 0.85),
+    0 0 24px -12px rgba(183, 237, 64, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+html.theme-verdan .bi-chart-panel {
+  animation: verdanCardRise 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, box-shadow 220ms ease !important;
+}
+
+html.theme-verdan .bi-chart-panel:nth-child(1) { animation-delay: 70ms; }
+html.theme-verdan .bi-chart-panel:nth-child(2) { animation-delay: 130ms; }
+html.theme-verdan .bi-chart-panel:nth-child(3) { animation-delay: 190ms; }
+html.theme-verdan .bi-chart-panel:nth-child(4) { animation-delay: 250ms; }
+
+html.theme-verdan .bi-root input,
+html.theme-verdan .bi-root select,
+html.theme-verdan .bi-select-trigger,
+html.theme-verdan .bi-search {
+  background: rgba(7, 15, 10, 0.8) !important;
+  border-color: rgba(208, 236, 182, 0.18) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .bi-button {
+  background: rgba(18, 34, 24, 0.78) !important;
+  border-color: rgba(208, 236, 182, 0.16) !important;
+  color: #eef6ec !important;
+  border-radius: 12px !important;
+}
+
+html.theme-verdan .bi-button-primary,
+html.theme-verdan .bi-view-toolbar nav button[aria-pressed="true"] {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.65) !important;
+  color: #07140b !important;
+  font-weight: 700 !important;
+}
+
+html.theme-verdan .bi-orders-table th {
+  background: rgba(9, 19, 13, 0.94) !important;
+  color: #b7ed40 !important;
+  border-bottom-color: rgba(183, 237, 64, 0.22) !important;
+}
+
+html.theme-verdan .bi-orders-table td {
+  color: #dce9db !important;
+  border-bottom-color: rgba(208, 236, 182, 0.08) !important;
+}
+
+html.theme-verdan .bi-orders-table td > strong {
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .bi-orders-table tbody > tr:hover {
+  background: rgba(183, 237, 64, 0.07) !important;
+}
+
+html.theme-verdan .bi-premium-label {
+  background: rgba(183, 237, 64, 0.14) !important;
+  border: 1px solid rgba(183, 237, 64, 0.34) !important;
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .bi-presets button,
+html.theme-verdan .bi-period-shortcuts button,
+html.theme-verdan .bi-filter-summary small,
+html.theme-verdan .bi-pagination button,
+html.theme-verdan .bi-detail-button,
+html.theme-verdan .bi-chart-actions button {
+  background: rgba(18, 34, 24, 0.78) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  color: #cfe0ce !important;
+}
+
+html.theme-verdan .bi-presets button:hover,
+html.theme-verdan .bi-period-shortcuts button:hover,
+html.theme-verdan .bi-pagination button:hover,
+html.theme-verdan .bi-detail-button:hover,
+html.theme-verdan .bi-chart-actions button:hover {
+  background: rgba(183, 237, 64, 0.16) !important;
+  border-color: rgba(183, 237, 64, 0.45) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .bi-select-options label:hover,
+html.theme-verdan .bi-select-clear {
+  background: rgba(183, 237, 64, 0.14) !important;
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .bi-select-options small {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #b7cbb8 !important;
+}
+
+html.theme-verdan .bi-full-narrative,
+html.theme-verdan .bi-expanded-row td {
+  background: rgba(8, 17, 11, 0.85) !important;
+  border-color: rgba(208, 236, 182, 0.14) !important;
+  color: #e4efe3 !important;
+}
+
+html.theme-verdan .bi-charts {
+  --bi-green: #b7ed40 !important;
+  --bi-slate-900: #f2f7f0 !important;
+  --bi-slate-700: #c4d5c4 !important;
+  --bi-slate-500: #8ea594 !important;
+  --bi-slate-300: rgba(208, 236, 182, 0.2) !important;
+  --bi-slate-200: rgba(208, 236, 182, 0.12) !important;
+  --bi-slate-100: rgba(15, 30, 20, 0.65) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .bi-chart-panel {
+  background: rgba(11, 22, 15, 0.74) !important;
+  border: 1px solid rgba(208, 236, 182, 0.13) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
+}
+
+html.theme-verdan .bi-chart-panel-header h3 {
+  color: #f3f8f1 !important;
+}
+
+html.theme-verdan .bi-chart-panel-header p,
+html.theme-verdan .bi-legend-item,
+html.theme-verdan .bi-heatmap-row > [role='columnheader'],
+html.theme-verdan .bi-heatmap-group-label,
+html.theme-verdan .bi-source-line {
+  color: #93aa99 !important;
+}
+
+html.theme-verdan .bi-source-line strong,
+html.theme-verdan .bi-axis-tick {
+  fill: #93aa99 !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .bi-tooltip {
+  background: rgba(9, 19, 13, 0.94) !important;
+  border: 1px solid rgba(183, 237, 64, 0.34) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .bi-tooltip > strong,
+html.theme-verdan .bi-tooltip-row b {
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .bi-tooltip-row {
+  color: #cfe0ce !important;
+}
+
+html.theme-verdan .bi-heat-cell {
+  background: color-mix(in srgb, #b7ed40 calc(var(--heat-intensity) * 72%), rgba(16, 32, 22, 0.9)) !important;
+  border-color: rgba(208, 236, 182, 0.14) !important;
+}
+
+html.theme-verdan .bi-heat-cell:not(.is-zero) {
+  color: #07140b !important;
+  text-shadow: none !important;
+}
+
+html.theme-verdan .bi-heat-cell.is-zero {
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: #6e8373 !important;
+}
+
+html.theme-verdan .bi-chart-empty {
+  background: rgba(15, 29, 20, 0.6) !important;
+  border-color: rgba(208, 236, 182, 0.2) !important;
+  color: #b7cbb8 !important;
+}
+
+/* ── Apoio & Maintenance Modules under theme-verdan (high specificity vs component CSS) ── */
+html.theme-verdan .app-shell .maintenance-tracking,
+html.theme-verdan .app-shell .apoio-module,
+html.theme-verdan .app-shell .apoio-premium,
+html.theme-verdan .app-shell .apoio-like-reformas {
+  --mt-ivory: transparent !important;
+  --mt-green: #b7ed40 !important;
+  --mt-green-deep: #07140b !important;
+  --mt-green-mid: #9ee22b !important;
+  --mt-gold: rgba(183, 237, 64, 0.36) !important;
+  --mt-gold-light: rgba(208, 236, 182, 0.16) !important;
+  --mt-text: #eef6ec !important;
+  --mt-muted: #98b09e !important;
+  --mt-line: rgba(208, 236, 182, 0.15) !important;
+
+  --apoio-ivory: transparent !important;
+  --apoio-surface: #07140b !important;
+  --apoio-surface-soft: rgba(16, 32, 22, 0.72) !important;
+  --apoio-heading: #b7ed40 !important;
+  --apoio-soft: rgba(183, 237, 64, 0.12) !important;
+  --apoio-border: rgba(208, 236, 182, 0.16) !important;
+  --apoio-border-strong: rgba(183, 237, 64, 0.36) !important;
+  --apoio-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.78) !important;
+  --apoio-danger: #f87171 !important;
+
+  --bg-primary: rgba(7, 15, 10, 0.84) !important;
+  --bg-secondary: rgba(11, 22, 15, 0.82) !important;
+  --bg-card: rgba(11, 22, 15, 0.78) !important;
+  --bg-hover: rgba(18, 34, 24, 0.78) !important;
+  --border-primary: rgba(208, 236, 182, 0.16) !important;
+  --text-primary: #eef6ec !important;
+  --text-secondary: #9fb7a4 !important;
+  --text-inverse: #07140b !important;
+  --brand-green: #b7ed40 !important;
+
+  background: transparent !important;
+  color: #eef6ec !important;
+  color-scheme: dark !important;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking > .mt-ribbon-layer,
+html.theme-verdan .app-shell .apoio-premium::before,
+html.theme-verdan .app-shell .apoio-premium::after,
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero::after {
+  display: none !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(h1, h2, h3, h4, .mt-fleet-title, .mt-kpi strong, .apoio-kpi strong),
+html.theme-verdan .app-shell .apoio-module :is(h1, h2, h3, h4, .mt-fleet-title, .mt-kpi strong, .apoio-kpi strong) {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif !important;
+  letter-spacing: -0.02em;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi strong, .apoio-kpi strong, .mt-fleet-title strong, .mt-os, .mt-days strong, .mt-quadrant dd, .apoio-table-fleet-cell strong, .apoio-table-os-cell) {
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Override low-contrast #0b321f base rule from maintenance-premium.css without beating specific accents */
+html.theme-verdan .app-shell .maintenance-tracking :where(h2, h3, h4, strong, dt, label) {
+  color: #f2f7f0 !important;
+}
+
+/* Hero & Source Strip */
+html.theme-verdan .app-shell .maintenance-tracking {
+  padding-inline: 0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero {
+  margin: 4px 0 0 !important;
+  min-height: 126px !important;
+  padding: 20px clamp(16px, 2.8vw, 32px) !important;
+  background:
+    radial-gradient(85% 95% at 100% 0%, rgba(183, 237, 64, 0.14) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(11, 24, 16, 0.88) 0%, rgba(7, 16, 11, 0.82) 100%) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-top: 2px solid #b7ed40 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 24px 52px -22px rgba(0, 0, 0, 0.82), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
+  animation: verdanCardRise 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero .mt-eyebrow,
+html.theme-verdan .app-shell .maintenance-tracking .mt-eyebrow {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero h2 {
+  color: #f4f9f1 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero .mt-hero-description {
+  color: #b5c9b6 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-hero .mt-source-tag {
+  background: rgba(183, 237, 64, 0.12) !important;
+  border: 1px solid rgba(183, 237, 64, 0.3) !important;
+  color: #d8f88a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-source-line {
+  color: #96ad9b !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-source-line strong {
+  color: #eef6ec !important;
+}
+
+/* Visibility Bar, Notices & Alerts */
+html.theme-verdan .app-shell .maintenance-tracking .mt-visibility-bar {
+  background: rgba(251, 191, 36, 0.11) !important;
+  border: 1px solid rgba(251, 191, 36, 0.34) !important;
+  border-radius: 14px !important;
+  color: #fde68a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-visibility-bar .mt-visibility-action {
+  background: rgba(251, 191, 36, 0.18) !important;
+  border: 1px solid rgba(251, 191, 36, 0.45) !important;
+  color: #fef3c7 !important;
+  border-radius: 10px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-visibility-bar .mt-visibility-toggle {
+  background: rgba(183, 237, 64, 0.2) !important;
+  border: 1px solid rgba(183, 237, 64, 0.5) !important;
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-notice, .apoio-notice) {
+  background: rgba(183, 237, 64, 0.12) !important;
+  border: 1px solid rgba(183, 237, 64, 0.32) !important;
+  color: #dcf79a !important;
+  border-radius: 14px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-notice, .apoio-notice) strong {
+  color: #f4fce1 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-alert, .apoio-stale, .apoio-recency-error, div[role="alert"]) {
+  background: rgba(217, 119, 6, 0.16) !important;
+  border: 1px solid rgba(251, 191, 36, 0.45) !important;
+  color: #fde68a !important;
+  border-radius: 14px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-alert, .apoio-stale, .apoio-recency-error, div[role="alert"]) strong {
+  color: #fef3c7 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-alert, .apoio-stale, .apoio-recency-error, div[role="alert"]) p {
+  color: #fde68a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-alert, .apoio-stale, .apoio-recency-error, div[role="alert"]) svg {
+  color: #fbbf24 !important;
+}
+
+/* Buttons & Toggles */
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-btn, .apoio-button, .apoio-image-picker-action, .apoio-direct-clear) {
+  background: rgba(18, 35, 24, 0.82) !important;
+  border: 1px solid rgba(208, 236, 182, 0.18) !important;
+  color: #eef6ec !important;
+  border-radius: 12px !important;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-btn, .apoio-button, .apoio-image-picker-action, .apoio-direct-clear):not(.mt-btn-primary):not([aria-pressed="true"]):not([style*="--brand-green"]):hover:not(:disabled) {
+  background: rgba(26, 48, 34, 0.94) !important;
+  border-color: rgba(183, 237, 64, 0.42) !important;
+  color: #ffffff !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"]) {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border: 1px solid rgba(235, 255, 175, 0.7) !important;
+  color: #07140b !important;
+  font-weight: 800 !important;
+  box-shadow: 0 10px 24px -10px rgba(183, 237, 64, 0.45) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"]):hover:not(:disabled) {
+  background: linear-gradient(135deg, #d8fb7b 0%, #afe838 100%) !important;
+  border-color: rgba(242, 255, 196, 0.9) !important;
+  color: #07140b !important;
+  box-shadow: 0 12px 28px -10px rgba(183, 237, 64, 0.62) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-btn-primary, .apoio-button[aria-pressed="true"], .apoio-button[style*="--brand-green"]) svg {
+  color: #07140b !important;
+}
+
+/* KPIs & Panels */
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi) {
+  background:
+    radial-gradient(80% 70% at 100% 0%, rgba(183, 237, 64, 0.08) 0%, transparent 65%),
+    rgba(11, 22, 15, 0.78) !important;
+  border: 1px solid rgba(208, 236, 182, 0.14) !important;
+  border-top: 3px solid rgba(183, 237, 64, 0.65) !important;
+  border-radius: 18px !important;
+  color: #eef6ec !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  animation: verdanCardRise 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, box-shadow 220ms ease !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-kpis > :nth-child(1) { animation-delay: 40ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-kpis > :nth-child(2) { animation-delay: 90ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-kpis > :nth-child(3) { animation-delay: 140ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-kpis > :nth-child(4) { animation-delay: 190ms; }
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi):hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 237, 64, 0.38) !important;
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.85), 0 0 24px -12px rgba(183, 237, 64, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-kpi--active {
+  border-color: rgba(183, 237, 64, 0.65) !important;
+  box-shadow: 0 0 0 1px rgba(183, 237, 64, 0.35), 0 20px 44px -20px rgba(183, 237, 64, 0.25) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi-label, .apoio-kpi-label) {
+  color: #9cb3a0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi > svg, .apoio-kpi svg) {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi strong, .apoio-kpi strong) {
+  color: #f4f9f1 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-kpi small {
+  color: #8ea594 !important;
+}
+
+/* Filters, Sticky Search, MultiSelect & Group Fleet Filter */
+html.theme-verdan .app-shell .maintenance-tracking :is(.mt-filters, .apoio-sticky-search, .apoio-order-filters, .apoio-recency-panel, .mt-toolbar, .mt-pagination, .mt-empty, .mt-method) {
+  background: rgba(11, 22, 15, 0.78) !important;
+  border: 1px solid rgba(208, 236, 182, 0.15) !important;
+  border-radius: 18px !important;
+  color: #eef6ec !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
+  box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-filters > summary {
+  color: #f2f7f0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-filters > summary > span:last-child {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-filter-body {
+  background: rgba(7, 15, 10, 0.56) !important;
+  border-top: 1px solid rgba(208, 236, 182, 0.1) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-panel-heading h3 {
+  color: #f4f9f1 !important;
+  border-left-color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-direct-search-label,
+html.theme-verdan .app-shell .maintenance-tracking .mt-filters label {
+  color: #c2d4c2 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-direct-search-control, .mt-search, .apoio-multi-select-trigger, .apoio-multi-select-search, .apoio-group-fleet-search, input:not([type="checkbox"]):not([type="color"]), select, textarea, select option) {
+  background: rgba(7, 15, 10, 0.86) !important;
+  border-color: rgba(208, 236, 182, 0.2) !important;
+  color: #f2f7f0 !important;
+  color-scheme: dark !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-direct-search-control input {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-direct-search-control, .mt-search) svg {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-direct-count,
+html.theme-verdan .app-shell .maintenance-tracking .mt-history-summary,
+html.theme-verdan .app-shell .maintenance-tracking .mt-toolbar p {
+  color: #9cb3a0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-history-summary strong,
+html.theme-verdan .app-shell .maintenance-tracking .mt-method strong {
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-toolbar h3 {
+  color: #f4f9f1 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) {
+  background: rgba(7, 15, 10, 0.84) !important;
+  border: 1px solid rgba(208, 236, 182, 0.18) !important;
+  border-radius: 12px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) button {
+  background: transparent !important;
+  color: #9cb3a0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-view-toggle, .mt-view-toggle) button[aria-pressed="true"] {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  color: #07140b !important;
+  font-weight: 800 !important;
+}
+
+/* Status Tabs */
+html.theme-verdan .app-shell .maintenance-tracking .mt-status-tabs button {
+  background: rgba(11, 22, 15, 0.8) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-radius: 12px !important;
+  color: #cfe0ce !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-status-tabs button b {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.72) !important;
+  color: #07140b !important;
+  font-weight: 800 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] b {
+  background: rgba(7, 20, 11, 0.16) !important;
+  color: #07140b !important;
+}
+
+/* MultiSelect & Group Fleet Filter Popovers/Tiles */
+html.theme-verdan .app-shell .apoio-module .apoio-multi-select-popover,
+html.theme-verdan .app-shell .apoio-module .apoio-group-fleet-picker {
+  background: rgba(8, 17, 11, 0.96) !important;
+  border: 1px solid rgba(183, 237, 64, 0.36) !important;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.88) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .apoio-module :is(.apoio-multi-select-option, .apoio-group-fleet-tile, .apoio-group-fleet-option, .apoio-group-fleet-all, .apoio-multi-select-actions button, .apoio-group-fleet-actions button, .apoio-group-fleet-clear) {
+  background: rgba(12, 24, 17, 0.86) !important;
+  border-color: rgba(208, 236, 182, 0.16) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .apoio-module :is(.apoio-multi-select-option.is-selected, .apoio-group-fleet-tile.is-selected, .apoio-group-fleet-option.is-selected, .apoio-group-fleet-all.is-active) {
+  background: rgba(183, 237, 64, 0.13) !important;
+  border-color: rgba(183, 237, 64, 0.45) !important;
+}
+
+html.theme-verdan .app-shell .apoio-module :is(.apoio-group-fleet-tile-copy strong, .apoio-group-fleet-option-text strong, .apoio-group-fleet-picker-heading strong, .apoio-multi-select-option span) {
+  color: #f2f7f0 !important;
+}
+
+html.theme-verdan .app-shell .apoio-module :is(.apoio-group-fleet-tile-copy small, .apoio-group-fleet-option-text small, .apoio-group-fleet-option-count, .apoio-multi-select-option small) {
+  color: #9ab09e !important;
+}
+
+/* Image Reports Preview Checklist */
+html.theme-verdan .app-shell .apoio-image-reports section[aria-label] {
+  background: rgba(11, 22, 15, 0.84) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview {
+  background: rgba(6, 13, 9, 0.86) !important;
+  border: 1px solid rgba(208, 236, 182, 0.15) !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview-row {
+  background: rgba(14, 28, 19, 0.88) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview-row.is-unmarked {
+  background: rgba(10, 20, 14, 0.36) !important;
+  border-color: rgba(208, 236, 182, 0.14) !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview-text strong {
+  color: #ccf76a !important;
+  font-family: 'JetBrains Mono', 'Plus Jakarta Sans', monospace !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview-text span {
+  color: #f2f7f0 !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview-text small {
+  color: #9fb7a4 !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-image-preview-text small.apoio-preview-emergency {
+  color: #fbbf24 !important;
+  font-weight: 700 !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-report-scope-btn {
+  background: rgba(16, 32, 22, 0.86) !important;
+  border: 1px solid rgba(208, 236, 182, 0.2) !important;
+  color: #e2efe0 !important;
+  border-radius: 10px !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-report-scope-btn:hover {
+  background: rgba(24, 46, 32, 0.96) !important;
+  border-color: rgba(183, 237, 64, 0.45) !important;
+  color: #ffffff !important;
+}
+
+html.theme-verdan .app-shell .apoio-image-reports .apoio-report-scope-btn.is-active {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.75) !important;
+  color: #07140b !important;
+  font-weight: 800 !important;
+  box-shadow: 0 8px 20px -10px rgba(183, 237, 64, 0.5) !important;
+}
+
+/* Grupos Apoio e Cadastro de Frotas */
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card {
+  background: rgba(12, 26, 17, 0.86) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card:hover {
+  border-color: rgba(183, 237, 64, 0.4) !important;
+  background: rgba(18, 36, 24, 0.92) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card__name {
+  color: #f4f9f1 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card__edit {
+  background: rgba(183, 237, 64, 0.14) !important;
+  border: 1px solid rgba(183, 237, 64, 0.36) !important;
+  color: #d9fc83 !important;
+  font-weight: 700 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card__edit:hover:not(:disabled) {
+  background: rgba(183, 237, 64, 0.24) !important;
+  color: #ffffff !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card button[aria-label^="Excluir"] {
+  color: #9fb7a4 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-group-card button[aria-label^="Excluir"]:hover:not(:disabled) {
+  color: #f87171 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking section.p-5 {
+  background: rgba(11, 22, 15, 0.82) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-radius: 18px !important;
+  color: #eef6ec !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking section.p-5 table th {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking section.p-5 table td {
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking section.p-5 table td button:first-child {
+  color: #d9fc83 !important;
+  font-weight: 600 !important;
+}
+
+/* Order Cards (.mt-order) — Premium Legibility Overhaul */
+html.theme-verdan .app-shell .maintenance-tracking .mt-results,
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-panel {
+  background: transparent !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order {
+  background:
+    radial-gradient(90% 60% at 100% 0%, rgba(183, 237, 64, 0.06) 0%, transparent 55%),
+    rgba(11, 22, 15, 0.86) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-left: 4px solid #b7ed40 !important;
+  border-radius: 20px !important;
+  color: #eef6ec !important;
+  box-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  animation: verdanCardRise 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, box-shadow 220ms ease !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:nth-child(1) { animation-delay: 30ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:nth-child(2) { animation-delay: 70ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:nth-child(3) { animation-delay: 110ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:nth-child(4) { animation-delay: 150ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:nth-child(5) { animation-delay: 190ms; }
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:nth-child(6) { animation-delay: 230ms; }
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 237, 64, 0.36) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order.mt-order--late {
+  border-color: rgba(248, 113, 113, 0.34) !important;
+  border-left-color: #f87171 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order.mt-order--closed {
+  border-color: rgba(74, 222, 128, 0.28) !important;
+  border-left-color: #4ade80 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closed-ribbon {
+  background: linear-gradient(90deg, rgba(74, 222, 128, 0.22) 0%, rgba(16, 48, 28, 0.9) 100%) !important;
+  border-bottom: 1px solid rgba(74, 222, 128, 0.28) !important;
+  color: #bbf7d0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closed-ribbon strong {
+  color: #4ade80 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-card-kicker {
+  color: #b7ed40 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-fleet-title {
+  color: #f7fbf5 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-fleet-title svg {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-fleet-title small {
+  color: #8fa694 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-fleet-title strong {
+  color: #f7fbf5 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-equipment {
+  color: #dce9db !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-os {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 7px;
+  background: rgba(183, 237, 64, 0.14) !important;
+  border: 1px solid rgba(183, 237, 64, 0.34) !important;
+  color: #d6fb7c !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status {
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--programado {
+  background: rgba(56, 189, 248, 0.15) !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  color: #bae6fd !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--programado .mt-status-dot {
+  background: #38bdf8 !important;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.75) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--andamento {
+  background: rgba(183, 237, 64, 0.16) !important;
+  border-color: rgba(183, 237, 64, 0.44) !important;
+  color: #d9fc83 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--andamento .mt-status-dot {
+  background: #b7ed40 !important;
+  box-shadow: 0 0 8px rgba(183, 237, 64, 0.75) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--encerrado {
+  background: rgba(74, 222, 128, 0.16) !important;
+  border-color: rgba(74, 222, 128, 0.42) !important;
+  color: #bbf7d0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--encerrado .mt-status-dot {
+  background: #4ade80 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--encerrado small {
+  color: #86efac !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-status--outros {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(208, 236, 182, 0.22) !important;
+  color: #d8e5d7 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-days {
+  background: rgba(183, 237, 64, 0.14) !important;
+  border: 1px solid rgba(183, 237, 64, 0.36) !important;
+  border-radius: 12px !important;
+  color: #e2fba0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-days strong {
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-days small {
+  color: #c5dab8 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border: 1px solid rgba(248, 113, 113, 0.5) !important;
+  color: #fecaca !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late strong {
+  color: #ffffff !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late small {
+  color: #fecaca !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrants {
+  background: rgba(7, 15, 10, 0.62) !important;
+  border: 1px solid rgba(208, 236, 182, 0.12) !important;
+  border-radius: 14px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant {
+  border-color: rgba(208, 236, 182, 0.1) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant > svg {
+  color: #b7ed40 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant.mt-quadrant--late > svg {
+  color: #f87171 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant dt {
+  color: #9cb3a0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant dd {
+  color: #f4f9f1 !important;
+  font-weight: 700 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant.mt-quadrant--late dd {
+  color: #fecaca !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant small {
+  color: #b5cab7 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-quadrant.mt-quadrant--late small {
+  color: #fca5a5 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closure-summary {
+  background: rgba(74, 222, 128, 0.08) !important;
+  border: 1px solid rgba(74, 222, 128, 0.24) !important;
+  border-radius: 14px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closure-fact {
+  background: rgba(10, 21, 14, 0.72) !important;
+  border-color: rgba(208, 236, 182, 0.12) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closure-fact span {
+  color: #86efac !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closure-fact strong,
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closure-fact--clear strong,
+html.theme-verdan .app-shell .maintenance-tracking .mt-table-closure-facts strong {
+  color: #f4f9f1 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-closure-fact small {
+  color: #9eb5a2 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-late-label {
+  background: rgba(239, 68, 68, 0.12) !important;
+  border: 1px solid rgba(248, 113, 113, 0.32) !important;
+  border-radius: 10px !important;
+  padding: 7px 11px !important;
+  color: #fecaca !important;
+  font-weight: 600 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-narrative-section {
+  background: rgba(6, 14, 9, 0.78) !important;
+  border: 1px solid rgba(208, 236, 182, 0.14) !important;
+  border-left: 3px solid #b7ed40 !important;
+  border-radius: 14px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-label {
+  color: #b7ed40 !important;
+  font-weight: 700 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-narrative {
+  color: #eef6ec !important;
+  font-size: 13.5px !important;
+  line-height: 1.58 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-order-bottom {
+  border-top: 1px solid rgba(208, 236, 182, 0.1) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-source-fact {
+  color: #a4bba8 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-order-bottom button {
+  background: rgba(183, 237, 64, 0.14) !important;
+  border: 1px solid rgba(183, 237, 64, 0.38) !important;
+  color: #d9fc83 !important;
+  border-radius: 10px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-order-bottom button:hover {
+  background: rgba(183, 237, 64, 0.24) !important;
+  color: #ffffff !important;
+}
+
+/* Order Card Expanded Details */
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-observations {
+  background: rgba(7, 15, 10, 0.88) !important;
+  border-top: 1px solid rgba(208, 236, 182, 0.14) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-header,
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-full-history > summary {
+  background: rgba(16, 32, 22, 0.8) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-header strong {
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-header span {
+  color: #b7cbb8 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-event {
+  background: rgba(13, 27, 18, 0.74) !important;
+  border-color: rgba(208, 236, 182, 0.12) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-event strong {
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-event span {
+  color: #d6fb7c !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-event small,
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-date-note {
+  color: #9cb3a0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-event.is-late {
+  border-color: rgba(248, 113, 113, 0.38) !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-timeline-event.is-closed {
+  border-color: rgba(74, 222, 128, 0.38) !important;
+  background: rgba(74, 222, 128, 0.1) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-detail-meta dt {
+  color: #8fa694 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-order .mt-detail-meta dd {
+  color: #eaf3ea !important;
+}
+
+/* Apoio & Maintenance Tables */
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-table-scroll, .mt-table-scroll) {
+  background: rgba(10, 20, 14, 0.86) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 22px 48px -22px rgba(0, 0, 0, 0.82) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-orders-table thead th, .mt-table thead th) {
+  background: #08130c !important;
+  color: #b7ed40 !important;
+  border-bottom: 1px solid rgba(183, 237, 64, 0.25) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-orders-table tbody td, .apoio-orders-table tbody th, .mt-table tbody td) {
+  background: rgba(11, 22, 15, 0.8) !important;
+  color: #e4efe3 !important;
+  border-bottom: 1px solid rgba(208, 236, 182, 0.08) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table tbody tr.is-odd :is(td, th),
+html.theme-verdan .app-shell .maintenance-tracking .mt-table tbody tr:nth-child(even) td {
+  background: rgba(15, 29, 20, 0.84) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-orders-table tbody tr:hover td, .apoio-orders-table tbody tr:hover th, .mt-table tbody tr:hover td) {
+  background: rgba(183, 237, 64, 0.08) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell {
+  background: #0b1810 !important;
+  border-right: 1px solid rgba(208, 236, 182, 0.14) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell strong {
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-os-cell {
+  color: #d6fb7c !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-equipment-cell {
+  min-width: 230px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-group-cell {
+  min-width: 215px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-date-cell {
+  min-width: 195px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-equipment-wrap {
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table :is(.apoio-table-equipment, .apoio-table-group, .apoio-table-date-cell span, .apoio-table-narrative-summary) {
+  color: #f2f7f0 !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table :is(.apoio-table-secondary, .apoio-table-date-cell strong) {
+  color: #98b09e !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-status {
+  border-radius: 9999px !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-status-scheduled {
+  background: rgba(56, 189, 248, 0.15) !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  color: #bae6fd !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-status-progress {
+  background: rgba(183, 237, 64, 0.16) !important;
+  border-color: rgba(183, 237, 64, 0.44) !important;
+  color: #d9fc83 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-status-closed {
+  background: rgba(74, 222, 128, 0.16) !important;
+  border-color: rgba(74, 222, 128, 0.42) !important;
+  color: #bbf7d0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table :is(.apoio-table-status-other, .apoio-table-status-unconfirmed) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(208, 236, 182, 0.22) !important;
+  color: #d8e5d7 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-details-button {
+  background: rgba(183, 237, 64, 0.13) !important;
+  border-color: rgba(183, 237, 64, 0.36) !important;
+  color: #d9fc83 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-row > td {
+  background: #07100b !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail {
+  background: rgba(10, 21, 14, 0.92) !important;
+  border-color: rgba(183, 237, 64, 0.25) !important;
+  color: #eef6ec !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-grid div {
+  background: rgba(15, 29, 20, 0.72) !important;
+  border-color: rgba(208, 236, 182, 0.12) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-grid dt {
+  color: #93aa99 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-grid dd,
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-full-narrative p {
+  color: #f2f7f0 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-full-narrative {
+  background: rgba(6, 14, 9, 0.8) !important;
+  border-color: rgba(208, 236, 182, 0.14) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking :is(.apoio-table-late, .apoio-table-forecast-badge, .mt-date-error) {
+  color: #fca5a5 !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-table-forecast-badge {
+  background: rgba(239, 68, 68, 0.16) !important;
+  border-color: rgba(248, 113, 113, 0.36) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .apoio-footer {
+  color: #7e9483 !important;
+  border-top-color: rgba(208, 236, 182, 0.12) !important;
+}
+
+/* ── Equipment Image Manager (Configurações) under theme-verdan ──────────── */
+html.theme-verdan .app-shell .equipment-image-manager {
+  --eim-ink: #f2f7f0 !important;
+  --eim-muted: #9cb3a0 !important;
+  --eim-line: rgba(208, 236, 182, 0.16) !important;
+  --eim-panel: rgba(11, 22, 15, 0.8) !important;
+  --eim-soft: rgba(183, 237, 64, 0.12) !important;
+  --eim-green: #b7ed40 !important;
+  --eim-green-dark: #ccf76a !important;
+  --eim-warning: #fde68a !important;
+  --eim-danger: #fca5a5 !important;
+  color: #f2f7f0 !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager :is(.equipment-image-manager__preview-card, .equipment-image-manager__form, .equipment-image-manager__login) {
+  background: rgba(11, 22, 15, 0.8) !important;
+  border: 1px solid rgba(208, 236, 182, 0.16) !important;
+  border-radius: 18px !important;
+  backdrop-filter: blur(22px) saturate(140%) !important;
+  box-shadow: 0 22px 48px -22px rgba(0, 0, 0, 0.82), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__checker {
+  background-color: #102016 !important;
+  background-image:
+    linear-gradient(45deg, #172d1f 25%, transparent 25%),
+    linear-gradient(-45deg, #172d1f 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #172d1f 75%),
+    linear-gradient(-45deg, transparent 75%, #172d1f 75%) !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__preview-caption {
+  background: rgba(8, 17, 11, 0.9) !important;
+  border-top-color: rgba(208, 236, 182, 0.14) !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager :is(.equipment-image-manager__selector select, .equipment-image-manager__login-row input, .equipment-image-manager__confirmation-row select, .equipment-image-manager__confirmation-row input, .equipment-image-manager__role.is-viewer, .equipment-image-manager__button.is-quiet) {
+  background: rgba(7, 15, 10, 0.86) !important;
+  border-color: rgba(208, 236, 182, 0.2) !important;
+  color: #f2f7f0 !important;
+  color-scheme: dark !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__file-label {
+  background: rgba(183, 237, 64, 0.08) !important;
+  border-color: rgba(183, 237, 64, 0.42) !important;
+  color: #ccf76a !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__file-label:hover {
+  background: rgba(183, 237, 64, 0.15) !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__button.is-primary {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  color: #07140b !important;
+  box-shadow: 0 10px 24px -10px rgba(183, 237, 64, 0.45) !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__button.is-danger {
+  background: rgba(248, 113, 113, 0.14) !important;
+  border-color: rgba(248, 113, 113, 0.36) !important;
+  color: #fecaca !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__notice.is-error {
+  background: rgba(248, 113, 113, 0.14) !important;
+  border-color: rgba(248, 113, 113, 0.35) !important;
+  color: #fecaca !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__notice.is-warning {
+  background: rgba(251, 191, 36, 0.13) !important;
+  border-color: rgba(251, 191, 36, 0.34) !important;
+  color: #fde68a !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager .equipment-image-manager__notice.is-success {
+  background: rgba(74, 222, 128, 0.14) !important;
+  border-color: rgba(74, 222, 128, 0.34) !important;
+  color: #bbf7d0 !important;
+}
+
+html.theme-verdan .app-shell .equipment-image-manager :is(.equipment-image-manager__notice.is-info, .equipment-image-manager__loading) {
+  background: rgba(15, 30, 20, 0.78) !important;
+  color: #b7cbb8 !important;
+}
+
+/* ── Global StatusBadge Overrides under theme-verdan ────────────────────── */
+html.theme-verdan .status-badge[data-status="PENDENTE"] {
+  background: rgba(251, 191, 36, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.38) !important;
+  color: #fde68a !important;
+  box-shadow: none !important;
+}
+html.theme-verdan .status-badge[data-status="PENDENTE"] [data-status-dot] {
+  background: #fbbf24 !important;
+}
+
+html.theme-verdan .status-badge[data-status="ATRASADO"] {
+  background: rgba(248, 113, 113, 0.16) !important;
+  border-color: rgba(248, 113, 113, 0.42) !important;
+  color: #fecaca !important;
+  box-shadow: none !important;
+}
+html.theme-verdan .status-badge[data-status="ATRASADO"] [data-status-dot] {
+  background: #f87171 !important;
+}
+
+html.theme-verdan .status-badge[data-status="PROGRAMADO"] {
+  background: rgba(56, 189, 248, 0.15) !important;
+  border-color: rgba(56, 189, 248, 0.38) !important;
+  color: #bae6fd !important;
+  box-shadow: none !important;
+}
+html.theme-verdan .status-badge[data-status="PROGRAMADO"] [data-status-dot] {
+  background: #38bdf8 !important;
+}
+
+html.theme-verdan .status-badge[data-status="ANDAMENTO"] {
+  background: rgba(167, 139, 250, 0.16) !important;
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  color: #ddd6fe !important;
+  box-shadow: none !important;
+}
+html.theme-verdan .status-badge[data-status="ANDAMENTO"] [data-status-dot] {
+  background: #a78bfa !important;
+}
+
+html.theme-verdan .status-badge[data-status="ENCERRADO"] {
+  background: rgba(74, 222, 128, 0.16) !important;
+  border-color: rgba(74, 222, 128, 0.4) !important;
+  color: #bbf7d0 !important;
+  box-shadow: none !important;
+}
+html.theme-verdan .status-badge[data-status="ENCERRADO"] [data-status-dot] {
+  background: #4ade80 !important;
+}
+
+/* Harmonize TV monitor emerald glass background & typography when theme-verdan is active */
+html.theme-verdan .tv-monitor {
+  --tv-bg: #050d08;
+  --tv-panel: rgba(11, 23, 15, 0.72);
+  --tv-line: rgba(208, 236, 182, 0.16);
+  --tv-text: #f3f8f1;
+  --tv-muted: #9eb5a3;
+  --tv-green: #b7ed40;
+  --tv-red: #fca5a5;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+}
+
+html.theme-verdan .tv-monitor[data-tv-theme="dark"]:not(.tv-monitor--presenting):not(:fullscreen) {
+  background:
+    radial-gradient(82% 85% at 90% 4%, rgba(183, 237, 64, 0.08) 0%, transparent 56%),
+    rgba(6, 17, 10, 0.2) !important;
+  border-color: rgba(208, 236, 182, 0.16) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.theme-verdan .tv-monitor.tv-monitor--presenting,
+html.theme-verdan .tv-monitor:fullscreen {
+  background:
+    radial-gradient(64% 52% at 24% 18%, rgba(44, 118, 56, 0.38) 0%, rgba(16, 48, 25, 0.14) 55%, transparent 100%),
+    radial-gradient(52% 48% at 78% 26%, rgba(183, 237, 64, 0.14) 0%, rgba(28, 72, 36, 0.12) 48%, transparent 100%),
+    radial-gradient(56% 50% at 52% 88%, rgba(30, 88, 45, 0.28) 0%, transparent 100%),
+    #050d08 !important;
+}
+
+html.theme-verdan .tv-monitor[data-tv-theme="dark"] :is(.tv-summary, .tv-board-tabs, .tv-order) {
+  background: rgba(10, 22, 14, 0.66) !important;
+  border-color: rgba(208, 236, 182, 0.15) !important;
+  backdrop-filter: blur(14px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+}
+
+html.theme-verdan .tv-monitor[data-tv-theme="dark"] .tv-board-tabs button[aria-pressed='true'] {
+  background: linear-gradient(135deg, #ccf76a 0%, #9ee22b 100%) !important;
+  border-color: rgba(235, 255, 175, 0.72) !important;
+  color: #07140b !important;
+}
+
+html.theme-verdan .tv-monitor[data-tv-theme="dark"] .tv-board-tabs button[aria-pressed='true'] b {
+  background: rgba(7, 20, 11, 0.16) !important;
+  color: #07140b !important;
+}
+
+html.theme-verdan .tv-monitor[data-tv-theme="dark"] .tv-brand img {
+  border-color: rgba(183, 237, 64, 0.58) !important;
+  background: radial-gradient(circle at 35% 30%, rgba(28, 68, 40, 0.92), rgba(7, 18, 11, 0.96)) !important;
+}
+
+html.theme-verdan .tv-monitor :is(h1, h2, h3, strong) {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif !important;
+}
+
+
+/* ── Verdan Animated Widget Primitives ───────────────────────────────────── */
+.verdan-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.verdan-overview-grid > .verdan-col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
+.verdan-overview-grid > .verdan-col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.verdan-overview-grid > .verdan-col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
+@media (max-width: 1120px) {
+  .verdan-overview-grid > .verdan-col-span-5,
+  .verdan-overview-grid > .verdan-col-span-4 {
+    grid-column: span 6 / span 6;
+  }
+
+  .verdan-overview-grid > .verdan-col-span-3 {
+    grid-column: span 12 / span 12;
+  }
+}
+
+@media (max-width: 680px) {
+  .verdan-overview-grid > .verdan-col-span-4,
+  .verdan-overview-grid > .verdan-col-span-3,
+  .verdan-overview-grid > .verdan-col-span-5 {
+    grid-column: span 12 / span 12;
+  }
+}
+
+.verdan-widget-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 18px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(208, 236, 182, 0.13);
+  background:
+    radial-gradient(85% 75% at 100% 0%, rgba(183, 237, 64, 0.08) 0%, transparent 65%),
+    rgba(11, 22, 15, 0.74);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    0 20px 44px -22px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease;
+}
+
+.verdan-widget-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 237, 64, 0.35);
+}
+
+.verdan-widget-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.verdan-widget-card__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #93aa99;
+}
+
+.verdan-widget-card__icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(208, 236, 182, 0.12);
+  color: #b7ed40;
+}
+
+.verdan-widget-card__metric-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px 0 12px;
+}
+
+.verdan-widget-card__metric {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  color: #f4f9f1;
+}
+
+.verdan-widget-card__unit {
+  font-size: 13px;
+  font-weight: 500;
+  color: #849a89;
+}
+
+.verdan-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.verdan-chip--lime {
+  background: rgba(183, 237, 64, 0.15);
+  border: 1px solid rgba(183, 237, 64, 0.35);
+  color: #ccf76a;
+}
+
+.verdan-chip--amber {
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #fde047;
+}
+
+.verdan-chip--sky {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #7dd3fc;
+}
+
+.verdan-chip--coral {
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  color: #fca5a5;
+}
+
+/* Radial Gauge */
+.verdan-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.verdan-gauge__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.verdan-gauge__arc {
+  transition: stroke-dashoffset 1050ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.verdan-gauge__value {
+  fill: #f4f9f1;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.verdan-gauge__label {
+  fill: #849a89;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.verdan-gauge__subtitle {
+  margin-top: -6px;
+  font-size: 12px;
+  color: #93aa99;
+}
+
+/* Sparkline */
+.verdan-sparkline {
+  width: 100%;
+  height: 54px;
+  overflow: visible;
+}
+
+.verdan-sparkline__line {
+  stroke-dasharray: 380;
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 6px rgba(183, 237, 64, 0.45));
+  animation: verdanSparkDraw 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.verdan-sparkline__area {
+  animation: verdanAreaFade 800ms ease 250ms both;
+}
+
+.verdan-sparkline__dot {
+  filter: drop-shadow(0 0 8px rgba(183, 237, 64, 0.85));
+}
+
+/* Segmented Zone Progress */
+.verdan-segments__track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22px, 1fr));
+  gap: 8px;
+}
+
+.verdan-segments__block {
+  height: 18px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(208, 236, 182, 0.1);
+}
+
+.verdan-segments__fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #8fd928 0%, #c6f65e 100%);
+  box-shadow: 0 0 14px rgba(183, 237, 64, 0.4);
+  animation: verdanBlockSweep 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--seg-delay, 0ms) both;
+}
+
+/* Lollipops */
+.verdan-lollipops {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24px, 1fr));
+  gap: 6px;
+  height: 58px;
+  align-items: end;
+}
+
+.verdan-lollipop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 4px;
+}
+
+.verdan-lollipop__stem-wrap {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  animation: verdanStemRise 550ms cubic-bezier(0.22, 1, 0.36, 1) var(--lol-delay, 0ms) both;
+}
+
+.verdan-lollipop__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: rgba(208, 236, 182, 0.45);
+  margin-bottom: -1px;
+}
+
+.verdan-lollipop__stem {
+  width: 2px;
+  min-height: 10px;
+  border-radius: 9999px;
+  background: rgba(208, 236, 182, 0.28);
+}
+
+.verdan-lollipop.is-active .verdan-lollipop__dot {
+  background: #ccf76a;
+  box-shadow: 0 0 10px rgba(183, 237, 64, 0.85);
+}
+
+.verdan-lollipop.is-active .verdan-lollipop__stem {
+  background: linear-gradient(180deg, #ccf76a 0%, rgba(183, 237, 64, 0.25) 100%);
+}
+
+.verdan-lollipop__label {
+  font-size: 9px;
+  color: #7e9483;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Vertical Pill Bars (Harvest Forecast Style) */
+.verdan-pill-bars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(36px, 1fr));
+  gap: 12px;
+  align-items: end;
+  height: 210px;
+  padding-top: 30px;
+}
+
+.verdan-pill-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 8px;
+}
+
+.verdan-pill-bar__callout {
+  position: absolute;
+  top: -26px;
+  white-space: nowrap;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: rgba(20, 38, 26, 0.94);
+  border: 1px solid rgba(183, 237, 64, 0.48);
+  color: #ccf76a;
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.verdan-pill-bar__rail {
+  flex: 1;
+  width: 100%;
+  max-width: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 3px;
+}
+
+.verdan-pill-bar__fill {
+  width: 100%;
+  min-height: 12px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(164, 198, 172, 0.65) 0%, rgba(164, 198, 172, 0.16) 100%);
+  animation: verdanPillRise 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--bar-delay, 0ms) both;
+  transition: filter 180ms ease;
+}
+
+.verdan-pill-bar.is-peak .verdan-pill-bar__fill {
+  background: linear-gradient(180deg, #d8fb7b 0%, #9ee22b 65%, rgba(158, 226, 43, 0.25) 100%);
+  box-shadow: 0 0 20px rgba(183, 237, 64, 0.45);
+}
+
+.verdan-pill-bar__axis {
+  font-size: 11px;
+  font-weight: 600;
+  color: #849a89;
+  text-transform: capitalize;
+}
+
+.verdan-pill-bar.is-peak .verdan-pill-bar__axis {
+  color: #ccf76a;
+}
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-verdan *,
+  html.theme-verdan *::before,
+  html.theme-verdan *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

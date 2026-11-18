@@ -1,0 +1,929 @@
+/*
+ * Compactação operacional transversal.
+ *
+ * Esta camada é intencionalmente posterior aos estilos de manutenção e
+ * lavagem. Todos os seletores ficam presos aos namespaces dos módulos para
+ * não alterar inputs, botões ou o modo TV fora das telas operacionais.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Acompanhamento de manutenção                                               */
+/* -------------------------------------------------------------------------- */
+
+.maintenance-tracking {
+  max-width: none;
+  gap: 14px;
+  padding: 0 clamp(10px, 1.45vw, 22px) 18px;
+}
+
+.maintenance-tracking .mt-hero {
+  min-height: 150px;
+  gap: 18px;
+  margin-inline: calc(clamp(10px, 1.45vw, 22px) * -1);
+  padding: 24px clamp(18px, 3.1vw, 42px) 42px;
+}
+
+.maintenance-tracking .mt-hero-brand {
+  gap: 14px;
+}
+
+.maintenance-tracking .mt-hero-brand img {
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+}
+
+.maintenance-tracking .mt-hero h2 {
+  font-size: clamp(22px, 2.5vw, 32px);
+}
+
+.maintenance-tracking .mt-hero-description {
+  font-size: clamp(13px, 1.2vw, 17px);
+  line-height: 1.38;
+}
+
+.maintenance-tracking .mt-hero-actions {
+  gap: 8px;
+}
+
+.maintenance-tracking .mt-source-line {
+  gap: 6px 18px;
+  padding-inline: 3px;
+}
+
+.maintenance-tracking .mt-alert,
+.maintenance-tracking .mt-notice {
+  gap: 9px;
+  padding: 11px 13px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.maintenance-tracking .mt-kpis {
+  gap: 10px;
+}
+
+.maintenance-tracking .mt-kpi {
+  min-height: 96px;
+  gap: 5px 9px;
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.maintenance-tracking .mt-kpi-label {
+  font-size: 11px;
+}
+
+.maintenance-tracking .mt-kpi > svg {
+  width: 19px;
+  height: 19px;
+}
+
+.maintenance-tracking .mt-kpi > strong {
+  font-size: 28px;
+}
+
+.maintenance-tracking .mt-kpi > small {
+  font-size: 11px;
+}
+
+.maintenance-tracking .mt-filters {
+  border-radius: 12px;
+}
+
+.maintenance-tracking .mt-filters > summary {
+  min-height: 48px;
+  padding: 9px 14px;
+}
+
+.maintenance-tracking .mt-filter-body {
+  gap: 12px;
+  padding: 14px 15px 16px;
+}
+
+.maintenance-tracking .mt-status-tabs {
+  gap: 6px;
+}
+
+.maintenance-tracking .mt-status-tabs button {
+  min-height: 42px;
+  padding: 7px 11px;
+}
+
+.maintenance-tracking .mt-results {
+  gap: 12px;
+}
+
+.maintenance-tracking .mt-toolbar {
+  gap: 12px;
+}
+
+.maintenance-tracking .mt-toolbar h3 {
+  margin-block: 2px 3px;
+  font-size: clamp(19px, 1.75vw, 24px);
+}
+
+.maintenance-tracking .mt-card-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.maintenance-tracking .mt-order {
+  border-radius: 14px;
+  background: #fff !important;
+  box-shadow: -3px 2px 0 var(--mt-gold), 0 7px 16px rgba(11, 50, 31, 0.1);
+}
+
+.maintenance-tracking .mt-order:hover,
+.maintenance-tracking .mt-order.is-expanded {
+  box-shadow: -3px 2px 0 var(--mt-gold), 0 10px 20px rgba(11, 50, 31, 0.13);
+}
+
+.maintenance-tracking .mt-order-head {
+  gap: 9px;
+  padding: 14px 14px 0;
+}
+
+.maintenance-tracking .mt-card-kicker {
+  margin-bottom: 6px;
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-fleet-title {
+  gap: 7px;
+}
+
+.maintenance-tracking .mt-fleet-title > svg {
+  width: 19px;
+  height: 19px;
+}
+
+.maintenance-tracking .mt-fleet-title small {
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-fleet-title strong {
+  font-size: clamp(22px, 1.8vw, 24px);
+  line-height: 1.05;
+}
+
+.maintenance-tracking .mt-equipment {
+  margin-top: 7px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.maintenance-tracking .mt-os {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.maintenance-tracking .mt-card-badges {
+  gap: 5px;
+  max-width: 52%;
+}
+
+.maintenance-tracking .mt-status {
+  gap: 5px;
+  padding: 5px 7px;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.maintenance-tracking .mt-status-dot {
+  width: 7px;
+  height: 7px;
+}
+
+.maintenance-tracking .mt-status small {
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-days {
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.maintenance-tracking .mt-days strong {
+  font-size: 16px;
+}
+
+.maintenance-tracking .mt-days small {
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-quadrants {
+  margin: 14px 14px 0;
+}
+
+.maintenance-tracking .mt-quadrant {
+  grid-template-columns: 21px minmax(0, 1fr);
+  gap: 7px;
+  padding: 10px 8px;
+}
+
+.maintenance-tracking .mt-quadrant > svg {
+  width: 19px;
+  height: 19px;
+  margin-top: 1px;
+}
+
+.maintenance-tracking .mt-quadrant dt {
+  margin-bottom: 3px;
+  font-size: 11px;
+}
+
+.maintenance-tracking .mt-quadrant dd {
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.maintenance-tracking .mt-quadrant dd svg {
+  width: 15px;
+  height: 15px;
+}
+
+.maintenance-tracking .mt-quadrant small {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.maintenance-tracking .mt-closure-summary {
+  margin: 12px 14px 0;
+  border-radius: 10px;
+}
+
+.maintenance-tracking .mt-closure-fact {
+  padding: 9px 10px;
+}
+
+.maintenance-tracking .mt-closure-fact span {
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-closure-fact strong {
+  margin-top: 3px;
+  font-size: 13px;
+}
+
+.maintenance-tracking .mt-closure-fact small {
+  margin-top: 2px;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.maintenance-tracking .mt-late-label {
+  gap: 5px;
+  margin: 3px 14px 0;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.maintenance-tracking .mt-late-label svg {
+  width: 15px;
+  height: 15px;
+}
+
+.maintenance-tracking .mt-narrative-section {
+  margin: 12px 14px 0;
+  padding: 10px 12px;
+  border-left-width: 4px;
+  border-radius: 10px;
+}
+
+.maintenance-tracking .mt-label {
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-narrative {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Fora da expansão, a narrativa continua limitada; a história integral fica
+   atrás de "Ver detalhes" e do details "Ver histórico e campos da fonte". */
+.maintenance-tracking .mt-narrative.line-clamp-3 {
+  -webkit-line-clamp: 3;
+}
+
+.maintenance-tracking .mt-order-bottom {
+  gap: 8px;
+  margin: 12px 14px 0;
+  padding: 9px 0 11px;
+}
+
+.maintenance-tracking .mt-source-fact {
+  gap: 5px;
+  font-size: 11px;
+}
+
+.maintenance-tracking .mt-source-fact svg {
+  width: 14px;
+  height: 14px;
+}
+
+.maintenance-tracking .mt-order-bottom button {
+  min-height: 44px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
+.maintenance-tracking .mt-order-bottom button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.maintenance-tracking .mt-observations {
+  margin: 0 14px 14px;
+  border-radius: 10px;
+}
+
+.maintenance-tracking .mt-timeline-header {
+  gap: 2px;
+  padding: 12px 13px;
+}
+
+.maintenance-tracking .mt-timeline-header strong {
+  font-size: 18px;
+}
+
+.maintenance-tracking .mt-timeline-header span {
+  font-size: 12px;
+}
+
+.maintenance-tracking .mt-timeline {
+  gap: 10px;
+  margin: 13px 13px 0 28px;
+  padding-left: 18px;
+}
+
+.maintenance-tracking .mt-timeline-event {
+  gap: 3px 7px;
+  font-size: 12px;
+}
+
+.maintenance-tracking .mt-timeline-event small {
+  font-size: 11px;
+}
+
+.maintenance-tracking .mt-full-history {
+  margin: 10px 13px 13px;
+}
+
+.maintenance-tracking .mt-full-history > summary {
+  min-height: 44px;
+  padding: 7px 11px;
+  font-size: 12px;
+}
+
+.maintenance-tracking .mt-detail-meta {
+  gap: 8px 11px;
+  margin-top: 12px;
+}
+
+.maintenance-tracking .mt-detail-meta > div {
+  padding-top: 6px;
+}
+
+.maintenance-tracking .mt-detail-meta dt {
+  font-size: 10px;
+}
+
+.maintenance-tracking .mt-detail-meta dd {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.maintenance-tracking .mt-date-note {
+  margin-top: 11px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Encerradas: faixa clara/legível com altura menor e fatos ainda em 3 colunas. */
+.maintenance-tracking .mt-closed-ribbon {
+  min-height: 28px;
+  padding: 5px 11px 5px 14px;
+}
+
+.maintenance-tracking .mt-closed-ribbon strong,
+.maintenance-tracking .mt-closed-ribbon span {
+  font-size: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Programação de lavagem/lubrificação                                       */
+/* -------------------------------------------------------------------------- */
+
+.lavagem-premium > .lavagem-premium-hero {
+  min-height: 156px;
+  gap: 18px;
+  padding: 28px max(18px, calc((100% - 1120px) / 2)) 50px !important;
+}
+
+.lavagem-premium .lavagem-premium-brand {
+  gap: 14px;
+}
+
+.lavagem-premium .lavagem-premium-brand img {
+  width: 54px !important;
+  height: 54px !important;
+  flex-basis: 54px;
+  border-radius: 9999px !important;
+}
+
+.lavagem-premium .lavagem-premium-brand h2 {
+  font-size: clamp(20px, 2.1vw, 29px) !important;
+}
+
+.lavagem-premium .lavagem-premium-brand p {
+  margin-top: 5px;
+  font-size: clamp(12px, 1.35vw, 18px) !important;
+}
+
+.lavagem-premium .lavagem-premium-sync {
+  min-height: 44px;
+  padding: 8px 16px !important;
+  border-radius: 12px !important;
+  font-size: clamp(13px, 1.4vw, 17px) !important;
+}
+
+.lavagem-premium > .lavagem-premium-body {
+  padding: 0 clamp(10px, 2.8vw, 32px) clamp(18px, 3vw, 32px) !important;
+}
+
+.lavagem-premium .lub-module {
+  gap: 0.75rem !important;
+}
+
+.lavagem-premium .lub-module .lub-hero {
+  min-height: 0;
+  padding: 15px 17px !important;
+  border-radius: 12px !important;
+}
+
+.lavagem-premium .lub-module .lub-brand {
+  gap: 11px;
+}
+
+.lavagem-premium .lub-module .lub-brand img {
+  width: 46px;
+  height: 46px;
+  border-radius: 9999px;
+}
+
+.lavagem-premium .lub-module .lub-hero h2 {
+  font-size: clamp(18px, 1.8vw, 24px);
+}
+
+.lavagem-premium .lub-module .lub-hero p:not(.lub-eyebrow) {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.lavagem-premium .lub-module .lub-hero-total {
+  min-width: 112px;
+  padding-left: 16px;
+}
+
+.lavagem-premium .lub-module .lub-hero-total strong {
+  font-size: 25px;
+}
+
+.lavagem-premium .lub-module .lub-toolbar {
+  gap: 8px;
+  padding-block: 2px;
+}
+
+.lavagem-premium .lub-module .lub-toolbar-title {
+  font-size: 14px;
+}
+
+.lavagem-premium .lub-module .lub-toolbar small {
+  font-size: 10px;
+}
+
+.lavagem-premium .lub-module .lub-kpis {
+  gap: 8px;
+}
+
+.lavagem-premium .lub-module .lub-kpi {
+  min-height: 78px;
+  padding: 10px 12px;
+  border-radius: 10px !important;
+}
+
+.lavagem-premium .lub-module .lub-kpi-label {
+  font-size: 9px;
+}
+
+.lavagem-premium .lub-module .lub-kpi strong {
+  margin-top: 4px;
+  font-size: 24px;
+}
+
+.lavagem-premium .lub-module .lub-kpi small {
+  font-size: 9px;
+}
+
+.lavagem-premium .lub-module .lub-filter-panel {
+  gap: 8px !important;
+  padding: 12px !important;
+  border-radius: 11px !important;
+}
+
+.lavagem-premium .lub-module .lub-filter-title {
+  padding-bottom: 6px;
+  margin-bottom: 1px;
+}
+
+.lavagem-premium .lub-module .lub-filter-title strong {
+  font-size: 12px;
+}
+
+.lavagem-premium .lub-module .lub-filter-title span {
+  font-size: 10px;
+}
+
+.lavagem-premium .lub-module .lub-filter-panel input,
+.lavagem-premium .lub-module .lub-filter-panel select {
+  min-height: 40px;
+  padding-block: 7px;
+}
+
+.lavagem-premium .lub-module .lub-table-panel {
+  border-radius: 11px !important;
+}
+
+.lavagem-premium .lub-module .lub-table-caption {
+  padding: 11px 13px;
+}
+
+.lavagem-premium .lub-module .lub-table-caption strong {
+  font-size: 13px;
+}
+
+.lavagem-premium .lub-module .lub-table-caption span {
+  font-size: 10px;
+}
+
+.lavagem-premium .lub-module .lub-table {
+  min-width: 920px !important;
+  font-size: 11px;
+}
+
+.lavagem-premium .lub-module .lub-table th {
+  padding: 10px 11px;
+  font-size: 9px;
+}
+
+.lavagem-premium .lub-module .lub-table td {
+  padding: 11px;
+}
+
+.lavagem-premium .lub-module .lub-fleet {
+  gap: 5px;
+  font-size: 14px;
+}
+
+.lavagem-premium .lub-module .lub-fleet svg {
+  width: 13px;
+  height: 13px;
+}
+
+.lavagem-premium .lub-module .lub-origin-line {
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.lavagem-premium .lub-module .lub-group {
+  margin-top: 4px;
+}
+
+.lavagem-premium .lub-module .lub-service {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.lavagem-premium .lub-module .lub-secondary {
+  margin-top: 3px;
+  line-height: 1.35;
+}
+
+.lavagem-premium .lub-module .lub-observation-cell {
+  min-width: 150px;
+  max-width: 220px;
+}
+
+.lavagem-premium .lub-module .lub-observation {
+  line-height: 1.4;
+}
+
+.lavagem-premium .lub-module .lub-row-actions {
+  gap: 5px;
+}
+
+.lavagem-premium .lub-module .lub-edit {
+  min-height: 40px;
+  padding: 6px 9px;
+  font-size: 10px;
+}
+
+.lavagem-premium .lub-module .lub-quick-actions button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 7px;
+}
+
+/* Compatibilidade de telas antigas: nunca converter a tabela atual de Lavagem
+   em cartões. O modo Cartões usa componente próprio, escolhido explicitamente. */
+@media (max-width: 720px) {
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table-scroll {
+    overflow: visible !important;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table {
+    display: block;
+    min-width: 0 !important;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody {
+    display: grid;
+    gap: 9px;
+    padding: 9px;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody tr.lub-row {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--lavagem-gold-mid);
+    border-left: 4px solid var(--lavagem-green);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(11, 50, 31, 0.08);
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody tr.lub-row-atrasado {
+    border-left-color: #cd6a55;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody tr.lub-row-andamento {
+    border-left-color: #9774b9;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody tr.lub-row-encerrado {
+    border-left-color: var(--lavagem-green);
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td,
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td:first-child,
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td:nth-child(7) {
+    display: grid;
+    grid-template-columns: minmax(86px, 31%) minmax(0, 1fr);
+    gap: 7px;
+    min-width: 0;
+    max-width: none;
+    padding: 8px 9px;
+    border: 0;
+    border-bottom: 1px solid var(--lavagem-line);
+    background: #fff !important;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td::before {
+    content: attr(data-label);
+    align-self: start;
+    color: var(--lavagem-muted);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td.lub-observation-cell {
+    display: grid;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td.lub-actions-cell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 0;
+    width: auto;
+    padding: 8px 9px;
+    border: 0;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td.lub-actions-cell::before {
+    display: none;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody tr:last-child td {
+    border-bottom: 1px solid var(--lavagem-line);
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table tbody tr td:last-child {
+    border-bottom: 0;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table .lub-row-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table .lub-edit,
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table .lub-quick-actions button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table .lub-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+}
+
+/* 320px: a coluna de rótulo cede espaço, mas nenhum conteúdo vaza. */
+@media (max-width: 360px) {
+  .maintenance-tracking {
+    padding-inline: 7px;
+  }
+
+  .maintenance-tracking .mt-hero {
+    margin-inline: -7px;
+    padding-inline: 13px;
+  }
+
+  .maintenance-tracking .mt-kpis {
+    gap: 7px;
+  }
+
+  .maintenance-tracking .mt-kpi {
+    padding-inline: 10px;
+  }
+
+  .maintenance-tracking .mt-kpi > strong {
+    font-size: 25px;
+  }
+
+  .maintenance-tracking .mt-card-badges {
+    width: 100%;
+    max-width: none;
+    justify-content: flex-start;
+  }
+
+  .maintenance-tracking .mt-closure-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .maintenance-tracking .mt-closure-fact {
+    padding-inline: 6px;
+  }
+
+  .maintenance-tracking .mt-closure-fact strong {
+    font-size: 12px;
+  }
+
+  .maintenance-tracking .mt-closure-fact small {
+    font-size: 9px;
+  }
+
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td,
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td:first-child,
+  .lavagem-premium .lub-module:not(.lub-operations-v1011) .lub-table td:nth-child(7) {
+    grid-template-columns: minmax(72px, 27%) minmax(0, 1fr);
+    gap: 5px;
+    padding-inline: 7px;
+  }
+}
+
+/* Grid por área útil do painel, não por uma largura global da janela. */
+@container maintenance-workspace (min-width: 740px) {
+  .maintenance-tracking .mt-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container maintenance-workspace (min-width: 1020px) {
+  .maintenance-tracking .mt-card-grid {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+  }
+}
+
+@container maintenance-workspace (min-width: 1600px) {
+  .maintenance-tracking .mt-card-grid {
+    grid-template-columns: repeat(4, minmax(280px, 1fr));
+  }
+}
+
+@container maintenance-workspace (max-width: 720px) {
+  .maintenance-tracking .mt-hero {
+    min-height: 132px;
+    margin-inline: -10px;
+    padding: 19px 16px 35px;
+  }
+
+  .maintenance-tracking .mt-hero-brand img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .maintenance-tracking .mt-hero-actions {
+    align-items: flex-start;
+  }
+
+  .maintenance-tracking .mt-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .lavagem-premium > .lavagem-premium-hero {
+    min-height: 128px;
+    gap: 13px;
+    padding: 22px 15px 38px !important;
+  }
+
+  .lavagem-premium .lavagem-premium-brand {
+    gap: 10px;
+  }
+
+  .lavagem-premium .lavagem-premium-brand img {
+    width: 48px !important;
+    height: 48px !important;
+    flex-basis: 48px;
+  }
+
+  .lavagem-premium .lavagem-premium-sync {
+    min-height: 44px;
+    padding-inline: 12px !important;
+  }
+}
+
+@container maintenance-card (max-width: 460px) {
+  .maintenance-tracking .mt-order-head {
+    flex-wrap: wrap;
+  }
+
+  .maintenance-tracking .mt-card-badges {
+    width: 100%;
+    max-width: none;
+    justify-content: flex-start;
+  }
+}
+
+@container maintenance-card (max-width: 350px) {
+  .maintenance-tracking .mt-quadrants {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .maintenance-tracking .mt-quadrant:nth-child(even),
+  .maintenance-tracking .mt-quadrant:nth-child(n + 3) {
+    border-left: 0;
+    border-top: 1px solid var(--mt-gold);
+  }
+
+  /* A faixa de encerramento segue em três fatos até 320px; abaixo disso a
+     leitura de cada fato fica mais segura em coluna única. */
+  .maintenance-tracking .mt-closure-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maintenance-tracking .mt-kpi:hover,
+  .maintenance-tracking .mt-kpi--active,
+  .maintenance-tracking .mt-order:hover,
+  .maintenance-tracking .mt-order.is-expanded {
+    transform: none;
+  }
+}
+
+/* Indicadores de Lavagem: mesma densidade operacional, sem reduzir os gráficos. */
+.lavagem-dashboard .dashboard-kpi { padding:12px;min-height:84px; }
+.lavagem-dashboard .dashboard-panel { padding:14px; }
+.lavagem-dashboard .dashboard-kpi > .flex > .p-2 { padding:6px; }

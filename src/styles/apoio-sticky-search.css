@@ -1,0 +1,128 @@
+/* Pesquisa integrada ao fluxo de filtros e resultados do Apoio. */
+.apoio-module .apoio-sticky-search {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  order: 0 !important;
+  transform: none !important;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 12px 0 0;
+  padding: 8px 10px;
+  border: 1px solid var(--brand-green, #1f6b45);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: 0 3px 12px rgba(11, 50, 31, .08);
+}
+
+.apoio-module .apoio-direct-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 240px);
+  align-items: end;
+  gap: 10px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.apoio-module .apoio-direct-search-label {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.apoio-module .apoio-direct-search-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 10px;
+  border: 1px solid var(--border-primary);
+  border-radius: 9px;
+  background: var(--bg-primary);
+  color: var(--brand-green);
+}
+
+.apoio-module .apoio-direct-search-control svg {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.apoio-module .apoio-direct-search-control input {
+  width: auto;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 8px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.apoio-module .apoio-direct-search-control:focus-within {
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 2px rgba(31, 107, 69, .14);
+}
+
+.apoio-module .apoio-direct-clear {
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: 9px;
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.apoio-module .apoio-direct-clear:disabled {
+  opacity: .45;
+}
+
+.apoio-module .apoio-direct-clear:focus-visible {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 2px;
+}
+
+.apoio-module .apoio-direct-count {
+  align-self: center;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+@media (max-width: 719px) {
+  .apoio-module .apoio-sticky-search {
+    padding: 7px 8px;
+  }
+
+  .apoio-module .apoio-direct-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 8px;
+  }
+
+  .apoio-module .apoio-direct-count {
+    grid-column: 1 / -1;
+    line-height: 1.25;
+  }
+}

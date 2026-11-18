@@ -1,0 +1,666 @@
+/* Glassy sidebar motion — scoped to the application shell only. */
+
+.app-shell .shell-sidebar {
+  position: relative;
+  z-index: 30;
+  flex: 0 0 76px;
+  width: 76px;
+  min-width: 76px;
+  height: 100%;
+  overflow: visible;
+}
+
+.app-shell .shell-sidebar__panel {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 31;
+  display: flex;
+  flex-direction: column;
+  width: 76px;
+  min-height: 100%;
+  overflow: hidden;
+  color: var(--sidebar-text);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--sidebar-border);
+  border-radius: 0 12px 12px 0;
+  box-shadow: 4px 0 32px -4px rgba(0, 0, 0, 0.28);
+  backdrop-filter: saturate(160%) blur(24px);
+  -webkit-backdrop-filter: saturate(160%) blur(24px);
+  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease;
+}
+
+.app-shell .shell-sidebar__brand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  gap: 12px;
+  padding: 16px 10px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.app-shell .shell-sidebar__logo {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  object-fit: contain;
+  padding: 2px;
+  background: radial-gradient(circle at 35% 30%, rgba(30, 72, 45, 0.72), rgba(7, 18, 11, 0.88));
+  border: 1.5px solid var(--sidebar-logo-ring);
+  border-radius: 9999px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.28), 0 0 10px var(--sidebar-logo-ring);
+}
+
+.app-shell .shell-sidebar__brand-copy {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-8px);
+  white-space: nowrap;
+  transition: opacity 160ms ease, transform 220ms ease, max-width 220ms ease;
+}
+
+.app-shell .shell-sidebar__brand-name {
+  color: var(--sidebar-logo-ring);
+  font-size: 0.875rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+}
+
+.app-shell .shell-sidebar__brand-subtitle {
+  margin-top: 3px;
+  color: var(--sidebar-text-muted);
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.app-shell .shell-sidebar__close {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+  color: var(--sidebar-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.app-shell .shell-sidebar__close:hover {
+  color: var(--sidebar-text);
+  background: var(--sidebar-hover-bg);
+}
+
+.app-shell .shell-sidebar__nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 10px 4px 14px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.app-shell .shell-sidebar__nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-shell .shell-sidebar__nav::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.app-shell .shell-sidebar__nav::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, rgba(148, 163, 184, 0.52));
+  border-radius: 999px;
+}
+
+.app-shell .shell-nav-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  min-height: 34px;
+  margin: 14px 12px 6px;
+  padding: 8px 0;
+  overflow: hidden;
+  color: var(--sidebar-text);
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid var(--sidebar-border);
+  border-left: 3px solid #8dc7a5;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.app-shell .shell-nav-section:first-child {
+  margin-top: 0;
+}
+
+.app-shell .shell-nav-section__marker {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 999px;
+  background: #a3d4b7;
+}
+
+.app-shell .shell-nav-section.is-current-section {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(218, 243, 226, 0.42);
+  border-left-color: #b7e2c7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.app-shell .shell-nav-section__label,
+.app-shell .shell-nav-item__label,
+.app-shell .shell-sidebar__status-label,
+.app-shell .shell-sidebar__status-detail,
+.app-shell .shell-sidebar__last-sync,
+.app-shell .shell-sidebar__version,
+.app-shell .shell-sidebar__brand-copy {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 160ms ease, transform 220ms ease, max-width 220ms ease;
+}
+
+.app-shell .shell-nav-section__label {
+  flex: 0 1 auto;
+}
+
+.app-shell .shell-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 58px;
+  min-height: 46px;
+  gap: 0;
+  margin: 2px 9px;
+  padding: 4px 5px;
+  overflow: hidden;
+  color: var(--sidebar-text-muted);
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1), margin 220ms cubic-bezier(0.22, 1, 0.36, 1), gap 220ms ease, padding 220ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.app-shell .shell-nav-item__icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  color: var(--sidebar-text-muted);
+  transform-origin: center;
+  transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms ease;
+}
+
+.app-shell .shell-nav-item__icon svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.app-shell .shell-nav-item:hover,
+.app-shell .shell-nav-item:focus-visible {
+  color: var(--sidebar-text);
+  background: var(--sidebar-hover-bg);
+}
+
+.app-shell .shell-nav-item:hover .shell-nav-item__icon,
+.app-shell .shell-nav-item:focus .shell-nav-item__icon {
+  color: var(--sidebar-text);
+  transform: scale(1.12) translateY(-2px);
+}
+
+.app-shell .shell-nav-item.is-active {
+  color: var(--sidebar-text);
+  background: var(--sidebar-active-bg);
+  border-color: var(--sidebar-border);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.app-shell .shell-nav-item.is-active .shell-nav-item__icon {
+  color: var(--sidebar-logo-ring);
+}
+
+.app-shell .shell-nav-item__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.app-shell .shell-nav-item__chevron {
+  flex: 0 0 auto;
+  margin-left: auto;
+  width: 0;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: var(--sidebar-logo-ring);
+  transition: width 220ms ease, max-width 220ms ease, opacity 160ms ease;
+}
+
+.app-shell .shell-nav-item__badge {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  overflow: hidden;
+  color: #fff;
+  background: #ef4444;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.app-shell .shell-sidebar__footer {
+  flex: 0 0 auto;
+  padding: 10px 0 8px;
+  color: var(--sidebar-text-muted);
+  border-top: 1px solid var(--sidebar-border);
+}
+
+.app-shell .shell-sidebar__status-line {
+  display: flex;
+  align-items: center;
+  width: 52px;
+  min-height: 30px;
+  gap: 8px;
+  margin: 0 12px;
+  padding: 0 8px;
+  overflow: hidden;
+  color: var(--sidebar-text);
+  border-radius: 8px;
+}
+
+.app-shell .shell-sidebar__status-line:hover {
+  background: var(--sidebar-hover-bg);
+}
+
+.app-shell .shell-sidebar__status-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 999px;
+}
+
+.app-shell .shell-sidebar__status-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--sidebar-text);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.app-shell .shell-sidebar__status-detail {
+  margin: 2px 20px 0;
+  color: #fbbf24;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+.app-shell .shell-sidebar__status-line.is-reconnecting + .shell-sidebar__status-detail {
+  color: #4ade80;
+}
+
+.app-shell .shell-sidebar__last-sync {
+  margin: 2px 20px 0;
+  color: var(--sidebar-text-muted);
+  font-size: 0.7rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.app-shell .shell-sidebar__version {
+  padding: 4px 10px 10px;
+  color: var(--sidebar-text-muted);
+  font-size: 0.68rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.app-shell .shell-sidebar__overlay {
+  display: none;
+}
+
+.app-shell .shell-menu-toggle {
+  display: none;
+}
+
+.shell-sidebar__popup {
+  position: fixed;
+  z-index: 70;
+  width: min(280px, calc(100vw - 24px));
+  max-height: min(70vh, 520px);
+  padding: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: var(--sidebar-text);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 12px;
+  box-shadow: 12px 18px 42px -12px rgba(0, 0, 0, 0.55);
+  backdrop-filter: saturate(160%) blur(24px);
+  -webkit-backdrop-filter: saturate(160%) blur(24px);
+}
+
+.shell-sidebar__popup-heading {
+  padding: 8px 10px 9px;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.shell-sidebar__popup-eyebrow {
+  color: var(--sidebar-text-muted);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.shell-sidebar__popup-title {
+  display: block;
+  margin-top: 3px;
+  color: var(--sidebar-text);
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.shell-sidebar__popup-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 42px;
+  gap: 9px;
+  margin-top: 3px;
+  padding: 6px 8px;
+  color: var(--sidebar-text-muted);
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.shell-sidebar__popup-item:hover,
+.shell-sidebar__popup-item:focus-visible,
+.shell-sidebar__popup-item[aria-current="page"] {
+  color: var(--sidebar-text);
+  background: var(--sidebar-active-bg);
+  border-color: var(--sidebar-border);
+}
+
+.shell-sidebar__popup-item-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  color: var(--sidebar-logo-ring);
+}
+
+.shell-sidebar__popup-item-label {
+  min-width: 0;
+  font-size: 0.8rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.app-shell .shell-sidebar__close:focus-visible,
+.app-shell .shell-nav-item:focus-visible,
+.shell-sidebar__popup-item:focus-visible,
+.app-shell .shell-menu-toggle:focus-visible {
+  outline: 2px solid var(--sidebar-logo-ring);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  .app-shell .shell-sidebar__panel:hover,
+  .app-shell .shell-sidebar__panel:focus-within,
+  .app-shell .shell-sidebar__panel.has-popout {
+    width: 256px;
+    box-shadow: 10px 0 34px -8px rgba(0, 0, 0, 0.42);
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__brand,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__brand,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__brand {
+    justify-content: flex-start;
+    padding-inline: 16px;
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__brand-copy,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__brand-copy,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__brand-copy,
+  .app-shell .shell-sidebar__panel:hover .shell-nav-label,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-label,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-label {
+    max-width: 220px;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-nav-section,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-section,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-section {
+    justify-content: flex-start;
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+    padding-inline: 10px;
+    gap: 8px;
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-nav-item,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-item,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-item {
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+    gap: 8px;
+    padding-inline: 8px;
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-nav-item__chevron,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-item__chevron,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-item__chevron {
+    width: 14px;
+    max-width: 14px;
+    opacity: 1;
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__status-line,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__status-line,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__status-line {
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+    padding-inline: 8px;
+  }
+
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__status-detail,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__status-detail,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__status-detail,
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__last-sync,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__last-sync,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__last-sync,
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__version,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__version,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__version {
+    max-width: 230px;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1023px), (pointer: coarse) {
+  .app-shell .shell-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    height: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    width: 256px;
+    min-width: 256px;
+    flex: 0 0 256px;
+    overflow: hidden;
+    transform: translateX(-100%);
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .app-shell .shell-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .app-shell .shell-sidebar__panel,
+  .app-shell .shell-sidebar__panel:hover,
+  .app-shell .shell-sidebar__panel:focus-within,
+  .app-shell .shell-sidebar__panel.has-popout {
+    position: relative;
+    width: 256px;
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 10px 0 34px -8px rgba(0, 0, 0, 0.45);
+  }
+
+  .app-shell .shell-sidebar__brand,
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__brand,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__brand,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__brand {
+    justify-content: flex-start;
+    padding-inline: 16px;
+  }
+
+  .app-shell .shell-sidebar__close,
+  .app-shell .shell-menu-toggle {
+    display: inline-flex;
+  }
+
+  .app-shell .shell-sidebar__panel .shell-nav-label,
+  .app-shell .shell-sidebar__panel .shell-sidebar__brand-copy,
+  .app-shell .shell-sidebar__panel .shell-sidebar__status-detail,
+  .app-shell .shell-sidebar__panel .shell-sidebar__last-sync,
+  .app-shell .shell-sidebar__panel .shell-sidebar__version {
+    max-width: 230px;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .app-shell .shell-sidebar__panel .shell-nav-section,
+  .app-shell .shell-sidebar__panel:hover .shell-nav-section,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-section,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-section {
+    justify-content: flex-start;
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+    padding-inline: 10px;
+    gap: 8px;
+  }
+
+  .app-shell .shell-sidebar__panel .shell-nav-item,
+  .app-shell .shell-sidebar__panel:hover .shell-nav-item,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-item,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-item {
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+    gap: 8px;
+    padding-inline: 8px;
+  }
+
+  .app-shell .shell-sidebar__panel .shell-nav-item__chevron,
+  .app-shell .shell-sidebar__panel:hover .shell-nav-item__chevron,
+  .app-shell .shell-sidebar__panel:focus-within .shell-nav-item__chevron,
+  .app-shell .shell-sidebar__panel.has-popout .shell-nav-item__chevron {
+    width: 14px;
+    max-width: 14px;
+    opacity: 1;
+  }
+
+  .app-shell .shell-sidebar__panel .shell-sidebar__status-line,
+  .app-shell .shell-sidebar__panel:hover .shell-sidebar__status-line,
+  .app-shell .shell-sidebar__panel:focus-within .shell-sidebar__status-line,
+  .app-shell .shell-sidebar__panel.has-popout .shell-sidebar__status-line {
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+    padding-inline: 8px;
+  }
+
+  .app-shell .shell-sidebar__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: block;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .shell-sidebar__popup {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell .shell-sidebar__panel,
+  .app-shell .shell-sidebar,
+  .app-shell .shell-sidebar__brand-copy,
+  .app-shell .shell-nav-label,
+  .app-shell .shell-nav-item,
+  .app-shell .shell-nav-item__icon,
+  .app-shell .shell-nav-item__chevron,
+  .shell-sidebar__popup {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Nomes completos em até duas linhas, sem mudar a altura base do item. */
+@media (min-width: 1024px) and (pointer: fine) {
+ .app-shell .shell-sidebar__panel:hover .shell-nav-item__label,
+ .app-shell .shell-sidebar__panel:focus-within .shell-nav-item__label,
+ .app-shell .shell-sidebar__panel.has-popout .shell-nav-item__label {white-space:normal;font-size:13px;line-height:1.3;}
+}
+@media (max-width:1023px), (pointer:coarse) {
+ .app-shell .shell-sidebar__panel .shell-nav-item__label {white-space:normal;font-size:13px;line-height:1.3;}
+}
+/* Alertas continuam visíveis no trilho compacto. */
+.app-shell .shell-nav-item__badge{position:absolute;right:2px;top:1px;width:16px;height:16px;font-size:10px;}
+@media(min-width:1024px) and (pointer:fine){
+ .app-shell .shell-sidebar__panel:hover .shell-nav-item__badge,
+ .app-shell .shell-sidebar__panel:focus-within .shell-nav-item__badge,
+ .app-shell .shell-sidebar__panel.has-popout .shell-nav-item__badge{position:static;width:20px;height:20px;font-size:.7rem;}
+}
+@media(max-width:1023px),(pointer:coarse){.app-shell .shell-sidebar__panel .shell-nav-item__badge{position:static;width:20px;height:20px;font-size:.7rem;}}

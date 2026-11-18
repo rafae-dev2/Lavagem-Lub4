@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1165 340" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="forest" x2="1" y2="0"><stop stop-color="#0b321f"/><stop offset=".6" stop-color="#0c3420"/><stop offset="1" stop-color="#0a301d"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#95742d"/><stop offset=".16" stop-color="#d4b760"/><stop offset=".38" stop-color="#f8e9a5"/><stop offset=".58" stop-color="#b5923b"/><stop offset=".77" stop-color="#f2db8b"/><stop offset="1" stop-color="#b89035"/></linearGradient>
+  </defs>
+  <path fill="url(#forest)" d="M0 0H1165V340C1040 264 987 226 805 215C618 200 505 267 305 264C180 261 68 233 0 193Z"/>
+  <path fill="url(#metal)" d="M0 72C123 225 281 280 493 235C686 194 774 150 964 190C1049 207 1109 227 1165 250V310C1036 254 944 218 813 215C642 210 483 269 305 264C175 261 68 229 0 193V143C77 220 190 254 336 253C184 239 84 186 0 119Z"/>
+  <path fill="#ead48a" opacity=".85" d="M0 145C74 217 189 250 329 253C498 256 645 194 785 184C935 173 1051 213 1165 253V268C1045 223 924 187 786 194C638 203 490 266 329 263C181 260 70 226 0 166Z"/>
+  <path fill="#0b321f" d="M0 117C88 197 208 243 336 250C179 224 74 173 0 72Z"/>
+</svg>

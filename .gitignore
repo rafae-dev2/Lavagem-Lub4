@@ -1,0 +1,13 @@
+# Dependências e build
+node_modules/
+dist/
+
+# Variáveis de ambiente e segredos locais
+.env
+.env.*
+*.local
+
+# Artefatos temporários dos testes
+tests/.tmp-*
+*.log
+.DS_Store

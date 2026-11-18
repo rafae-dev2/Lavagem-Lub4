@@ -1,0 +1,997 @@
+{
+  "data": "mock local, no Supabase/network; before = local legacy selector fixture; after = current full application CSS",
+  "checks": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "orientation": "portrait",
+        "theme": "light"
+      },
+      "before": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rows": 70,
+        "tableDisplay": "block",
+        "theadDisplay": "block",
+        "tbodyDisplay": "grid",
+        "rowDisplay": "grid",
+        "cellDisplay": "grid",
+        "pseudoContents": [
+          "\"Equipamento / OS\"",
+          "\"Serviço / local\"",
+          "\"Programação\"",
+          "\"Situação\"",
+          "\"Data realizada\"",
+          "\"Observações\"",
+          "\"Ações\""
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "solid",
+        "tbodyGridTemplateColumns": "300.188px",
+        "rowGridTemplateColumns": "295.188px",
+        "cellPadding": "13px",
+        "rowYs": [
+          545.5,
+          646.1,
+          711.4,
+          779.3,
+          845.7,
+          890.1,
+          1044.7
+        ],
+        "sameRowY": false,
+        "scroll": {
+          "overflowX": "visible",
+          "overflowY": "visible",
+          "touchAction": "manipulation",
+          "clientWidth": 318,
+          "scrollWidth": 318,
+          "scrollLeft": 0,
+          "width": 318
+        },
+        "tableWidth": 318,
+        "actionVisibleAtRight": true,
+        "documentWidth": 390,
+        "documentHeight": 40441,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "13px",
+        "rowYs": [
+          449.1,
+          449.1,
+          449.1,
+          449.1,
+          449.1,
+          449.1,
+          449.1
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 318,
+          "scrollWidth": 947,
+          "scrollLeft": 0,
+          "width": 318
+        },
+        "tableWidth": 947,
+        "actionVisibleAtRight": false,
+        "documentWidth": 390,
+        "documentHeight": 12617,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 354,
+        "actions": {
+          "actionText": "Editar",
+          "left": 157.578125,
+          "right": 353.578125,
+          "scrollerRight": 354.09375,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 399
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "orientation": "portrait",
+        "theme": "dark"
+      },
+      "before": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rows": 70,
+        "tableDisplay": "block",
+        "theadDisplay": "block",
+        "tbodyDisplay": "grid",
+        "rowDisplay": "grid",
+        "cellDisplay": "grid",
+        "pseudoContents": [
+          "\"Equipamento / OS\"",
+          "\"Serviço / local\"",
+          "\"Programação\"",
+          "\"Situação\"",
+          "\"Data realizada\"",
+          "\"Observações\"",
+          "\"Ações\""
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "solid",
+        "tbodyGridTemplateColumns": "300.188px",
+        "rowGridTemplateColumns": "295.188px",
+        "cellPadding": "13px",
+        "rowYs": [
+          545.5,
+          646.1,
+          711.4,
+          779.3,
+          845.7,
+          890.1,
+          1044.7
+        ],
+        "sameRowY": false,
+        "scroll": {
+          "overflowX": "visible",
+          "overflowY": "visible",
+          "touchAction": "manipulation",
+          "clientWidth": 318,
+          "scrollWidth": 318,
+          "scrollLeft": 0,
+          "width": 318
+        },
+        "tableWidth": 318,
+        "actionVisibleAtRight": true,
+        "documentWidth": 390,
+        "documentHeight": 40441,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "13px",
+        "rowYs": [
+          449.1,
+          449.1,
+          449.1,
+          449.1,
+          449.1,
+          449.1,
+          449.1
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 318,
+          "scrollWidth": 947,
+          "scrollLeft": 0,
+          "width": 318
+        },
+        "tableWidth": 947,
+        "actionVisibleAtRight": false,
+        "documentWidth": 390,
+        "documentHeight": 12617,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 358,
+        "actions": {
+          "actionText": "Editar",
+          "left": 157.578125,
+          "right": 353.578125,
+          "scrollerRight": 354.09375,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 395
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 428,
+        "height": 926,
+        "orientation": "portrait",
+        "theme": "light"
+      },
+      "before": {
+        "viewport": {
+          "width": 428,
+          "height": 926
+        },
+        "rows": 70,
+        "tableDisplay": "block",
+        "theadDisplay": "block",
+        "tbodyDisplay": "grid",
+        "rowDisplay": "grid",
+        "cellDisplay": "grid",
+        "pseudoContents": [
+          "\"Equipamento / OS\"",
+          "\"Serviço / local\"",
+          "\"Programação\"",
+          "\"Situação\"",
+          "\"Data realizada\"",
+          "\"Observações\"",
+          "\"Ações\""
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "solid",
+        "tbodyGridTemplateColumns": "336.062px",
+        "rowGridTemplateColumns": "331.062px",
+        "cellPadding": "13px",
+        "rowYs": [
+          521,
+          621.6,
+          686.9,
+          754.8,
+          821.2,
+          865.6,
+          1020.2
+        ],
+        "sameRowY": false,
+        "scroll": {
+          "overflowX": "visible",
+          "overflowY": "visible",
+          "touchAction": "manipulation",
+          "clientWidth": 354,
+          "scrollWidth": 354,
+          "scrollLeft": 0,
+          "width": 354
+        },
+        "tableWidth": 354,
+        "actionVisibleAtRight": true,
+        "documentWidth": 428,
+        "documentHeight": 40416,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 428,
+          "height": 926
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "13px",
+        "rowYs": [
+          424.6,
+          424.6,
+          424.6,
+          424.6,
+          424.6,
+          424.6,
+          424.6
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 354,
+          "scrollWidth": 947,
+          "scrollLeft": 0,
+          "width": 354
+        },
+        "tableWidth": 947,
+        "actionVisibleAtRight": false,
+        "documentWidth": 428,
+        "documentHeight": 12593,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 357,
+        "actions": {
+          "actionText": "Editar",
+          "left": 194.640625,
+          "right": 390.640625,
+          "scrollerRight": 391.03125,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 396
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 428,
+        "height": 926,
+        "orientation": "portrait",
+        "theme": "dark"
+      },
+      "before": {
+        "viewport": {
+          "width": 428,
+          "height": 926
+        },
+        "rows": 70,
+        "tableDisplay": "block",
+        "theadDisplay": "block",
+        "tbodyDisplay": "grid",
+        "rowDisplay": "grid",
+        "cellDisplay": "grid",
+        "pseudoContents": [
+          "\"Equipamento / OS\"",
+          "\"Serviço / local\"",
+          "\"Programação\"",
+          "\"Situação\"",
+          "\"Data realizada\"",
+          "\"Observações\"",
+          "\"Ações\""
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "solid",
+        "tbodyGridTemplateColumns": "336.062px",
+        "rowGridTemplateColumns": "331.062px",
+        "cellPadding": "13px",
+        "rowYs": [
+          521,
+          621.6,
+          686.9,
+          754.8,
+          821.2,
+          865.6,
+          1020.2
+        ],
+        "sameRowY": false,
+        "scroll": {
+          "overflowX": "visible",
+          "overflowY": "visible",
+          "touchAction": "manipulation",
+          "clientWidth": 354,
+          "scrollWidth": 354,
+          "scrollLeft": 0,
+          "width": 354
+        },
+        "tableWidth": 354,
+        "actionVisibleAtRight": true,
+        "documentWidth": 428,
+        "documentHeight": 40416,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 428,
+          "height": 926
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "13px",
+        "rowYs": [
+          424.6,
+          424.6,
+          424.6,
+          424.6,
+          424.6,
+          424.6,
+          424.6
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 354,
+          "scrollWidth": 947,
+          "scrollLeft": 0,
+          "width": 354
+        },
+        "tableWidth": 947,
+        "actionVisibleAtRight": false,
+        "documentWidth": 428,
+        "documentHeight": 12593,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 354,
+        "actions": {
+          "actionText": "Editar",
+          "left": 194.640625,
+          "right": 390.640625,
+          "scrollerRight": 391.03125,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 395
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "orientation": "landscape",
+        "theme": "light"
+      },
+      "before": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 747,
+          "scrollWidth": 943,
+          "scrollLeft": 0,
+          "width": 747
+        },
+        "tableWidth": 943,
+        "actionVisibleAtRight": true,
+        "documentWidth": 844,
+        "documentHeight": 12296,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 747,
+          "scrollWidth": 943,
+          "scrollLeft": 0,
+          "width": 747
+        },
+        "tableWidth": 943,
+        "actionVisibleAtRight": true,
+        "documentWidth": 844,
+        "documentHeight": 12296,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 196,
+        "actions": {
+          "actionText": "Editar",
+          "left": 603.296875,
+          "right": 795.296875,
+          "scrollerRight": 795.375,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 397
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "orientation": "landscape",
+        "theme": "dark"
+      },
+      "before": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 747,
+          "scrollWidth": 943,
+          "scrollLeft": 0,
+          "width": 747
+        },
+        "tableWidth": 943,
+        "actionVisibleAtRight": true,
+        "documentWidth": 844,
+        "documentHeight": 12296,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4,
+          400.4
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 747,
+          "scrollWidth": 943,
+          "scrollLeft": 0,
+          "width": 747
+        },
+        "tableWidth": 943,
+        "actionVisibleAtRight": true,
+        "documentWidth": 844,
+        "documentHeight": 12296,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 196,
+        "actions": {
+          "actionText": "Editar",
+          "left": 603.296875,
+          "right": 795.296875,
+          "scrollerRight": 795.375,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 394
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "orientation": "desktop",
+        "theme": "light"
+      },
+      "before": {
+        "viewport": {
+          "width": 1366,
+          "height": 900
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 1252,
+          "scrollWidth": 1252,
+          "scrollLeft": 0,
+          "width": 1252
+        },
+        "tableWidth": 1252,
+        "actionVisibleAtRight": true,
+        "documentWidth": 1366,
+        "documentHeight": 9087,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 1366,
+          "height": 900
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 1252,
+          "scrollWidth": 1252,
+          "scrollLeft": 0,
+          "width": 1252
+        },
+        "tableWidth": 1252,
+        "actionVisibleAtRight": true,
+        "documentWidth": 1366,
+        "documentHeight": 9087,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 0,
+        "actions": {
+          "actionText": "Editar",
+          "left": 1117,
+          "right": 1309,
+          "scrollerRight": 1309,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 409
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "orientation": "desktop",
+        "theme": "dark"
+      },
+      "before": {
+        "viewport": {
+          "width": 1366,
+          "height": 900
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 1252,
+          "scrollWidth": 1252,
+          "scrollLeft": 0,
+          "width": 1252
+        },
+        "tableWidth": 1252,
+        "actionVisibleAtRight": true,
+        "documentWidth": 1366,
+        "documentHeight": 9087,
+        "windowScrollY": 0
+      },
+      "after": {
+        "viewport": {
+          "width": 1366,
+          "height": 900
+        },
+        "rows": 70,
+        "tableDisplay": "table",
+        "theadDisplay": "table-header-group",
+        "tbodyDisplay": "table-row-group",
+        "rowDisplay": "table-row",
+        "cellDisplay": "table-cell",
+        "pseudoContents": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "tableBorderStyle": "none",
+        "rowBorderStyle": "none",
+        "tbodyGridTemplateColumns": "none",
+        "rowGridTemplateColumns": "none",
+        "cellPadding": "11px",
+        "rowYs": [
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2,
+          417.2
+        ],
+        "sameRowY": true,
+        "scroll": {
+          "overflowX": "auto",
+          "overflowY": "auto",
+          "touchAction": "manipulation",
+          "clientWidth": 1252,
+          "scrollWidth": 1252,
+          "scrollLeft": 0,
+          "width": 1252
+        },
+        "tableWidth": 1252,
+        "actionVisibleAtRight": true,
+        "documentWidth": 1366,
+        "documentHeight": 9087,
+        "windowScrollY": 0
+      },
+      "horizontal": {
+        "before": 0,
+        "after": 0,
+        "actions": {
+          "actionText": "Editar",
+          "left": 1117,
+          "right": 1309,
+          "scrollerRight": 1309,
+          "visible": true
+        }
+      },
+      "vertical": {
+        "before": 0,
+        "after": 315
+      },
+      "errors": []
+    }
+  ]
+}

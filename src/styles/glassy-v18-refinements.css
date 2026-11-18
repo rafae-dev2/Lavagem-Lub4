@@ -1,0 +1,269 @@
+/* Glassy V18: material, legibilidade e movimento. Relatórios permanecem intactos. */
+html.theme-glassy-v18 {
+  --text-primary: #fffaf2;
+  --text-secondary: #eee5d9;
+  --text-tertiary: #dfd2c2;
+  --text-muted: #dfd2c2;
+  --sidebar-text-muted: #e4d9cc;
+  --glass-card-bg: linear-gradient(145deg, rgba(255, 248, 236, .16) 0%, rgba(68, 58, 51, .46) 52%, rgba(42, 36, 33, .56) 100%);
+  --glass-card-border: rgba(255, 246, 229, .26);
+  --glass-card-shadow: inset 0 1.5px 1px rgba(255, 250, 239, .24), inset 0 -1px 1px rgba(140, 166, 239, .14), 0 22px 50px -22px rgba(20, 15, 12, .78);
+  --glass-blur: 26px;
+  --v18-ease: cubic-bezier(.22, 1, .36, 1);
+  --v18-link: #cedbff;
+  --v18-sticky: #39322e;
+  --status-atrasado-bg: #542d2c;
+  --status-atrasado-text: #ffd3ce;
+  --status-atrasado-border: #ba726a;
+  --status-pendente-bg: #4d3e22;
+  --status-pendente-text: #ffe2a5;
+  --status-pendente-border: #ae8d4d;
+  --status-programado-bg: #2d3c60;
+  --status-programado-text: #dce7ff;
+  --status-programado-border: #8298d0;
+  --status-andamento-bg: #473053;
+  --status-andamento-text: #f0d6ff;
+  --status-andamento-border: #ab82be;
+  --status-encerrado-bg: #263f32;
+  --status-encerrado-text: #c7f5d7;
+  --status-encerrado-border: #71a987;
+}
+
+/* Local shell tokens take precedence over the green module header. */
+html.theme-glassy-v18 .app-shell {
+  --shell-header-bg: rgba(48, 41, 36, .78);
+  --shell-header-text: #fffaf2;
+  --shell-header-muted: #eee5d9;
+  --shell-header-action: #dce5ff;
+  --shell-header-action-bg: rgba(170, 189, 246, .16);
+  --shell-header-action-border: rgba(211, 224, 255, .35);
+  --shell-header-border: rgba(255, 246, 229, .2);
+  --bg-card: rgba(49, 42, 37, .82);
+  --bg-secondary: rgba(49, 42, 37, .88);
+  height: 100dvh;
+  isolation: isolate;
+}
+
+/* Warm ambient light sits behind the glass, never over the text. */
+html.theme-glassy-v18 body {
+  background:
+    radial-gradient(ellipse at 18% 12%, rgba(255, 232, 194, .36), transparent 45%),
+    radial-gradient(ellipse at 88% 19%, rgba(139, 164, 226, .3), transparent 42%),
+    linear-gradient(100deg, transparent 0 14%, rgba(28, 21, 16, .24) 15% 20%, transparent 22% 68%, rgba(29, 23, 18, .22) 70% 78%, transparent 80%),
+    linear-gradient(155deg, #847364, #57483d 42%, #977b60 76%, #4f4844);
+  background-attachment: fixed;
+}
+html.theme-glassy-v18 body::before {
+  z-index: 0;
+  opacity: .6;
+  background: radial-gradient(ellipse at 18% 62%, rgba(237, 183, 110, .23), transparent 42%), radial-gradient(ellipse at 86% 40%, rgba(172, 193, 253, .25), transparent 38%);
+}
+html.theme-glassy-v18 .app-shell .glass-card,
+html.theme-glassy-v18 .app-shell .apoio-order,
+html.theme-glassy-v18 .app-shell .apoio-kpi,
+html.theme-glassy-v18 .app-shell .lub-kpi,
+html.theme-glassy-v18 .app-shell .lub-filter-panel {
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%) brightness(1.04);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%) brightness(1.04);
+  transition: transform 320ms var(--v18-ease), border-color 240ms ease, box-shadow 320ms ease, background-color 240ms ease;
+}
+html.theme-glassy-v18 .app-shell .lub-table-panel {
+  background: rgba(48, 41, 37, .64) !important;
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  transition: transform 320ms var(--v18-ease), border-color 240ms ease, box-shadow 320ms ease, background-color 240ms ease;
+}
+html.theme-glassy-v18 .app-shell .lub-module {
+  --lub-muted: #e1d6c9;
+  --lub-text: #fffaf2;
+  --lub-soft: rgba(28, 24, 22, .58);
+  --lub-green: var(--v18-link);
+}
+html.theme-glassy-v18 .app-shell .apoio-module {
+  --apoio-muted: #e1d6c9;
+  --apoio-text: #fffaf2;
+}
+html.theme-glassy-v18 .app-shell .lub-table td {
+  background: rgba(33, 28, 25, .28) !important;
+}
+html.theme-glassy-v18 .app-shell .lub-table th {
+  background: rgba(28, 24, 22, .75) !important;
+  color: #eee5d9 !important;
+}
+/* Sticky content must occlude the cells that pass beneath it. */
+html.theme-glassy-v18 .app-shell .lub-table .lub-actions-cell {
+  background: var(--v18-sticky) !important;
+  background-clip: padding-box;
+  box-shadow: -8px 0 18px -10px rgba(0, 0, 0, .85);
+}
+html.theme-glassy-v18 .app-shell .lub-table thead .lub-actions-cell {
+  background: #2e2824 !important;
+}
+html.theme-glassy-v18 .app-shell .lub-table tbody tr:hover .lub-actions-cell {
+  background: #403c43 !important;
+}
+html.theme-glassy-v18 .app-shell .lub-edit {
+  color: #e5ecff;
+  background: #343e59;
+  border-color: #798aaf;
+}
+html.theme-glassy-v18 .app-shell .lub-detail,
+html.theme-glassy-v18 .app-shell .lub-fleet { color: var(--v18-link); }
+html.theme-glassy-v18 .app-shell .lub-modal-error {
+  background: #542d2c;
+  color: #ffd3ce;
+  border: 1px solid #ba726a;
+}
+/* Don't recolor every .text-xs: its color often conveys a status. */
+html.theme-glassy-v18 .app-shell .text-red-400 { color: #ffb8ad; }
+html.theme-glassy-v18 .app-shell .text-blue-400 { color: #c5d7ff; }
+html.theme-glassy-v18 .app-shell .text-green-400 { color: #b1ebc6; }
+html.theme-glassy-v18 .app-shell .text-purple-400 { color: #e7c5ff; }
+html.theme-glassy-v18 .app-shell .text-amber-400 { color: #f8d693; }
+html.theme-glassy-v18 .app-shell .status-badge {
+  font-weight: 700;
+  opacity: 1;
+  text-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html.theme-glassy-v18 .app-shell .status-badge[data-status='ATRASADO'] {
+  background: var(--status-atrasado-bg) !important;
+  color: var(--status-atrasado-text) !important;
+  border-color: var(--status-atrasado-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+html.theme-glassy-v18 .app-shell [data-status-dot='ATRASADO'] { background: var(--status-atrasado-text); }
+
+html.theme-glassy-v18 .app-shell .status-badge[data-status='PENDENTE'] {
+  background: var(--status-pendente-bg) !important;
+  color: var(--status-pendente-text) !important;
+  border-color: var(--status-pendente-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+html.theme-glassy-v18 .app-shell [data-status-dot='PENDENTE'] { background: var(--status-pendente-text); }
+
+html.theme-glassy-v18 .app-shell .status-badge[data-status='PROGRAMADO'] {
+  background: var(--status-programado-bg) !important;
+  color: var(--status-programado-text) !important;
+  border-color: var(--status-programado-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+html.theme-glassy-v18 .app-shell [data-status-dot='PROGRAMADO'] { background: var(--status-programado-text); }
+
+html.theme-glassy-v18 .app-shell .status-badge[data-status='ANDAMENTO'] {
+  background: var(--status-andamento-bg) !important;
+  color: var(--status-andamento-text) !important;
+  border-color: var(--status-andamento-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+html.theme-glassy-v18 .app-shell [data-status-dot='ANDAMENTO'] { background: var(--status-andamento-text); }
+
+html.theme-glassy-v18 .app-shell .status-badge[data-status='ENCERRADO'] {
+  background: var(--status-encerrado-bg) !important;
+  color: var(--status-encerrado-text) !important;
+  border-color: var(--status-encerrado-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+html.theme-glassy-v18 .app-shell [data-status-dot='ENCERRADO'] { background: var(--status-encerrado-text); }
+
+/* Portaled theme menu is a sibling of .app-shell, not a descendant. */
+html.theme-glassy-v18 .shell-theme-picker {
+  color: #fffaf2;
+  background: rgba(42, 36, 32, .97) !important;
+  border-color: rgba(255, 246, 229, .24) !important;
+  box-shadow: 0 24px 64px -20px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .12) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  animation: v18-menu-enter 220ms var(--v18-ease);
+}
+html.theme-glassy-v18 .shell-theme-picker__heading,
+html.theme-glassy-v18 .shell-theme-option__label { color: #fffaf2; }
+html.theme-glassy-v18 .shell-theme-option__description { color: #e1d6c9; }
+html.theme-glassy-v18 .shell-theme-option:hover { background: rgba(153, 177, 245, .18); }
+
+.shell-page-stage { min-width: 0; }
+html.theme-glassy-v18 .app-shell .shell-page-stage {
+  animation: v18-page-enter 440ms var(--v18-ease) backwards;
+}
+html.theme-glassy-v18 .app-shell .lub-kpi,
+html.theme-glassy-v18 .app-shell .apoio-kpi {
+  animation: v18-card-enter 420ms var(--v18-ease) backwards;
+}
+html.theme-glassy-v18 .app-shell :is(.lub-kpi, .apoio-kpi):nth-child(1) { animation-delay: 50ms; }
+html.theme-glassy-v18 .app-shell :is(.lub-kpi, .apoio-kpi):nth-child(2) { animation-delay: 90ms; }
+html.theme-glassy-v18 .app-shell :is(.lub-kpi, .apoio-kpi):nth-child(3) { animation-delay: 130ms; }
+html.theme-glassy-v18 .app-shell :is(.lub-kpi, .apoio-kpi):nth-child(4) { animation-delay: 170ms; }
+html.theme-glassy-v18 .app-shell :is(.lub-kpi, .apoio-kpi):nth-child(5) { animation-delay: 210ms; }
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-picker,
+html.theme-glassy-v18 .app-shell .lub-modal {
+  animation: v18-menu-enter 260ms var(--v18-ease) backwards;
+}
+html.theme-glassy-v18 .app-shell .shell-header button,
+html.theme-glassy-v18 .app-shell .lub-edit,
+html.theme-glassy-v18 .app-shell .apoio-group-fleet-tile {
+  transition: transform 240ms var(--v18-ease), background-color 200ms ease, border-color 200ms ease, box-shadow 240ms ease;
+}
+/* Table/filter/modal frames remain anchored while reading or editing. */
+html.theme-glassy-v18 .app-shell :is(.lub-table-panel, .lub-filter-panel, .lub-modal).glass-card:hover {
+  transform: none;
+  box-shadow: var(--glass-card-shadow) !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  html.theme-glassy-v18 .app-shell :is(.lub-kpi, .apoio-kpi, .apoio-order):hover {
+    transform: translateY(-5px);
+    border-color: rgba(203, 216, 255, .52) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 24px 54px -22px rgba(23, 18, 15, .82) !important;
+  }
+  html.theme-glassy-v18 .app-shell .shell-header button:hover { transform: translateY(-1px); }
+}
+html.theme-glassy-v18 .app-shell .shell-header button:active,
+html.theme-glassy-v18 .app-shell .lub-edit:active,
+html.theme-glassy-v18 .app-shell .lub-kpi:active { transform: scale(.98); }
+
+@keyframes v18-page-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes v18-card-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes v18-menu-enter {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 719px) {
+  html.theme-glassy-v18 { --glass-blur: 18px; }
+  html.theme-glassy-v18 .app-shell .shell-header { gap: 8px; padding: 12px; }
+  html.theme-glassy-v18 .app-shell .shell-header__title { font-size: 14px; line-height: 1.3; }
+  html.theme-glassy-v18 .app-shell .shell-header__subtitle { font-size: 10px; }
+  html.theme-glassy-v18 .app-shell .shell-header__sync-button { padding: 8px; }
+  html.theme-glassy-v18 .app-shell .lub-detail { min-height: 32px; }
+  html.theme-glassy-v18 .app-shell .lub-edit { min-height: 40px; }
+  html.theme-glassy-v18 .app-shell .glass-card:hover,
+  html.theme-glassy-v18 .app-shell .apoio-order:hover,
+  html.theme-glassy-v18 .app-shell .lub-kpi:hover { transform: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html.theme-glassy-v18 .app-shell .glass-card,
+  html.theme-glassy-v18 .app-shell .lub-kpi,
+  html.theme-glassy-v18 .app-shell .apoio-order,
+  html.theme-glassy-v18 .app-shell .lub-table-panel,
+  html.theme-glassy-v18 .app-shell .lub-filter-panel { background: #39312c !important; }
+  html.theme-glassy-v18 .app-shell .shell-header { background: #302924 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-glassy-v18 .app-shell *,
+  html.theme-glassy-v18 .app-shell *::before,
+  html.theme-glassy-v18 .app-shell *::after,
+  html.theme-glassy-v18 .shell-theme-picker {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  html.theme-glassy-v18 .app-shell :is(.glass-card, .lub-kpi, .apoio-kpi, .apoio-order):hover,
+  html.theme-glassy-v18 .app-shell .shell-header button:hover,
+  html.theme-glassy-v18 .app-shell button:active { transform: none !important; }
+}
