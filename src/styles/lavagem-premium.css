@@ -61,8 +61,13 @@ html.theme-glassy-v18 .lavagem-premium {
   background: var(--lavagem-ivory) !important;
   color: var(--lavagem-ink) !important;
   color-scheme: light !important;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
-  line-height: 1.45;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  line-height: 1.5;
+}
+
+.lavagem-premium :is(h1, h2, h3, h4, .lavagem-premium-brand h2, .lub-toolbar-title, .lub-kpi strong, .lub-fleet) {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif !important;
+  letter-spacing: -0.02em;
 }
 
 .lavagem-premium,
@@ -333,7 +338,7 @@ html.theme-glassy-v18 .app-shell .lavagem-premium :is(input, select, textarea) {
   border-radius: 9px !important;
   background: var(--lavagem-ivory) !important;
   color: var(--lavagem-ink) !important;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
   box-shadow: inset 0 1px 2px rgba(11, 50, 31, .05) !important;
   opacity: 1 !important;
   backdrop-filter: none !important;
@@ -358,14 +363,13 @@ html.theme-glassy-v18 .app-shell .lavagem-premium select option {
 }
 
 .lavagem-premium .lavagem-premium-body button {
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
 /* Botões primários: verde profundo com filete metálico. */
 .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
 .lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"],
-.lavagem-premium .lavagem-premium-body .lub-edit,
-.lavagem-premium .lavagem-premium-body .lub-detail {
+.lavagem-premium .lavagem-premium-body .lub-edit {
   border-color: var(--lavagem-gold-mid) !important;
   background: linear-gradient(180deg, #247d43 0%, #0c4224 100%) !important;
   color: #f8e49a !important;
@@ -374,8 +378,7 @@ html.theme-glassy-v18 .app-shell .lavagem-premium select option {
 
 .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"]:hover:not(:disabled),
 .lavagem-premium .lavagem-premium-body button[class*="bg-[var(--brand-green)]"]:hover:not(:disabled),
-.lavagem-premium .lavagem-premium-body .lub-edit:hover:not(:disabled),
-.lavagem-premium .lavagem-premium-body .lub-detail:hover:not(:disabled) {
+.lavagem-premium .lavagem-premium-body .lub-edit:hover:not(:disabled) {
   background: linear-gradient(180deg, #2d8b4c 0%, #0f4c2a 100%) !important;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, .28), 0 6px 13px rgba(11, 50, 31, .18) !important;
 }
@@ -391,7 +394,7 @@ html.theme-glassy-v18 .app-shell .lavagem-premium select option {
 .lavagem-premium .lub-module {
   min-width: 0;
   color: var(--lub-text) !important;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
 /* O cabeçalho próprio do módulo já foi substituído pelo hero do wrapper. */
@@ -683,7 +686,11 @@ html.theme-glassy-v18 .lub-premium-modal {
   --lavagem-line: #d6c596 !important;
   color-scheme: light !important;
   color: var(--lavagem-ink) !important;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+
+.lub-premium-modal :is(h1, h2, h3, h4) {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
 .lub-premium-modal .lub-modal,
@@ -908,9 +915,22 @@ html.theme-glassy-v18 .app-shell .lavagem-premium :is(.lub-kpi,.lub-table-panel,
 /* Links de narrativa permanecem links legíveis, não pequenos botões sem área útil. */
 .lavagem-premium .lavagem-premium-body .lub-detail,
 html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-detail {
-  background: none !important; color: #155c32 !important;
-  box-shadow: none !important; border: 0 !important;
-  padding: 5px 0; min-height: 32px;
+  background: none !important;
+  color: #155c32 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 5px 8px;
+  min-height: 32px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.lavagem-premium .lavagem-premium-body .lub-detail:hover:not(:disabled),
+.lavagem-premium .lavagem-premium-body .lub-detail[aria-expanded="true"],
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-detail:hover:not(:disabled),
+html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-detail[aria-expanded="true"] {
+  background: rgba(21, 92, 50, 0.11) !important;
+  color: #0b321f !important;
+  box-shadow: none !important;
 }
 html.theme-glassy-v18 .app-shell .lavagem-premium .lub-module .lub-edit {
   background: linear-gradient(180deg,#247d43,#0c4224) !important;

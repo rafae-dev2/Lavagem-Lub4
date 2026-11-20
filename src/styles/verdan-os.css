@@ -68,13 +68,13 @@ html.theme-verdan {
   --scrollbar-thumb-hover: rgba(183, 237, 64, 0.6) !important;
 
   color-scheme: dark;
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 html.theme-verdan body {
   background: #050c08 !important;
   color: #f2f7f0 !important;
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 html.theme-verdan h1,
@@ -82,8 +82,19 @@ html.theme-verdan h2,
 html.theme-verdan h3,
 html.theme-verdan h4,
 html.theme-verdan .font-display {
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+}
+
+html.theme-verdan h1,
+html.theme-verdan h2 {
   letter-spacing: -0.02em;
+  word-spacing: 0.02em;
+}
+
+html.theme-verdan h3,
+html.theme-verdan h4 {
+  letter-spacing: -0.006em;
+  word-spacing: 0.04em;
 }
 
 html.theme-verdan .tabular-nums,
@@ -501,7 +512,7 @@ html.theme-verdan .lavagem-premium {
   background: transparent !important;
   color: #eef6ec !important;
   color-scheme: dark !important;
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif !important;
 }
 
 html.theme-verdan .lavagem-premium > .lavagem-premium-ribbons {
@@ -638,7 +649,7 @@ html.theme-verdan .lavagem-premium .lavagem-premium-tabs {
 
 html.theme-verdan .lavagem-premium .lavagem-premium-tabs > button {
   border-radius: 13px !important;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif !important;
+  font-family: 'Inter', 'Plus Jakarta Sans', sans-serif !important;
   font-weight: 600 !important;
   transition: all 200ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
@@ -824,7 +835,7 @@ html.theme-verdan .lavagem-premium :is(input, select, textarea) {
   border-radius: 12px !important;
   background: rgba(7, 15, 10, 0.8) !important;
   color: #eef6ec !important;
-  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35) !important;
 }
 
@@ -1010,7 +1021,7 @@ html.theme-verdan .bi-root {
   background: transparent !important;
   color: #eef6ec !important;
   color-scheme: dark !important;
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif !important;
 }
 
 html.theme-verdan .bi-header,
@@ -1275,7 +1286,7 @@ html.theme-verdan .app-shell .apoio-like-reformas {
   background: transparent !important;
   color: #eef6ec !important;
   color-scheme: dark !important;
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
 }
 
 html.theme-verdan .app-shell .maintenance-tracking > .mt-ribbon-layer,
@@ -1287,8 +1298,9 @@ html.theme-verdan .app-shell .maintenance-tracking .mt-hero::after {
 
 html.theme-verdan .app-shell .maintenance-tracking :is(h1, h2, h3, h4, .mt-fleet-title, .mt-kpi strong, .apoio-kpi strong),
 html.theme-verdan .app-shell .apoio-module :is(h1, h2, h3, h4, .mt-fleet-title, .mt-kpi strong, .apoio-kpi strong) {
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif !important;
-  letter-spacing: -0.02em;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif !important;
+  letter-spacing: -0.008em;
+  word-spacing: 0.03em;
 }
 
 html.theme-verdan .app-shell .maintenance-tracking :is(.mt-kpi strong, .apoio-kpi strong, .mt-fleet-title strong, .mt-os, .mt-days strong, .mt-quadrant dd, .apoio-table-fleet-cell strong, .apoio-table-os-cell) {
@@ -1491,6 +1503,13 @@ html.theme-verdan .app-shell .maintenance-tracking :is(.mt-filters, .apoio-stick
   backdrop-filter: blur(22px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
   box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+html.theme-verdan .app-shell .maintenance-tracking .mt-toolbar {
+  padding: 18px 20px !important;
+  gap: 14px 18px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
 }
 
 html.theme-verdan .app-shell .maintenance-tracking .mt-filters > summary {
@@ -2374,7 +2393,7 @@ html.theme-verdan .tv-monitor {
   --tv-muted: #9eb5a3;
   --tv-green: #b7ed40;
   --tv-red: #fca5a5;
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif !important;
 }
 
 html.theme-verdan .tv-monitor[data-tv-theme="dark"]:not(.tv-monitor--presenting):not(:fullscreen) {
@@ -2419,7 +2438,7 @@ html.theme-verdan .tv-monitor[data-tv-theme="dark"] .tv-brand img {
 }
 
 html.theme-verdan .tv-monitor :is(h1, h2, h3, strong) {
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif !important;
 }
 
 
@@ -2596,7 +2615,7 @@ html.theme-verdan .tv-monitor :is(h1, h2, h3, strong) {
 
 .verdan-gauge__label {
   fill: #849a89;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.14em;

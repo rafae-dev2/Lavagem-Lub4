@@ -1,0 +1,78 @@
+/* ============================================================================
+ * Physical 3D Equipment Card Tilt Micro-Interaction
+ * GPU-composited perspective tilt + dynamic specular light sheen for hover
+ * and touch interactions across all equipment, workshop, and fleet cards.
+ * ============================================================================ */
+
+html .app-shell .tilt-card,
+html .tilt-card {
+  --tilt-rx: 0deg;
+  --tilt-ry: 0deg;
+  --tilt-ty: 0px;
+  --tilt-scale: 1;
+  --tilt-gx: 50%;
+  --tilt-gy: 50%;
+  --tilt-glare: 0;
+  position: relative;
+  transform: perspective(920px) rotateX(var(--tilt-rx)) rotateY(var(--tilt-ry)) translate3d(0, var(--tilt-ty), 0) scale3d(var(--tilt-scale), var(--tilt-scale), 1);
+  transition:
+    transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    backdrop-filter 220ms ease;
+}
+
+html .app-shell .tilt-card.is-tilting,
+html .tilt-card.is-tilting {
+  will-change: transform;
+  transform: perspective(920px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg)) translate3d(0, var(--tilt-ty, -3px), 0) scale3d(var(--tilt-scale, 1.012), var(--tilt-scale, 1.012), 1);
+  transition:
+    transform 80ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease,
+    backdrop-filter 180ms ease;
+}
+
+html .app-shell .tilt-card::after,
+html .tilt-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  opacity: var(--tilt-glare, 0);
+  background: radial-gradient(
+    circle 260px at var(--tilt-gx, 50%) var(--tilt-gy, 50%),
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    transparent 74%
+  );
+  transition: opacity 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html:not(.dark) .app-shell .tilt-card::after,
+html.theme-light .app-shell .tilt-card::after {
+  background: radial-gradient(
+    circle 260px at var(--tilt-gx, 50%) var(--tilt-gy, 50%),
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.14) 40%,
+    transparent 74%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .app-shell .tilt-card,
+  html .app-shell .tilt-card.is-tilting,
+  html .tilt-card,
+  html .tilt-card.is-tilting {
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+
+  html .app-shell .tilt-card::after,
+  html .tilt-card::after {
+    display: none !important;
+  }
+}

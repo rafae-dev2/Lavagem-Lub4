@@ -14,6 +14,10 @@ import './styles/verdan-os.css';
 import './styles/black-cyan-os.css';
 import './styles/ios-liquid-glass.css';
 import './styles/liquid-glass-v18.css';
+import './styles/dashboard-v32.css';
+import './styles/vitrea.css';
+import './styles/calda.css';
+import './styles/card-tilt.css';
 import { registerAppServiceWorker } from './lib/serviceWorkerRegistration';
 
 registerAppServiceWorker();

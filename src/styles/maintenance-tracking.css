@@ -15,8 +15,13 @@
   color: var(--mt-text);
   background: var(--mt-ivory);
   color-scheme: light;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
-  line-height: 1.45;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+.maintenance-tracking :is(h1, h2, h3, h4, .mt-hero h2, .mt-kpi strong, .mt-fleet-title strong) {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 .maintenance-tracking * {
@@ -550,6 +555,15 @@
   justify-content: space-between;
   gap: 18px;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mt-toolbar > div:first-child {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 240px;
 }
 
 .mt-toolbar h3 {
@@ -559,12 +573,15 @@
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.2;
+  overflow-wrap: break-word;
 }
 
 .mt-toolbar > div > p:not(.mt-eyebrow) {
   margin: 0;
   color: var(--mt-muted);
   font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: break-word;
 }
 
 .mt-toolbar-actions {
@@ -573,6 +590,8 @@
   justify-content: flex-end;
   gap: 8px;
   flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .mt-sort {

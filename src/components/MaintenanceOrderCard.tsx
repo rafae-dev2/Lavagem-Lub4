@@ -12,6 +12,7 @@ import {
 import type { ReactNode } from "react";
 import { formatApoioDate as fmt } from "../lib/apoioDate";
 import EquipmentThumbnail from "./EquipmentThumbnail";
+import { getCardTiltProps } from "../hooks/useCardTilt";
 import {
   parseTrackingDate,
   statusLabel,
@@ -93,10 +94,16 @@ export default function MaintenanceOrderCard({
   const point = [row.setor, row.ponto].filter(Boolean).join(" · ");
   const detectedAt = trackingClosedAt(row);
   const lastSeen = row.ultima_vista || row.primeira_vista;
+  const cardTiltProps = getCardTiltProps<HTMLElement>({
+    maxTiltDeg: expanded ? 1.8 : 4.2,
+    scale: expanded ? 1.003 : 1.01,
+    glareMaxOpacity: expanded ? 0.08 : 0.14,
+  });
 
   return (
     <article
-      className={`glass-card mt-order ${row.overdue ? "mt-order--late" : ""} ${status === "encerrado" ? "mt-order--closed" : ""} ${expanded ? "is-expanded is-active" : ""}`}
+      {...cardTiltProps}
+      className={`glass-card mt-order tilt-card ${row.overdue ? "mt-order--late" : ""} ${status === "encerrado" ? "mt-order--closed" : ""} ${expanded ? "is-expanded is-active" : ""}`}
       aria-label={`OS ${row.os || "não informada"}, frota ${fleet}`}
     >
       {status === "encerrado" && (

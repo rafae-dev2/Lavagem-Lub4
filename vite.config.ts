@@ -75,9 +75,10 @@ export default defineConfig({
     ],
   },
   server: {
-    host: true,
+    host: '0.0.0.0',
     port: 3000,
-    strictPort: false,
+    strictPort: true,
+    hmr: process.env.DISABLE_HMR !== 'true',
     // Permite servir atrás do proxy de preview (dev apenas; não afeta o build).
     allowedHosts: true,
     watch: {
@@ -85,6 +86,8 @@ export default defineConfig({
         '**/tests/**',
         '**/docs/**',
         '**/public/assets/**',
+        '**/public/sw.js',
+        '**/public/pdf.worker.min.mjs',
         '**/dist/**',
         '**/.playwright-cli/**',
       ],

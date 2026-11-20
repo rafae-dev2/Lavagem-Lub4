@@ -188,3 +188,95 @@ export function setManualHideEncerradas(hidden: boolean, now = new Date()): void
   const windowKey = getOperationalWindowKey(now);
   saveHideEncerradasState({ windowKey, hidden, syncedToSheet: true });
 }
+
+export interface ScheduleStatsSnapshot {
+  total: number;
+  pendente: number;
+  atrasado: number;
+  programado: number;
+  encerrado: number;
+  andamento: number;
+}
+
+/**
+ * Aplica a regra de ocultação das encerradas anteriores ao corte operacional.
+ * Quando `hideEncerradas` está desligado, devolve a própria referência de `schedules`
+ * para evitar alocações e re-renderizações desnecessárias.
+ */
+export function computeVisibleSchedules(
+  schedules: Programacao[],
+  hideEncerradas: boolean,
+  now = new Date(),
+): Programacao[] {
+  if (!hideEncerradas) return schedules;
+  let hasHidden = false;
+  const visible: Programacao[] = [];
+  for (let i = 0; i < schedules.length; i += 1) {
+    const item = schedules[i]!;
+    if (shouldHideClosedSchedule(item, now)) {
+      hasHidden = true;
+    } else {
+      visible.push(item);
+    }
+  }
+  return hasHidden ? visible : schedules;
+}
+
+/**
+ * Calcula estatísticas do dashboard em passagem única O(n).
+ */
+export function computeScheduleStats(schedules: readonly Programacao[]): ScheduleStatsSnapshot {
+  let pendente = 0;
+  let atrasado = 0;
+  let programado = 0;
+  let encerrado = 0;
+  let andamento = 0;
+
+  for (let i = 0; i < schedules.length; i += 1) {
+    switch (schedules[i]?.situacao) {
+      case 'PENDENTE':
+        pendente += 1;
+        break;
+      case 'ATRASADO':
+        atrasado += 1;
+        break;
+      case 'PROGRAMADO':
+        programado += 1;
+        break;
+      case 'ENCERRADO':
+        encerrado += 1;
+        break;
+      case 'ANDAMENTO':
+        andamento += 1;
+        break;
+      default:
+        break;
+    }
+  }
+
+  return {
+    total: schedules.length,
+    pendente,
+    atrasado,
+    programado,
+    encerrado,
+    andamento,
+  };
+}
+
+export function areDashboardStatsEqual(
+  a: ScheduleStatsSnapshot | null | undefined,
+  b: ScheduleStatsSnapshot | null | undefined,
+): boolean {
+  if (a === b) return true;
+  if (!a || !b) return false;
+  return (
+    a.total === b.total &&
+    a.pendente === b.pendente &&
+    a.atrasado === b.atrasado &&
+    a.programado === b.programado &&
+    a.encerrado === b.encerrado &&
+    a.andamento === b.andamento
+  );
+}
+

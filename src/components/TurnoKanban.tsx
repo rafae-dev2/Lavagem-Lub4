@@ -2,6 +2,7 @@ import EquipmentThumbnail from './EquipmentThumbnail';
 import { cleanScheduleObservation, effectiveScheduleCompletionDate } from '../lib/schedulePresentation';
 import { Edit2 } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
+import { getCardTiltProps } from '../hooks/useCardTilt';
 import { Programacao, StatusType } from '../types';
 import { Play, Check, CalendarClock, RotateCcw, Loader2, GripVertical } from 'lucide-react';
 import { format, parseISO, isValid } from 'date-fns';
@@ -44,6 +45,7 @@ function fmtDate(iso: string): string {
 export const TurnoKanban: React.FC<Props> = ({ schedules, isDark, quickUpdating, onQuick, onPostpone, onOpenFrota, onEdit }) => {
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [overCol, setOverCol] = useState<StatusType | null>(null);
+  const kanbanTiltProps = getCardTiltProps<HTMLDivElement>({ maxTiltDeg: 5, scale: 1.015 });
 
   const grouped = useMemo(() => {
     const map: Record<string, Programacao[]> = {
@@ -107,9 +109,13 @@ export const TurnoKanban: React.FC<Props> = ({ schedules, isDark, quickUpdating,
                   <div
                     key={s.id}
                     draggable={s.origemRegistro !== 'PCM'}
-                    onDragStart={() => setDraggingId(s.id)}
+                    {...kanbanTiltProps}
+                    onDragStart={(e) => {
+                      kanbanTiltProps.onDragStart(e);
+                      setDraggingId(s.id);
+                    }}
                     onDragEnd={() => { setDraggingId(null); setOverCol(null); }}
-                    className={`glass-card group rounded-xl p-2.5 cursor-grab active:cursor-grabbing shadow-sm transition-all duration-150 ${cardBase} ${
+                    className={`glass-card tilt-card group rounded-xl p-2.5 cursor-grab active:cursor-grabbing shadow-sm transition-all duration-150 ${cardBase} ${
                       draggingId === s.id ? 'is-active opacity-50 scale-[0.98]' : ''
                     }`}
                   >

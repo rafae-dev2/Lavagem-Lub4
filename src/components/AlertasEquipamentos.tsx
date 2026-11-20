@@ -4,6 +4,7 @@ import { AlertTriangle, Droplets, ShieldCheck, Clock, ChevronDown } from 'lucide
 import { parseISO, isValid, differenceInDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import HistoricoFrotaModal from './HistoricoFrotaModal';
+import { getCardTiltProps } from '../hooks/useCardTilt';
 
 interface Props {
   schedules: Programacao[];
@@ -32,6 +33,7 @@ function loadThreshold(): number {
 export const AlertasEquipamentos: React.FC<Props> = ({ schedules, isDark }) => {
   const [threshold, setThreshold] = useState<number>(() => loadThreshold());
   const [historicoFrota, setHistoricoFrota] = useState<string | null>(null);
+  const alertTiltProps = getCardTiltProps<HTMLButtonElement>({ maxTiltDeg: 5.5, scale: 1.015 });
 
   const changeThreshold = (v: number) => {
     setThreshold(v);
@@ -151,7 +153,8 @@ export const AlertasEquipamentos: React.FC<Props> = ({ schedules, isDark }) => {
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => setHistoricoFrota(f.frota)}
-                className={`glass-card dashboard-equipment-card w-full text-left flex items-center gap-2.5 px-2.5 py-2 rounded-lg border transition-all hover:brightness-110 hover:scale-[1.01] cursor-pointer ${sev.bg} ${isSelected ? 'is-selected' : ''}`}
+                {...alertTiltProps}
+                className={`glass-card dashboard-equipment-card tilt-card w-full text-left flex items-center gap-2.5 px-2.5 py-2 rounded-lg border transition-all hover:brightness-110 cursor-pointer ${sev.bg} ${isSelected ? 'is-selected' : ''}`}
                 title={`Ver histórico da frota ${f.frota}`}
               >
                 <span className={`w-2 h-2 rounded-full ${sev.dot} ${critical || never ? 'animate-pulse' : ''} flex-shrink-0`} />

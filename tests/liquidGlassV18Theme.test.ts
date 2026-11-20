@@ -217,5 +217,20 @@ test('liquid-glass-v18 refines featured KPI highlight, eyebrow contrast over amb
   assert.match(lg18Css, /\.mt-search input:not\(\[type="checkbox"\]\)[\s\S]*?padding-left:\s*42px\s*!important;/);
 });
 
+test('dark sibling themes override Central Gerencial heatmap cells and StatusBadge contrast', () => {
+  for (const rel of [
+    'src/styles/liquid-glass-v18.css',
+    'src/styles/ios-liquid-glass.css',
+    'src/styles/black-cyan-os.css',
+  ]) {
+    const css = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    assert.match(css, /\.bi-heat-cell:not\(\.is-zero\)\s*\{[\s\S]*?color:\s*#ffffff\s*!important/, `${rel} must force high-contrast text on non-zero heatmap cells`);
+    assert.match(css, /\.bi-heat-cell\.is-zero\s*\{/, `${rel} must darken zero heatmap cells`);
+    assert.match(css, /\.bi-status-programado/, `${rel} must override .bi-status-programado`);
+    assert.match(css, /\.bg-red-100/, `${rel} must override .bg-red-100`);
+    assert.match(css, /\.bg-purple-100/, `${rel} must override .bg-purple-100`);
+  }
+});
+
 
 

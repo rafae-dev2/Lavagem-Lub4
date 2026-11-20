@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark theme-verdan">
+<html lang="pt-BR" class="dark theme-calda">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/pwa-512x512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#07140b" />
+    <meta name="theme-color" content="#2a2c2f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Branco Peres" />
     <meta name="description" content="Sistema integrado de gestão, programação e monitoramento de manutenção de frota — Branco Peres Agro." />
     <title>BRANCO PERES — Controle de Lavagem e Lubrificação</title>
     <script>
@@ -12,21 +19,21 @@
         try {
           var v = localStorage.getItem('bp-theme-default-version');
           var t = localStorage.getItem('bp-theme');
-          var dark = { verdan: 1, 'liquid-glass-v18': 1, dark: 1, ocean: 1, sunset: 1, forest: 1, midnight: 1, copper: 1, 'glassy-v18': 1, 'black-cyan': 1, 'ios-liquid-glass': 1 };
+          var dark = { verdan: 1, 'liquid-glass-v18': 1, 'dashboard-v32': 1, vitrea: 1, calda: 1, dark: 1, ocean: 1, sunset: 1, forest: 1, midnight: 1, copper: 1, 'glassy-v18': 1, 'black-cyan': 1, 'ios-liquid-glass': 1 };
           var light = { light: 1, rose: 1, arctic: 1, lavender: 1, glass: 1 };
-          var active = (v === 'verdan-v10.29' && t && (dark[t] || light[t])) ? t : 'verdan';
+          var active = (v === 'calda-v10.30' && t && (dark[t] || light[t])) ? t : 'calda';
           var root = document.documentElement;
-          root.classList.remove('dark', 'theme-verdan', 'theme-liquid-glass-v18', 'theme-ocean', 'theme-sunset', 'theme-forest', 'theme-midnight', 'theme-rose', 'theme-arctic', 'theme-copper', 'theme-lavender', 'theme-glass', 'theme-glassy-v18', 'theme-black-cyan', 'theme-ios-liquid-glass');
+          root.classList.remove('dark', 'theme-verdan', 'theme-liquid-glass-v18', 'theme-dashboard-v32', 'theme-vitrea', 'theme-calda', 'theme-ocean', 'theme-sunset', 'theme-forest', 'theme-midnight', 'theme-rose', 'theme-arctic', 'theme-copper', 'theme-lavender', 'theme-glass', 'theme-glassy-v18', 'theme-black-cyan', 'theme-ios-liquid-glass');
           if (dark[active]) root.classList.add('dark');
           if (active !== 'light' && active !== 'dark') root.classList.add('theme-' + active);
           var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', active === 'verdan' ? '#07140b' : (active === 'liquid-glass-v18' ? '#181412' : (active === 'black-cyan' || active === 'ios-liquid-glass' ? '#000000' : (dark[active] ? '#0f172a' : '#1F6B45'))));
+          if (meta) meta.setAttribute('content', active === 'calda' ? '#2a2c2f' : (active === 'verdan' ? '#07140b' : (active === 'liquid-glass-v18' ? '#181412' : (active === 'dashboard-v32' ? '#0e0f11' : (active === 'vitrea' ? '#111113' : (active === 'black-cyan' || active === 'ios-liquid-glass' ? '#000000' : (dark[active] ? '#0f172a' : '#1F6B45')))))));
         } catch (e) {}
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

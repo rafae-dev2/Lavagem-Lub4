@@ -22,7 +22,12 @@ html.theme-glassy-v18 .maintenance-tracking {
   background-color: #f4f0e3 !important;
   color: #173325 !important;
   color-scheme: light !important;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+.maintenance-tracking :is(h1, h2, h3, h4, .mt-hero h2, .mt-kpi strong, .mt-fleet-title strong) {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif !important;
+  letter-spacing: -0.02em;
 }
 
 html.dark .maintenance-tracking,

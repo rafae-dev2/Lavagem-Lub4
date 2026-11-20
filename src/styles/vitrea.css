@@ -1,0 +1,2144 @@
+/* ============================================================================
+ * Vitrea Glass Theme (Dark Graphite Edition)
+ * Faithful recreation of the Vitrea Liquid Glass aesthetic:
+ *   - Deep obsidian-graphite monochrome wallpaper (#0c0c0e -> #131316) with
+ *     sculptural curved graphite planes, fine specular rim lines & glass orbs
+ *   - Signature Urbanist geometric typography + JetBrains Mono tabular metrics
+ *   - Translucent dark obsidian glass cards (border-radius: 26px) with multi-
+ *     layer inner refraction depth and conic-gradient specular glass rim
+ *   - Floating capsule top bar & floating capsule left dock with frosted lens
+ *     active highlights and circular icon hover wells
+ *   - Signature sky-periwinkle primary CTAs (#7aaef0 with deep #071a33 ink)
+ *   - Soft dark-mode pastel telemetry accents: teal sparklines (#68c0b8),
+ *     mint (#8fdca8), warm gold (#f3cd7e), soft coral (#f6a59c), sky (#a9cdfc)
+ * Strictly scoped under html.theme-vitrea so all other themes and exported
+ * report canvases outside .app-shell remain completely untouched.
+ * ============================================================================ */
+
+html.theme-vitrea {
+  --font-display: 'Urbanist', 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-family: 'Urbanist', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Core Vitrea dark graphite tokens */
+  --vitrea-bg: #111113;
+  --vitrea-bg-1: #0c0c0e;
+  --vitrea-bg-2: #131316;
+  --vitrea-glass: rgba(30, 30, 34, 0.44);
+  --vitrea-glass-chrome: rgba(32, 32, 36, 0.42);
+  --vitrea-glass-thick: rgba(28, 28, 32, 0.88);
+  --vitrea-glass-solid: #1d1d21;
+  --vitrea-well: rgba(255, 255, 255, 0.06);
+  --vitrea-well-deep: rgba(12, 12, 16, 0.48);
+  --vitrea-hover-well: rgba(200, 200, 215, 0.12);
+  --vitrea-line: rgba(255, 255, 255, 0.11);
+  --vitrea-line-2: rgba(255, 255, 255, 0.19);
+
+  /* Specular glass physics */
+  --vitrea-blur: blur(16px) saturate(175%) brightness(0.96);
+  --vitrea-blur-thick: blur(30px) saturate(185%) brightness(0.96);
+  --vitrea-sheen: linear-gradient(172deg, rgba(255, 255, 255, 0.10) 0%, transparent 34%);
+  --vitrea-card-bg:
+    linear-gradient(172deg, rgba(255, 255, 255, 0.10) 0%, transparent 34%),
+    rgba(30, 30, 34, 0.46);
+  --vitrea-card-hover-bg:
+    linear-gradient(172deg, rgba(255, 255, 255, 0.14) 0%, transparent 38%),
+    rgba(36, 36, 42, 0.56);
+  --vitrea-chrome-bg:
+    linear-gradient(172deg, rgba(255, 255, 255, 0.11) 0%, transparent 38%),
+    rgba(32, 32, 36, 0.48);
+  --vitrea-depth:
+    inset 0 1px 1px rgba(255, 255, 255, 0.30),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.10),
+    inset 3px 4px 12px -6px rgba(255, 255, 255, 0.22),
+    inset -4px -6px 14px -8px rgba(255, 255, 255, 0.12),
+    inset 0 -16px 28px -18px rgba(0, 0, 0, 0.48);
+  --vitrea-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.32),
+    0 24px 48px -22px rgba(0, 0, 0, 0.78);
+  --vitrea-glass-shadow: var(--vitrea-depth), var(--vitrea-shadow);
+  --vitrea-rim-gradient: conic-gradient(
+    from 300deg,
+    rgba(255, 255, 255, 0.82) 0deg,
+    rgba(255, 255, 255, 0.12) 55deg,
+    transparent 90deg,
+    rgba(255, 255, 255, 0.12) 140deg,
+    rgba(255, 255, 255, 0.44) 180deg,
+    rgba(255, 255, 255, 0.12) 220deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.12) 315deg,
+    rgba(255, 255, 255, 0.82) 360deg
+  );
+
+  /* Frosted active lens pill (like "Apps" / "Proceeds" in Vitrea) */
+  --vitrea-lens: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.12));
+  --vitrea-lens-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 5px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.30),
+    0 8px 18px -8px rgba(0, 0, 0, 0.60);
+
+  /* Signature Vitrea palette (WCAG AA checked) */
+  --vitrea-text: #f6f8fc;
+  --vitrea-text-soft: #d6dde9;
+  --vitrea-muted: #b6c0d1;
+  --vitrea-accent: #7aaef0;
+  --vitrea-accent-hover: #8dbcf6;
+  --vitrea-on-accent: #071a33;
+  --vitrea-accent-text: #a9cdfc;
+  --vitrea-teal: #68c0b8;
+  --vitrea-good: #8fdca8;
+  --vitrea-good-fill: #5fc483;
+  --vitrea-warn: #f3cd7e;
+  --vitrea-warn-fill: #e4b759;
+  --vitrea-bad: #f6a59c;
+  --vitrea-bad-fill: #e98278;
+
+  --vitrea-r-card: 26px;
+  --vitrea-r-well: 18px;
+  --vitrea-r-pill: 999px;
+  --vitrea-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Semantic tokens consumed by Tailwind & existing modules */
+  --bg-primary: #111113 !important;
+  --bg-secondary: rgba(24, 24, 28, 0.72) !important;
+  --bg-tertiary: rgba(30, 30, 34, 0.68) !important;
+  --bg-card: rgba(30, 30, 34, 0.64) !important;
+  --bg-sidebar: rgba(32, 32, 36, 0.54) !important;
+  --bg-hover: rgba(200, 200, 215, 0.12) !important;
+  --bg-accent: rgba(122, 174, 240, 0.18) !important;
+
+  --text-primary: #f6f8fc !important;
+  --text-secondary: #d6dde9 !important;
+  --text-tertiary: #c9d1de !important;
+  --text-muted: #b6c0d1 !important;
+  --text-inverse: #071a33 !important;
+
+  --border-primary: rgba(255, 255, 255, 0.16) !important;
+  --border-secondary: rgba(255, 255, 255, 0.09) !important;
+  --border-accent: rgba(122, 174, 240, 0.52) !important;
+
+  --brand-green: #7aaef0 !important;
+  --brand-green-light: #68c0b8 !important;
+  --brand-yellow: #f3cd7e !important;
+  --brand-red: #f6a59c !important;
+  --brand-dark: #283953 !important;
+  --brand-accent: #a9cdfc !important;
+
+  --sidebar-text: #f6f8fc !important;
+  --sidebar-text-muted: #b6c0d1 !important;
+  --sidebar-active-bg: rgba(255, 255, 255, 0.22) !important;
+  --sidebar-hover-bg: rgba(200, 200, 215, 0.12) !important;
+  --sidebar-border: rgba(255, 255, 255, 0.16) !important;
+  --sidebar-logo-ring: #7aaef0 !important;
+
+  --status-atrasado-bg: rgba(233, 130, 120, 0.18) !important;
+  --status-atrasado-text: #fde2df !important;
+  --status-atrasado-border: rgba(246, 165, 156, 0.44) !important;
+  --status-pendente-bg: rgba(228, 183, 89, 0.18) !important;
+  --status-pendente-text: #fdf0d1 !important;
+  --status-pendente-border: rgba(243, 205, 126, 0.44) !important;
+  --status-programado-bg: rgba(122, 174, 240, 0.18) !important;
+  --status-programado-text: #e3efff !important;
+  --status-programado-border: rgba(169, 205, 252, 0.46) !important;
+  --status-encerrado-bg: rgba(95, 196, 131, 0.18) !important;
+  --status-encerrado-text: #dff8e7 !important;
+  --status-encerrado-border: rgba(143, 220, 168, 0.44) !important;
+  --status-andamento-bg: rgba(104, 192, 184, 0.18) !important;
+  --status-andamento-text: #ddf7f4 !important;
+  --status-andamento-border: rgba(104, 192, 184, 0.46) !important;
+
+  --glass-card-bg: rgba(30, 30, 34, 0.50) !important;
+  --glass-card-border: rgba(255, 255, 255, 0.18) !important;
+  --glass-card-shadow: var(--vitrea-glass-shadow) !important;
+  --glass-blur: 16px;
+  --glass-input-bg: rgba(22, 22, 26, 0.62) !important;
+  --glass-input-border: rgba(255, 255, 255, 0.16) !important;
+
+  --scrollbar-track: #0e0e11 !important;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.22) !important;
+  --scrollbar-thumb-hover: rgba(122, 174, 240, 0.72) !important;
+
+  --wm-halo-opacity: 0.22;
+  color-scheme: dark;
+  font-family: var(--font-family);
+}
+
+/* ── Vitrea Graphite Curved Glass Wallpaper ────────────────────────────────── */
+html.theme-vitrea body {
+  background: linear-gradient(135deg, #0c0c0e 0%, #111114 48%, #131316 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--vitrea-text) !important;
+  font-family: var(--font-family) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sculptural sweeping graphite glass curves + subtle monochrome specular glass orbs */
+html.theme-vitrea body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='xMidYMid slice' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='gA' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334353b'/%3E%3Cstop offset='100%25' stop-color='%23141416'/%3E%3C/linearGradient%3E%3ClinearGradient id='gB' x1='0.1' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0%25' stop-color='%2342434a'/%3E%3Cstop offset='100%25' stop-color='%231a1a1d'/%3E%3C/linearGradient%3E%3ClinearGradient id='gC' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%232a2a2f'/%3E%3Cstop offset='100%25' stop-color='%230d0d0f'/%3E%3C/linearGradient%3E%3ClinearGradient id='gD' x1='0.2' y1='0' x2='0.8' y2='1'%3E%3Cstop offset='0%25' stop-color='%234b4c54'/%3E%3Cstop offset='100%25' stop-color='%231d1d21'/%3E%3C/linearGradient%3E%3CradialGradient id='orb' cx='32%25' cy='28%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='0.26'/%3E%3Cstop offset='42%25' stop-color='%235a5c66' stop-opacity='0.10'/%3E%3Cstop offset='82%25' stop-color='%23141416' stop-opacity='0.34'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0.24'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M-120 340 C 260 400 780 280 1180 -60 L 1560 -60 L 1560 440 C 1180 560 560 540 -120 760 Z' fill='url(%23gA)' opacity='0.52'/%3E%3Ccircle cx='1320' cy='220' r='310' fill='url(%23gB)' opacity='0.78'/%3E%3Cpath d='M1040 -40 C 1020 320 1180 520 1520 560 L 1520 -40 Z' fill='url(%23gD)' opacity='0.48'/%3E%3Cpath d='M-100 620 C 340 480 680 650 1120 960 L -100 960 Z' fill='url(%23gC)' opacity='0.72'/%3E%3Cpath d='M-80 356 C 320 385 830 250 1205 -45' stroke='%23ffffff' stroke-opacity='0.14' stroke-width='1.4'/%3E%3Cpath d='M1085 -20 C 1042 295 1190 480 1500 522' stroke='%23ffffff' stroke-opacity='0.16' stroke-width='1.5'/%3E%3Cpath d='M-80 680 C 310 525 695 620 1070 940' stroke='%23ffffff' stroke-opacity='0.10' stroke-width='1.2'/%3E%3Ccircle cx='268' cy='230' r='44' fill='url(%23orb)' stroke='%23ffffff' stroke-opacity='0.22' stroke-width='1.1'/%3E%3Ccircle cx='1160' cy='312' r='30' fill='url(%23orb)' stroke='%23ffffff' stroke-opacity='0.20' stroke-width='1'/%3E%3Ccircle cx='78' cy='804' r='28' fill='url(%23orb)' stroke='%23ffffff' stroke-opacity='0.24' stroke-width='1.1'/%3E%3Ccircle cx='882' cy='762' r='38' fill='url(%23orb)' stroke='%23ffffff' stroke-opacity='0.16' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Keep brand watermark ultra-subtle so graphite glass curves remain focal */
+html.theme-vitrea .verdan-watermark-stage--workspace {
+  opacity: 0.28;
+}
+
+html.theme-vitrea .verdan-watermark-stage--sidebar {
+  opacity: 0.14;
+}
+
+/* ── Urbanist Geometric Typography & Tabular Numerals ──────────────────────── */
+html.theme-vitrea :is(
+  .app-shell,
+  .lavagem-premium,
+  .lavagem-premium .lub-module,
+  .lavagem-premium .lavagem-premium-body,
+  .lavagem-premium .lavagem-premium-body button,
+  .lavagem-premium :is(input, select, textarea),
+  .lub-premium-modal,
+  .lub-premium-modal :is(button, input, select, textarea),
+  .app-shell .maintenance-tracking,
+  .app-shell .apoio-module,
+  .app-shell .apoio-premium,
+  .app-shell .apoio-reference,
+  .bi-root,
+  .tv-monitor,
+  .tv-dialog,
+  .equipment-image-manager
+) {
+  font-family: var(--font-family) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+html.theme-vitrea :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  .shell-header__title,
+  .lavagem-premium .lavagem-premium-brand h2,
+  .lavagem-premium .lub-toolbar-title,
+  .lavagem-premium .lub-kpi strong,
+  .lavagem-premium .lub-fleet,
+  .app-shell .maintenance-tracking .mt-hero h2,
+  .app-shell .maintenance-tracking .mt-kpi strong,
+  .app-shell .maintenance-tracking .mt-fleet-title strong,
+  .app-shell .apoio-reference .apoio-hero h2,
+  .app-shell .apoio-reference .apoio-fleet-title,
+  .bi-brand h1,
+  .bi-kpi > strong,
+  .tv-topbar h2,
+  .tv-summary strong
+) {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+html.theme-vitrea :is(code, pre, .font-mono) {
+  font-family: var(--font-mono) !important;
+}
+
+/* ── Strict Logo Color Preservation ────────────────────────────────────────── */
+html.theme-vitrea img[src*="logo.png"],
+html.theme-vitrea .shell-sidebar__logo,
+html.theme-vitrea .mt-hero-brand img,
+html.theme-vitrea .tv-brand img,
+html.theme-vitrea .bi-brand img,
+html.theme-vitrea .lavagem-premium-brand img,
+html.theme-vitrea .lavagem-premium .lub-brand img,
+html.theme-vitrea .verdan-watermark-logo {
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+html.theme-vitrea .shell-sidebar__logo {
+  border-radius: 999px !important;
+  background: linear-gradient(160deg, #d2e4ff, #9fc6f8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  padding: 2px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 4px 12px -2px rgba(40, 90, 160, 0.40) !important;
+}
+
+html.theme-vitrea :is(
+  .lavagem-premium .lavagem-premium-brand img,
+  .lavagem-premium .lub-module .lub-brand img,
+  .app-shell .maintenance-tracking .mt-hero-brand img,
+  .bi-brand img,
+  .tv-brand img
+) {
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  padding: 3px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    0 10px 24px -10px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* ── Signature Vitrea Conic-Gradient Specular Rim Helper ───────────────────── */
+html.theme-vitrea .app-shell :is(
+  .shell-sidebar__panel,
+  .shell-header,
+  .glass-card,
+  .verdan-widget-card,
+  .dashboard-kpi,
+  .lub-kpi,
+  .lub-filter-panel,
+  .lub-table-panel,
+  .lub-schedule-card,
+  .lavagem-premium-hero,
+  .lavagem-premium-header,
+  .lavagem-premium-tabs,
+  .bi-header,
+  .bi-filter-panel,
+  .bi-kpi,
+  .bi-chart-panel,
+  .bi-panel,
+  .mt-hero,
+  .apoio-hero,
+  .mt-kpi,
+  .apoio-kpi,
+  .mt-order,
+  .apoio-order
+) {
+  position: relative;
+}
+
+html.theme-vitrea .app-shell :is(
+  .shell-sidebar__panel,
+  .shell-header,
+  .glass-card,
+  .verdan-widget-card,
+  .dashboard-kpi,
+  .lub-kpi,
+  .lub-filter-panel,
+  .lub-table-panel,
+  .lub-schedule-card,
+  .lavagem-premium-hero,
+  .lavagem-premium-header,
+  .lavagem-premium-tabs,
+  .bi-header,
+  .bi-filter-panel,
+  .bi-kpi,
+  .bi-chart-panel,
+  .bi-panel,
+  .mt-hero,
+  .apoio-hero,
+  .mt-kpi,
+  .apoio-kpi,
+  .mt-order,
+  .apoio-order
+)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.25px;
+  pointer-events: none;
+  z-index: 1;
+  background: var(--vitrea-rim-gradient);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+/* ── App Shell & Floating Vitrea Capsule Left Dock ─────────────────────────── */
+html.theme-vitrea .app-shell,
+html.theme-vitrea .app-shell.app-shell--lub > div > main,
+html.theme-vitrea .app-shell.app-shell--apoio > div > main,
+html.theme-vitrea .app-shell.app-shell--apoio-reference > div > main,
+html.dark.theme-vitrea .app-shell--lub > div > main,
+html.dark.theme-vitrea .app-shell--apoio > div > main,
+html.dark.theme-vitrea .app-shell--apoio-reference > div > main,
+html.theme-vitrea .app-shell > div > main {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html.theme-vitrea .app-shell .shell-sidebar__panel {
+  background: var(--vitrea-chrome-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+  color: var(--vitrea-text) !important;
+}
+
+@media (min-width: 1024px) {
+  html.theme-vitrea .app-shell .shell-sidebar {
+    padding: 16px 0 16px 16px;
+    background: transparent !important;
+    border-right: 0 !important;
+  }
+
+  html.theme-vitrea .app-shell .shell-sidebar__panel {
+    top: 16px;
+    bottom: 16px;
+    left: 16px;
+    height: calc(100vh - 32px);
+    height: calc(100dvh - 32px);
+    border-radius: 34px !important;
+  }
+
+  html.theme-vitrea .app-shell .shell-sidebar__panel:hover,
+  html.theme-vitrea .app-shell .shell-sidebar__panel:has(:focus-visible),
+  html.theme-vitrea .app-shell .shell-sidebar__panel.has-popout {
+    border-radius: 28px !important;
+    background:
+      linear-gradient(172deg, rgba(255, 255, 255, 0.12) 0%, transparent 34%),
+      rgba(26, 26, 30, 0.84) !important;
+    backdrop-filter: var(--vitrea-blur-thick) !important;
+    -webkit-backdrop-filter: var(--vitrea-blur-thick) !important;
+    box-shadow:
+      var(--vitrea-depth),
+      0 28px 64px -16px rgba(0, 0, 0, 0.88) !important;
+  }
+
+  /* Keep collapsed dock compact when clicking inside without hover */
+  html.theme-vitrea .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) {
+    width: var(--shell-sidebar-collapsed) !important;
+  }
+
+  html.theme-vitrea .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) .shell-sidebar__brand {
+    justify-content: center;
+    padding: 14px 8px;
+  }
+
+  html.theme-vitrea .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) :is(.shell-sidebar__brand-copy, .shell-nav-label, .shell-sidebar__status-detail, .shell-sidebar__last-sync, .shell-sidebar__version) {
+    max-width: 0;
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  html.theme-vitrea .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) :is(.shell-nav-section, .shell-nav-item, .shell-sidebar__status-line) {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  html.theme-vitrea .app-shell .shell-sidebar__panel:focus-within:not(:hover):not(.has-popout):not(:has(:focus-visible)) .shell-nav-item__chevron {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  html.theme-vitrea .app-shell .shell-sidebar__panel {
+    background: var(--vitrea-glass-thick) !important;
+    backdrop-filter: var(--vitrea-blur-thick) !important;
+    -webkit-backdrop-filter: var(--vitrea-blur-thick) !important;
+    border-radius: 0 28px 28px 0 !important;
+  }
+}
+
+html.theme-vitrea .app-shell .shell-sidebar__brand {
+  border-bottom: 1px solid var(--vitrea-line) !important;
+}
+
+html.theme-vitrea .app-shell .shell-sidebar__brand-name {
+  color: var(--vitrea-text) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+}
+
+html.theme-vitrea .app-shell .shell-sidebar__brand-subtitle {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .app-shell .shell-nav-section {
+  color: var(--vitrea-muted) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 999px !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.04em !important;
+}
+
+html.theme-vitrea .app-shell .shell-nav-section__marker {
+  background: var(--vitrea-accent) !important;
+  box-shadow: 0 0 8px rgba(122, 174, 240, 0.65) !important;
+}
+
+html.theme-vitrea .app-shell .shell-nav-section.is-current-section {
+  background: rgba(122, 174, 240, 0.14) !important;
+  border-color: rgba(122, 174, 240, 0.34) !important;
+  color: var(--vitrea-accent-text) !important;
+}
+
+html.theme-vitrea .app-shell .shell-nav-item {
+  border-radius: 999px !important;
+  color: var(--vitrea-text-soft) !important;
+  border: 1px solid transparent !important;
+  transition: background-color 180ms var(--vitrea-ease), color 180ms var(--vitrea-ease), box-shadow 180ms var(--vitrea-ease), transform 180ms var(--vitrea-ease) !important;
+}
+
+html.theme-vitrea .app-shell .shell-nav-item:hover,
+html.theme-vitrea .app-shell .shell-nav-item:focus-visible {
+  background: var(--vitrea-hover-well) !important;
+  color: var(--vitrea-text) !important;
+}
+
+/* Signature Vitrea frosted glass lens active pill */
+html.theme-vitrea .app-shell .shell-nav-item.is-active,
+html.theme-vitrea .shell-sidebar__popup-item[aria-current="page"] {
+  background: var(--vitrea-lens) !important;
+  color: var(--vitrea-accent-text) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .shell-nav-item.is-active *,
+html.theme-vitrea .shell-sidebar__popup-item[aria-current="page"] * {
+  color: var(--vitrea-accent-text) !important;
+}
+
+html.theme-vitrea .app-shell .shell-sidebar__footer {
+  border-top: 1px solid var(--vitrea-line) !important;
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .shell-sidebar__popup,
+html.theme-vitrea .shell-theme-picker {
+  background: var(--vitrea-glass-thick) !important;
+  backdrop-filter: var(--vitrea-blur-thick) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur-thick) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--vitrea-depth), 0 28px 60px -16px rgba(0, 0, 0, 0.88) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .shell-sidebar__popup-item,
+html.theme-vitrea .shell-theme-option {
+  border-radius: 14px !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .shell-sidebar__popup-item:hover,
+html.theme-vitrea .shell-theme-option:hover {
+  background: var(--vitrea-hover-well) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .shell-theme-option.is-active {
+  background: rgba(122, 174, 240, 0.16) !important;
+  border-color: rgba(122, 174, 240, 0.45) !important;
+}
+
+html.theme-vitrea .shell-theme-option__description {
+  color: var(--vitrea-muted) !important;
+}
+
+/* ── Floating Vitrea Pill Top Header Bar ───────────────────────────────────── */
+html.theme-vitrea .app-shell .shell-header,
+html.theme-vitrea .app-shell.app-shell--lub .shell-header,
+html.theme-vitrea .app-shell.app-shell--apoio .shell-header,
+html.theme-vitrea .app-shell.app-shell--apoio-reference .shell-header {
+  --shell-header-bg: transparent !important;
+  --shell-header-text: #f6f8fc !important;
+  --shell-header-muted: #b6c0d1 !important;
+  --shell-header-action: #f6f8fc !important;
+  --shell-header-action-bg: rgba(255, 255, 255, 0.08) !important;
+  --shell-header-action-border: rgba(255, 255, 255, 0.18) !important;
+  --shell-header-border: transparent !important;
+  background: var(--vitrea-chrome-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  margin: 16px 20px 8px 16px !important;
+  padding-inline: 20px !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+@media (max-width: 767px) {
+  html.theme-vitrea .app-shell .shell-header,
+  html.theme-vitrea .app-shell.app-shell--lub .shell-header,
+  html.theme-vitrea .app-shell.app-shell--apoio .shell-header,
+  html.theme-vitrea .app-shell.app-shell--apoio-reference .shell-header {
+    border-radius: 22px !important;
+    margin: 8px 10px 4px !important;
+    padding-inline: 12px !important;
+  }
+}
+
+html.theme-vitrea .shell-header__title {
+  color: var(--vitrea-text) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-vitrea .shell-header__subtitle {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .shell-header__theme-button,
+html.theme-vitrea .shell-header__closed-button,
+html.theme-vitrea .shell-header__notification > div > button,
+html.theme-vitrea .shell-header__icon-button {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+  transition: background-color 160ms var(--vitrea-ease), border-color 160ms var(--vitrea-ease), transform 160ms var(--vitrea-ease) !important;
+}
+
+html.theme-vitrea .shell-header__theme-button:hover,
+html.theme-vitrea .shell-header__closed-button:hover,
+html.theme-vitrea .shell-header__notification > div > button:hover,
+html.theme-vitrea .shell-header__icon-button:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  color: #ffffff !important;
+}
+
+/* Signature Vitrea sky-periwinkle primary pill CTA (#7aaef0 + dark #071a33 ink) */
+html.theme-vitrea .shell-header__sync-button {
+  background: var(--vitrea-accent) !important;
+  border: 1px solid rgba(255, 255, 255, 0.38) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-on-accent) !important;
+  font-weight: 700 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 8px 20px -6px rgba(122, 174, 240, 0.55) !important;
+}
+
+html.theme-vitrea .shell-header__sync-button * {
+  color: var(--vitrea-on-accent) !important;
+}
+
+html.theme-vitrea .shell-header__sync-button:hover:not(:disabled) {
+  background: var(--vitrea-accent-hover) !important;
+  filter: brightness(1.04);
+}
+
+html.theme-vitrea .shell-sync-indicator {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+html.theme-vitrea button.shell-sync-indicator:hover {
+  background: rgba(255, 255, 255, 0.13) !important;
+  border-color: rgba(169, 205, 252, 0.42) !important;
+}
+
+html.theme-vitrea .shell-sync-indicator__icon {
+  color: var(--vitrea-accent-text) !important;
+}
+
+html.theme-vitrea .shell-sync-indicator__relative {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .shell-sync-indicator__countdown {
+  color: var(--vitrea-accent-text) !important;
+  border-left-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+html.theme-vitrea .shell-sync-indicator__meter {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+html.theme-vitrea .shell-sync-indicator__meter-fill,
+html.theme-vitrea .shell-sync-sidebar__fill {
+  background: linear-gradient(90deg, #68c0b8, #7aaef0) !important;
+}
+
+/* ── Global Vitrea Obsidian Glass Cards, Pill Inputs & Sky CTAs ────────────── */
+html.theme-vitrea .app-shell .glass-card,
+html.theme-vitrea .app-shell [class*="glass-card"] {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  border-radius: var(--vitrea-r-card) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+  transition: transform 200ms var(--vitrea-ease), background-color 200ms var(--vitrea-ease), box-shadow 200ms var(--vitrea-ease);
+}
+
+html.theme-vitrea .app-shell :is(.glass-card, .dashboard-kpi, .lub-kpi, .bi-kpi, .mt-kpi, .apoio-kpi):hover {
+  background: var(--vitrea-card-hover-bg) !important;
+  box-shadow:
+    var(--vitrea-depth),
+    0 2px 6px rgba(0, 0, 0, 0.36),
+    0 28px 54px -22px rgba(0, 0, 0, 0.85) !important;
+}
+
+html.theme-vitrea .app-shell .glass-input,
+html.theme-vitrea .app-shell input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not(.bg-transparent),
+html.theme-vitrea .app-shell select,
+html.theme-vitrea .app-shell textarea {
+  background: rgba(20, 20, 24, 0.58) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .app-shell input[type="search"],
+html.theme-vitrea .app-shell .lub-filter-panel input[type="text"],
+html.theme-vitrea .app-shell .lub-filter-panel input[placeholder*="Buscar"] {
+  border-radius: 999px !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-panel label.glass-input {
+  background: rgba(20, 20, 24, 0.58) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-panel label.glass-input input[type="date"],
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-panel input.bg-transparent {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .app-shell :is(input, select, textarea):focus {
+  border-color: var(--vitrea-accent) !important;
+  box-shadow: 0 0 0 3px rgba(122, 174, 240, 0.24) !important;
+}
+
+html.theme-vitrea .app-shell select option {
+  background: #1d1d21 !important;
+  color: var(--vitrea-text) !important;
+}
+
+/* Global StatusBadge & light Tailwind pastel pill overrides */
+html.theme-vitrea .app-shell .status-badge {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-vitrea .app-shell .status-badge[data-status="PENDENTE"] {
+  background: rgba(228, 183, 89, 0.18) !important;
+  border-color: rgba(243, 205, 126, 0.44) !important;
+  color: #fdf0d1 !important;
+}
+
+html.theme-vitrea .app-shell .status-badge[data-status="ATRASADO"] {
+  background: rgba(233, 130, 120, 0.18) !important;
+  border-color: rgba(246, 165, 156, 0.44) !important;
+  color: #fde2df !important;
+}
+
+html.theme-vitrea .app-shell .status-badge[data-status="PROGRAMADO"] {
+  background: rgba(122, 174, 240, 0.18) !important;
+  border-color: rgba(169, 205, 252, 0.46) !important;
+  color: #e3efff !important;
+}
+
+html.theme-vitrea .app-shell .status-badge[data-status="ANDAMENTO"] {
+  background: rgba(104, 192, 184, 0.18) !important;
+  border-color: rgba(104, 192, 184, 0.46) !important;
+  color: #ddf7f4 !important;
+}
+
+html.theme-vitrea .app-shell .status-badge[data-status="ENCERRADO"] {
+  background: rgba(95, 196, 131, 0.18) !important;
+  border-color: rgba(143, 220, 168, 0.44) !important;
+  color: #dff8e7 !important;
+}
+
+/* ── Lavagem e Lubrificação Module ─────────────────────────────────────────── */
+html.theme-vitrea .app-shell .lavagem-premium,
+html.dark.theme-vitrea .app-shell .lavagem-premium {
+  --bg-primary: #111113 !important;
+  --bg-secondary: #18181c !important;
+  --bg-tertiary: rgba(28, 28, 32, 0.72) !important;
+  --bg-card: rgba(30, 30, 34, 0.56) !important;
+  --bg-hover: rgba(200, 200, 215, 0.12) !important;
+  --border-primary: rgba(255, 255, 255, 0.15) !important;
+  --border-secondary: rgba(255, 255, 255, 0.09) !important;
+  --text-primary: #f6f8fc !important;
+  --text-secondary: #d6dde9 !important;
+  --text-tertiary: #b6c0d1 !important;
+  --text-muted: #b6c0d1 !important;
+  --brand-green: #7aaef0 !important;
+  --glass-card-bg: rgba(30, 30, 34, 0.52) !important;
+  --glass-card-border: rgba(255, 255, 255, 0.18) !important;
+  --glass-input-bg: rgba(22, 22, 26, 0.64) !important;
+  --glass-input-border: rgba(255, 255, 255, 0.16) !important;
+  --lavagem-ivory: transparent !important;
+  --lavagem-ivory-deep: rgba(22, 22, 26, 0.64) !important;
+  --lavagem-surface: rgba(30, 30, 34, 0.56) !important;
+  --lavagem-surface-soft: rgba(26, 26, 30, 0.64) !important;
+  --lavagem-cream: rgba(255, 255, 255, 0.06) !important;
+  --lavagem-green: #f6f8fc !important;
+  --lavagem-green-deep: #f6f8fc !important;
+  --lavagem-green-medium: #7aaef0 !important;
+  --lavagem-ink: #f6f8fc !important;
+  --lavagem-muted: #b6c0d1 !important;
+  --lavagem-line: rgba(255, 255, 255, 0.14) !important;
+  --lub-green: #f6f8fc !important;
+  --lub-green-dark: #283953 !important;
+  --lub-green-soft: rgba(122, 174, 240, 0.16) !important;
+  --lub-muted: #b6c0d1 !important;
+  --lub-text: #f6f8fc !important;
+  --lub-bg: transparent !important;
+  --lub-surface: rgba(30, 30, 34, 0.56) !important;
+  --lub-soft: rgba(22, 22, 26, 0.58) !important;
+  --lub-hover: rgba(255, 255, 255, 0.08) !important;
+  --lub-line: rgba(255, 255, 255, 0.12) !important;
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium-body :is(h1, h2, h3, h4) {
+  color: var(--vitrea-text) !important;
+}
+
+/* Hide green/gold reference corner ribbons so monochrome graphite curves & orbs stay clean */
+html.theme-vitrea .app-shell .lavagem-premium > .lavagem-premium-ribbons,
+html.theme-vitrea .app-shell .apoio-reference > .apoio-reference-ribbons {
+  display: none !important;
+}
+
+/* Transform Lavagem hero from green/gold wave into a floating Vitrea dark obsidian glass banner */
+html.theme-vitrea .app-shell .lavagem-premium > .lavagem-premium-hero,
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-header {
+  min-height: auto !important;
+  max-width: 1120px !important;
+  margin: 14px auto 16px !important;
+  padding: 22px 28px !important;
+  background: var(--vitrea-card-bg) !important;
+  background-image: var(--vitrea-sheen) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  border-radius: var(--vitrea-r-card) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-brand h2 {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-brand p {
+  color: var(--vitrea-accent-text) !important;
+  font-weight: 600 !important;
+}
+
+/* Soft performance notice inside Lavagem */
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-perf-soft-warning {
+  background: rgba(243, 205, 126, 0.12) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(243, 205, 126, 0.34) !important;
+  border-radius: 18px !important;
+  color: #f9e7b8 !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-perf-soft-warning__close {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #f6f8fc !important;
+}
+
+/* Dashboard KPI icon wells & high-contrast typography inside Lavagem */
+html.theme-vitrea .app-shell .lavagem-premium .dashboard-kpi__icon {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .dashboard-kpi {
+  background: var(--vitrea-card-bg) !important;
+  color: var(--vitrea-text) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Vitrea animated overview widgets (override Verdan lime -> Vitrea teal & sky) */
+html.theme-vitrea .app-shell .verdan-widget-card {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  border-radius: var(--vitrea-r-card) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-widget-card__title {
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-widget-card__icon {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: var(--vitrea-accent-text) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-widget-card__badge,
+html.theme-vitrea .app-shell .verdan-widget-card__badge--lime {
+  background: rgba(104, 192, 184, 0.16) !important;
+  border-color: rgba(104, 192, 184, 0.42) !important;
+  color: #d6f6f2 !important;
+}
+
+html.theme-vitrea .app-shell .verdan-widget-card__badge--coral {
+  background: rgba(233, 130, 120, 0.18) !important;
+  border-color: rgba(246, 165, 156, 0.44) !important;
+  color: #fde2df !important;
+}
+
+html.theme-vitrea .app-shell .verdan-lollipop__dot {
+  background: linear-gradient(135deg, #68c0b8, #a9cdfc) !important;
+  box-shadow: 0 0 10px rgba(104, 192, 184, 0.48) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-lollipop__stem {
+  background: linear-gradient(180deg, rgba(104, 192, 184, 0.85), rgba(122, 174, 240, 0.18)) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-lollipop__label {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-gauge__value {
+  fill: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .verdan-gauge__label {
+  fill: var(--vitrea-muted) !important;
+}
+
+/* Vitrea pill tab track (matches top Overview/Apps/Releases pill track) */
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-tabs {
+  background: var(--vitrea-chrome-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 5px !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text-soft) !important;
+  box-shadow: none !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]):hover:not(:disabled) {
+  background: var(--vitrea-hover-well) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-tabs > button[aria-current="page"] {
+  background: var(--vitrea-lens) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-accent-text) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+/* Primary action pill buttons in Lavagem (#7aaef0 + #071a33) */
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-sync,
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-edit,
+html.theme-vitrea .lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  background: var(--vitrea-accent) !important;
+  border: 1px solid rgba(255, 255, 255, 0.36) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-on-accent) !important;
+  font-weight: 700 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 20px -6px rgba(122, 174, 240, 0.50) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium :is(.lavagem-premium-sync, .lavagem-premium-body button[class*="bg-green-600"], .lub-edit) * {
+  color: var(--vitrea-on-accent) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 20px !important;
+  color: var(--vitrea-text-soft) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] strong {
+  color: var(--vitrea-text) !important;
+}
+
+/* PCMIntegrationPanel */
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--vitrea-r-card) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] h3 {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] p {
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] article {
+  background: var(--vitrea-well) !important;
+  border: 1px solid var(--vitrea-line) !important;
+  border-radius: var(--vitrea-r-well) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] button:not([style*="--brand-green"]) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] button[style*="--brand-green"] {
+  background: var(--vitrea-accent) !important;
+  border: 1px solid rgba(255, 255, 255, 0.36) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-on-accent) !important;
+  font-weight: 700 !important;
+}
+
+/* Lavagem cards, KPIs, filter panel, table panel, schedule cards */
+html.theme-vitrea .app-shell .lavagem-premium .lub-module :is(
+  .lub-kpi,
+  .lub-filter-panel,
+  .lub-table-panel,
+  .lub-schedule-card
+) {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 0 !important;
+  border-radius: var(--vitrea-r-card) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-kpi.is-selected {
+  box-shadow:
+    0 0 0 2px rgba(122, 174, 240, 0.55),
+    var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-toolbar-title,
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-title strong,
+html.theme-vitrea .app-shell .lavagem-premium .lub-table-caption strong,
+html.theme-vitrea .app-shell .lavagem-premium .lub-kpi strong {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-toolbar p,
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-title span,
+html.theme-vitrea .app-shell .lavagem-premium .lub-table-caption span,
+html.theme-vitrea .app-shell .lavagem-premium .lub-kpi-label,
+html.theme-vitrea .app-shell .lavagem-premium .lub-kpi small {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-toolbar p > span {
+  color: var(--vitrea-warn) !important;
+}
+
+/* Segmented switcher (Tabela/Cartões/Quadro) + secondary toolbar pills */
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > div {
+  background: var(--vitrea-chrome-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+  box-shadow: var(--vitrea-depth) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-[var(--brand-green)]"] {
+  background: var(--vitrea-lens) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-accent-text) !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"] {
+  border-radius: 999px !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"]:hover {
+  background: var(--vitrea-hover-well) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button:not([class*="bg-[var(--brand-green)]"]):not([class*="bg-green-"]):not([class*="bg-amber-"]):not([class*="bg-cyan-"]):not([aria-pressed="true"]),
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-panel .lub-chip:not(.is-active) {
+  background: rgba(30, 30, 34, 0.62) !important;
+  backdrop-filter: blur(14px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(165%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button:not([class*="bg-[var(--brand-green)]"]):not([class*="bg-green-"]):not([class*="bg-amber-"]):not([class*="bg-cyan-"]):not([aria-pressed="true"]):hover,
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-panel .lub-chip:not(.is-active):hover {
+  background: rgba(44, 44, 52, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-filter-panel .lub-chip.is-active {
+  background: var(--vitrea-lens) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-accent-text) !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-toolbar button[class*="bg-amber-"] {
+  background: rgba(228, 183, 89, 0.18) !important;
+  border-color: rgba(243, 205, 126, 0.44) !important;
+  border-radius: 999px !important;
+  color: #fdf0d1 !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-toolbar button[class*="bg-green-500/"] {
+  background: rgba(95, 196, 131, 0.18) !important;
+  border-color: rgba(143, 220, 168, 0.44) !important;
+  border-radius: 999px !important;
+  color: #dff8e7 !important;
+}
+
+/* Lavagem table */
+html.theme-vitrea .app-shell .lavagem-premium .lub-table-caption {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-bottom: 1px solid var(--vitrea-line) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-table th,
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-table th button,
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  background: rgba(24, 24, 28, 0.88) !important;
+  color: var(--vitrea-muted) !important;
+  border-bottom: 1px solid var(--vitrea-line) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-table td {
+  background: transparent !important;
+  color: var(--vitrea-text-soft) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  background: rgba(24, 24, 28, 0.92) !important;
+  border-left: 1px solid var(--vitrea-line) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-fleet {
+  color: var(--vitrea-accent-text) !important;
+}
+
+/* Observações: botão Ver detalhes / Recolher e Narrativa da OS com alto contraste */
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-observation-cell {
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-observation {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-detail {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  min-height: 30px !important;
+  margin-top: 6px !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  background: rgba(122, 174, 240, 0.14) !important;
+  border: 1px solid rgba(169, 205, 252, 0.34) !important;
+  color: #dbeafe !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  transition: background-color 160ms var(--vitrea-ease), border-color 160ms var(--vitrea-ease), color 160ms var(--vitrea-ease) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-detail svg {
+  color: currentColor !important;
+  transition: transform 180ms var(--vitrea-ease);
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-detail:hover:not(:disabled),
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-detail[aria-expanded="true"] {
+  background: var(--vitrea-lens) !important;
+  border-color: rgba(169, 205, 252, 0.52) !important;
+  color: #f6f8fc !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-narrative {
+  margin-top: 8px !important;
+  padding: 10px 12px !important;
+  border-radius: 14px !important;
+  background: rgba(12, 12, 16, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-narrative strong {
+  color: var(--vitrea-accent-text) !important;
+  letter-spacing: 0.06em;
+}
+
+html.theme-vitrea .app-shell .lavagem-premium .lub-module .lub-narrative p {
+  color: var(--vitrea-text-soft) !important;
+  margin-top: 2px;
+}
+
+/* Verdan animated overview cards inside Lavagem (styled as Vitrea inset sparkline cards) */
+html.theme-vitrea .app-shell .verdan-overview-card {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--vitrea-r-card) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+/* ── Central Gerencial (BI) ────────────────────────────────────────────────── */
+html.theme-vitrea .bi-root {
+  --bi-surface: rgba(30, 30, 34, 0.50) !important;
+  --bi-surface-soft: rgba(255, 255, 255, 0.06) !important;
+  --bi-text: #f6f8fc !important;
+  --bi-muted: #b6c0d1 !important;
+  --bi-line: rgba(255, 255, 255, 0.11) !important;
+  --bi-bg: transparent !important;
+  --bi-gold: #a9cdfc !important;
+  --text-primary: #f6f8fc !important;
+  --text-secondary: #d6dde9 !important;
+  --text-muted: #b6c0d1 !important;
+  --bg-card: rgba(30, 30, 34, 0.56) !important;
+  --bg-primary: transparent !important;
+  background: transparent !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .bi-root .bi-view-toolbar {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.theme-vitrea .bi-root :is(
+  .bi-header,
+  .bi-filter-panel,
+  .bi-view-toolbar nav,
+  .bi-kpi,
+  .bi-chart-panel,
+  .bi-panel,
+  .bi-table-wrap,
+  .bi-empty-callout,
+  .bi-loading,
+  .bi-method-note,
+  .bi-select-popover,
+  .bi-tooltip
+) {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: var(--vitrea-r-card) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .bi-root .bi-view-toolbar nav {
+  border-radius: 999px !important;
+  padding: 5px !important;
+}
+
+html.theme-vitrea .bi-root :is(.bi-source-line, .bi-footer) {
+  background: transparent !important;
+  border-color: var(--vitrea-line) !important;
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .bi-root .bi-eyebrow,
+html.theme-vitrea .bi-root .bi-methodology h3 {
+  color: var(--vitrea-accent-text) !important;
+}
+
+html.theme-vitrea .bi-root :is(
+  .bi-brand h1,
+  .bi-kpi > strong,
+  .bi-chart-panel-header h3,
+  .bi-panel-heading h2,
+  .bi-methodology h2,
+  .bi-source-line strong,
+  .bi-tooltip > strong,
+  .bi-tooltip-row b,
+  .bi-orders-table td > strong,
+  .bi-order-details dd,
+  .bi-order-details h3
+) {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .bi-root :is(
+  .bi-brand p,
+  .bi-field-label,
+  .bi-kpi > div,
+  .bi-kpi p,
+  .bi-filter-bottom p,
+  .bi-period-shortcuts,
+  .bi-filter-summary > span,
+  .bi-presets > span,
+  .bi-chart-panel-header p,
+  .bi-legend-item,
+  .bi-panel-heading p,
+  .bi-sort,
+  .bi-orders-table small,
+  .bi-order-details dt,
+  .bi-detail-note,
+  .bi-narrative-preview,
+  .bi-pagination,
+  .bi-methodology p,
+  .bi-loading p,
+  .bi-empty-callout p,
+  .bi-select-footer,
+  .bi-select-options p
+) {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .bi-root input,
+html.theme-vitrea .bi-root select,
+html.theme-vitrea .bi-root .bi-select-trigger,
+html.theme-vitrea .bi-root .bi-search,
+html.theme-vitrea .bi-root .bi-select-search,
+html.theme-vitrea .bi-root .bi-chart-empty {
+  background: rgba(20, 20, 24, 0.58) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .app-shell .bi-root .bi-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-vitrea .app-shell .bi-root .bi-select-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-vitrea .app-shell .bi-root .bi-search input:focus,
+html.theme-vitrea .app-shell .bi-root .bi-select-search input:focus {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+html.theme-vitrea .bi-root .bi-button-primary,
+html.theme-vitrea .bi-root .bi-button.is-active {
+  background: var(--vitrea-accent) !important;
+  border-color: rgba(255, 255, 255, 0.36) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-on-accent) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-vitrea .bi-root .bi-view-toolbar nav button[aria-pressed="true"] {
+  background: var(--vitrea-lens) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-accent-text) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+html.theme-vitrea .bi-root .bi-view-toolbar nav button:not([aria-pressed="true"]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .bi-root :is(
+  .bi-button:not(.bi-button-primary):not(.is-active),
+  .bi-presets button,
+  .bi-period-shortcuts button,
+  .bi-filter-summary small,
+  .bi-pagination button,
+  .bi-detail-button,
+  .bi-chart-actions button,
+  .bi-select-options small
+) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .bi-root .bi-orders-table th {
+  background: rgba(24, 24, 28, 0.88) !important;
+  color: var(--vitrea-accent-text) !important;
+  border-bottom: 1px solid var(--vitrea-line) !important;
+}
+
+html.theme-vitrea .bi-root .bi-orders-table td {
+  color: var(--vitrea-text-soft) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+html.theme-vitrea .bi-root .bi-orders-table tbody > tr:hover td,
+html.theme-vitrea .bi-root .bi-expanded-row td {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html.theme-vitrea .bi-root .bi-full-narrative {
+  background: var(--vitrea-well-deep) !important;
+  border-color: var(--vitrea-line) !important;
+  border-radius: 16px !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .bi-root .bi-status-programado {
+  background: rgba(122, 174, 240, 0.18) !important;
+  border-color: rgba(169, 205, 252, 0.44) !important;
+  color: #e3efff !important;
+}
+
+html.theme-vitrea .bi-root .bi-status-aguardando {
+  background: rgba(228, 183, 89, 0.18) !important;
+  border-color: rgba(243, 205, 126, 0.44) !important;
+  color: #fdf0d1 !important;
+}
+
+html.theme-vitrea .bi-root .bi-status-andamento {
+  background: rgba(104, 192, 184, 0.18) !important;
+  border-color: rgba(104, 192, 184, 0.44) !important;
+  color: #ddf7f4 !important;
+}
+
+html.theme-vitrea .bi-root .bi-status-encerrado {
+  background: rgba(95, 196, 131, 0.18) !important;
+  border-color: rgba(143, 220, 168, 0.44) !important;
+  color: #dff8e7 !important;
+}
+
+html.theme-vitrea .bi-charts {
+  --bi-green: #68c0b8 !important;
+  --bi-slate-900: #f6f8fc !important;
+  --bi-slate-700: #d6dde9 !important;
+  --bi-slate-500: #b6c0d1 !important;
+  --bi-slate-300: rgba(255, 255, 255, 0.16) !important;
+  --bi-slate-200: rgba(255, 255, 255, 0.09) !important;
+  --bi-slate-100: rgba(255, 255, 255, 0.05) !important;
+  color: #f6f8fc !important;
+}
+
+html.theme-vitrea .bi-charts .bi-axis-tick,
+html.theme-vitrea .bi-charts .recharts-cartesian-axis-tick text {
+  fill: #b6c0d1 !important;
+}
+
+html.theme-vitrea .bi-heatmap-row > [role='columnheader'],
+html.theme-vitrea .bi-heatmap-group-label {
+  color: #d6dde9 !important;
+}
+
+html.theme-vitrea .bi-heat-cell {
+  background: color-mix(in srgb, #68c0b8 calc(var(--heat-intensity) * 76%), #1d1d22) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  border-radius: 10px !important;
+}
+
+html.theme-vitrea .bi-heat-cell:not(.is-zero) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.60) !important;
+}
+
+html.theme-vitrea .bi-heat-cell.is-zero {
+  background: rgba(20, 20, 24, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  color: #8c95a6 !important;
+}
+
+/* ── Apoio, Preventivas & Reformas (Zero Ivory/Green Leaks) ────────────────── */
+html.theme-vitrea .app-shell .maintenance-tracking,
+html.theme-vitrea .app-shell .apoio-module,
+html.theme-vitrea .app-shell .apoio-premium,
+html.theme-vitrea .app-shell .apoio-reference,
+html.theme-vitrea .app-shell .apoio-like-reformas {
+  --mt-ivory: transparent !important;
+  --mt-green: #f6f8fc !important;
+  --mt-green-deep: #7aaef0 !important;
+  --mt-green-mid: #a9cdfc !important;
+  --mt-gold: rgba(255, 255, 255, 0.16) !important;
+  --mt-gold-light: rgba(122, 174, 240, 0.36) !important;
+  --mt-text: #f6f8fc !important;
+  --mt-muted: #b6c0d1 !important;
+  --mt-line: rgba(255, 255, 255, 0.11) !important;
+
+  --apoio-ivory: transparent !important;
+  --apoio-surface: rgba(30, 30, 34, 0.56) !important;
+  --apoio-surface-soft: rgba(255, 255, 255, 0.06) !important;
+  --apoio-text: #f6f8fc !important;
+  --apoio-heading: #ffffff !important;
+  --apoio-muted: #b6c0d1 !important;
+  --apoio-soft: rgba(122, 174, 240, 0.16) !important;
+  --apoio-border: rgba(255, 255, 255, 0.14) !important;
+  --apoio-border-strong: rgba(122, 174, 240, 0.45) !important;
+  --apoio-line: rgba(255, 255, 255, 0.11) !important;
+  --apoio-green: #7aaef0 !important;
+  --apoio-medium: #a9cdfc !important;
+
+  --bg-primary: #111113 !important;
+  --bg-secondary: rgba(24, 24, 28, 0.72) !important;
+  --bg-tertiary: rgba(30, 30, 34, 0.68) !important;
+  --bg-card: rgba(30, 30, 34, 0.64) !important;
+  --bg-hover: rgba(200, 200, 215, 0.12) !important;
+  --border-primary: rgba(255, 255, 255, 0.16) !important;
+  --border-secondary: rgba(255, 255, 255, 0.09) !important;
+  --text-primary: #f6f8fc !important;
+  --text-secondary: #d6dde9 !important;
+  --text-muted: #b6c0d1 !important;
+  --brand-green: #7aaef0 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking > .mt-ribbon-layer,
+html.theme-vitrea .app-shell .apoio-reference > .apoio-ribbon-layer,
+html.theme-vitrea .app-shell .apoio-premium::before,
+html.theme-vitrea .app-shell .apoio-premium::after,
+html.theme-vitrea .app-shell .maintenance-tracking .mt-hero::after {
+  display: none !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :where(h2, h3, h4, strong, dt, label),
+html.theme-vitrea .app-shell .apoio-reference :where(h2, h3, h4, strong, dt, label) {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :where(p, dd, small, summary span),
+html.theme-vitrea .app-shell .apoio-reference :where(p, dd, small) {
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(
+  .mt-hero,
+  .apoio-hero,
+  .mt-kpi,
+  .apoio-kpi,
+  .mt-filters,
+  .mt-toolbar,
+  .mt-source-line,
+  .mt-visibility-bar,
+  .apoio-sticky-search,
+  .apoio-recency-panel,
+  .apoio-order-filters,
+  .mt-order,
+  .apoio-order,
+  .mt-empty,
+  .mt-pagination,
+  .mt-closure-summary
+),
+html.theme-vitrea .app-shell .apoio-image-reports section[aria-label],
+html.theme-vitrea .app-shell .apoio-reference :is(.apoio-command-center, .apoio-filter-center, .apoio-closed-toggle, .apoio-footer, .apoio-orders-panel > .p-4:last-child) {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: var(--vitrea-r-card) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-source-line {
+  padding: 12px 16px !important;
+  gap: 6px 16px !important;
+  border-radius: 18px !important;
+  box-sizing: border-box !important;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--vitrea-text-soft) !important;
+  font-size: 12.5px !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-source-line > span {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-source-line strong {
+  color: var(--vitrea-text) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-toolbar {
+  padding: 18px 20px !important;
+  gap: 14px 18px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-toolbar > div:first-child {
+  min-width: 0;
+  max-width: 100%;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-toolbar > div > p:not(.mt-eyebrow) {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-history-summary {
+  margin: 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  color: var(--vitrea-muted) !important;
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+@media (max-width: 639px) {
+  html.theme-vitrea .app-shell .maintenance-tracking .mt-toolbar {
+    padding: 16px !important;
+    border-radius: 22px !important;
+  }
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-eyebrow, .mt-card-kicker, .mt-label, .apoio-eyebrow) {
+  color: var(--vitrea-accent-text) !important;
+  font-weight: 700 !important;
+}
+
+/* Signature Vitrea recessed dark data wells inside equipment cards */
+html.theme-vitrea .app-shell .maintenance-tracking :is(
+  .mt-filter-body,
+  .mt-quadrants,
+  .mt-narrative-section,
+  .mt-observations,
+  .mt-closure-fact,
+  .apoio-image-preview,
+  .apoio-image-preview-row
+) {
+  background: var(--vitrea-well-deep) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: var(--vitrea-r-well) !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-order .mt-os {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+/* Vitrea pill buttons & active states in Maintenance & Apoio */
+html.theme-vitrea .app-shell .maintenance-tracking :is(
+  .mt-btn-primary,
+  .mt-visibility-action,
+  .apoio-hero-tab[aria-pressed="true"],
+  .apoio-button[aria-pressed="true"],
+  .mt-status-tabs button[aria-pressed="true"],
+  .mt-view-toggle button[aria-pressed="true"],
+  .apoio-view-toggle button[aria-pressed="true"],
+  .apoio-direct-toolbar button[aria-pressed="true"],
+  .apoio-report-scope-btn.is-active
+) {
+  background: var(--vitrea-accent) !important;
+  border: 1px solid rgba(255, 255, 255, 0.36) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-on-accent) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(
+  .mt-btn-primary,
+  .mt-visibility-action,
+  .apoio-hero-tab[aria-pressed="true"],
+  .apoio-button[aria-pressed="true"],
+  .mt-status-tabs button[aria-pressed="true"],
+  .mt-view-toggle button[aria-pressed="true"],
+  .apoio-view-toggle button[aria-pressed="true"],
+  .apoio-direct-toolbar button[aria-pressed="true"],
+  .apoio-report-scope-btn.is-active
+) * {
+  color: var(--vitrea-on-accent) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(
+  .mt-btn-subtle,
+  .mt-btn,
+  .apoio-button:not([aria-pressed="true"]),
+  .apoio-hero-tab:not([aria-pressed="true"]),
+  .apoio-direct-clear,
+  .apoio-image-picker-action,
+  .mt-status-tabs button:not([aria-pressed="true"]),
+  .mt-view-toggle button:not([aria-pressed="true"]),
+  .apoio-view-toggle button:not([aria-pressed="true"]),
+  .apoio-report-scope-btn:not(.is-active),
+  .mt-order-bottom button,
+  .apoio-orders-table .apoio-table-details-button,
+  .apoio-group-card__edit
+) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-order-bottom button, .apoio-group-card__edit):hover:not(:disabled) {
+  background: var(--vitrea-accent) !important;
+  border-color: rgba(255, 255, 255, 0.40) !important;
+  color: var(--vitrea-on-accent) !important;
+}
+
+/* Maintenance & Apoio status pills & days badges */
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-order .mt-status, .mt-table .mt-status),
+html.theme-vitrea .app-shell .apoio-reference .apoio-status,
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status {
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: var(--vitrea-text) !important;
+  font-weight: 600 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-order .mt-status--programado, .mt-table .mt-status--programado),
+html.theme-vitrea .app-shell .apoio-reference .apoio-status-scheduled,
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-scheduled {
+  background: rgba(122, 174, 240, 0.18) !important;
+  border-color: rgba(169, 205, 252, 0.44) !important;
+  color: #e3efff !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-order .mt-status--andamento, .mt-table .mt-status--andamento),
+html.theme-vitrea .app-shell .apoio-reference .apoio-status-progress,
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-progress {
+  background: rgba(104, 192, 184, 0.18) !important;
+  border-color: rgba(104, 192, 184, 0.44) !important;
+  color: #ddf7f4 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-order .mt-status--encerrado, .mt-order--closed .mt-status--encerrado, .mt-table .mt-status--encerrado),
+html.theme-vitrea .app-shell .apoio-reference :is(.apoio-status-closed, .apoio-closed-seal),
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-closed {
+  background: rgba(95, 196, 131, 0.18) !important;
+  border-color: rgba(143, 220, 168, 0.44) !important;
+  color: #dff8e7 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-order .mt-status--outros, .mt-table .mt-status--outros),
+html.theme-vitrea .app-shell .apoio-reference .apoio-status-waiting,
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-unconfirmed {
+  background: rgba(228, 183, 89, 0.18) !important;
+  border-color: rgba(243, 205, 126, 0.44) !important;
+  color: #fdf0d1 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-order .mt-days,
+html.theme-vitrea .app-shell .apoio-reference .apoio-days {
+  background: rgba(228, 183, 89, 0.16) !important;
+  border: 1px solid rgba(243, 205, 126, 0.42) !important;
+  border-radius: 14px !important;
+  color: #fdf0d1 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late,
+html.theme-vitrea .app-shell .apoio-reference .apoio-days.apoio-age-critical {
+  background: rgba(233, 130, 120, 0.20) !important;
+  border-color: rgba(246, 165, 156, 0.48) !important;
+  color: #fde2df !important;
+}
+
+/* Search pills & Apoio tables */
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-direct-search-control {
+  background: rgba(20, 20, 24, 0.58) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  gap: 11px !important;
+  padding: 0 16px !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-sticky-search .apoio-direct-search-control input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-group-fleet-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-multi-select-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html.theme-vitrea .app-shell .apoio-module .apoio-multi-select-popover,
+html.theme-vitrea .app-shell .apoio-module .apoio-group-fleet-picker {
+  background: var(--vitrea-glass-thick) !important;
+  backdrop-filter: var(--vitrea-blur-thick) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur-thick) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 22px !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-table-scroll, .apoio-table-scroll),
+html.theme-vitrea .app-shell .apoio-module .apoio-table-scroll {
+  background: rgba(20, 20, 24, 0.84) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 22px !important;
+  color: var(--vitrea-text-soft) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+  overflow-x: auto !important;
+}
+
+html.theme-vitrea .app-shell .apoio-module .apoio-orders-table {
+  background: transparent !important;
+  border-radius: 0 !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-table thead th, .apoio-orders-table thead th),
+html.theme-vitrea .app-shell .apoio-module .apoio-orders-table thead th,
+html.theme-vitrea .app-shell .apoio-module .apoio-orders-table thead th:first-child {
+  background: #16161b !important;
+  color: var(--vitrea-muted) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-table tbody td, .apoio-orders-table tbody td, .apoio-orders-table tbody th),
+html.theme-vitrea .app-shell .apoio-module .apoio-orders-table tbody td,
+html.theme-vitrea .app-shell .apoio-module .apoio-table-row {
+  background: rgba(24, 24, 29, 0.74) !important;
+  color: var(--vitrea-text-soft) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table tbody tr.is-odd :is(td, th),
+html.theme-vitrea .app-shell .apoio-module .apoio-orders-table tbody tr.is-odd :is(td, th) {
+  background: rgba(31, 31, 38, 0.80) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking :is(.apoio-orders-table tbody tr:hover td, .apoio-orders-table tbody tr:hover th, .mt-table tbody tr:hover td) {
+  background: rgba(122, 174, 240, 0.10) !important;
+}
+
+/* Opaque sticky first column so horizontally scrolled columns never bleed behind Frota */
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell,
+html.theme-vitrea .app-shell .apoio-module .apoio-table-fleet-cell {
+  background: #17171c !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 6px 0 14px -6px rgba(0, 0, 0, 0.65) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table tbody tr.is-odd .apoio-table-fleet-cell {
+  background: #1c1c22 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table tbody tr:hover .apoio-table-fleet-cell {
+  background: #212531 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-fleet-cell strong {
+  color: var(--vitrea-accent-text) !important;
+  font-size: 13.5px !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-os-cell {
+  color: var(--vitrea-text) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 12.5px !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table :is(.apoio-table-equipment, .apoio-table-group, .apoio-table-date-cell span, .apoio-table-narrative-summary) {
+  color: var(--vitrea-text) !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table :is(.apoio-table-secondary, .apoio-table-date-cell strong) {
+  color: var(--vitrea-muted) !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-late,
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-forecast-badge {
+  color: #fde2df !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-forecast-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  width: fit-content !important;
+  background: rgba(233, 130, 120, 0.18) !important;
+  border: 1px solid rgba(246, 165, 156, 0.42) !important;
+  border-radius: 999px !important;
+  padding: 3px 9px !important;
+  white-space: nowrap !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-row > td {
+  background: #121216 !important;
+  padding: 0 !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail {
+  background: rgba(22, 22, 27, 0.94) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-grid div {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 12px !important;
+  padding: 8px 10px !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-grid dt {
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-detail-grid dd,
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-full-narrative p {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-full-narrative {
+  background: rgba(12, 12, 16, 0.68) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 14px !important;
+  padding: 12px 14px !important;
+}
+
+html.theme-vitrea .app-shell .maintenance-tracking .apoio-orders-table .apoio-table-backlink {
+  color: var(--vitrea-accent-text) !important;
+}
+
+/* Apoio Cartões / Tabela segmented pill toggle & Central Gerencial premium badge */
+html.theme-vitrea .app-shell .apoio-module .apoio-view-toggle,
+html.theme-vitrea .app-shell .maintenance-tracking .mt-view-toggle {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  padding: 3px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-vitrea .app-shell .apoio-module .apoio-view-toggle button,
+html.theme-vitrea .app-shell .maintenance-tracking .mt-view-toggle button {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text-soft) !important;
+  box-shadow: none !important;
+}
+
+html.theme-vitrea .app-shell .apoio-module .apoio-view-toggle button:hover:not([aria-pressed="true"]),
+html.theme-vitrea .app-shell .maintenance-tracking .mt-view-toggle button:hover:not([aria-pressed="true"]) {
+  background: var(--vitrea-hover-well) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .app-shell .apoio-module .apoio-view-toggle button[aria-pressed="true"],
+html.theme-vitrea .app-shell .maintenance-tracking .mt-view-toggle button[aria-pressed="true"] {
+  background: var(--vitrea-lens) !important;
+  color: var(--vitrea-text) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--vitrea-lens-shadow) !important;
+}
+
+html.theme-vitrea .app-shell .bi-root .bi-premium-label {
+  background: rgba(243, 205, 126, 0.12) !important;
+  border: 1px solid rgba(243, 205, 126, 0.34) !important;
+  border-radius: 999px !important;
+  color: #f3cd7e !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+/* ── TV Monitor, Equipment Manager & Portaled Thick-Glass Modals ───────────── */
+html.theme-vitrea .tv-monitor {
+  background: linear-gradient(135deg, #0c0c0e 0%, #131316 100%) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .tv-monitor :is(.tv-summary, .tv-order),
+html.theme-vitrea .tv-dialog,
+html.theme-vitrea .app-shell .equipment-image-manager :is(.equipment-image-manager__preview-card, .equipment-image-manager__form, .equipment-image-manager__login) {
+  background: var(--vitrea-card-bg) !important;
+  backdrop-filter: var(--vitrea-blur) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--vitrea-r-card) !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-glass-shadow) !important;
+}
+
+html.theme-vitrea .lub-premium-modal {
+  background: rgba(8, 10, 14, 0.72) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .historico-frota-modal .historico-frota-card,
+html.theme-vitrea .lub-premium-modal .lub-modal,
+html.theme-vitrea [role="dialog"] .rounded-2xl {
+  background: var(--vitrea-glass-thick) !important;
+  backdrop-filter: var(--vitrea-blur-thick) !important;
+  -webkit-backdrop-filter: var(--vitrea-blur-thick) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  border-radius: 28px !important;
+  color: var(--vitrea-text) !important;
+  box-shadow: var(--vitrea-depth), 0 32px 72px -16px rgba(0, 0, 0, 0.92) !important;
+  overflow: hidden;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal > :is(div):first-child {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal > :is(div):last-child {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal h3 {
+  color: var(--vitrea-text) !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal label {
+  color: var(--vitrea-text-soft) !important;
+  font-weight: 600 !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal :is(input, select, textarea) {
+  background: rgba(16, 18, 22, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 12px !important;
+  color: var(--vitrea-text) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal :is(input, select, textarea):disabled {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--vitrea-muted) !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal select option {
+  background: #1b1d22 !important;
+  color: #f6f8fc !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal .lub-modal-note {
+  background: rgba(94, 212, 198, 0.10) !important;
+  border: 1px solid rgba(94, 212, 198, 0.30) !important;
+  border-radius: 14px !important;
+  color: var(--vitrea-text-soft) !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal .lub-modal-note strong {
+  color: var(--vitrea-accent-text) !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal .lub-modal-error {
+  background: rgba(244, 124, 103, 0.14) !important;
+  border: 1px solid rgba(244, 124, 103, 0.44) !important;
+  color: #ffe3de !important;
+}
+
+html.theme-vitrea .lub-premium-modal .lub-modal button:not([class*="bg-green-600"]) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: var(--vitrea-text) !important;
+}
+
+/* ── Focus, Reduced Transparency & Reduced Motion ──────────────────────────── */
+html.theme-vitrea :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--vitrea-accent-text) !important;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html.theme-vitrea {
+    --vitrea-glass: #1d1d21;
+    --vitrea-glass-chrome: #1d1d21;
+    --vitrea-card-bg: #1d1d21;
+    --vitrea-chrome-bg: #1d1d21;
+  }
+
+  html.theme-vitrea .app-shell * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-vitrea .app-shell *,
+  html.theme-vitrea .app-shell *::before,
+  html.theme-vitrea .app-shell *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -5,6 +5,7 @@ import { Programacao, StatusType } from '../types';
 import StatusBadge from './StatusBadge';
 import EquipmentThumbnail from './EquipmentThumbnail';
 import { cleanScheduleObservation, effectiveScheduleCompletionDate } from '../lib/schedulePresentation';
+import { getCardTiltProps } from '../hooks/useCardTilt';
 
 interface Props {
   schedules: Programacao[];
@@ -50,10 +51,16 @@ export default function LubricationScheduleTable(props: Props) {
           const completion = effectiveScheduleCompletionDate(schedule);
           const isUpdating = props.quickUpdating === schedule.id;
           const expanded = expandedId === schedule.id;
+          const cardTiltProps = getCardTiltProps<HTMLElement>({
+            maxTiltDeg: expanded ? 1.8 : 4.5,
+            scale: expanded ? 1.004 : 1.012,
+            glareMaxOpacity: expanded ? 0.08 : 0.14,
+          });
           return (
             <article
               key={schedule.id}
-              className={`lub-schedule-card glass-card${expanded ? ' is-expanded is-active' : ''}`}
+              {...cardTiltProps}
+              className={`lub-schedule-card glass-card tilt-card${expanded ? ' is-expanded is-active' : ''}`}
               data-status={schedule.situacao}
               role="listitem"
             >

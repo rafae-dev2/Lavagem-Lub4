@@ -11,7 +11,7 @@
  * 5. Operações CRUD: atualização otimista; PCM edita somente campos premium via RPC
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Programacao, DashboardStats } from '../types';
 import {
   fetchSchedules,
@@ -236,6 +236,7 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
   const [loading, setLoading]       = useState<boolean>(() => !loadFromCache());
   const [error, setError]           = useState<string | null>(null);
   const [lastSync, setLastSync]     = useState<string | null>(null);
+  const [lastSyncAt, setLastSyncAt] = useState<number | null>(() => readCacheMeta()?.timestamp ?? null);
   const [syncing, setSyncing]       = useState(false);
   const [fromCache, setFromCache]   = useState<boolean>(() => !!loadFromCache());
   const autoRefreshRef              = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -339,7 +340,8 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
           lastWatermarkVerifiedAtRef.current = nowTs;
           touchCacheTimestamp(remoteWatermark);
           setFromCache(false);
-          setLastSync(new Date().toLocaleString('pt-BR'));
+          setLastSyncAt(nowTs);
+          setLastSync(new Date(nowTs).toLocaleString('pt-BR'));
           return;
         }
       }
@@ -388,15 +390,17 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
       const localOnly = prevLocal.filter(s => !serverIds.has(s.id) && !s.rowIndex);
       const finalArr = sortBySheetOrder([...merged, ...localOnly]);
 
+      const syncedNow = Date.now();
       schedulesRef.current = finalArr;
-      lastSyncCompletedAtRef.current = Date.now();
+      lastSyncCompletedAtRef.current = syncedNow;
       lastWatermarkRef.current = latestWatermark;
-      lastWatermarkVerifiedAtRef.current = Date.now();
+      lastWatermarkVerifiedAtRef.current = syncedNow;
       setSchedules(finalArr);
       saveToCache(finalArr, latestWatermark);
       notifyOtherTabs();
       setFromCache(false);
-      setLastSync(new Date().toLocaleString('pt-BR'));
+      setLastSyncAt(syncedNow);
+      setLastSync(new Date(syncedNow).toLocaleString('pt-BR'));
       console.log(`[useSchedules] ✅ ${finalArr.length} registros (mesclados; ${pendingWritesRef.current.size} alteração(ões) local(is) pendente(s))`);
     } catch (err: any) {
       if (!mountedRef.current || lifecycle !== lifecycleRef.current) return;
@@ -465,9 +469,11 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
       schedulesRef.current = cached;
       if (meta?.watermark !== undefined) lastWatermarkRef.current = meta.watermark ?? null;
       if (meta?.timestamp) lastWatermarkVerifiedAtRef.current = meta.timestamp;
+      const syncedTs = meta?.timestamp ?? Date.now();
       setSchedules(cached);
       setFromCache(false);
-      setLastSync(new Date().toLocaleString('pt-BR'));
+      setLastSyncAt(syncedTs);
+      setLastSync(new Date(syncedTs).toLocaleString('pt-BR'));
     };
 
     if (typeof BroadcastChannel !== 'undefined') {
@@ -516,6 +522,7 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
       setFromCache(true);
       setLoading(false);
       const cacheAge = getCacheAge();
+      setLastSyncAt(meta?.timestamp ?? null);
       setLastSync(`Cache local (${cacheAge})`);
       if (
         shouldRunInitialMountSync({
@@ -758,15 +765,25 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
     return {};
   }, [notifyOtherTabs, syncFromSheet]);
 
-  // ─── Estatísticas ─────────────────────────────────────────────────────────
-  const stats: DashboardStats = {
-    total:      schedules.length,
-    pendente:   schedules.filter(s => s.situacao === 'PENDENTE').length,
-    atrasado:   schedules.filter(s => s.situacao === 'ATRASADO').length,
-    programado: schedules.filter(s => s.situacao === 'PROGRAMADO').length,
-    encerrado:  schedules.filter(s => s.situacao === 'ENCERRADO').length,
-    andamento:  schedules.filter(s => s.situacao === 'ANDAMENTO').length,
-  };
+  // ─── Estatísticas (memoizadas em passagem única) ──────────────────────────
+  const stats: DashboardStats = useMemo(() => {
+    let pendente = 0;
+    let atrasado = 0;
+    let programado = 0;
+    let encerrado = 0;
+    let andamento = 0;
+    for (let i = 0; i < schedules.length; i += 1) {
+      switch (schedules[i]?.situacao) {
+        case 'PENDENTE': pendente += 1; break;
+        case 'ATRASADO': atrasado += 1; break;
+        case 'PROGRAMADO': programado += 1; break;
+        case 'ENCERRADO': encerrado += 1; break;
+        case 'ANDAMENTO': andamento += 1; break;
+        default: break;
+      }
+    }
+    return { total: schedules.length, pendente, atrasado, programado, encerrado, andamento };
+  }, [schedules]);
 
   return {
     schedules,
@@ -774,6 +791,8 @@ export function useSchedules(options: UseSchedulesOptions = {}) {
     error,
     syncing,
     lastSync,
+    lastSyncAt,
+    autoRefreshMs,
     fromCache,
     stats,
     refresh,

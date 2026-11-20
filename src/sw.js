@@ -1,6 +1,6 @@
 const STATIC_CACHE = 'bp-static-assets-v1';
 const SHELL_CACHE = 'bp-app-shell-v1';
-const CSS_CACHE_VERSION = 'liquid-glass-v18-3';
+const CSS_CACHE_VERSION = 'liquid-glass-v18-9';
 const CSS_CACHE = `bp-css-styles-${CSS_CACHE_VERSION}`;
 const CACHE_PREFIXES = ['bp-static-assets-', 'bp-app-shell-', 'bp-css-styles-'];
 
@@ -13,6 +13,12 @@ const NETWORK_TIMEOUT_MS = 2500;
 
 const PRECACHE_STATIC_URLS = [
   '/logo.png',
+  '/manifest.webmanifest',
+  '/pwa-192x192.png',
+  '/pwa-512x512.png',
+  '/pwa-maskable-192x192.png',
+  '/pwa-maskable-512x512.png',
+  '/apple-touch-icon.png',
   '/apoio-reference-header.svg',
   '/apoio-reference-ribbons.svg',
 ];

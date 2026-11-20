@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RefreshCw, FileText, Download, Plus, Save, Trash2, Search, AlertTriangle, Truck, Wrench, Building2, Clock, Settings2, MessageSquare, ClipboardList, CalendarDays, CheckCircle2, Filter, Eye } from 'lucide-react';
 import { loadApoioData, saveApoioGroup, deleteApoioGroup, saveApoioFleet, deleteApoioFleet, syncApoio } from '../lib/apoioService';
+import { getCardTiltProps } from '../hooks/useCardTilt';
 import { isNavigatorOnline, isPageVisible } from '../lib/egressCachePolicy';
 import { exportApoioPDF, exportApoioExcel } from '../lib/apoioReport';
 import { exportApoioImages, APOIO_IMAGE_FORMATS, type ApoioImageFormat, type ApoioImageQuality } from '../lib/apoioImageReport';
@@ -29,10 +30,12 @@ import {
 } from '../lib/apoioOficinaTerceirosData';
 import { ApoioData, ApoioFleet, ApoioGroup, ApoioReportOptions, ApoioReportRow, diasEmAberto, diasObservados, oficinaLabel } from '../types/apoio';
 import { apoioBaseRows, apoioOrderStatusLabel, filterApoioRows, reconcileApoioFleetSelection } from '../lib/apoioFilters';
+import { createGroupEditSession, getGroupFleets, validateGroupFleetAddition } from '../lib/apoioGroupEdit';
 import { getMaintenanceOrderClosure } from '../lib/maintenanceTracking';
 import { DEFAULT_APOIO_RECENCY, apoioRecencyTimestamp, selectApoioRecency, apoioRecencyBounds, apoioRecencySummary, type ApoioRecencyOptions } from '../lib/apoioRecency';
 import ApoioOrderCard from '../components/ApoioOrderCard';
 import ApoioOrdersTable from '../components/ApoioOrdersTable';
+import ApoioOrdersPanelView from '../components/ApoioOrdersPanelView';
 import ApoioMultiSelect from '../components/ApoioMultiSelect';
 import ApoioGroupFleetFilter from '../components/ApoioGroupFleetFilter';
 import ApoioWhatsAppPanel from '../components/ApoioWhatsAppPanel';
@@ -64,13 +67,15 @@ const neutral: React.CSSProperties = { background: 'var(--bg-hover)', border: '1
 const msg = (err: unknown) => err instanceof Error ? err.message : String(err);
 const PAGE_SIZE = 40;
 type View = 'abertas' | 'classificar' | 'historico' | 'encerradas';
-type DisplayMode = 'cards' | 'table';
+type DisplayMode = 'cards' | 'panel' | 'table';
 const DISPLAY_MODE_STORAGE_KEY = 'branco-peres-apoio-display-mode';
 
 function initialDisplayMode(): DisplayMode {
   if (typeof window === 'undefined') return 'cards';
   try {
-    return window.localStorage.getItem(DISPLAY_MODE_STORAGE_KEY) === 'table' ? 'table' : 'cards';
+    const stored = window.localStorage.getItem(DISPLAY_MODE_STORAGE_KEY);
+    if (stored === 'table' || stored === 'panel' || stored === 'cards') return stored;
+    return 'cards';
   } catch {
     return 'cards';
   }
@@ -112,9 +117,14 @@ export default function ControleApoio() {
   const [exportProgress, setExportProgress] = useState('');
   const [groupDraft, setGroupDraft] = useState<ApoioGroup>({ id: '', nome: '', cor: '#20a876' });
   const [fleetDraft, setFleetDraft] = useState({ frotas: '', grupo_id: '', nome: '' });
+  const [inlineGroupFrotas, setInlineGroupFrotas] = useState('');
+  const [inlineGroupNome, setInlineGroupNome] = useState('');
+  const oficinaPreviewTiltProps = getCardTiltProps<HTMLLabelElement>({ maxTiltDeg: 4.5, scale: 1.012, glareMaxOpacity: 0.14 });
   const mounted = useRef(true);
   const reading = useRef(false);
   const lastAttemptAt = useRef(0);
+  const groupEditorRef = useRef<HTMLElement | null>(null);
+  const inlineFleetInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     try { window.localStorage.setItem(DISPLAY_MODE_STORAGE_KEY, displayMode); } catch { /* preferência opcional */ }
@@ -285,6 +295,24 @@ export default function ControleApoio() {
     catch (err) { setError(msg(err)); }
     finally { setBusy(false); }
   };
+  const startEditingGroup = (group: ApoioGroup) => {
+    const session = createGroupEditSession(group);
+    setError('');
+    setNotice('');
+    setGroupDraft(session.groupDraft);
+    setFleetDraft(draft => ({ ...draft, grupo_id: session.fleetGroupId }));
+    setInlineGroupFrotas(session.inlineFrotas);
+    setInlineGroupNome(session.inlineNome);
+    window.requestAnimationFrame(() => {
+      groupEditorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      inlineFleetInputRef.current?.focus();
+    });
+  };
+  const cancelEditingGroup = () => {
+    setGroupDraft({ id: '', nome: '', cor: '#20a876' });
+    setInlineGroupFrotas('');
+    setInlineGroupNome('');
+  };
   const saveGroup = (event: React.FormEvent) => {
     event.preventDefault();
     const nome = groupDraft.nome.trim();
@@ -293,26 +321,48 @@ export default function ControleApoio() {
     const group = { ...groupDraft, id: groupDraft.id || crypto.randomUUID(), nome };
     void runMutation(async () => {
       await saveApoioGroup(group);
-      setGroupDraft({ id: '', nome: '', cor: '#20a876' });
+      cancelEditingGroup();
     }, 'Grupo Apoio salvo e compartilhado.');
   };
-  const saveFleet = (event: React.FormEvent) => {
-    event.preventDefault();
-    const frotas = [...new Set(fleetDraft.frotas.split(/[\s,;]+/).map(s => s.trim()).filter(Boolean))];
-    if (!frotas.length || !fleetDraft.grupo_id) { setError('Informe a frota e selecione um grupo Apoio.'); return; }
-    if (frotas.some(f => !/^[A-Za-z0-9._-]{1,40}$/.test(f))) { setError('Use números ou códigos de frota sem espaços. Separe várias frotas por vírgula.'); return; }
+  const saveFleetsToGroup = (
+    rawFrotas: string,
+    grupoId: string,
+    nomeEquipamento: string,
+    onSuccess: (count: number) => void,
+  ) => {
+    const validation = validateGroupFleetAddition(rawFrotas, grupoId, data?.fleets || []);
+    if (!validation.ok) {
+      setError(validation.error || 'Informe a frota e selecione um grupo Apoio.');
+      return;
+    }
+    const frotas = validation.frotas;
+    const targetGroupName = groupMap.get(grupoId)?.nome || 'grupo selecionado';
     void runMutation(async () => {
       let saved = 0;
       try {
         for (const frota of frotas) {
-          await saveApoioFleet({ frota, grupo_id: fleetDraft.grupo_id, nome: fleetDraft.nome.trim() }); saved++;
+          await saveApoioFleet({ frota, grupo_id: grupoId, nome: nomeEquipamento.trim() }); saved++;
         }
       } catch (err) {
         await refresh(false, true);
         throw new Error(`${saved} de ${frotas.length} frotas salvas. ${msg(err)}`);
       }
+      onSuccess(frotas.length);
+    }, `${frotas.length} frota(s) vinculada(s) ao grupo ${targetGroupName}.`);
+  };
+  const saveGroupFleets = (event: React.FormEvent) => {
+    event.preventDefault();
+    saveFleetsToGroup(inlineGroupFrotas, groupDraft.id, inlineGroupNome, () => {
+      setInlineGroupFrotas('');
+      setInlineGroupNome('');
+    });
+  };
+  const saveFleet = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!fleetDraft.grupo_id) { setError('Informe a frota e selecione um grupo Apoio.'); return; }
+    saveFleetsToGroup(fleetDraft.frotas, fleetDraft.grupo_id, fleetDraft.nome, () => {
       setFleetDraft(draft => ({ ...draft, frotas: '', nome: '' }));
-    }, `${frotas.length} frota(s) cadastrada(s) no controle próprio.`);
+    });
   };
   const assignGroup = async (order: ApoioReportRow, groupId: string) => {
     if (!groupId) return;
@@ -449,16 +499,96 @@ export default function ControleApoio() {
       {data && tab === 'cadastros' && <div className="space-y-5"><button type="button" className="mt-btn" onClick={() => setTab('ordens')}>Voltar às ordens</button>
         <p className="text-xs" style={muted}>Acesso público, conforme solicitado: visitantes podem consultar e editar os grupos e as frotas. As ordens importadas são somente leitura.</p>
         <div className="grid lg:grid-cols-2 gap-5">
-          <section className="p-5" style={panel}>
+          <section ref={groupEditorRef} className="p-5" style={panel}>
             <h3 className="font-bold text-lg">Criar ou editar grupo Apoio</h3>
             <p className="text-sm mt-1" style={muted}>Exemplos: Veículos Leves, Caminhão Munck e Caminhão Pipa. Os nomes são definidos por você.</p>
             <form className="space-y-3 mt-4" onSubmit={saveGroup}>
               <label className="block text-sm">Nome do grupo<input required maxLength={100} value={groupDraft.nome} onChange={e => setGroupDraft(d => ({ ...d, nome: e.target.value }))} style={field} className="mt-1" placeholder="Ex.: Veículos Leves" /></label>
               <label className="flex items-center gap-3 text-sm">Cor de identificação<input aria-label="Cor do grupo" type="color" value={groupDraft.cor} onChange={e => setGroupDraft(d => ({ ...d, cor: e.target.value }))} /></label>
-              <div className="flex gap-2"><button type="submit" className={buttonClass} style={green} disabled={busy}><Save size={16} />{groupDraft.id ? 'Salvar alterações' : 'Criar grupo'}</button>{groupDraft.id && <button type="button" className={buttonClass} style={neutral} onClick={() => setGroupDraft({ id: '', nome: '', cor: '#20a876' })}>Cancelar</button>}</div>
+              <div className="flex flex-wrap gap-2"><button type="submit" className={buttonClass} style={green} disabled={busy}><Save size={16} />{groupDraft.id ? 'Salvar alterações' : 'Criar grupo'}</button>{groupDraft.id && <button type="button" className={buttonClass} style={neutral} onClick={cancelEditingGroup}>Cancelar edição</button>}</div>
             </form>
+            {groupDraft.id && (() => {
+              const editedGroupFleets = getGroupFleets(data.fleets, groupDraft.id);
+              return (
+                <div data-testid="apoio-group-equipment-editor" className="mt-5 p-4 rounded-xl space-y-3" style={{ background: 'var(--bg-hover)', border: '1px solid var(--border-accent, var(--border-primary))' }}>
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-3 h-3 rounded-full shrink-0" style={{ background: groupDraft.cor }} />
+                      <strong className="text-sm truncate">Equipamentos do grupo: {groupDraft.nome || 'Sem nome'}</strong>
+                    </div>
+                    <span className="text-xs font-semibold" style={muted}>{editedGroupFleets.length} {editedGroupFleets.length === 1 ? 'frota vinculada' : 'frotas vinculadas'}</span>
+                  </div>
+                  <form className="space-y-2.5" onSubmit={saveGroupFleets}>
+                    <label className="block text-xs font-semibold">
+                      Adicionar mais equipamentos (frotas) ao grupo
+                      <textarea
+                        ref={inlineFleetInputRef}
+                        required
+                        rows={2}
+                        value={inlineGroupFrotas}
+                        onChange={e => setInlineGroupFrotas(e.target.value)}
+                        style={field}
+                        className="mt-1 text-sm font-normal"
+                        placeholder="Ex.: 4568, 4569 (separe várias por vírgula ou espaço)"
+                      />
+                    </label>
+                    <label className="block text-xs font-semibold">
+                      Nome do equipamento (opcional)
+                      <input
+                        maxLength={200}
+                        value={inlineGroupNome}
+                        onChange={e => setInlineGroupNome(e.target.value)}
+                        style={field}
+                        className="mt-1 text-sm font-normal"
+                        placeholder="Se vazio, usa o modelo informado pela fonte"
+                      />
+                    </label>
+                    <button type="submit" className={buttonClass} style={green} disabled={busy}>
+                      <Plus size={16} />Adicionar equipamentos ao grupo
+                    </button>
+                  </form>
+                  {editedGroupFleets.length > 0 ? (
+                    <div className="space-y-1.5 pt-2" style={{ borderTop: '1px solid var(--border-primary)' }}>
+                      <p className="text-xs font-semibold" style={muted}>Equipamentos já vinculados neste grupo:</p>
+                      <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-1">
+                        {editedGroupFleets.map(fleet => (
+                          <span
+                            key={fleet.frota}
+                            className="inline-flex items-center gap-2 text-xs px-2.5 py-1.5 rounded-lg"
+                            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-primary)', color: 'var(--text-primary)' }}
+                          >
+                            <strong>{fleet.frota}</strong>
+                            {(fleet.nome || orders.find(o => o.frota === fleet.frota)?.modelo) && (
+                              <span style={muted} className="truncate max-w-[160px]">
+                                {fleet.nome || orders.find(o => o.frota === fleet.frota)?.modelo}
+                              </span>
+                            )}
+                            <button
+                              type="button"
+                              aria-label={`Remover frota ${fleet.frota} do grupo ${groupDraft.nome}`}
+                              disabled={busy}
+                              onClick={() => {
+                                if (window.confirm(`Remover a frota ${fleet.frota} do controle próprio? As ordens da fonte não serão excluídas.`)) {
+                                  void runMutation(() => deleteApoioFleet(fleet.frota), 'Frota removida do controle próprio. As ordens foram preservadas.');
+                                }
+                              }}
+                              className="opacity-75 hover:opacity-100 disabled:opacity-30"
+                              style={{ color: 'var(--apoio-danger, #f87171)' }}
+                            >
+                              <Trash2 size={13} />
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-xs" style={muted}>Este grupo ainda não possui frotas vinculadas. Informe os números acima para adicionar.</p>
+                  )}
+                </div>
+              );
+            })()}
             <div className="space-y-2 mt-5">
-              {data.groups.map(group => <div key={group.id} className={`glass-card apoio-group-card flex items-center gap-3 p-3 rounded-xl${groupDraft.id === group.id ? ' is-selected' : ''}`} style={{ background: 'var(--bg-hover)' }}><span className="w-3 h-3 rounded-full shrink-0" style={{ background: group.cor }} /><div className="flex-1 min-w-0"><strong className="apoio-group-card__name text-sm block truncate">{group.nome}</strong><p className="text-xs" style={muted}>{data.fleets.filter(f => f.grupo_id === group.id).length} frotas cadastradas</p></div><button className="apoio-group-card__edit text-xs px-2.5 py-1.5 rounded-lg" disabled={busy} onClick={() => setGroupDraft(group)}>Editar</button><button aria-label={`Excluir ${group.nome}`} disabled={busy || data.fleets.some(f => f.grupo_id === group.id)} title="Só é possível excluir grupos sem frotas" onClick={() => { if (window.confirm(`Excluir o grupo ${group.nome}?`)) void runMutation(() => deleteApoioGroup(group.id), 'Grupo excluído.'); }} className="disabled:opacity-30 p-1.5"><Trash2 size={16} /></button></div>)}
+              {data.groups.map(group => <div key={group.id} className={`glass-card apoio-group-card flex items-center gap-3 p-3 rounded-xl${groupDraft.id === group.id ? ' is-selected' : ''}`} style={{ background: 'var(--bg-hover)' }}><span className="w-3 h-3 rounded-full shrink-0" style={{ background: group.cor }} /><div className="flex-1 min-w-0"><strong className="apoio-group-card__name text-sm block truncate">{group.nome}</strong><p className="text-xs" style={muted}>{data.fleets.filter(f => f.grupo_id === group.id).length} frotas cadastradas</p></div><button type="button" aria-label={`Editar grupo ${group.nome}`} aria-pressed={groupDraft.id === group.id} className="apoio-group-card__edit text-xs px-2.5 py-1.5 rounded-lg" disabled={busy} onClick={() => startEditingGroup(group)}>{groupDraft.id === group.id ? 'Editando' : 'Editar'}</button><button type="button" aria-label={`Excluir ${group.nome}`} disabled={busy || data.fleets.some(f => f.grupo_id === group.id)} title="Só é possível excluir grupos sem frotas" onClick={() => { if (window.confirm(`Excluir o grupo ${group.nome}?`)) void runMutation(() => deleteApoioGroup(group.id), 'Grupo excluído.'); }} className="disabled:opacity-30 p-1.5"><Trash2 size={16} /></button></div>)}
               {!data.groups.length && <p className="text-sm" style={muted}>Nenhum grupo cadastrado. Crie o primeiro grupo acima.</p>}
             </div>
           </section>
@@ -556,7 +686,7 @@ export default function ControleApoio() {
           <div className="mt-toolbar">
             <div><p className="mt-eyebrow">Visão operacional</p><h3>{rows.length} ordens selecionadas</h3><p>{new Set(rows.map(row => row.frota)).size} frotas · todos os filtros valem para os relatórios</p></div>
             <div className="mt-toolbar-actions">
-              <div className="apoio-view-toggle" role="group" aria-label="Visualização dos resultados"><button type="button" aria-pressed={displayMode === 'cards'} onClick={() => setDisplayMode('cards')}>Cartões</button><button type="button" aria-pressed={displayMode === 'table'} onClick={() => setDisplayMode('table')}>Tabela</button></div>
+              <div className="apoio-view-toggle" role="group" aria-label="Visualização dos resultados"><button type="button" aria-pressed={displayMode === 'cards'} onClick={() => setDisplayMode('cards')}>Cartões</button><button type="button" aria-pressed={displayMode === 'panel'} onClick={() => setDisplayMode('panel')}>Painel</button><button type="button" aria-pressed={displayMode === 'table'} onClick={() => setDisplayMode('table')}>Tabela</button></div>
               <button type="button" className="mt-btn" disabled={!rows.length || exporting} onClick={() => void exportReport('pdf')}><FileText size={17} aria-hidden="true" />Relatório PDF</button>
               <button type="button" className="mt-btn" disabled={!rows.length || exporting} onClick={() => void exportReport('xlsx')}><Download size={17} aria-hidden="true" />Excel</button>
               <button type="button" className="mt-btn" disabled={!oficinaTerceirosSelecionadas.length || exporting} title="Relatório em PNG conforme modo escolhido: oficina externa, emergenciais ou juntos" onClick={() => void exportOficinaTerceiros('png')}><Building2 size={17} aria-hidden="true" />{oficinaScope === 'externa' ? 'Oficina de terceiros' : oficinaScope === 'emergencia' ? 'Emergenciais · Interna/Campo' : 'Terceiros + Emergenciais'}</button>
@@ -659,7 +789,7 @@ export default function ControleApoio() {
                       const marcado = !oficinaDesmarcados.includes(entry.frota);
                       const isEmergencyEntry = entry.categoria === 'emergencial_interna' || entry.categoria === 'emergencial_campo';
                       return (
-                        <label className={`glass-card apoio-image-preview-row${marcado ? ' is-marked is-selected' : ' is-unmarked'}`} key={entry.frota}>
+                        <label {...oficinaPreviewTiltProps} className={`apoio-image-preview-row glass-card tilt-card${marcado ? ' is-marked is-selected' : ' is-unmarked'}`} key={entry.frota}>
                           <input type="checkbox" checked={marcado} onChange={() => toggleOficinaEquipamento(entry.frota)} aria-label={`Incluir frota ${entry.frota} no relatório`} />
                           <EquipmentThumbnail
                             equipment={{
@@ -709,6 +839,15 @@ export default function ControleApoio() {
               groups={data.groups}
               groupIdForFleet={frota => fleetMap.get(frota)?.grupo_id || ''}
               busy={busy}
+              onAssign={(order, groupId) => void assignGroup(order, groupId)}
+            />
+          ) : displayMode === 'panel' ? (
+            <ApoioOrdersPanelView
+              rows={shown}
+              groups={data.groups}
+              groupIdForFleet={frota => fleetMap.get(frota)?.grupo_id || ''}
+              busy={busy}
+              clock={recencyClock}
               onAssign={(order, groupId) => void assignGroup(order, groupId)}
             />
           ) : (

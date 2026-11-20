@@ -1,0 +1,2357 @@
+/* ============================================================================
+   CALDA GLASS — Premium Smoked Architectural Glass & App Mode Theme
+   Inspired faithfully by Calda (Urbanist + smoked frosted sheet + specular
+   hairline glass rims + crisp white active pills + signal blue #1e9bf0).
+   Strictly scoped to html.theme-calda so no other theme is affected.
+   ============================================================================ */
+
+html.theme-calda {
+  --calda-font: "Urbanist", "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --calda-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Core Calda Smoke palette */
+  --calda-bg: #2a2c2f;
+  --calda-bg-deep: #1e2023;
+  --calda-sheet: rgba(62, 65, 70, 0.44);
+  --calda-chrome: rgba(56, 58, 62, 0.86);
+  --calda-chrome-solid: rgba(56, 58, 62, 0.95);
+  --calda-card: rgba(255, 255, 255, 0.068);
+  --calda-card-elev: rgba(255, 255, 255, 0.10);
+  --calda-well: rgba(20, 22, 26, 0.38);
+  --calda-well-deep: rgba(18, 20, 24, 0.56);
+  --calda-panel-solid: #2f3236;
+
+  /* Text tokens — WCAG AA >= 4.5:1 over smoked charcoal glass */
+  --calda-ink: #ffffff;
+  --calda-ink-soft: #e6e9ee;
+  --calda-muted: #c2c7d0;
+  --calda-line: rgba(255, 255, 255, 0.15);
+  --calda-line-soft: rgba(255, 255, 255, 0.09);
+
+  /* Signature Calda active white capsule & signal blue */
+  --calda-pill-bg: #f6f7f8;
+  --calda-pill-ink: #16191d;
+  --calda-sig: #1e9bf0;
+  --calda-sig-hi: #56b8ff;
+  --calda-sig-soft: rgba(30, 155, 240, 0.22);
+  --calda-good: #34d399;
+  --calda-good-soft: rgba(52, 211, 153, 0.20);
+  --calda-warn: #f4be5e;
+  --calda-warn-soft: rgba(244, 190, 94, 0.20);
+  --calda-bad: #f47c67;
+  --calda-bad-soft: rgba(244, 124, 103, 0.22);
+
+  /* Specular glass rim & depth matching Calda */
+  --calda-blur: blur(22px) saturate(108%);
+  --calda-blur-thick: blur(28px) saturate(112%);
+  --calda-rim:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.36),
+    0 1px 2px rgba(0, 0, 0, 0.18);
+  --calda-rim-pane:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.20),
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.42),
+    0 0 0 1px rgba(0, 0, 0, 0.16),
+    0 18px 42px -24px rgba(0, 0, 0, 0.56);
+
+  --calda-r-sm: 12px;
+  --calda-r-md: 16px;
+  --calda-r-card: 22px;
+  --calda-r-sheet: 28px;
+
+  /* Map shared semantic variables cleanly */
+  --font-display: var(--calda-font);
+  --font-sans: var(--calda-font);
+  --font-mono: var(--calda-mono);
+  --bg-primary: #2a2c2f;
+  --bg-secondary: rgba(56, 58, 62, 0.78);
+  --bg-tertiary: rgba(255, 255, 255, 0.08);
+  --bg-card: rgba(255, 255, 255, 0.068);
+  --bg-hover: rgba(255, 255, 255, 0.11);
+  --border-primary: rgba(255, 255, 255, 0.16);
+  --border-secondary: rgba(255, 255, 255, 0.10);
+  --text-primary: #ffffff;
+  --text-secondary: #e2e6ec;
+  --text-tertiary: #c2c7d0;
+  --text-muted: #c2c7d0;
+  --brand-green: #1e9bf0;
+  --brand-green-hover: #38a8f5;
+  --brand-green-light: rgba(30, 155, 240, 0.20);
+  --glass-card-bg: rgba(255, 255, 255, 0.072);
+  --glass-card-border: rgba(255, 255, 255, 0.18);
+  --glass-button-bg: rgba(255, 255, 255, 0.10);
+  --glass-button-border: rgba(255, 255, 255, 0.20);
+  --glass-button-hover-bg: rgba(255, 255, 255, 0.18);
+  --glass-button-hover-color: #ffffff;
+  --shell-header-bg: transparent;
+  --shell-header-border: transparent;
+  --shell-header-text: #ffffff;
+  --sidebar-logo-ring: #1e9bf0;
+
+  color-scheme: dark;
+  font-family: var(--calda-font);
+}
+
+html.theme-calda body {
+  font-family: var(--calda-font);
+  background-color: #2a2c2f;
+  background-image:
+    radial-gradient(ellipse 92% 68% at 50% -10%, rgba(160, 168, 178, 0.24) 0%, transparent 62%),
+    radial-gradient(circle at 18% 82%, rgba(30, 155, 240, 0.09) 0%, transparent 48%),
+    radial-gradient(circle at 86% 24%, rgba(255, 255, 255, 0.07) 0%, transparent 44%),
+    linear-gradient(168deg, #34373b 0%, #2a2c2f 46%, #202226 100%);
+  background-attachment: fixed;
+  color: var(--calda-ink);
+}
+
+html.theme-calda h1,
+html.theme-calda h2,
+html.theme-calda h3,
+html.theme-calda h4,
+html.theme-calda button,
+html.theme-calda input,
+html.theme-calda select,
+html.theme-calda textarea {
+  font-family: var(--calda-font);
+}
+
+/* ── App Shell Container (Desktop Architectural Canvas vs Mobile App Mode) ─── */
+html.theme-calda .app-shell {
+  background: transparent !important;
+  color: var(--calda-ink) !important;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 20px 18px;
+  gap: 14px;
+}
+
+/* Hide legacy left sidebar completely in Calda — replaced by Top Pill Dock (desktop) & Bottom Tabbar (app/phone) */
+html.theme-calda .app-shell .shell-sidebar,
+html.theme-calda .app-shell .shell-sidebar__overlay {
+  display: none !important;
+}
+
+html.theme-calda .app-shell > .calda-viewport-frame {
+  width: 100%;
+  max-width: 1520px;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Desktop Top Bar (Floating Calda Architectural Pill Bar) ───────────────── */
+html.theme-calda .app-shell .shell-header {
+  background: var(--calda-chrome) !important;
+  backdrop-filter: var(--calda-blur) !important;
+  -webkit-backdrop-filter: var(--calda-blur) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  box-shadow: var(--calda-rim-pane) !important;
+  padding: 10px 16px !important;
+  min-height: 64px;
+  gap: 12px;
+  flex-shrink: 0;
+  z-index: 20 !important;
+}
+
+html.theme-calda .app-shell .shell-menu-toggle {
+  display: none !important;
+}
+
+.calda-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--calda-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.calda-brand-mark__tile {
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: var(--calda-pill-bg);
+  color: var(--calda-pill-ink);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  padding: 4px;
+}
+
+.calda-brand-mark__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.calda-brand-mark__copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.calda-brand-mark__title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.calda-brand-mark__subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--calda-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+/* Centered Calda Desktop Navigation Pill Track (mirrors Calda header pill dock) */
+.calda-top-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.26);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.calda-top-dock::-webkit-scrollbar {
+  display: none;
+}
+
+.calda-top-dock__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  min-width: 38px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.calda-top-dock__item:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.calda-top-dock__item.is-active {
+  background: var(--calda-pill-bg);
+  color: var(--calda-pill-ink);
+  font-weight: 700;
+  padding: 0 15px;
+  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.45);
+}
+
+.calda-top-dock__badge {
+  position: static;
+  margin-left: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--calda-sig);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Desktop "Modo Celular" switcher button */
+.calda-device-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.calda-device-toggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+.calda-device-toggle.is-active {
+  background: var(--calda-pill-bg);
+  border-color: var(--calda-pill-bg);
+  color: var(--calda-pill-ink);
+  font-weight: 700;
+}
+
+/* Header icon controls & Sync CTA in Calda */
+html.theme-calda .app-shell .shell-header__theme-button,
+html.theme-calda .app-shell .shell-header__closed-button,
+html.theme-calda .app-shell .shell-header__notification > button,
+html.theme-calda .app-shell .shell-header__notification button {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  min-height: 36px;
+}
+
+html.theme-calda .app-shell .shell-header__theme-button:hover,
+html.theme-calda .app-shell .shell-header__notification button:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-calda .app-shell .shell-header__sync-button {
+  background: var(--calda-pill-bg) !important;
+  color: var(--calda-pill-ink) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  min-height: 36px;
+  padding: 0 14px !important;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.theme-calda .app-shell .shell-header__sync-button * {
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .shell-sync-pill {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: var(--calda-ink-soft) !important;
+  border-radius: 999px !important;
+}
+
+/* ── Main Translucent Architectural Sheet ──────────────────────────────────── */
+html.theme-calda .app-shell main,
+html.theme-calda .app-shell > div > main,
+html.theme-calda .app-shell.app-shell--lub > div > main,
+html.theme-calda .app-shell.app-shell--apoio > div > main,
+html.theme-calda .app-shell.app-shell--apoio-reference > div > main,
+html.dark.theme-calda .app-shell.app-shell--lub > div > main,
+html.dark.theme-calda .app-shell.app-shell--apoio > div > main,
+html.dark.theme-calda .app-shell.app-shell--apoio-reference > div > main {
+  background: var(--calda-sheet) !important;
+  background-color: var(--calda-sheet) !important;
+  background-image: none !important;
+  backdrop-filter: var(--calda-blur) !important;
+  -webkit-backdrop-filter: var(--calda-blur) !important;
+  border-radius: var(--calda-r-sheet) !important;
+  box-shadow: var(--calda-rim-pane) !important;
+  color: var(--calda-ink) !important;
+  padding: 20px 22px 26px !important;
+}
+
+/* ── DESKTOP "MODO CELULAR" PHONE FRAME ────────────────────────────────────── */
+.calda-desktop-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 430px;
+  padding: 7px 10px 7px 14px;
+  border-radius: 999px;
+  background: var(--calda-chrome);
+  backdrop-filter: var(--calda-blur);
+  -webkit-backdrop-filter: var(--calda-blur);
+  box-shadow: var(--calda-rim-pane);
+  color: var(--calda-ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.calda-desktop-mode-bar__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calda-desktop-mode-bar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--calda-sig);
+  flex-shrink: 0;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame {
+  padding: 12px 16px 14px;
+  gap: 10px;
+  justify-content: center;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame > .calda-viewport-frame {
+  width: 100%;
+  max-width: 416px;
+  height: min(836px, calc(100vh - 76px));
+  flex: 0 1 auto;
+  border-radius: 34px;
+  padding: 10px 10px 0;
+  gap: 10px;
+  background:
+    radial-gradient(ellipse 100% 55% at 50% 0%, rgba(164, 172, 182, 0.22) 0%, transparent 62%),
+    linear-gradient(175deg, #323539 0%, #26282c 55%, #1e2024 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.24),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.42),
+    0 34px 80px -20px rgba(0, 0, 0, 0.78);
+  overflow: hidden;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .shell-header {
+  border-radius: 22px !important;
+  min-height: 54px;
+  padding: 8px 11px !important;
+  gap: 8px;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .calda-brand-mark__tile {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .calda-brand-mark__title {
+  font-size: 14px;
+  max-width: 155px;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .calda-brand-mark__subtitle {
+  display: none;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .shell-sync-indicator,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .shell-sync-pill,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .shell-header__sync-label,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .shell-header__theme-emoji {
+  display: none !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .shell-header__sync-button {
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  justify-content: center;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame main,
+html.dark.theme-calda .app-shell.app-shell--calda-phone-frame > div > main {
+  border-radius: 24px 24px 0 0 !important;
+  padding: 12px 11px 92px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Force true single-column mobile responsive layout inside desktop phone frame */
+html.theme-calda .app-shell.app-shell--calda-phone-frame .mt-card-grid,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-order-list,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .lub-card-grid,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-multiselect-grid,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-recency-fields,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .mt-quadrants,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-main-filters,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-advanced-filters,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-charts-grid {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-module .apoio-sticky-search {
+  padding: 10px 12px !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-module .apoio-direct-toolbar {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: end !important;
+  gap: 8px !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-module .apoio-direct-count {
+  grid-column: 1 / -1 !important;
+  line-height: 1.3 !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-header,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-filter-top {
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-header-actions {
+  flex-wrap: wrap !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .mt-kpi-grid,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .lub-kpis,
+html.theme-calda .app-shell.app-shell--calda-phone-frame .bi-kpi-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .mt-toolbar {
+  padding: 14px !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  border-radius: 20px !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .mt-toolbar-actions {
+  width: 100%;
+  justify-content: stretch;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-view-toggle {
+  width: 100%;
+  justify-content: space-between;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .apoio-view-toggle button {
+  flex: 1 1 0;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .mt-hero {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  padding: 14px !important;
+}
+
+/* ── CALDA FLOATING BOTTOM TAB BAR (Exact match to Calda mobile nav.tabbar.pane) ── */
+.calda-tabbar {
+  position: fixed;
+  left: 10px;
+  right: 10px;
+  bottom: max(10px, env(safe-area-inset-bottom, 10px));
+  height: 64px;
+  padding: 5px;
+  border-radius: 24px;
+  background: var(--calda-chrome-solid);
+  backdrop-filter: var(--calda-blur);
+  -webkit-backdrop-filter: var(--calda-blur);
+  box-shadow: var(--calda-rim-pane);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 4px;
+  z-index: 60;
+}
+
+/* When inside the Desktop Phone Frame, anchor tabbar cleanly inside the phone frame */
+html.theme-calda .app-shell.app-shell--calda-phone-frame .calda-tabbar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+
+.calda-tabbar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 48px;
+  padding: 4px 2px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.1;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 160ms ease, color 160ms ease, transform 150ms ease, box-shadow 160ms ease;
+}
+
+.calda-tabbar__item:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.calda-tabbar__item:active {
+  transform: scale(0.96);
+}
+
+/* Signature Calda pure white active tile in bottom tab bar */
+.calda-tabbar__item.is-active {
+  background: var(--calda-pill-bg);
+  color: var(--calda-pill-ink);
+  font-weight: 700;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.50);
+}
+
+.calda-tabbar__item.is-active svg {
+  color: var(--calda-pill-ink);
+}
+
+.calda-tabbar__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  letter-spacing: -0.01em;
+}
+
+.calda-tabbar__badge {
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--calda-sig);
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── CALDA "MAIS OPERAÇÕES" BOTTOM SHEET ───────────────────────────────────── */
+.calda-more-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(14, 16, 19, 0.56);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+}
+
+.calda-more-sheet {
+  width: 100%;
+  max-width: 440px;
+  max-height: min(76vh, 620px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  background: rgba(44, 46, 51, 0.96);
+  backdrop-filter: var(--calda-blur-thick);
+  -webkit-backdrop-filter: var(--calda-blur-thick);
+  box-shadow: var(--calda-rim-pane);
+  color: var(--calda-ink);
+  overflow: hidden;
+}
+
+.calda-more-sheet__handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  margin: 10px auto 4px;
+  flex-shrink: 0;
+}
+
+.calda-more-sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 18px 12px;
+  border-bottom: 1px solid var(--calda-line-soft);
+}
+
+.calda-more-sheet__header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.calda-more-sheet__close {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--calda-line);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.calda-more-sheet__body {
+  padding: 12px 14px 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.calda-more-section__title {
+  margin: 0 0 6px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--calda-muted);
+}
+
+.calda-more-section__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.calda-more-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: var(--calda-rim);
+  color: var(--calda-ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.calda-more-tile:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.calda-more-tile.is-active {
+  background: var(--calda-pill-bg);
+  color: var(--calda-pill-ink);
+  font-weight: 700;
+}
+
+.calda-more-tile svg {
+  flex-shrink: 0;
+}
+
+.calda-more-tile span {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.25;
+}
+
+/* ── REAL MOBILE VIEWPORT (<= 768px) — MODO APLICATIVO AUTOMÁTICO ──────────── */
+@media (max-width: 768px) {
+  html.theme-calda .app-shell {
+    padding: 8px 8px 0;
+    gap: 8px;
+  }
+
+  html.theme-calda .app-shell > .calda-viewport-frame {
+    gap: 8px;
+  }
+
+  html.theme-calda .app-shell .shell-header {
+    border-radius: 22px !important;
+    min-height: 54px;
+    padding: 7px 10px !important;
+    gap: 6px;
+  }
+
+  html.theme-calda .calda-brand-mark {
+    gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  html.theme-calda .calda-brand-mark__tile {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+
+  html.theme-calda .calda-brand-mark__title {
+    font-size: 13px;
+    max-width: 126px;
+  }
+
+  html.theme-calda .calda-brand-mark__subtitle {
+    display: none;
+  }
+
+  html.theme-calda .app-shell .shell-header > div:last-child {
+    gap: 6px !important;
+    flex-shrink: 0;
+  }
+
+  html.theme-calda .app-shell .shell-sync-indicator,
+  html.theme-calda .app-shell .shell-sync-pill,
+  html.theme-calda .app-shell .shell-header__sync-label,
+  html.theme-calda .app-shell .shell-header__theme-emoji {
+    display: none !important;
+  }
+
+  html.theme-calda .app-shell .shell-header__sync-button,
+  html.theme-calda .app-shell .shell-header > div:last-child > button {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 0 !important;
+    justify-content: center;
+  }
+
+  html.theme-calda .app-shell main,
+  html.dark.theme-calda .app-shell > div > main,
+  html.dark.theme-calda .app-shell.app-shell--lub > div > main,
+  html.dark.theme-calda .app-shell.app-shell--apoio > div > main,
+  html.dark.theme-calda .app-shell.app-shell--apoio-reference > div > main {
+    border-radius: 24px 24px 0 0 !important;
+    padding: 12px 10px 92px !important;
+  }
+}
+
+/* ── Theme Picker Modal in Calda ───────────────────────────────────────────── */
+html.theme-calda .shell-theme-picker {
+  background: rgba(44, 46, 51, 0.96) !important;
+  backdrop-filter: var(--calda-blur-thick) !important;
+  -webkit-backdrop-filter: var(--calda-blur-thick) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  box-shadow: var(--calda-rim-pane) !important;
+  color: var(--calda-ink) !important;
+}
+
+html.theme-calda .shell-theme-picker__heading {
+  border-bottom: 1px solid var(--calda-line-soft) !important;
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .shell-theme-option {
+  color: var(--calda-ink) !important;
+}
+
+html.theme-calda .shell-theme-option:hover {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+html.theme-calda .shell-theme-option__description {
+  color: var(--calda-muted) !important;
+}
+
+/* ── Shared Cards, Panels, KPIs, & Wells across Modules ────────────────────── */
+html.theme-calda .app-shell .maintenance-tracking,
+html.theme-calda .app-shell .apoio-module,
+html.theme-calda .app-shell .apoio-premium,
+html.theme-calda .app-shell .apoio-reference,
+html.theme-calda .app-shell .apoio-like-reformas {
+  --mt-ivory: transparent !important;
+  --mt-green: #ffffff !important;
+  --mt-green-deep: #1e9bf0 !important;
+  --mt-green-mid: #56b8ff !important;
+  --mt-gold: rgba(255, 255, 255, 0.18) !important;
+  --mt-gold-light: rgba(30, 155, 240, 0.36) !important;
+  --mt-text: #ffffff !important;
+  --mt-muted: #c2c7d0 !important;
+  --mt-line: rgba(255, 255, 255, 0.12) !important;
+
+  --apoio-ivory: transparent !important;
+  --apoio-surface: rgba(255, 255, 255, 0.072) !important;
+  --apoio-surface-soft: rgba(255, 255, 255, 0.06) !important;
+  --apoio-text: #ffffff !important;
+  --apoio-heading: #ffffff !important;
+  --apoio-muted: #c2c7d0 !important;
+  --apoio-soft: rgba(30, 155, 240, 0.18) !important;
+  --apoio-border: rgba(255, 255, 255, 0.16) !important;
+  --apoio-border-strong: rgba(30, 155, 240, 0.45) !important;
+  --apoio-line: rgba(255, 255, 255, 0.11) !important;
+  --apoio-green: #1e9bf0 !important;
+  --apoio-medium: #56b8ff !important;
+
+  --bg-primary: rgba(24, 26, 30, 0.56) !important;
+  --bg-secondary: rgba(46, 49, 54, 0.72) !important;
+  --bg-tertiary: rgba(255, 255, 255, 0.07) !important;
+  --bg-card: rgba(255, 255, 255, 0.072) !important;
+  --bg-hover: rgba(255, 255, 255, 0.10) !important;
+  --border-primary: rgba(255, 255, 255, 0.16) !important;
+  --border-secondary: rgba(255, 255, 255, 0.10) !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #d8dde6 !important;
+  --text-muted: #c2c7d0 !important;
+  --brand-green: #1e9bf0 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking > .mt-ribbon-layer,
+html.theme-calda .app-shell .apoio-reference > .apoio-ribbon-layer,
+html.theme-calda .app-shell .apoio-premium::before,
+html.theme-calda .app-shell .apoio-premium::after,
+html.theme-calda .app-shell .maintenance-tracking .mt-hero::after {
+  display: none !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :where(h2, h3, h4, strong, dt, label),
+html.theme-calda .app-shell .apoio-reference :where(h2, h3, h4, strong, dt, label) {
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :where(p, dd, small, summary span),
+html.theme-calda .app-shell .apoio-reference :where(p, dd, small) {
+  color: var(--calda-ink-soft) !important;
+}
+
+/* Smoked Calda cards with exact specular glass rim */
+html.theme-calda .app-shell .maintenance-tracking :is(
+  .mt-hero,
+  .apoio-hero,
+  .mt-kpi,
+  .apoio-kpi,
+  .mt-filters,
+  .mt-toolbar,
+  .mt-source-line,
+  .mt-visibility-bar,
+  .apoio-sticky-search,
+  .apoio-recency-panel,
+  .apoio-order-filters,
+  .mt-order,
+  .apoio-order,
+  .mt-empty,
+  .mt-pagination,
+  .mt-closure-summary
+),
+html.theme-calda .app-shell .apoio-image-reports section[aria-label],
+html.theme-calda .app-shell .lavagem-premium .lub-module :is(.lub-kpi, .lub-filter-panel, .lub-table-panel, .lub-schedule-card),
+html.theme-calda .app-shell .bi-root :is(.bi-kpi, .bi-panel, .bi-card, .bi-section, .bi-hero, .bi-toolbar),
+html.theme-calda .app-shell .glass-card:not(.apoio-image-preview-row) {
+  background: var(--calda-card) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  color: #ffffff !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-toolbar {
+  padding: 18px 20px !important;
+  gap: 14px 18px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-source-line {
+  padding: 12px 16px !important;
+  gap: 6px 16px !important;
+  border-radius: 18px !important;
+  box-sizing: border-box !important;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--calda-ink-soft) !important;
+  font-size: 12.5px !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-source-line > span {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-source-line strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-connection-dot {
+  background: var(--calda-good) !important;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.20) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-toolbar > div > p:not(.mt-eyebrow) {
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-eyebrow, .mt-card-kicker, .mt-label, .apoio-eyebrow) {
+  color: var(--calda-sig-hi) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-history-summary {
+  margin: 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12) !important;
+  color: var(--calda-muted) !important;
+  font-size: 12.5px !important;
+}
+
+/* Inner dark wells inside cards */
+html.theme-calda .app-shell .maintenance-tracking :is(
+  .mt-filter-body,
+  .mt-quadrants,
+  .mt-narrative-section,
+  .mt-observations,
+  .mt-closure-fact,
+  .apoio-image-preview,
+  .apoio-image-preview-row
+) {
+  background: var(--calda-well) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  border-radius: var(--calda-r-md) !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+/* Calda Active White Pill & Signal Controls */
+html.theme-calda .app-shell .maintenance-tracking :is(
+  .mt-btn-primary,
+  .mt-visibility-action,
+  .apoio-hero-tab[aria-pressed="true"],
+  .apoio-button[aria-pressed="true"],
+  .mt-status-tabs button[aria-pressed="true"],
+  .mt-view-toggle button[aria-pressed="true"],
+  .apoio-view-toggle button[aria-pressed="true"],
+  .apoio-direct-toolbar button[aria-pressed="true"],
+  .apoio-report-scope-btn.is-active
+),
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-tabs > button[aria-current="page"],
+html.theme-calda .app-shell .lavagem-premium .lub-filter-panel .lub-chip.is-active {
+  background: var(--calda-pill-bg) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :is(
+  .mt-btn-primary,
+  .mt-visibility-action,
+  .apoio-hero-tab[aria-pressed="true"],
+  .apoio-button[aria-pressed="true"],
+  .mt-status-tabs button[aria-pressed="true"],
+  .mt-view-toggle button[aria-pressed="true"],
+  .apoio-view-toggle button[aria-pressed="true"],
+  .apoio-direct-toolbar button[aria-pressed="true"],
+  .apoio-report-scope-btn.is-active
+) *,
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-tabs > button[aria-current="page"] * {
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-status-tabs button[aria-pressed="true"] b {
+  background: rgba(22, 25, 29, 0.14) !important;
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :is(
+  .mt-btn-subtle,
+  .mt-btn,
+  .apoio-button:not([aria-pressed="true"]),
+  .apoio-hero-tab:not([aria-pressed="true"]),
+  .apoio-direct-clear,
+  .apoio-image-picker-action,
+  .mt-status-tabs button:not([aria-pressed="true"]),
+  .mt-view-toggle button:not([aria-pressed="true"]),
+  .apoio-view-toggle button:not([aria-pressed="true"]),
+  .apoio-report-scope-btn:not(.is-active),
+  .mt-order-bottom button,
+  .apoio-orders-table .apoio-table-details-button,
+  .apoio-group-card__edit
+) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-view-toggle,
+html.theme-calda .app-shell .maintenance-tracking .mt-view-toggle {
+  background: rgba(20, 22, 26, 0.42) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-view-toggle button:not([aria-pressed="true"]),
+html.theme-calda .app-shell .maintenance-tracking .mt-view-toggle button:not([aria-pressed="true"]) {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+/* Inputs & Selects */
+html.theme-calda .app-shell .maintenance-tracking :is(input:not([type="checkbox"]):not([type="radio"]):not([type="color"]), select, textarea),
+html.theme-calda .app-shell .lavagem-premium :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  background: rgba(22, 24, 28, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 14px !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .apoio-direct-search-control {
+  background: rgba(22, 24, 28, 0.56) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  padding: 0 14px !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .apoio-direct-search-control input {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+/* Status pills & badges in Calda */
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-order .mt-status, .apoio-table-status) {
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-status--programado, .apoio-table-status-scheduled) {
+  background: var(--calda-sig-soft) !important;
+  border-color: rgba(86, 184, 255, 0.45) !important;
+  color: #d8f0ff !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-status--andamento, .apoio-table-status-progress) {
+  background: var(--calda-good-soft) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+  color: #d6fae9 !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-status--outros, .apoio-table-status-unconfirmed) {
+  background: var(--calda-warn-soft) !important;
+  border-color: rgba(244, 190, 94, 0.45) !important;
+  color: #fff2d6 !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-order .mt-days {
+  background: var(--calda-warn-soft) !important;
+  border: 1px solid rgba(244, 190, 94, 0.42) !important;
+  border-radius: 14px !important;
+  color: #fff2d6 !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-order .mt-days.mt-days--late {
+  background: var(--calda-bad-soft) !important;
+  border-color: rgba(244, 124, 103, 0.48) !important;
+  color: #ffe3de !important;
+}
+
+/* ── Apoio Table & Operational Panel in Calda ──────────────────────────────── */
+html.theme-calda .app-shell .apoio-module .apoio-table-scroll {
+  background: rgba(34, 36, 41, 0.86) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table {
+  background: transparent !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table thead th,
+html.theme-calda .app-shell .apoio-module .apoio-orders-table thead th:first-child {
+  background: #27292e !important;
+  color: var(--calda-muted) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table tbody td,
+html.theme-calda .app-shell .apoio-module .apoio-orders-table tbody th,
+html.theme-calda .app-shell .apoio-module .apoio-table-row {
+  background: rgba(42, 44, 49, 0.72) !important;
+  color: var(--calda-ink-soft) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table tbody tr.is-odd :is(td, th) {
+  background: rgba(52, 55, 61, 0.78) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table .apoio-table-fleet-cell {
+  background: #282a2f !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table tbody tr.is-odd .apoio-table-fleet-cell {
+  background: #2f3238 !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table tbody tr:hover .apoio-table-fleet-cell {
+  background: #353b45 !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table .apoio-table-fleet-cell strong {
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-orders-table .apoio-table-detail-row > td,
+html.theme-calda .app-shell .apoio-module .apoio-orders-table .apoio-table-detail {
+  background: #25272c !important;
+  color: #ffffff !important;
+}
+
+/* Operational Panel (Painel) Calda smoked glass integration */
+html.theme-calda .app-shell .apoio-op-controls,
+html.theme-calda .app-shell .apoio-op-bucket,
+html.theme-calda .app-shell .apoio-op-inspector {
+  background: var(--calda-card) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .apoio-op-chip {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .apoio-op-chip.is-active,
+html.theme-calda .app-shell .apoio-op-groupby__btn.is-active {
+  background: var(--calda-pill-bg) !important;
+  border-color: var(--calda-pill-bg) !important;
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .apoio-op-chip.is-active *,
+html.theme-calda .app-shell .apoio-op-groupby__btn.is-active * {
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .apoio-op-groupby {
+  background: rgba(20, 22, 26, 0.42) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-calda .app-shell .apoio-op-bucket__header {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .apoio-op-item.is-selected {
+  background: rgba(30, 155, 240, 0.16) !important;
+}
+
+html.theme-calda .app-shell .apoio-op-inline-dossier {
+  background: rgba(22, 24, 28, 0.62) !important;
+}
+
+html.theme-calda .app-shell .apoio-dossier__grid > div,
+html.theme-calda .app-shell .apoio-dossier__narrative {
+  background: rgba(20, 22, 26, 0.44) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ── Central Gerencial (.bi-root) Calda Smoked Glass Overrides ─────────────── */
+html.theme-calda .bi-root {
+  --bi-ink: #ffffff !important;
+  --bi-muted: #c2c7d0 !important;
+  --bi-green: #1e9bf0 !important;
+  --bi-line: rgba(255, 255, 255, 0.14) !important;
+  --bi-bg: transparent !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #d8dde6 !important;
+  --bg-card: rgba(255, 255, 255, 0.072) !important;
+  --bg-primary: rgba(22, 24, 28, 0.56) !important;
+  --brand-green: #1e9bf0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+  padding: 6px 2px !important;
+}
+
+html.theme-calda .bi-root .bi-view-toolbar {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html.theme-calda .bi-root :is(
+  .bi-header,
+  .bi-filter-panel,
+  .bi-view-toolbar nav,
+  .bi-kpi,
+  .bi-chart-panel,
+  .bi-panel,
+  .bi-table-wrap,
+  .bi-empty-callout,
+  .bi-loading,
+  .bi-method-note,
+  .bi-select-popover,
+  .bi-tooltip
+) {
+  background: var(--calda-card) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  color: #ffffff !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .bi-root .bi-select-popover,
+html.theme-calda .bi-root .bi-tooltip {
+  background: rgba(42, 44, 49, 0.96) !important;
+}
+
+html.theme-calda .bi-root .bi-view-toolbar nav {
+  border-radius: 22px !important;
+  padding: 6px !important;
+}
+
+html.theme-calda .bi-root :is(.bi-source-line, .bi-footer) {
+  background: transparent !important;
+  border-color: var(--calda-line) !important;
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .bi-root .bi-eyebrow,
+html.theme-calda .bi-root .bi-methodology h3,
+html.theme-calda .bi-root .bi-premium-label {
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .bi-root .bi-premium-label {
+  background: var(--calda-sig-soft) !important;
+  border: 1px solid rgba(86, 184, 255, 0.36) !important;
+  border-radius: 999px !important;
+}
+
+html.theme-calda .bi-root :is(
+  .bi-brand h1,
+  .bi-kpi > strong,
+  .bi-chart-panel-header h3,
+  .bi-panel-heading h2,
+  .bi-methodology h2,
+  .bi-source-line strong,
+  .bi-tooltip > strong,
+  .bi-tooltip-row b,
+  .bi-orders-table td > strong,
+  .bi-order-details dd,
+  .bi-order-details h3
+) {
+  color: #ffffff !important;
+}
+
+html.theme-calda .bi-root :is(
+  .bi-brand p,
+  .bi-field-label,
+  .bi-kpi > div,
+  .bi-kpi p,
+  .bi-filter-bottom p,
+  .bi-period-shortcuts,
+  .bi-filter-summary > span,
+  .bi-presets > span,
+  .bi-chart-panel-header p,
+  .bi-legend-item,
+  .bi-panel-heading p,
+  .bi-sort,
+  .bi-orders-table small,
+  .bi-order-details dt,
+  .bi-detail-note,
+  .bi-narrative-preview,
+  .bi-pagination,
+  .bi-methodology p,
+  .bi-loading p,
+  .bi-empty-callout p,
+  .bi-select-footer,
+  .bi-select-options p
+) {
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .bi-root input,
+html.theme-calda .bi-root select,
+html.theme-calda .bi-root .bi-select-trigger,
+html.theme-calda .bi-root .bi-search,
+html.theme-calda .bi-root .bi-select-search,
+html.theme-calda .bi-root .bi-chart-empty {
+  background: rgba(22, 24, 28, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .bi-root .bi-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-calda .bi-root .bi-select-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+html.theme-calda .bi-root .bi-button-primary,
+html.theme-calda .bi-root .bi-button.is-active,
+html.theme-calda .bi-root .bi-view-toolbar nav button[aria-pressed="true"] {
+  background: var(--calda-pill-bg) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.theme-calda .bi-root .bi-button-primary *,
+html.theme-calda .bi-root .bi-button.is-active *,
+html.theme-calda .bi-root .bi-view-toolbar nav button[aria-pressed="true"] * {
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .bi-root .bi-view-toolbar nav button:not([aria-pressed="true"]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .bi-root :is(
+  .bi-button:not(.bi-button-primary):not(.is-active),
+  .bi-presets button,
+  .bi-period-shortcuts button,
+  .bi-filter-summary small,
+  .bi-pagination button,
+  .bi-detail-button,
+  .bi-chart-actions button,
+  .bi-select-options small
+) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .bi-root .bi-orders-table th {
+  background: rgba(30, 32, 37, 0.92) !important;
+  color: var(--calda-sig-hi) !important;
+  border-bottom: 1px solid var(--calda-line) !important;
+}
+
+html.theme-calda .bi-root .bi-orders-table td {
+  color: var(--calda-ink-soft) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-calda .bi-root .bi-full-narrative {
+  background: var(--calda-well) !important;
+  border-color: var(--calda-line) !important;
+  border-radius: 16px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .bi-charts {
+  --bi-green: #1e9bf0 !important;
+  --bi-slate-900: #ffffff !important;
+  --bi-slate-700: #e5e8ef !important;
+  --bi-slate-500: #c2c7d0 !important;
+  --bi-slate-300: rgba(255, 255, 255, 0.16) !important;
+  --bi-slate-200: rgba(255, 255, 255, 0.09) !important;
+  --bi-slate-100: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+}
+
+/* ── Global Glass Inputs, Selects, & Status Badges across ALL Modules ──────── */
+html.theme-calda .app-shell .glass-input,
+html.theme-calda .app-shell input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not(.bg-transparent),
+html.theme-calda .app-shell select,
+html.theme-calda .app-shell textarea {
+  background: rgba(22, 24, 28, 0.62) !important;
+  backdrop-filter: blur(12px) saturate(110%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(110%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 14px !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .app-shell select option {
+  background: #24262b !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .status-badge {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-calda .app-shell .status-badge[data-status="PENDENTE"] {
+  background: var(--calda-warn-soft) !important;
+  border-color: rgba(244, 190, 94, 0.46) !important;
+  color: #fff2d6 !important;
+}
+
+html.theme-calda .app-shell .status-badge[data-status="ATRASADO"] {
+  background: var(--calda-bad-soft) !important;
+  border-color: rgba(244, 124, 103, 0.48) !important;
+  color: #ffe3de !important;
+}
+
+html.theme-calda .app-shell .status-badge[data-status="PROGRAMADO"] {
+  background: var(--calda-sig-soft) !important;
+  border-color: rgba(86, 184, 255, 0.46) !important;
+  color: #dff2ff !important;
+}
+
+html.theme-calda .app-shell .status-badge[data-status="ANDAMENTO"] {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(86, 184, 255, 0.48) !important;
+  color: #e0f5ff !important;
+}
+
+html.theme-calda .app-shell .status-badge[data-status="ENCERRADO"] {
+  background: var(--calda-good-soft) !important;
+  border-color: rgba(52, 211, 153, 0.46) !important;
+  color: #d6fae9 !important;
+}
+
+/* ── Lavagem e Lubrificação Module (.lavagem-premium & .lub-module) ────────── */
+html.theme-calda .app-shell .lavagem-premium,
+html.dark.theme-calda .app-shell .lavagem-premium {
+  --bg-primary: #2a2c2f !important;
+  --bg-secondary: rgba(44, 46, 51, 0.84) !important;
+  --bg-tertiary: rgba(255, 255, 255, 0.07) !important;
+  --bg-card: rgba(255, 255, 255, 0.072) !important;
+  --bg-hover: rgba(255, 255, 255, 0.11) !important;
+  --border-primary: rgba(255, 255, 255, 0.16) !important;
+  --border-secondary: rgba(255, 255, 255, 0.10) !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e2e5eb !important;
+  --text-tertiary: #c2c7d0 !important;
+  --text-muted: #c2c7d0 !important;
+  --brand-green: #1e9bf0 !important;
+  --glass-card-bg: rgba(255, 255, 255, 0.072) !important;
+  --glass-card-border: rgba(255, 255, 255, 0.18) !important;
+  --glass-input-bg: rgba(22, 24, 28, 0.62) !important;
+  --glass-input-border: rgba(255, 255, 255, 0.18) !important;
+
+  --lavagem-ivory: transparent !important;
+  --lavagem-ivory-deep: rgba(22, 24, 28, 0.56) !important;
+  --lavagem-surface: rgba(255, 255, 255, 0.072) !important;
+  --lavagem-surface-soft: rgba(255, 255, 255, 0.06) !important;
+  --lavagem-cream: rgba(255, 255, 255, 0.06) !important;
+  --lavagem-green: #ffffff !important;
+  --lavagem-green-deep: #ffffff !important;
+  --lavagem-green-medium: #56b8ff !important;
+  --lavagem-ink: #ffffff !important;
+  --lavagem-muted: #c2c7d0 !important;
+  --lavagem-line: rgba(255, 255, 255, 0.14) !important;
+
+  --lub-green: #ffffff !important;
+  --lub-green-dark: #1e9bf0 !important;
+  --lub-green-soft: rgba(30, 155, 240, 0.18) !important;
+  --lub-muted: #c2c7d0 !important;
+  --lub-text: #ffffff !important;
+  --lub-bg: transparent !important;
+  --lub-surface: rgba(255, 255, 255, 0.072) !important;
+  --lub-soft: rgba(22, 24, 28, 0.54) !important;
+  --lub-hover: rgba(255, 255, 255, 0.09) !important;
+  --lub-line: rgba(255, 255, 255, 0.12) !important;
+
+  background: transparent !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium > .lavagem-premium-ribbons,
+html.theme-calda .app-shell .apoio-reference > .apoio-reference-ribbons {
+  display: none !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium-body :is(h1, h2, h3, h4) {
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium > .lavagem-premium-hero,
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-header {
+  min-height: auto !important;
+  max-width: 1180px !important;
+  margin: 8px auto 16px !important;
+  padding: 20px 24px !important;
+  background: var(--calda-card) !important;
+  background-image: none !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  box-shadow: var(--calda-rim) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-brand h2 {
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-brand p {
+  color: var(--calda-sig-hi) !important;
+  font-weight: 600 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-tabs {
+  background: rgba(20, 22, 26, 0.44) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 5px !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-ink-soft) !important;
+  box-shadow: none !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-tabs button:not([aria-current="page"]):hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-perf-soft-warning,
+html.dark.theme-calda .app-shell .lavagem-premium .lavagem-perf-soft-warning {
+  background: rgba(244, 190, 94, 0.14) !important;
+  backdrop-filter: blur(16px) saturate(110%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(110%) !important;
+  border: 1px solid rgba(244, 190, 94, 0.36) !important;
+  border-radius: 18px !important;
+  color: #fff2d6 !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-perf-soft-warning__close,
+html.dark.theme-calda .app-shell .lavagem-premium .lavagem-perf-soft-warning__close {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-sync,
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-green-600"],
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-emerald-"],
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body .lub-edit,
+html.theme-calda .lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  background: var(--calda-pill-bg) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium :is(
+  .lavagem-premium-sync,
+  .lavagem-premium-body button[class*="bg-green-600"],
+  .lavagem-premium-body button[class*="bg-emerald-"],
+  .lub-edit
+) * {
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-green-700"],
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-[#1b4332]"],
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body button[class*="bg-[#0f3d26]"] {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body :is(
+  [class*="bg-amber-50"],
+  [class*="bg-amber-100"],
+  [class*="bg-yellow-50"]
+) {
+  background: rgba(244, 190, 94, 0.14) !important;
+  border-color: rgba(244, 190, 94, 0.34) !important;
+  color: #fff2d6 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body :is(
+  [class*="bg-red-50"],
+  [class*="bg-red-100"],
+  [class*="bg-rose-50"]
+) {
+  background: rgba(244, 124, 103, 0.14) !important;
+  border-color: rgba(244, 124, 103, 0.34) !important;
+  color: #ffe3de !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body :is(
+  [class*="bg-blue-50"],
+  [class*="bg-blue-100"],
+  [class*="bg-sky-50"]
+) {
+  background: rgba(30, 155, 240, 0.16) !important;
+  border-color: rgba(86, 184, 255, 0.36) !important;
+  color: #dff2ff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body :is(
+  [class*="bg-purple-50"],
+  [class*="bg-purple-100"]
+) {
+  background: rgba(167, 139, 250, 0.16) !important;
+  border-color: rgba(196, 181, 253, 0.36) !important;
+  color: #ede9fe !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body :is(
+  [class*="bg-green-50"],
+  [class*="bg-green-100"],
+  [class*="bg-emerald-50"]
+) {
+  background: rgba(52, 211, 153, 0.16) !important;
+  border-color: rgba(52, 211, 153, 0.36) !important;
+  color: #d6fae9 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"],
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"],
+html.theme-calda .app-shell .lavagem-premium .dashboard-kpi,
+html.theme-calda .app-shell .verdan-widget-card,
+html.theme-calda .app-shell .verdan-overview-card {
+  background: var(--calda-card) !important;
+  background-image: none !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  box-shadow: var(--calda-rim) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] h3,
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] strong {
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] p,
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body > p[role="note"] {
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] article {
+  background: var(--calda-well) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--calda-r-md) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] button:not([style*="--brand-green"]) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body section[style*="linear-gradient"] button[style*="--brand-green"] {
+  background: var(--calda-pill-bg) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .dashboard-kpi__icon,
+html.theme-calda .app-shell .verdan-widget-card__icon {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .app-shell .verdan-widget-card__title {
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .verdan-widget-card__badge,
+html.theme-calda .app-shell .verdan-widget-card__badge--lime {
+  background: var(--calda-sig-soft) !important;
+  border-color: rgba(86, 184, 255, 0.44) !important;
+  color: #dff2ff !important;
+}
+
+html.theme-calda .app-shell .verdan-widget-card__badge--coral {
+  background: var(--calda-bad-soft) !important;
+  border-color: rgba(244, 124, 103, 0.46) !important;
+  color: #ffe3de !important;
+}
+
+html.theme-calda .app-shell .verdan-lollipop__dot {
+  background: linear-gradient(135deg, #1e9bf0, #79ccff) !important;
+  box-shadow: 0 0 10px rgba(30, 155, 240, 0.50) !important;
+}
+
+html.theme-calda .app-shell .verdan-lollipop__stem {
+  background: linear-gradient(180deg, rgba(30, 155, 240, 0.85), rgba(86, 184, 255, 0.18)) !important;
+}
+
+html.theme-calda .app-shell .verdan-lollipop__label {
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .app-shell .verdan-gauge__value {
+  fill: #ffffff !important;
+}
+
+html.theme-calda .app-shell .verdan-gauge__label {
+  fill: var(--calda-muted) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-kpi.is-selected {
+  box-shadow:
+    0 0 0 2px rgba(86, 184, 255, 0.65),
+    var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-toolbar-title,
+html.theme-calda .app-shell .lavagem-premium .lub-filter-title strong,
+html.theme-calda .app-shell .lavagem-premium .lub-table-caption strong,
+html.theme-calda .app-shell .lavagem-premium .lub-kpi strong {
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-toolbar p,
+html.theme-calda .app-shell .lavagem-premium .lub-filter-title span,
+html.theme-calda .app-shell .lavagem-premium .lub-table-caption span,
+html.theme-calda .app-shell .lavagem-premium .lub-kpi-label,
+html.theme-calda .app-shell .lavagem-premium .lub-kpi small {
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-filter-panel label.glass-input {
+  background: rgba(22, 24, 28, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 14px !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-filter-panel label.glass-input input[type="date"],
+html.theme-calda .app-shell .lavagem-premium .lub-filter-panel input.bg-transparent {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > div {
+  background: rgba(20, 22, 26, 0.44) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-[var(--brand-green)]"] {
+  background: var(--calda-pill-bg) !important;
+  border-radius: 999px !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-[var(--brand-green)]"] * {
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"] {
+  border-radius: 999px !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button:not([class*="bg-[var(--brand-green)]"]):not([class*="bg-green-"]):not([class*="bg-amber-"]):not([class*="bg-cyan-"]):not([aria-pressed="true"]),
+html.theme-calda .app-shell .lavagem-premium .lub-filter-panel .lub-chip:not(.is-active) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-toolbar button[class*="bg-amber-"] {
+  background: var(--calda-warn-soft) !important;
+  border-color: rgba(244, 190, 94, 0.44) !important;
+  border-radius: 999px !important;
+  color: #fff2d6 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-toolbar button[class*="bg-green-500/"] {
+  background: var(--calda-good-soft) !important;
+  border-color: rgba(52, 211, 153, 0.44) !important;
+  border-radius: 999px !important;
+  color: #d6fae9 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-table-caption {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-table th,
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-table th button,
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-table thead .lub-actions-cell {
+  background: #27292e !important;
+  color: var(--calda-muted) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-table td {
+  background: transparent !important;
+  color: var(--calda-ink-soft) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-table .lub-actions-cell {
+  background: #282a2f !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-fleet {
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-observation-cell {
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-observation {
+  color: #ffffff !important;
+}
+
+/* Lavagem OBSERVAÇÕES (.lub-detail) crisp dark pill contrast in Calda */
+html.theme-calda .app-shell .lavagem-premium .lub-table-wrap .lub-detail,
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-detail {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  min-height: 30px !important;
+  margin-top: 6px !important;
+  padding: 4px 10px !important;
+  background: rgba(30, 155, 240, 0.15) !important;
+  background-image: none !important;
+  border: 1px solid rgba(86, 184, 255, 0.38) !important;
+  border-radius: 999px !important;
+  color: #dff2ff !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-detail:hover:not(:disabled),
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-detail[aria-expanded="true"] {
+  background: var(--calda-pill-bg) !important;
+  border-color: var(--calda-pill-bg) !important;
+  color: var(--calda-pill-ink) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-narrative {
+  margin-top: 8px !important;
+  padding: 10px 12px !important;
+  border-radius: 14px !important;
+  background: rgba(20, 22, 26, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-narrative strong {
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .app-shell .lavagem-premium .lub-module .lub-narrative p {
+  color: var(--calda-ink-soft) !important;
+}
+
+/* Lavagem responsive stacking inside desktop Modo Celular phone frame */
+html.theme-calda .app-shell.app-shell--calda-phone-frame .verdan-overview-grid {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .verdan-overview-grid > * {
+  grid-column: 1 / -1 !important;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .lavagem-premium-tabs {
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+
+html.theme-calda .app-shell.app-shell--calda-phone-frame .lub-toolbar {
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+/* ── Reformas, Preventivas, Popovers, TV Monitor & Portaled Modals ─────────── */
+html.theme-calda .app-shell .apoio-reference :is(.apoio-command-center, .apoio-filter-center, .apoio-closed-toggle, .apoio-footer, .apoio-orders-panel > .p-4:last-child) {
+  background: var(--calda-card) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  color: #ffffff !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .apoio-module .apoio-multi-select-popover,
+html.theme-calda .app-shell .apoio-module .apoio-group-fleet-picker {
+  background: rgba(44, 46, 51, 0.96) !important;
+  backdrop-filter: var(--calda-blur-thick) !important;
+  -webkit-backdrop-filter: var(--calda-blur-thick) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #ffffff !important;
+  box-shadow: var(--calda-rim-pane) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-table-scroll {
+  background: rgba(34, 36, 41, 0.86) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-table thead th {
+  background: #27292e !important;
+  color: var(--calda-muted) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-table tbody td {
+  background: rgba(42, 44, 49, 0.72) !important;
+  color: var(--calda-ink-soft) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.theme-calda .app-shell .maintenance-tracking .mt-order .mt-os {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 999px !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .tv-monitor {
+  background: linear-gradient(155deg, #222428 0%, #2a2c2f 55%, #1c1e22 100%) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .tv-monitor :is(.tv-summary, .tv-order),
+html.theme-calda .tv-dialog,
+html.theme-calda .app-shell .equipment-image-manager :is(.equipment-image-manager__preview-card, .equipment-image-manager__form, .equipment-image-manager__login) {
+  background: var(--calda-card) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  color: #ffffff !important;
+  box-shadow: var(--calda-rim) !important;
+}
+
+/* Equipment Image Manager (Configurações) full Calda dark smoked-glass styling */
+html.theme-calda .app-shell .equipment-image-manager,
+html.dark.theme-calda .app-shell .equipment-image-manager {
+  --eim-ink: #ffffff !important;
+  --eim-muted: #c2c7d0 !important;
+  --eim-line: rgba(255, 255, 255, 0.16) !important;
+  --eim-panel: var(--calda-card) !important;
+  --eim-soft: rgba(255, 255, 255, 0.08) !important;
+  --eim-green: #56b8ff !important;
+  --eim-green-dark: #ffffff !important;
+  --eim-warning: #fff2d6 !important;
+  --eim-danger: #ffe3de !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__header {
+  background: var(--calda-card) !important;
+  backdrop-filter: blur(18px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(108%) !important;
+  border: 0 !important;
+  border-radius: var(--calda-r-card) !important;
+  box-shadow: var(--calda-rim) !important;
+  padding: 20px 22px !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager :is(h2, h3, h4, strong) {
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager :is(
+  .equipment-image-manager__intro,
+  .equipment-image-manager__hint,
+  .equipment-image-manager__readonly p,
+  .equipment-image-manager__login p,
+  .equipment-image-manager__selector label,
+  .equipment-image-manager__login-row label
+) {
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__eyebrow {
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__role,
+html.theme-calda .app-shell .equipment-image-manager__role.is-viewer {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__checker {
+  background-color: #23252a !important;
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%) !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__caption,
+html.theme-calda .app-shell .equipment-image-manager__preview-caption,
+html.theme-calda .app-shell .equipment-image-manager__meta {
+  background: rgba(20, 22, 26, 0.72) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__notice.is-info,
+html.theme-calda .app-shell .equipment-image-manager__loading {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__notice.is-success {
+  background: var(--calda-good-soft) !important;
+  border-color: rgba(52, 211, 153, 0.42) !important;
+  color: #d6fae9 !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__notice.is-warning {
+  background: var(--calda-warn-soft) !important;
+  border-color: rgba(244, 190, 94, 0.42) !important;
+  color: #fff2d6 !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__notice.is-error {
+  background: var(--calda-bad-soft) !important;
+  border-color: rgba(244, 124, 103, 0.44) !important;
+  color: #ffe3de !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__button {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .app-shell .equipment-image-manager__button.is-primary {
+  background: var(--calda-pill-bg) !important;
+  border: 0 !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+}
+
+html.theme-calda .lub-premium-modal {
+  background: rgba(14, 15, 18, 0.68) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color-scheme: dark !important;
+}
+
+html.theme-calda .historico-frota-modal .historico-frota-card,
+html.theme-calda .lub-premium-modal .lub-modal,
+html.theme-calda [role="dialog"] .rounded-2xl {
+  background: rgba(38, 40, 45, 0.97) !important;
+  backdrop-filter: var(--calda-blur-thick) !important;
+  -webkit-backdrop-filter: var(--calda-blur-thick) !important;
+  border: 0 !important;
+  border-radius: 26px !important;
+  color: #ffffff !important;
+  box-shadow: var(--calda-rim-pane) !important;
+  overflow: hidden;
+}
+
+/* Complete Calda dark smoked-glass styling inside portaled Lavagem Edit/Create modal */
+html.theme-calda .lub-premium-modal .lub-modal > :is(div):first-child {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal > :is(div):last-child {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal h3 {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal label {
+  color: var(--calda-ink-soft) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal :is(input, select, textarea) {
+  background: rgba(20, 22, 26, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 14px !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal :is(input, select, textarea)::placeholder {
+  color: var(--calda-muted) !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal :is(input, select, textarea):disabled {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  color: #c2c7d0 !important;
+  opacity: 0.9 !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal select option {
+  background: #24262b !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal .lub-modal-note {
+  background: rgba(30, 155, 240, 0.12) !important;
+  border: 1px solid rgba(86, 184, 255, 0.30) !important;
+  border-radius: 16px !important;
+  color: var(--calda-ink-soft) !important;
+  padding: 12px 14px !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal .lub-modal-note strong {
+  color: var(--calda-sig-hi) !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal .lub-modal-note p {
+  color: var(--calda-ink-soft) !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal .lub-modal-error {
+  background: var(--calda-bad-soft) !important;
+  border: 1px solid rgba(244, 124, 103, 0.44) !important;
+  border-radius: 14px !important;
+  color: #ffe3de !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal button:not([class*="bg-green-600"]) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal > :is(div):first-child button {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal button[class*="bg-green-600"] {
+  background: var(--calda-pill-bg) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--calda-pill-ink) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.theme-calda .lub-premium-modal .lub-modal button[class*="bg-green-600"] * {
+  color: var(--calda-pill-ink) !important;
+}
+
+/* Focus accessibility */
+html.theme-calda :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--calda-sig-hi) !important;
+  outline-offset: 2px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-calda .app-shell *,
+  html.theme-calda .app-shell *::before,
+  html.theme-calda .app-shell *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

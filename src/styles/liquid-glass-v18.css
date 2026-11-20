@@ -13,8 +13,8 @@
  * ============================================================================ */
 
 html.theme-liquid-glass-v18 {
-  --font-display: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Core palette */
@@ -110,15 +110,15 @@ html.theme-liquid-glass-v18 {
   --bg-primary: #141923 !important;
   --bg-secondary: rgba(18, 25, 40, 0.42) !important;
   --bg-tertiary: rgba(24, 34, 54, 0.40) !important;
-  --bg-card: rgba(18, 26, 44, 0.38) !important;
+  --bg-card: rgba(15, 22, 38, 0.62) !important;
   --bg-sidebar: rgba(16, 22, 36, 0.42) !important;
   --bg-hover: rgba(224, 242, 254, 0.14) !important;
   --bg-accent: rgba(56, 189, 248, 0.22) !important;
 
   --text-primary: #ffffff !important;
-  --text-secondary: rgba(248, 250, 252, 0.92) !important;
-  --text-tertiary: rgba(226, 232, 240, 0.84) !important;
-  --text-muted: rgba(226, 232, 240, 0.82) !important;
+  --text-secondary: rgba(248, 250, 252, 0.95) !important;
+  --text-tertiary: rgba(226, 232, 240, 0.90) !important;
+  --text-muted: rgba(226, 232, 240, 0.86) !important;
   --text-inverse: #ffffff !important;
 
   --border-primary: rgba(255, 255, 255, 0.26) !important;
@@ -644,6 +644,22 @@ html.theme-liquid-glass-v18 .app-shell .bg-green-100 {
   -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
 
+html.theme-liquid-glass-v18 .app-shell .bg-red-100 {
+  background: rgba(244, 63, 94, 0.24) !important;
+  border: 1px solid rgba(251, 113, 133, 0.50) !important;
+  color: #ffe4e6 !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+html.theme-liquid-glass-v18 .app-shell .bg-purple-100 {
+  background: rgba(139, 92, 246, 0.24) !important;
+  border: 1px solid rgba(167, 139, 250, 0.50) !important;
+  color: #ede9fe !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
 html.theme-liquid-glass-v18 .app-shell .equipment-thumbnail {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.22) 0%, rgba(147, 197, 253, 0.14) 55%, rgba(255, 255, 255, 0.10) 100%) !important;
   backdrop-filter: blur(16px) saturate(185%) !important;
@@ -1069,19 +1085,71 @@ html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :i
 html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/10"],
 html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-tertiary)]"],
 html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-secondary)]"] {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.16) !important;
-  color: #f1f5f9 !important;
+  background: rgba(15, 23, 42, 0.56) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  color: #f8fafc !important;
 }
 
-/* Segmented view switcher (Tabela / Cartões / Quadro) & toolbar pills */
+/* Segmented view switcher (Tabela / Cartões / Quadro) & secondary toolbar pills over caustic backdrops */
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > div {
+  background: rgba(14, 22, 38, 0.66) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.20),
+    0 8px 18px -10px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button:not([class*="bg-[var(--brand-green)]"]):not([class*="bg-green-"]):not([class*="bg-amber-"]):not([class*="bg-cyan-"]):not([aria-pressed="true"]) {
+  background: rgba(14, 22, 38, 0.66) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.26) !important;
+  color: #f8fafc !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 8px 18px -10px rgba(0, 0, 0, 0.50) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button:not([class*="bg-[var(--brand-green)]"]):not([class*="bg-green-"]):not([class*="bg-amber-"]):not([class*="bg-cyan-"]):not([aria-pressed="true"]):hover {
+  background: rgba(20, 32, 56, 0.78) !important;
+  border-color: rgba(186, 230, 253, 0.48) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button[aria-pressed="true"] {
+  background: var(--lg18-glass-featured) !important;
+  border: 1px solid var(--lg18-border-blue) !important;
+  color: #ffffff !important;
+  box-shadow: var(--lg18-shadow-blue) !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-amber-"] {
+  background: linear-gradient(155deg, rgba(146, 64, 14, 0.72), rgba(28, 25, 23, 0.78)) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border-color: rgba(251, 191, 36, 0.50) !important;
+  color: #fef3c7 !important;
+}
+
+html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-green-500/"] {
+  background: linear-gradient(155deg, rgba(6, 95, 70, 0.72), rgba(14, 22, 38, 0.78)) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border-color: rgba(52, 211, 153, 0.48) !important;
+  color: #d1fae5 !important;
+}
+
 html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"] {
-  color: rgba(241, 245, 249, 0.84) !important;
+  color: rgba(241, 245, 249, 0.90) !important;
 }
 
 html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="text-[var(--text-muted)]"]:hover {
   color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.10) !important;
+  background: rgba(255, 255, 255, 0.14) !important;
 }
 
 html.theme-liquid-glass-v18 .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar button[class*="bg-[var(--brand-green)]"] {
@@ -1498,6 +1566,64 @@ html.theme-liquid-glass-v18 .bi-charts .recharts-cartesian-grid line {
 
 html.theme-liquid-glass-v18 .bi-charts .recharts-cartesian-axis-tick text {
   fill: rgba(241, 245, 249, 0.86) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-status {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  color: #f8fafc !important;
+}
+
+html.theme-liquid-glass-v18 .bi-status-programado {
+  background: rgba(59, 130, 246, 0.24) !important;
+  border-color: rgba(147, 197, 253, 0.52) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-liquid-glass-v18 .bi-status-aguardando {
+  background: rgba(251, 191, 36, 0.20) !important;
+  border-color: rgba(251, 191, 36, 0.46) !important;
+  color: #fde68a !important;
+}
+
+html.theme-liquid-glass-v18 .bi-status-andamento {
+  background: rgba(139, 92, 246, 0.24) !important;
+  border-color: rgba(167, 139, 250, 0.50) !important;
+  color: #ede9fe !important;
+}
+
+html.theme-liquid-glass-v18 .bi-status-encerrado {
+  background: rgba(52, 211, 153, 0.22) !important;
+  border-color: rgba(110, 231, 183, 0.48) !important;
+  color: #d1fae5 !important;
+}
+
+html.theme-liquid-glass-v18 .bi-heatmap-row > [role='columnheader'],
+html.theme-liquid-glass-v18 .bi-heatmap-group-label {
+  color: rgba(226, 232, 240, 0.86) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-heatmap-group-button:hover,
+html.theme-liquid-glass-v18 .bi-heatmap-group-button:focus-visible {
+  background: rgba(59, 130, 246, 0.18) !important;
+  border-color: rgba(147, 197, 253, 0.52) !important;
+  color: #ffffff !important;
+}
+
+html.theme-liquid-glass-v18 .bi-heat-cell {
+  background: color-mix(in srgb, #3b82f6 calc(var(--heat-intensity) * 82%), rgba(18, 22, 34, 0.86)) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-heat-cell:not(.is-zero) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(7, 18, 46, 0.55) !important;
+}
+
+html.theme-liquid-glass-v18 .bi-heat-cell.is-zero {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  color: rgba(203, 213, 225, 0.56) !important;
 }
 
 /* ── Apoio, Gestão de Ordens, Reformas & Canavieiras ───────────────────────── */

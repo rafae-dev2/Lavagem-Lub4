@@ -8,7 +8,11 @@
   --lub-green: #1f6b45;
   --lub-hover: #eff7f2;
   color: var(--lub-text);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-family, 'Inter', system-ui, sans-serif);
+}
+.lub-module :is(h1, h2, h3, h4, .lub-toolbar-title, .lub-kpi strong, .lub-hero-total strong, .lub-fleet) {
+  font-family: var(--font-display, 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif);
+  letter-spacing: -0.02em;
 }
 html.dark .lub-module {
   --lub-surface: #1b2e25;

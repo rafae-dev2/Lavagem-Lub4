@@ -88,6 +88,9 @@ function isPcmSchedule(schedule: Programacao): boolean {
 export default function Programacoes({ schedules: inputSchedules, onUpdate, onDelete, onAdd, onAddSingle }: Props) {
   const { isDark, theme } = useTheme();
   const isVerdan = theme === 'verdan';
+  const isDashboardV32 = theme === 'dashboard-v32';
+  const isVitrea = theme === 'vitrea';
+  const isCalda = theme === 'calda';
   const schedules = useMemo(() => filterLavagemEquipmentSchedules(inputSchedules), [inputSchedules]);
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState<StatusType | 'TODOS'>('TODOS');
@@ -754,7 +757,7 @@ export default function Programacoes({ schedules: inputSchedules, onUpdate, onDe
         </div>
       </div>
 
-      {!compactHeader && isVerdan && (
+      {!compactHeader && (isVerdan || isDashboardV32 || isVitrea || isCalda) && (
         <section className="verdan-overview-grid" aria-label="Visão geral animada da operação">
           <div className="verdan-col-span-5">
             <VerdanSparklineCard
@@ -765,6 +768,8 @@ export default function Programacoes({ schedules: inputSchedules, onUpdate, onDe
               badgeTone={verdanMetrics.delayedInSelection > 0 ? 'coral' : 'lime'}
               series={verdanMetrics.sparkSeries}
               icon={<Zap size={14} />}
+              accentColor={isCalda ? '#1e9bf0' : isVitrea ? '#68c0b8' : isDashboardV32 ? '#10b981' : '#b7ed40'}
+              accentBright={isCalda ? '#56b8ff' : isVitrea ? '#8fdca8' : isDashboardV32 ? '#6ee7b7' : '#d9fb7a'}
             />
           </div>
           <div className="verdan-col-span-4">
@@ -785,7 +790,8 @@ export default function Programacoes({ schedules: inputSchedules, onUpdate, onDe
               <VerdanRadialGauge
                 valuePct={verdanMetrics.overallPct}
                 label={turnoStats.total > 0 ? 'TURNO HOJE' : 'CONCLUÍDO'}
-                size={156}
+                variant={isCalda || isVitrea ? 'vitrea' : isDashboardV32 ? 'v32-segmented' : 'verdan'}
+                size={isDashboardV32 ? 172 : 156}
               />
             </div>
           </div>
@@ -793,12 +799,12 @@ export default function Programacoes({ schedules: inputSchedules, onUpdate, onDe
       )}
       {!compactHeader && <section className="lub-kpis" aria-label="Situação das programações na seleção">
         {([
-          { status: 'ATRASADO', label: 'Atrasadas', color: '#f87171', icon: AlertTriangle },
-          { status: 'PROGRAMADO', label: 'Programadas', color: '#38bdf8', icon: CalendarClock },
-          { status: 'PENDENTE', label: 'Pendentes', color: '#fbbf24', icon: Clock },
-          { status: 'ANDAMENTO', label: 'Em andamento', color: '#a78bfa', icon: Play },
-          { status: 'ENCERRADO', label: 'Encerradas', color: '#b7ed40', icon: CheckCircle2 },
-        ] as const).map(item => <button type="button" key={item.status} className={`lub-kpi${filterStatus === item.status ? ' is-selected' : ''}`} style={{ '--lub-kpi-color': item.color } as React.CSSProperties} aria-pressed={filterStatus === item.status} onClick={() => setFilterStatus(filterStatus === item.status ? 'TODOS' : item.status)}><span className="lub-kpi-label">{item.label}<item.icon size={15} /></span><strong>{isVerdan ? <VerdanCountUp value={filtered.filter(schedule => schedule.situacao === item.status).length} /> : filtered.filter(schedule => schedule.situacao === item.status).length}</strong><small>Ordens na seleção atual</small></button>)}
+          { status: 'ATRASADO', label: 'Atrasadas', color: '#f87171', vitreaColor: '#f6a59c', caldaColor: '#f47c67', icon: AlertTriangle },
+          { status: 'PROGRAMADO', label: 'Programadas', color: '#38bdf8', vitreaColor: '#7aaef0', caldaColor: '#1e9bf0', icon: CalendarClock },
+          { status: 'PENDENTE', label: 'Pendentes', color: '#fbbf24', vitreaColor: '#f3cd7e', caldaColor: '#f4be5e', icon: Clock },
+          { status: 'ANDAMENTO', label: 'Em andamento', color: '#a78bfa', vitreaColor: '#68c0b8', caldaColor: '#56b8ff', icon: Play },
+          { status: 'ENCERRADO', label: 'Encerradas', color: '#b7ed40', vitreaColor: '#8fdca8', caldaColor: '#34d399', icon: CheckCircle2 },
+        ] as const).map(item => <button type="button" key={item.status} className={`lub-kpi${filterStatus === item.status ? ' is-selected' : ''}`} style={{ '--lub-kpi-color': isCalda ? item.caldaColor : isVitrea ? item.vitreaColor : isDashboardV32 && item.status === 'PROGRAMADO' ? '#f97316' : isDashboardV32 && item.status === 'ENCERRADO' ? '#10b981' : item.color } as React.CSSProperties} aria-pressed={filterStatus === item.status} onClick={() => setFilterStatus(filterStatus === item.status ? 'TODOS' : item.status)}><span className="lub-kpi-label">{item.label}<item.icon size={15} /></span><strong>{(isVerdan || isDashboardV32 || isVitrea || isCalda) ? <VerdanCountUp value={filtered.filter(schedule => schedule.situacao === item.status).length} /> : filtered.filter(schedule => schedule.situacao === item.status).length}</strong><small>Ordens na seleção atual</small></button>)}
       </section>}
       {/* Barra de Progresso do Turno */}
       {!compactHeader && turnoBar}

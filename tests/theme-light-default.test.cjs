@@ -163,15 +163,17 @@ function flushEffect(mounted) {
   mounted.effect();
 }
 
-assert.match(contextSource, /const DEFAULT_THEME: Theme = 'verdan';/);
-assert.match(contextSource, /const THEME_DEFAULT_VERSION = 'verdan-v10\.29';/);
+assert.match(contextSource, /const DEFAULT_THEME: Theme = 'calda';/);
+assert.match(contextSource, /const THEME_DEFAULT_VERSION = 'calda-v10\.30';/);
 assert.match(contextSource, /const THEME_DEFAULT_VERSION_KEY = 'bp-theme-default-version';/);
+
+const caldaThemeInfo = themeApi.THEMES.find((t) => t.key === 'calda');
 
 {
   const mounted = mount({ documentEnabled: false });
-  assert.equal(mounted.value.theme, 'verdan', 'SSR sem window deve iniciar em verdan');
+  assert.equal(mounted.value.theme, 'calda', 'SSR sem window deve iniciar em calda');
   assert.equal(mounted.value.isDark, true, 'SSR sem window deve expor isDark=true');
-  assert.equal(mounted.value.themeInfo, themeApi.THEMES[0]);
+  assert.equal(mounted.value.themeInfo, caldaThemeInfo);
   assert.doesNotThrow(() => flushEffect(mounted), 'SSR não deve quebrar se o stub executar o efeito');
 }
 
@@ -180,22 +182,22 @@ defaultEnvironment();
 {
   const storage = makeStorage();
   const mounted = mount({ storage });
-  assert.equal(mounted.value.theme, 'verdan', 'instalação sem preferência deve iniciar em verdan');
+  assert.equal(mounted.value.theme, 'calda', 'instalação sem preferência deve iniciar em calda');
   assert.deepEqual(storage.writes, [], 'initializer deve apenas ler, sem gravar o marcador');
   flushEffect(mounted);
-  assert.equal(storage.value('bp-theme'), 'verdan');
-  assert.equal(storage.value('bp-theme-default-version'), 'verdan-v10.29');
+  assert.equal(storage.value('bp-theme'), 'calda');
+  assert.equal(storage.value('bp-theme-default-version'), 'calda-v10.30');
 }
 
 defaultEnvironment();
 
 {
-  const storage = makeStorage({ 'bp-theme': 'light', 'bp-theme-default-version': 'light-v10.6' });
+  const storage = makeStorage({ 'bp-theme': 'verdan', 'bp-theme-default-version': 'verdan-v10.29' });
   const mounted = mount({ storage });
-  assert.equal(mounted.value.theme, 'verdan', 'preferência antiga deve migrar uma única vez para verdan');
+  assert.equal(mounted.value.theme, 'calda', 'preferência antiga deve migrar uma única vez para calda');
   flushEffect(mounted);
-  assert.equal(storage.value('bp-theme'), 'verdan');
-  assert.equal(storage.value('bp-theme-default-version'), 'verdan-v10.29');
+  assert.equal(storage.value('bp-theme'), 'calda');
+  assert.equal(storage.value('bp-theme-default-version'), 'calda-v10.30');
 }
 
 defaultEnvironment();
@@ -203,7 +205,7 @@ defaultEnvironment();
 {
   const storage = makeStorage({
     'bp-theme': 'light',
-    'bp-theme-default-version': 'verdan-v10.29',
+    'bp-theme-default-version': 'calda-v10.30',
   });
   const mounted = mount({ storage });
   assert.equal(mounted.value.theme, 'light', 'tema manual deve sobreviver após o marcador atualizado');
@@ -218,13 +220,13 @@ defaultEnvironment();
 {
   const storage = makeStorage({
     'bp-theme': 'tema-inexistente',
-    'bp-theme-default-version': 'verdan-v10.29',
+    'bp-theme-default-version': 'calda-v10.30',
   });
   const mounted = mount({ storage });
-  assert.equal(mounted.value.theme, 'verdan', 'valor persistido inválido deve cair no padrão verdan');
+  assert.equal(mounted.value.theme, 'calda', 'valor persistido inválido deve cair no padrão calda');
   flushEffect(mounted);
-  assert.equal(storage.value('bp-theme'), 'verdan');
-  assert.equal(storage.value('bp-theme-default-version'), 'verdan-v10.29');
+  assert.equal(storage.value('bp-theme'), 'calda');
+  assert.equal(storage.value('bp-theme-default-version'), 'calda-v10.30');
 }
 
 defaultEnvironment();
@@ -235,7 +237,7 @@ defaultEnvironment();
   mounted.value.setTheme('light');
   assert.deepEqual(
     storage.writes,
-    [['bp-theme', 'light'], ['bp-theme-default-version', 'verdan-v10.29']],
+    [['bp-theme', 'light'], ['bp-theme-default-version', 'calda-v10.30']],
     'escolha antes do primeiro efeito deve persistir tema e marcador juntos',
   );
   flushEffect(mounted);
@@ -248,10 +250,10 @@ defaultEnvironment();
 {
   const storage = makeStorage({}, { getThrows: true });
   const mounted = mount({ storage, classes: ['app-shell', 'dark', 'theme-ocean'] });
-  assert.equal(mounted.value.theme, 'verdan');
+  assert.equal(mounted.value.theme, 'calda');
   assert.doesNotThrow(() => flushEffect(mounted), 'falha de leitura do storage não deve quebrar o provider');
   assert.equal(mounted.document.names.has('theme-ocean'), false);
-  assert.equal(mounted.document.names.has('theme-verdan'), true);
+  assert.equal(mounted.document.names.has('theme-calda'), true);
 }
 
 defaultEnvironment();
@@ -259,10 +261,10 @@ defaultEnvironment();
 {
   const storage = makeStorage({}, { setThrows: true });
   const mounted = mount({ storage, classes: ['app-shell', 'dark', 'theme-ocean'] });
-  assert.equal(mounted.value.theme, 'verdan');
+  assert.equal(mounted.value.theme, 'calda');
   assert.doesNotThrow(() => flushEffect(mounted), 'falha de gravação do storage não deve quebrar o provider');
   assert.equal(mounted.document.names.has('theme-ocean'), false);
-  assert.equal(mounted.document.names.has('theme-verdan'), true);
+  assert.equal(mounted.document.names.has('theme-calda'), true);
 }
 
 defaultEnvironment();
@@ -270,15 +272,16 @@ defaultEnvironment();
 {
   const storage = makeStorage({
     'bp-theme': 'light',
-    'bp-theme-default-version': 'verdan-v10.29',
+    'bp-theme-default-version': 'calda-v10.30',
   });
   const mounted = mount({
     storage,
-    classes: ['app-shell', 'dark', 'theme-ocean', 'theme-verdan', 'classe-estrutural'],
+    classes: ['app-shell', 'dark', 'theme-ocean', 'theme-calda', 'theme-verdan', 'classe-estrutural'],
   });
   flushEffect(mounted);
   assert.equal(mounted.document.names.has('dark'), false);
   assert.equal(mounted.document.names.has('theme-ocean'), false);
+  assert.equal(mounted.document.names.has('theme-calda'), false);
   assert.equal(mounted.document.names.has('theme-verdan'), false);
   assert.equal(mounted.document.names.has('classe-estrutural'), true, 'classes genéricas devem ser preservadas');
   assert.equal(mounted.document.names.has('app-shell'), true);
@@ -295,13 +298,13 @@ defaultEnvironment();
   );
   assert.deepEqual(
     themeApi.THEMES.map((theme) => theme.key),
-    ['verdan', 'liquid-glass-v18', 'black-cyan', 'ios-liquid-glass', 'light', 'dark', 'ocean', 'sunset', 'forest', 'midnight', 'rose', 'arctic', 'copper', 'lavender', 'glass', 'glassy-v18'],
-    'a lista de temas existente deve ser preservada com verdan no topo',
+    ['verdan', 'liquid-glass-v18', 'dashboard-v32', 'vitrea', 'calda', 'black-cyan', 'ios-liquid-glass', 'light', 'dark', 'ocean', 'sunset', 'forest', 'midnight', 'rose', 'arctic', 'copper', 'lavender', 'glass', 'glassy-v18'],
+    'a lista de temas existente deve ser preservada com calda registrado',
   );
 }
 
 defaultEnvironment();
-console.log('OK: padrão verdan-v10.29, migração única, SSR, persistência sem corrida, classes e API do contexto validados.');
+console.log('OK: padrão calda-v10.30, migração única, SSR, persistência sem corrida, classes e API do contexto validados.');
 }
 
 main().catch((error) => {

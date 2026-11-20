@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ClipboardList,
+  Columns3,
   Download,
   Droplets,
   Eye,
@@ -29,6 +30,7 @@ import MaintenanceOrderCard, {
   closureOriginLabel,
   MaintenanceStatusBadge,
 } from "../components/MaintenanceOrderCard";
+import TrackingOperationalPanel from "../components/TrackingOperationalPanel";
 import EquipmentThumbnail from "../components/EquipmentThumbnail";
 import { VerdanCountUp } from "../components/VerdanAnimatedWidgets";
 import { useTheme } from "../contexts/ThemeContext";
@@ -147,7 +149,7 @@ export default function AcompanhamentoManutencao({
   const [filters, setFilters] = useState({ ...emptyFilters });
   const [lateOnly, setLateOnly] = useState(false);
   const [sort, setSort] = useState("priority");
-  const [view, setView] = useState<"cards" | "table">("cards");
+  const [view, setView] = useState<"cards" | "panel" | "table">("cards");
   const [page, setPage] = useState(1);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [exporting, setExporting] = useState<"pdf" | "xlsx" | null>(null);
@@ -700,6 +702,15 @@ export default function AcompanhamentoManutencao({
             <div className="mt-view-toggle" aria-label="Modo de visualização">
               <button
                 type="button"
+                aria-label="Visualizar em painel operacional"
+                title="Painel Operacional (Triagem + Dossiê)"
+                aria-pressed={view === "panel"}
+                onClick={() => setView("panel")}
+              >
+                <Columns3 size={18} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
                 aria-label="Visualizar em cartões"
                 title="Cartões"
                 aria-pressed={view === "cards"}
@@ -796,6 +807,8 @@ export default function AcompanhamentoManutencao({
               </button>
             )}
           </div>
+        ) : view === "panel" ? (
+          <TrackingOperationalPanel rows={rows} clock={clock} />
         ) : view === "cards" ? (
           <div className="mt-card-grid">
             {shown.map((row) => (
@@ -902,7 +915,7 @@ export default function AcompanhamentoManutencao({
           </div>
         )}
 
-        {rows.length > 0 && (
+        {rows.length > 0 && view !== "panel" && (
           <footer className="mt-pagination">
             <span>
               Exibindo {(currentPage - 1) * PAGE_SIZE + 1}–

@@ -1,8 +1,7 @@
 import { isEquipmentEditorReturn } from './lib/editorAuthNavigation';
 import { useOperationalMinuteClock } from './hooks/useOperationalMinuteClock';
 import {refreshEquipmentImageOverrides} from './lib/equipmentImageRegistry';
-import React, { useEffect, useMemo, useState } from "react";
-import { formatApoioDate } from "./lib/apoioDate";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
@@ -26,28 +25,89 @@ import LavagemPremiumLayout from "./components/LavagemPremiumLayout";
 import PCMIntegrationPanel from "./components/PCMIntegrationPanel";
 import { useSchedules } from "./hooks/useSchedules";
 import { useNotifications } from "./hooks/useNotifications";
-import { DashboardStats, PageType } from "./types";
+import { DashboardStats, PageType, Programacao } from "./types";
 import "./styles/operational-compact.css";
 import { filterLavagemEquipmentSchedules, HIDDEN_LAVAGEM_GROUPS } from "./lib/lavagemEquipmentScope";
 import {
+  areDashboardStatsEqual,
+  computeScheduleStats,
+  computeVisibleSchedules,
   getEffectiveHideEncerradas,
   getOperationalWindowKey,
   setManualHideEncerradas,
-  shouldHideClosedSchedule,
 } from "./lib/scheduleVisibility";
+import {
+  areMaintenanceShellStatesEqual,
+  resolveEffectiveShellSync,
+  stabilizeScheduleListReference,
+} from "./lib/appReconciliation";
 
-/**
- * Hook utilit�rio que reage \u00e0s mudan\u00e7as do filtro "ocultar encerradas"
- * persistido em localStorage pela p\u00e1gina de Programa\u00e7\u00f5es.
- *
- * Por que isso existe?
- * - O usu\u00e1rio pediu que o Dashboard (e a Exporta\u00e7\u00e3o) acompanhem o filtro
- *   da Programa\u00e7\u00e3o, em vez de contar tamb\u00e9m as frotas ocultas.
- * - O estado do filtro j\u00e1 \u00e9 salvo em `localStorage` (chave bp_hide_encerradas),
- *   ent\u00e3o aqui apenas escutamos altera\u00e7\u00f5es de outras abas (`storage`) e
- *   um evento customizado `bp:hide-encerradas-changed` disparado pela
- *   pr\u00f3pria p\u00e1gina de Programa\u00e7\u00f5es quando o usu\u00e1rio alterna o filtro.
- */
+const VALID_PAGES: ReadonlySet<PageType> = new Set<PageType>([
+  "central-gerencial",
+  "gestao-ordens-manutencao",
+  "controle-apoio",
+  "modo-tv",
+  "modo-tv-externas",
+  "dashboard",
+  "programacoes",
+  "calendario",
+  "importar",
+  "exportar",
+  "configuracoes",
+  "preventivas-canavieiras",
+  "lubrificacao-canavieiras",
+  "reformas-apoio",
+  "reformas-rodomuda",
+  "reformas-colhedoras",
+  "reformas-trator-transbordo",
+  "reformas-trator-reboque",
+]);
+
+const MAINTENANCE_PAGES: ReadonlySet<PageType> = new Set<PageType>([
+  "central-gerencial",
+  "preventivas-canavieiras",
+  "lubrificacao-canavieiras",
+  "reformas-apoio",
+  "reformas-rodomuda",
+  "reformas-colhedoras",
+  "reformas-trator-transbordo",
+  "reformas-trator-reboque",
+]);
+
+const ACTIVE_LAVAGEM_PAGES: ReadonlySet<PageType> = new Set<PageType>([
+  "dashboard",
+  "programacoes",
+  "calendario",
+  "importar",
+  "exportar",
+  "configuracoes",
+]);
+
+const LAVAGEM_TAB_PAGES: ReadonlySet<PageType> = new Set<PageType>([
+  "dashboard",
+  "programacoes",
+  "importar",
+  "exportar",
+]);
+
+const SILENT_ERROR_PAGES: ReadonlySet<PageType> = new Set<PageType>([
+  "modo-tv",
+  "modo-tv-externas",
+  "controle-apoio",
+  "gestao-ordens-manutencao",
+  "central-gerencial",
+  "preventivas-canavieiras",
+  "lubrificacao-canavieiras",
+  "reformas-apoio",
+  "reformas-rodomuda",
+  "reformas-colhedoras",
+  "reformas-trator-transbordo",
+  "reformas-trator-reboque",
+]);
+
+const MAINTENANCE_REFRESH_INTERVAL_MS = 300_000;
+const HIDDEN_GROUPS_TEXT = HIDDEN_LAVAGEM_GROUPS.join(", ");
+
 interface HideEncerradasFlag {
   hidden: boolean;
   windowKey: string;
@@ -62,22 +122,20 @@ function useHideEncerradasFlag(): HideEncerradasFlag {
   );
 
   useEffect(() => {
-    const refresh = () => {
+    const refreshFlag = () => {
       setHidden(getEffectiveHideEncerradas());
     };
-    refresh();
-    window.addEventListener("storage", refresh);
+    refreshFlag();
+    window.addEventListener("storage", refreshFlag);
     window.addEventListener(
       "bp:hide-encerradas-changed",
-      refresh as EventListener,
+      refreshFlag as EventListener,
     );
-    // O relógio operacional avança no início do minuto, preservando 07:10
-    // sem reconstruir todas as telas a cada segundo.
     return () => {
-      window.removeEventListener("storage", refresh);
+      window.removeEventListener("storage", refreshFlag);
       window.removeEventListener(
         "bp:hide-encerradas-changed",
-        refresh as EventListener,
+        refreshFlag as EventListener,
       );
     };
   }, []);
@@ -86,42 +144,195 @@ function useHideEncerradasFlag(): HideEncerradasFlag {
     setHidden(getEffectiveHideEncerradas());
   }, [windowKey]);
 
-  return { hidden, windowKey };
+  return useMemo(() => ({ hidden, windowKey }), [hidden, windowKey]);
 }
 
-const initialEquipmentEditorReturn = typeof window !== "undefined" && isEquipmentEditorReturn(window.location.href);
+const initialEquipmentEditorReturn =
+  typeof window !== "undefined" && isEquipmentEditorReturn(window.location.href);
 
-function AppInner() {
+const MemoizedDashboardView = React.memo(function MemoizedDashboardView({
+  schedules,
+  allSchedules,
+  stats,
+  loading,
+  error,
+}: {
+  schedules: Programacao[];
+  allSchedules: Programacao[];
+  stats: DashboardStats;
+  loading: boolean;
+  error: string | null;
+}) {
+  return (
+    <Dashboard
+      schedules={schedules}
+      allSchedules={allSchedules}
+      stats={stats}
+      loading={loading}
+      error={error}
+    />
+  );
+});
+
+const MemoizedProgramacoesView = React.memo(function MemoizedProgramacoesView({
+  schedules,
+  onUpdate,
+  onDelete,
+  onAdd,
+  onAddSingle,
+  onRefresh,
+}: {
+  schedules: Programacao[];
+  onUpdate: (id: string, updates: Partial<Programacao>) => Promise<void>;
+  onDelete: (id: string) => Promise<void>;
+  onAdd: (newItems: Programacao[]) => Promise<void>;
+  onAddSingle: (item: Programacao) => Promise<void>;
+  onRefresh: () => Promise<void>;
+}) {
+  return (
+    <>
+      <PCMIntegrationPanel onChanged={onRefresh} hideMainEquipment />
+      <Programacoes
+        schedules={schedules}
+        onUpdate={onUpdate}
+        onDelete={onDelete}
+        onAdd={onAdd}
+        onAddSingle={onAddSingle}
+      />
+    </>
+  );
+});
+
+const MemoizedExportarView = React.memo(function MemoizedExportarView({
+  schedules,
+}: {
+  schedules: Programacao[];
+}) {
+  return <Exportar schedules={schedules} />;
+});
+
+const MemoizedCalendarioView = React.memo(function MemoizedCalendarioView({
+  schedules,
+}: {
+  schedules: Programacao[];
+}) {
+  return <Calendario schedules={schedules} />;
+});
+
+const MemoizedImportarView = React.memo(function MemoizedImportarView({
+  onImport,
+}: {
+  onImport: (newItems: Programacao[]) => Promise<void>;
+}) {
+  return <Importar onImport={onImport} />;
+});
+
+const MemoizedConfiguracoesView = React.memo(function MemoizedConfiguracoesView({
+  onRefresh,
+}: {
+  onRefresh: () => Promise<void>;
+}) {
+  return <Configuracoes onRefresh={onRefresh} />;
+});
+
+const MemoizedCentralGerencialView = React.memo(function MemoizedCentralGerencialView() {
+  return <CentralGerencial />;
+});
+
+const MemoizedGestaoOrdensView = React.memo(function MemoizedGestaoOrdensView() {
+  return <GestaoOrdensManutencao />;
+});
+
+const MemoizedControleApoioView = React.memo(function MemoizedControleApoioView() {
+  return <ControleApoio />;
+});
+
+const MemoizedModoTVView = React.memo(function MemoizedModoTVView({
+  initialPanel,
+}: {
+  initialPanel: "emergency" | "external";
+}) {
+  return <ModoTV initialPanel={initialPanel} />;
+});
+
+const MemoizedAcompanhamentoView = React.memo(function MemoizedAcompanhamentoView({
+  module,
+}: {
+  module:
+    | "preventivas"
+    | "lubrificacao"
+    | "reformas"
+    | "reformas-rodomuda"
+    | "reformas-colhedoras"
+    | "reformas-trator-transbordo"
+    | "reformas-trator-reboque";
+}) {
+  return <AcompanhamentoManutencao module={module} />;
+});
+
+const MemoizedLavagemWorkspace = React.memo(function MemoizedLavagemWorkspace({
+  page,
+  syncing,
+  onRefresh,
+  onNavigate,
+  alertCount,
+  children,
+}: {
+  page: PageType;
+  syncing: boolean;
+  onRefresh: () => Promise<void>;
+  onNavigate: (page: PageType) => void;
+  alertCount: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <LavagemPremiumLayout refreshing={syncing} onRefresh={onRefresh} activeTab={page}>
+      <LavagemTabs
+        current={page}
+        onNavigate={onNavigate}
+        alertCount={alertCount}
+      />
+      <p
+        role="note"
+        style={{
+          padding: "10px 14px",
+          marginBottom: 12,
+          borderRadius: 10,
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-primary)",
+          color: "var(--text-secondary)",
+          fontSize: 12,
+          lineHeight: 1.5,
+        }}
+      >
+        <strong>Controle dos demais equipamentos.</strong> Grupos ocultos nesta visualização: {HIDDEN_GROUPS_TEXT}. As ordens continuam preservadas nos seus módulos.
+      </p>
+      {children}
+    </LavagemPremiumLayout>
+  );
+});
+
+const AppInner = React.memo(function AppInner() {
   const { isDark } = useTheme();
-  const validPages: PageType[] = [
-    "central-gerencial",
-    "gestao-ordens-manutencao",
-    "controle-apoio",
-    "modo-tv",
-    "modo-tv-externas",
-    "dashboard",
-    "programacoes",
-    "calendario",
-    "importar",
-    "exportar",
-    "configuracoes",
-    "preventivas-canavieiras",
-    "lubrificacao-canavieiras",
-    "reformas-apoio",
-    "reformas-rodomuda",
-    "reformas-colhedoras",
-    "reformas-trator-transbordo",
-    "reformas-trator-reboque",
-  ];
-  const readHashPage = (): PageType => {
+
+  const readHashPage = useCallback((): PageType => {
     const candidate = window.location.hash.slice(1) as PageType;
-    if (validPages.includes(candidate)) return candidate;
-    if (isEquipmentEditorReturn(window.location.href) || (initialEquipmentEditorReturn && !window.location.hash)) return "configuracoes";
+    if (VALID_PAGES.has(candidate)) return candidate;
+    if (
+      isEquipmentEditorReturn(window.location.href) ||
+      (initialEquipmentEditorReturn && !window.location.hash)
+    ) {
+      return "configuracoes";
+    }
     return "programacoes";
-  };
+  }, []);
+
   const [page, setPageState] = useState<PageType>(readHashPage);
-  const setPage = (next: PageType) => {
-    if (!validPages.includes(next)) return;
+  const pageRef = useRef<PageType>(page);
+  pageRef.current = page;
+
+  const setPage = useCallback((next: PageType) => {
+    if (!VALID_PAGES.has(next)) return;
     setPageState(next);
     if (window.location.search.includes("editor_login")) {
       const url = new URL(window.location.href);
@@ -129,43 +340,42 @@ function AppInner() {
       window.history.replaceState(window.history.state, "", url);
     }
     if (window.location.hash !== `#${next}`) window.location.hash = next;
-  };
+  }, []);
+
   useEffect(() => {
     const onHashChange = () => setPageState(readHashPage());
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
-  const maintenancePage = [
-    "central-gerencial",
-    "preventivas-canavieiras",
-    "lubrificacao-canavieiras",
-    "reformas-apoio",
-    "reformas-rodomuda",
-    "reformas-colhedoras",
-    "reformas-trator-transbordo",
-    "reformas-trator-reboque",
-  ].includes(page);
+  }, [readHashPage]);
+
+  const maintenancePage = useMemo(() => MAINTENANCE_PAGES.has(page), [page]);
   const [maintenanceShell, setMaintenanceShell] =
     useState<MaintenanceShellState>({
       syncing: true,
       lastSync: null,
       fromCache: false,
     });
-  useEffect(() => {
-    const onState = (event: Event) =>
-      setMaintenanceShell((event as CustomEvent<MaintenanceShellState>).detail);
-    window.addEventListener(MAINTENANCE_STATE_EVENT, onState);
-    return () => window.removeEventListener(MAINTENANCE_STATE_EVENT, onState);
+
+  const handleMaintenanceStateEvent = useCallback((event: Event) => {
+    const next = (event as CustomEvent<MaintenanceShellState>).detail;
+    setMaintenanceShell((prev) =>
+      areMaintenanceShellStatesEqual(prev, next) ? prev : next,
+    );
   }, []);
 
-  const activeLavagemPage = [
-    "dashboard",
-    "programacoes",
-    "calendario",
-    "importar",
-    "exportar",
-    "configuracoes",
-  ].includes(page);
+  useEffect(() => {
+    window.addEventListener(MAINTENANCE_STATE_EVENT, handleMaintenanceStateEvent);
+    return () =>
+      window.removeEventListener(
+        MAINTENANCE_STATE_EVENT,
+        handleMaintenanceStateEvent,
+      );
+  }, [handleMaintenanceStateEvent]);
+
+  const activeLavagemPage = useMemo(
+    () => ACTIVE_LAVAGEM_PAGES.has(page),
+    [page],
+  );
 
   const {
     schedules,
@@ -173,8 +383,9 @@ function AppInner() {
     error,
     syncing,
     lastSync,
+    lastSyncAt,
     fromCache,
-    stats,
+    autoRefreshMs,
     refresh,
     addSchedules,
     addSingleSchedule,
@@ -182,7 +393,10 @@ function AppInner() {
     deleteSchedule,
   } = useSchedules({ activeLavagemPage });
 
-  const lavagemSchedules = useMemo(() => filterLavagemEquipmentSchedules(schedules), [schedules]);
+  const lavagemSchedules = useMemo(
+    () => filterLavagemEquipmentSchedules(schedules),
+    [schedules],
+  );
 
   const {
     alerts,
@@ -196,42 +410,44 @@ function AppInner() {
 
   const { hidden: hideEncerradas, windowKey: operationalWindowKey } =
     useHideEncerradasFlag();
+  const hideEncerradasRef = useRef<boolean>(hideEncerradas);
+  hideEncerradasRef.current = hideEncerradas;
 
-  /**
-   * Lista de programa\u00e7\u00f5es vis\u00edveis ap\u00f3s aplicar o filtro de "ocultar
-   * encerradas anteriores ao corte das 7h" \u2014 \u00e9 a mesma regra usada na
-   * p\u00e1gina de Programa\u00e7\u00f5es. Quando o filtro est\u00e1 desligado, devolvemos
-   * a lista completa.
-   */
-  const visibleSchedules = useMemo(() => {
-    if (!hideEncerradas) return lavagemSchedules;
-    const now = new Date();
-    return lavagemSchedules.filter((s) => !shouldHideClosedSchedule(s, now));
-  }, [lavagemSchedules, hideEncerradas, operationalWindowKey]);
-
-  /**
-   * Stats reativas \u00e0 lista vis\u00edvel: o Dashboard agora reflete exatamente o
-   * que est\u00e1 vis\u00edvel na Programa\u00e7\u00e3o, em vez de contar tamb\u00e9m as frotas
-   * ocultas.
-   */
-  const visibleStats: DashboardStats = useMemo(
-    () => ({
-      total: visibleSchedules.length,
-      pendente: visibleSchedules.filter((s) => s.situacao === "PENDENTE")
-        .length,
-      atrasado: visibleSchedules.filter((s) => s.situacao === "ATRASADO")
-        .length,
-      programado: visibleSchedules.filter((s) => s.situacao === "PROGRAMADO")
-        .length,
-      encerrado: visibleSchedules.filter((s) => s.situacao === "ENCERRADO")
-        .length,
-      andamento: visibleSchedules.filter((s) => s.situacao === "ANDAMENTO")
-        .length,
-    }),
-    [visibleSchedules],
+  const selectVisibleSchedules = useCallback(
+    (source: Programacao[], hideClosed: boolean) =>
+      computeVisibleSchedules(source, hideClosed, new Date()),
+    [],
   );
 
-  // Escutar evento de navega\u00e7\u00e3o disparado pela p\u00e1gina de importa\u00e7\u00e3o
+  const prevVisibleSchedulesRef = useRef<Programacao[] | null>(null);
+  const visibleSchedules = useMemo(() => {
+    const computed = selectVisibleSchedules(lavagemSchedules, hideEncerradas);
+    const stabilized = stabilizeScheduleListReference(
+      prevVisibleSchedulesRef.current,
+      computed,
+    );
+    prevVisibleSchedulesRef.current = stabilized;
+    return stabilized;
+  }, [selectVisibleSchedules, lavagemSchedules, hideEncerradas, operationalWindowKey]);
+
+  const selectVisibleStats = useCallback(
+    (items: readonly Programacao[]): DashboardStats => computeScheduleStats(items),
+    [],
+  );
+
+  const prevVisibleStatsRef = useRef<DashboardStats | null>(null);
+  const visibleStats: DashboardStats = useMemo(() => {
+    const nextStats = selectVisibleStats(visibleSchedules);
+    if (
+      prevVisibleStatsRef.current &&
+      areDashboardStatsEqual(prevVisibleStatsRef.current, nextStats)
+    ) {
+      return prevVisibleStatsRef.current;
+    }
+    prevVisibleStatsRef.current = nextStats;
+    return nextStats;
+  }, [selectVisibleStats, visibleSchedules]);
+
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent).detail as PageType;
@@ -239,27 +455,132 @@ function AppInner() {
     };
     window.addEventListener("navigate", handler);
     return () => window.removeEventListener("navigate", handler);
+  }, [setPage]);
+
+  const handleToggleEncerradas = useCallback(() => {
+    const hidden = !hideEncerradasRef.current;
+    setManualHideEncerradas(hidden, new Date());
+    window.dispatchEvent(
+      new CustomEvent("bp:hide-encerradas-changed", { detail: { hidden } }),
+    );
   }, []);
+
+  const handleShellRefresh = useCallback(() => {
+    const current = pageRef.current;
+    if (MAINTENANCE_PAGES.has(current)) {
+      window.dispatchEvent(new Event(MAINTENANCE_REFRESH_EVENT));
+    } else if (current === "controle-apoio") {
+      window.dispatchEvent(new Event("bp:apoio-refresh"));
+    } else {
+      void refresh();
+    }
+  }, [refresh]);
 
   const alertCount = visibleStats.atrasado;
 
-  const renderPage = () => {
-    let content: React.ReactNode;
+  const effectiveShellSync = useMemo(
+    () =>
+      resolveEffectiveShellSync({
+        maintenancePage,
+        maintenanceShell,
+        maintenanceRefreshIntervalMs: MAINTENANCE_REFRESH_INTERVAL_MS,
+        lavagemSyncing: syncing,
+        lavagemLastSync: lastSync,
+        lavagemLastSyncAt: lastSyncAt,
+        lavagemRefreshIntervalMs: autoRefreshMs,
+        lavagemFromCache: fromCache,
+      }),
+    [
+      maintenancePage,
+      maintenanceShell,
+      syncing,
+      lastSync,
+      lastSyncAt,
+      autoRefreshMs,
+      fromCache,
+    ],
+  );
+
+  const {
+    syncing: effectiveSyncing,
+    lastSync: effectiveLastSync,
+    lastSyncAt: effectiveLastSyncAt,
+    refreshIntervalMs: effectiveRefreshIntervalMs,
+    fromCache: effectiveFromCache,
+  } = effectiveShellSync;
+
+  const isLavagemTabPage = useMemo(() => LAVAGEM_TAB_PAGES.has(page), [page]);
+
+  // Isolated standalone pages never re-reconcile during background Lavagem sync ticks
+  const standalonePageContent = useMemo(() => {
     switch (page) {
       case "central-gerencial":
-        return <CentralGerencial />;
+        return <MemoizedCentralGerencialView />;
       case "gestao-ordens-manutencao":
-        return <GestaoOrdensManutencao />;
+        return <MemoizedGestaoOrdensView />;
       case "controle-apoio":
-        return <ControleApoio />;
+        return <MemoizedControleApoioView />;
       case "modo-tv":
-        return <ModoTV initialPanel="emergency" />;
+        return <MemoizedModoTVView initialPanel="emergency" />;
       case "modo-tv-externas":
-        return <ModoTV initialPanel="external" />;
+        return <MemoizedModoTVView initialPanel="external" />;
+      case "calendario":
+        return <MemoizedCalendarioView schedules={visibleSchedules} />;
+      case "configuracoes":
+        return <MemoizedConfiguracoesView onRefresh={refresh} />;
+      case "preventivas-canavieiras":
+        return (
+          <MemoizedAcompanhamentoView key="preventivas" module="preventivas" />
+        );
+      case "lubrificacao-canavieiras":
+        return (
+          <MemoizedAcompanhamentoView
+            key="lubrificacao"
+            module="lubrificacao"
+          />
+        );
+      case "reformas-apoio":
+        return <MemoizedAcompanhamentoView key="reformas" module="reformas" />;
+      case "reformas-rodomuda":
+        return (
+          <MemoizedAcompanhamentoView
+            key="reformas-rodomuda"
+            module="reformas-rodomuda"
+          />
+        );
+      case "reformas-colhedoras":
+        return (
+          <MemoizedAcompanhamentoView
+            key="reformas-colhedoras"
+            module="reformas-colhedoras"
+          />
+        );
+      case "reformas-trator-transbordo":
+        return (
+          <MemoizedAcompanhamentoView
+            key="reformas-trator-transbordo"
+            module="reformas-trator-transbordo"
+          />
+        );
+      case "reformas-trator-reboque":
+        return (
+          <MemoizedAcompanhamentoView
+            key="reformas-trator-reboque"
+            module="reformas-trator-reboque"
+          />
+        );
+      default:
+        return null;
+    }
+  }, [page, visibleSchedules, refresh]);
+
+  const lavagemPageContent = useMemo(() => {
+    if (!isLavagemTabPage) return null;
+    let content: React.ReactNode;
+    switch (page) {
       case "dashboard":
-        // Dashboard usa a lista FILTRADA: respeita "ocultar encerradas" da Programa\u00e7\u00e3o
         content = (
-          <Dashboard
+          <MemoizedDashboardView
             schedules={visibleSchedules}
             allSchedules={lavagemSchedules}
             stats={visibleStats}
@@ -268,122 +589,98 @@ function AppInner() {
           />
         );
         break;
-      case "programacoes":
-        // Programa\u00e7\u00f5es continua recebendo a lista bruta porque ela mesma decide o filtro
-        content = (
-          <>
-            <PCMIntegrationPanel onChanged={refresh} hideMainEquipment />
-            <Programacoes
-              schedules={lavagemSchedules}
-              onUpdate={updateSchedule}
-              onDelete={deleteSchedule}
-              onAdd={addSchedules}
-              onAddSingle={addSingleSchedule}
-            />
-          </>
-        );
-        break;
       case "importar":
-        content = <Importar onImport={addSchedules} />;
+        content = <MemoizedImportarView onImport={addSchedules} />;
         break;
       case "exportar":
-        // A exportação aplica a mesma visibilidade operacional; o botão global revela o histórico.
-        content = <Exportar schedules={visibleSchedules} />;
+        content = <MemoizedExportarView schedules={visibleSchedules} />;
         break;
-      case "calendario":
-        return <Calendario schedules={visibleSchedules} />;
-      case "configuracoes":
-        return <Configuracoes onRefresh={refresh} />;
-      case "preventivas-canavieiras":
-        return (
-          <AcompanhamentoManutencao key="preventivas" module="preventivas" />
-        );
-      case "lubrificacao-canavieiras":
-        return (
-          <AcompanhamentoManutencao key="lubrificacao" module="lubrificacao" />
-        );
-      case "reformas-apoio":
-        return <AcompanhamentoManutencao key="reformas" module="reformas" />;
-      case "reformas-rodomuda":
-        return <AcompanhamentoManutencao key="reformas-rodomuda" module="reformas-rodomuda" />;
-      case "reformas-colhedoras":
-        return <AcompanhamentoManutencao key="reformas-colhedoras" module="reformas-colhedoras" />;
-      case "reformas-trator-transbordo":
-        return <AcompanhamentoManutencao key="reformas-trator-transbordo" module="reformas-trator-transbordo" />;
-      case "reformas-trator-reboque":
-        return <AcompanhamentoManutencao key="reformas-trator-reboque" module="reformas-trator-reboque" />;
-
+      case "programacoes":
       default:
         content = (
-          <>
-            <PCMIntegrationPanel onChanged={refresh} hideMainEquipment />
-            <Programacoes
-              schedules={lavagemSchedules}
-              onUpdate={updateSchedule}
-              onDelete={deleteSchedule}
-              onAdd={addSchedules}
-              onAddSingle={addSingleSchedule}
-            />
-          </>
+          <MemoizedProgramacoesView
+            schedules={lavagemSchedules}
+            onUpdate={updateSchedule}
+            onDelete={deleteSchedule}
+            onAdd={addSchedules}
+            onAddSingle={addSingleSchedule}
+            onRefresh={refresh}
+          />
         );
+        break;
     }
 
-    if (!["dashboard", "programacoes", "importar", "exportar"].includes(page))
-      return content;
-
-    // Dashboard, Importar e Exportar da Lavagem agora vivem DENTRO de
-    // Programa\u00e7\u00f5es, por meio de uma barra de abas no topo.
     return (
-      <LavagemPremiumLayout refreshing={syncing} onRefresh={refresh} activeTab={page}>
-        <LavagemTabs
-          current={page}
-          onNavigate={setPage}
-          alertCount={alertCount}
-        />
-        <p role="note" style={{padding:"10px 14px",marginBottom:12,borderRadius:10,background:"var(--bg-card)",color:"var(--text-secondary)",fontSize:12,lineHeight:1.5}}>
-          <strong>Controle dos demais equipamentos.</strong> Grupos ocultos nesta visualização: {HIDDEN_LAVAGEM_GROUPS.join(", ")}. As ordens continuam preservadas nos seus módulos.
-        </p>
+      <MemoizedLavagemWorkspace
+        page={page}
+        syncing={syncing}
+        onRefresh={refresh}
+        onNavigate={setPage}
+        alertCount={alertCount}
+      >
         {content}
-      </LavagemPremiumLayout>
+      </MemoizedLavagemWorkspace>
     );
-  };
+  }, [
+    isLavagemTabPage,
+    page,
+    visibleSchedules,
+    lavagemSchedules,
+    visibleStats,
+    loading,
+    error,
+    updateSchedule,
+    deleteSchedule,
+    addSchedules,
+    addSingleSchedule,
+    refresh,
+    syncing,
+    setPage,
+    alertCount,
+  ]);
+
+  const pageContent = isLavagemTabPage
+    ? lavagemPageContent
+    : standalonePageContent;
+
+  const showPendingBanner = useMemo(
+    () =>
+      Boolean(
+        error &&
+          !error.startsWith("Sem conexão com a internet") &&
+          !SILENT_ERROR_PAGES.has(page),
+      ),
+    [error, page],
+  );
+
+  const pendingBannerStyle = useMemo<React.CSSProperties>(
+    () =>
+      isDark
+        ? {
+            borderColor: "rgba(251, 191, 36, 0.36)",
+            background: "rgba(251, 191, 36, 0.11)",
+            color: "#fde68a",
+          }
+        : {
+            borderColor: "#c08a28",
+            background: "#fff8e7",
+            color: "#63420b",
+          },
+    [isDark],
+  );
 
   return (
     <Layout
       currentPage={page}
       hideEncerradas={hideEncerradas}
-      onToggleEncerradas={() => {
-        const hidden = !hideEncerradas;
-        setManualHideEncerradas(hidden, new Date());
-        window.dispatchEvent(new CustomEvent("bp:hide-encerradas-changed", { detail: { hidden } }));
-      }}
+      onToggleEncerradas={handleToggleEncerradas}
       onNavigate={setPage}
-      onRefresh={() => {
-        if (
-          [
-            "central-gerencial",
-          "preventivas-canavieiras",
-            "lubrificacao-canavieiras",
-            "reformas-apoio",
-    "reformas-rodomuda",
-    "reformas-colhedoras",
-    "reformas-trator-transbordo",
-    "reformas-trator-reboque",
-          ].includes(page)
-        )
-          window.dispatchEvent(new Event(MAINTENANCE_REFRESH_EVENT));
-        else if (page === "controle-apoio") window.dispatchEvent(new Event("bp:apoio-refresh"));
-        else void refresh();
-      }}
-      syncing={maintenancePage ? maintenanceShell.syncing : syncing}
-      lastSync={
-        maintenancePage
-          ? maintenanceShell.lastSync
-            ? formatApoioDate(maintenanceShell.lastSync)
-            : null
-          : lastSync
-      }
-      fromCache={maintenancePage ? maintenanceShell.fromCache : fromCache}
+      onRefresh={handleShellRefresh}
+      syncing={effectiveSyncing}
+      lastSync={effectiveLastSync}
+      lastSyncAt={effectiveLastSyncAt}
+      refreshIntervalMs={effectiveRefreshIntervalMs}
+      fromCache={effectiveFromCache}
       alertCount={alertCount}
       alerts={alerts}
       unreadCount={unreadCount}
@@ -393,62 +690,43 @@ function AppInner() {
       onMarkAllAsRead={markAllAsRead}
       onClearAll={clearAll}
     >
-      {error &&
-        !error.startsWith("Sem conexão com a internet") &&
-        ![
-          "modo-tv",
-          "modo-tv-externas",
-          "controle-apoio",
-          "gestao-ordens-manutencao",
-          "central-gerencial",
-          "preventivas-canavieiras",
-          "lubrificacao-canavieiras",
-          "reformas-apoio",
-    "reformas-rodomuda",
-    "reformas-colhedoras",
-    "reformas-trator-transbordo",
-    "reformas-trator-reboque",
-        ].includes(page) && (
-          <div
-            role="alert"
-            className="mb-3 rounded-xl px-4 py-3 text-[13px] leading-relaxed border"
-            style={
-              isDark
-                ? {
-                    borderColor: "rgba(251, 191, 36, 0.36)",
-                    background: "rgba(251, 191, 36, 0.11)",
-                    color: "#fde68a",
-                  }
-                : {
-                    borderColor: "#c08a28",
-                    background: "#fff8e7",
-                    color: "#63420b",
-                  }
-            }
+      {showPendingBanner && (
+        <div
+          role="alert"
+          className="mb-3 rounded-xl px-4 py-3 text-[13px] leading-relaxed border"
+          style={pendingBannerStyle}
+        >
+          <strong>Lavagem e Lubrificação: atualização pendente.</strong> Os
+          dados exibidos podem estar desatualizados. {error}
+          <button
+            type="button"
+            onClick={refresh}
+            className="ml-3 underline font-semibold"
           >
-            <strong>Lavagem e Lubrificação: atualização pendente.</strong> Os
-            dados exibidos podem estar desatualizados. {error}
-            <button
-              type="button"
-              onClick={refresh}
-              className="ml-3 underline font-semibold"
-            >
-              Tentar atualizar agora
-            </button>
-          </div>
-        )}
-      {renderPage()}
+            Tentar atualizar agora
+          </button>
+        </div>
+      )}
+      {pageContent}
     </Layout>
   );
-}
+});
 
 export default function App() {
   useEffect(() => {
-    const readImages = () => { if(document.visibilityState === 'visible') void refreshEquipmentImageOverrides().catch(() => undefined); };
-    readImages();const timer=window.setInterval(readImages,300_000);
-    window.addEventListener('focus',readImages);
-    return () => {window.clearInterval(timer);window.removeEventListener('focus',readImages);};
-  },[]);
+    const readImages = () => {
+      if (document.visibilityState === "visible") {
+        void refreshEquipmentImageOverrides().catch(() => undefined);
+      }
+    };
+    readImages();
+    const timer = window.setInterval(readImages, 300_000);
+    window.addEventListener("focus", readImages);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("focus", readImages);
+    };
+  }, []);
 
   return (
     <ThemeProvider>

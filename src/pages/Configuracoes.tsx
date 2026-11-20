@@ -1,4 +1,5 @@
 import EquipmentImageManager from '../components/EquipmentImageManager';
+import PWAInstallButton from '../components/PWAInstallButton';
 import React, { useState } from "react";
 import { getStoredConfig, testSupabaseConnection } from "../lib/sheetsService";
 import {
@@ -73,6 +74,7 @@ export default function Configuracoes({ onRefresh }: Props) {
         </p>
       </div>
 
+      <PWAInstallButton variant="card" />
       <EquipmentImageManager />
       {/* ═════════════════════════════════════════════════════════════════════════
           SEÇÃO 1: LAVAGEM / LUBRIFICAÇÃO — SUPABASE

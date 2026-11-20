@@ -5,8 +5,8 @@
  * ============================================================================ */
 
 html.theme-black-cyan {
-  --font-display: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --bc-canvas: #000000;
@@ -104,7 +104,7 @@ html.theme-black-cyan :is(
   .tv-dialog,
   .equipment-image-manager
 ) {
-  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: var(--font-family) !important;
 }
 
 html.theme-black-cyan :is(
@@ -126,7 +126,7 @@ html.theme-black-cyan :is(
   .tv-topbar h2,
   .tv-summary strong
 ) {
-  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: var(--font-display) !important;
   letter-spacing: -0.02em;
 }
 
@@ -967,9 +967,97 @@ html.theme-black-cyan .bi-charts {
   --bi-slate-100: #0a1017 !important;
 }
 
+html.theme-black-cyan .bi-heatmap-row > [role='columnheader'],
+html.theme-black-cyan .bi-heatmap-group-label {
+  color: #c5d8e4 !important;
+}
+
+html.theme-black-cyan .bi-heatmap-group-button:hover,
+html.theme-black-cyan .bi-heatmap-group-button:focus-visible {
+  background: rgba(6, 182, 212, 0.14) !important;
+  border-color: rgba(34, 211, 238, 0.46) !important;
+  color: #ffffff !important;
+}
+
 html.theme-black-cyan .bi-heat-cell {
   background: color-mix(in srgb, #06b6d4 calc(var(--heat-intensity) * 78%), #0b121a) !important;
   border-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+html.theme-black-cyan .bi-heat-cell:not(.is-zero) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65) !important;
+}
+
+html.theme-black-cyan .bi-heat-cell.is-zero {
+  background: #060a0f !important;
+  border-color: rgba(56, 189, 248, 0.10) !important;
+  color: #64748b !important;
+}
+
+html.theme-black-cyan .bi-status {
+  background: rgba(56, 189, 248, 0.10) !important;
+  border-color: rgba(56, 189, 248, 0.24) !important;
+  color: #dbeaf3 !important;
+}
+
+html.theme-black-cyan .bi-status-programado {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(56, 189, 248, 0.44) !important;
+  color: #bae6fd !important;
+}
+
+html.theme-black-cyan .bi-status-aguardando {
+  background: rgba(245, 158, 11, 0.16) !important;
+  border-color: rgba(245, 158, 11, 0.42) !important;
+  color: #fde68a !important;
+}
+
+html.theme-black-cyan .bi-status-andamento {
+  background: rgba(167, 139, 250, 0.18) !important;
+  border-color: rgba(167, 139, 250, 0.44) !important;
+  color: #ede9fe !important;
+}
+
+html.theme-black-cyan .bi-status-encerrado {
+  background: rgba(6, 182, 212, 0.20) !important;
+  border-color: rgba(34, 211, 238, 0.48) !important;
+  color: #cffafe !important;
+}
+
+html.theme-black-cyan .status-badge[data-status="PENDENTE"],
+html.theme-black-cyan .app-shell .bg-amber-100 {
+  background: rgba(245, 158, 11, 0.16) !important;
+  border-color: rgba(245, 158, 11, 0.42) !important;
+  color: #fde68a !important;
+}
+
+html.theme-black-cyan .status-badge[data-status="ATRASADO"],
+html.theme-black-cyan .app-shell .bg-red-100 {
+  background: rgba(239, 68, 68, 0.20) !important;
+  border-color: rgba(248, 113, 113, 0.46) !important;
+  color: #fecaca !important;
+}
+
+html.theme-black-cyan .status-badge[data-status="PROGRAMADO"],
+html.theme-black-cyan .app-shell .bg-blue-100 {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(56, 189, 248, 0.44) !important;
+  color: #bae6fd !important;
+}
+
+html.theme-black-cyan .status-badge[data-status="ANDAMENTO"],
+html.theme-black-cyan .app-shell .bg-purple-100 {
+  background: rgba(167, 139, 250, 0.18) !important;
+  border-color: rgba(167, 139, 250, 0.44) !important;
+  color: #ede9fe !important;
+}
+
+html.theme-black-cyan .status-badge[data-status="ENCERRADO"],
+html.theme-black-cyan .app-shell .bg-green-100 {
+  background: rgba(52, 211, 153, 0.18) !important;
+  border-color: rgba(52, 211, 153, 0.44) !important;
+  color: #a7f3d0 !important;
 }
 
 /* ── Apoio, Reformas & Carretas Canavieiras ────────────────────────────────── */
@@ -1117,6 +1205,13 @@ html.theme-black-cyan .app-shell .apoio-reference :is(.apoio-command-center, .ap
   border: 1px solid rgba(56, 189, 248, 0.18) !important;
   color: #f3f9fc !important;
   box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.92) !important;
+}
+
+html.theme-black-cyan .app-shell .maintenance-tracking .mt-toolbar {
+  padding: 18px 20px !important;
+  gap: 14px 18px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
 }
 
 html.theme-black-cyan .app-shell .maintenance-tracking .mt-visibility-bar {

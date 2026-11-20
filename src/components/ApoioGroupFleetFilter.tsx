@@ -3,6 +3,7 @@ import { Check, ChevronDown, Search, X } from 'lucide-react';
 import type { ApoioFleet, ApoioGroup, ApoioReportRow } from '../types/apoio';
 import type { ApoioFleetsByGroup } from '../lib/apoioFilters';
 import '../styles/apoio-fleet-filter.css';
+import { getCardTiltProps } from '../hooks/useCardTilt';
 
 export interface ApoioGroupFleetFilterProps {
   groups: ApoioGroup[];
@@ -89,6 +90,8 @@ export default function ApoioGroupFleetFilter({
   const gridRef = useRef<HTMLDivElement>(null);
   const originButtonRef = useRef<HTMLButtonElement | null>(null);
   const openingGroupRef = useRef<string | null>(null);
+  const fleetOptionTiltProps = getCardTiltProps<HTMLLabelElement>({ maxTiltDeg: 4.5, scale: 1.012 });
+  const fleetTileTiltProps = getCardTiltProps<HTMLDivElement>({ maxTiltDeg: 4.5, scale: 1.012 });
   const optionsByGroup = useMemo(() => groupOptions(groups, fleets, baseRows), [baseRows, fleets, groups]);
   const openGroup = groups.find(group => group.id === openGroupId) || null;
   const openOptions = openGroup ? optionsByGroup.get(openGroup.id) || [] : [];
@@ -252,7 +255,7 @@ export default function ApoioGroupFleetFilter({
         <div className="apoio-group-fleet-options">
           {visibleOptions.map(option => {
             const checked = openSelected.has(option.frota);
-            return <label className={`glass-card apoio-group-fleet-option${checked ? ' is-selected' : ''}`} key={option.frota}>
+            return <label {...fleetOptionTiltProps} className={`glass-card apoio-group-fleet-option tilt-card${checked ? ' is-selected' : ''}`} key={option.frota}>
               <input type="checkbox" checked={checked} onChange={event => updateSelection(option.frota, event.target.checked)} aria-label={`Selecionar frota ${option.frota}`} />
               <span className="apoio-group-fleet-option-text"><strong>Frota {option.frota}</strong><small>{option.nome}</small></span>
               <span className="apoio-group-fleet-option-count">{option.count ? `${option.count} ${option.count === 1 ? 'ordem' : 'ordens'}` : 'sem ordens'}</span>
@@ -292,7 +295,7 @@ export default function ApoioGroupFleetFilter({
           const selected = selectedGroups.includes(group.id);
           const isOpen = openGroupId === group.id;
           return <React.Fragment key={group.id}>
-            <div className={`glass-card apoio-group-fleet-tile${selected ? ' is-selected' : ''}${isOpen ? ' is-open is-active' : ''}`}>
+            <div {...fleetTileTiltProps} className={`glass-card apoio-group-fleet-tile tilt-card${selected ? ' is-selected' : ''}${isOpen ? ' is-open is-active' : ''}`}>
               <button
                 type="button"
                 className="apoio-group-fleet-tile-main"

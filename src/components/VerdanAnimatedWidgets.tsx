@@ -61,13 +61,17 @@ interface RadialGaugeProps {
   label?: string;
   subtitle?: string;
   size?: number;
+  variant?: 'verdan' | 'v32-segmented' | 'vitrea';
 }
+
+const V32_SEGMENT_COUNT = 22;
 
 export function VerdanRadialGauge({
   valuePct,
   label = 'HOJE',
   subtitle,
   size = 186,
+  variant = 'verdan',
 }: RadialGaugeProps) {
   const gradId = useId().replace(/:/g, '');
   const [animatedPct, setAnimatedPct] = useState(0);
@@ -90,8 +94,89 @@ export function VerdanRadialGauge({
   // Rotate so the 220-degree arc sits symmetrically across the top (-200deg = bottom-left to bottom-right)
   const rotation = 160;
 
+  if (variant === 'v32-segmented') {
+    const clampedPct = Math.max(0, Math.min(100, animatedPct));
+    const litSegments = Math.round((clampedPct / 100) * V32_SEGMENT_COUNT);
+    const startDeg = -200;
+    const stepDeg = 220 / (V32_SEGMENT_COUNT - 1);
+    const innerR = 50;
+    const outerR = 67;
+
+    return (
+      <div className="verdan-gauge verdan-gauge--v32" style={{ width: size }}>
+        <svg
+          viewBox="0 0 168 124"
+          className="verdan-gauge__svg"
+          role="img"
+          aria-label={`Taxa de conclusão: ${Math.round(clampedPct)}%`}
+        >
+          <defs>
+            <linearGradient id={`v32-seg-grad-${gradId}`} x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#ea580c" />
+              <stop offset="52%" stopColor="#f97316" />
+              <stop offset="100%" stopColor="#fdba74" />
+            </linearGradient>
+            <filter id={`v32-seg-glow-${gradId}`} x="-35%" y="-35%" width="170%" height="170%">
+              <feGaussianBlur stdDeviation="2.4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {Array.from({ length: V32_SEGMENT_COUNT }, (_, idx) => {
+            const rad = ((startDeg + idx * stepDeg) * Math.PI) / 180;
+            const x1 = center + innerR * Math.cos(rad);
+            const y1 = center + innerR * Math.sin(rad);
+            const x2 = center + outerR * Math.cos(rad);
+            const y2 = center + outerR * Math.sin(rad);
+            const isLit = idx < litSegments;
+            return (
+              <line
+                key={idx}
+                x1={x1.toFixed(2)}
+                y1={y1.toFixed(2)}
+                x2={x2.toFixed(2)}
+                y2={y2.toFixed(2)}
+                stroke={isLit ? `url(#v32-seg-grad-${gradId})` : 'rgba(255, 255, 255, 0.10)'}
+                strokeWidth={5.2}
+                strokeLinecap="round"
+                filter={isLit ? `url(#v32-seg-glow-${gradId})` : undefined}
+                style={{
+                  transition: 'stroke 240ms ease, opacity 240ms ease',
+                  opacity: isLit ? 1 : 0.72,
+                }}
+              />
+            );
+          })}
+
+          <text
+            x={center}
+            y={center - 1}
+            textAnchor="middle"
+            className="verdan-gauge__value v32-gauge__value"
+          >
+            {Math.round(clampedPct)}%
+          </text>
+          <text
+            x={center}
+            y={center + 18}
+            textAnchor="middle"
+            className="verdan-gauge__label v32-gauge__label"
+          >
+            {label}
+          </text>
+        </svg>
+        {subtitle && <p className="verdan-gauge__subtitle">{subtitle}</p>}
+      </div>
+    );
+  }
+
+  const isVitreaArc = variant === 'vitrea';
+
   return (
-    <div className="verdan-gauge" style={{ width: size }}>
+    <div className={`verdan-gauge${isVitreaArc ? ' verdan-gauge--vitrea' : ''}`} style={{ width: size }}>
       <svg
         viewBox="0 0 168 134"
         className="verdan-gauge__svg"
@@ -100,12 +185,12 @@ export function VerdanRadialGauge({
       >
         <defs>
           <linearGradient id={`verdan-arc-${gradId}`} x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#65d957" />
-            <stop offset="55%" stopColor="#b7ed40" />
-            <stop offset="100%" stopColor="#d9fb7a" />
+            <stop offset="0%" stopColor={isVitreaArc ? '#68c0b8' : '#65d957'} />
+            <stop offset="55%" stopColor={isVitreaArc ? '#7aaef0' : '#b7ed40'} />
+            <stop offset="100%" stopColor={isVitreaArc ? '#a9cdfc' : '#d9fb7a'} />
           </linearGradient>
           <filter id={`verdan-glow-${gradId}`} x="-25%" y="-25%" width="150%" height="150%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feGaussianBlur stdDeviation={isVitreaArc ? '2.4' : '3.5'} result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -189,6 +274,8 @@ interface SparklineCardProps {
   badgeTone?: 'lime' | 'amber' | 'sky' | 'coral';
   series: number[];
   icon?: React.ReactNode;
+  accentColor?: string;
+  accentBright?: string;
 }
 
 export function VerdanSparklineCard({
@@ -199,6 +286,8 @@ export function VerdanSparklineCard({
   badgeTone = 'lime',
   series,
   icon,
+  accentColor = '#b7ed40',
+  accentBright = '#d9fb7a',
 }: SparklineCardProps) {
   const gradId = useId().replace(/:/g, '');
   const geom = useMemo(() => computeSparklinePaths(series, 220, 52, 6), [series]);
@@ -226,15 +315,15 @@ export function VerdanSparklineCard({
       >
         <defs>
           <linearGradient id={`verdan-spark-${gradId}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#b7ed40" stopOpacity="0.34" />
-            <stop offset="100%" stopColor="#b7ed40" stopOpacity="0.01" />
+            <stop offset="0%" stopColor={accentColor} stopOpacity="0.34" />
+            <stop offset="100%" stopColor={accentColor} stopOpacity="0.01" />
           </linearGradient>
         </defs>
         <path d={geom.areaPath} fill={`url(#verdan-spark-${gradId})`} className="verdan-sparkline__area" />
         <path
           d={geom.linePath}
           fill="none"
-          stroke="#b7ed40"
+          stroke={accentColor}
           strokeWidth="2.4"
           strokeLinecap="round"
           className="verdan-sparkline__line"
@@ -243,7 +332,7 @@ export function VerdanSparklineCard({
           cx={geom.lastPoint.x}
           cy={geom.lastPoint.y}
           r="4"
-          fill="#d9fb7a"
+          fill={accentBright}
           className="verdan-sparkline__dot"
         />
       </svg>

@@ -17,7 +17,7 @@ html.theme-glassy-v18 {
   --bg-primary: #514841;
   --bg-secondary: rgba(67, 59, 53, .76);
   --bg-tertiary: rgba(95, 83, 73, .72);
-  --bg-card: rgba(79, 69, 61, .62);
+  --bg-card: rgba(54, 46, 40, .78);
   --bg-sidebar: linear-gradient(180deg, rgba(62, 54, 49, .91), rgba(82, 71, 63, .84));
   --sidebar-text: #f6f0e6;
   --sidebar-text-muted: #c8baaa;
@@ -28,9 +28,9 @@ html.theme-glassy-v18 {
   --bg-hover: rgba(255, 248, 236, .10);
   --bg-accent: rgba(140, 166, 239, .18);
   --text-primary: #f6f0e6;
-  --text-secondary: #e3d8ca;
-  --text-tertiary: #c7b9a9;
-  --text-muted: #ad9f90;
+  --text-secondary: #f3ece2;
+  --text-tertiary: #dfd3c4;
+  --text-muted: #cfc1b0;
   --text-inverse: #403b33;
   --border-primary: rgba(255, 255, 255, .16);
   --border-secondary: rgba(255, 255, 255, .10);
@@ -53,7 +53,7 @@ html.theme-glassy-v18 {
   --scrollbar-track: rgba(47, 41, 37, .64);
   --scrollbar-thumb: rgba(190, 177, 161, .62);
   --scrollbar-thumb-hover: #8ca6ef;
-  --glass-card-bg: rgba(78, 68, 60, .60);
+  --glass-card-bg: rgba(54, 46, 40, .74);
   --glass-card-border: rgba(255, 255, 255, .16);
   --glass-card-shadow: 0 18px 44px -22px rgba(27, 22, 19, .74), inset 0 1px 0 rgba(255, 255, 255, .08);
   --glass-blur: 22px;
@@ -90,7 +90,7 @@ html.theme-glassy-v18 #root { min-height: 100vh; }
 html.theme-glassy-v18 .app-shell {
   --bg-primary: transparent;
   --bg-secondary: rgba(67, 59, 53, .76);
-  --bg-card: rgba(79, 69, 61, .62);
+  --bg-card: rgba(54, 46, 40, .78);
   background: transparent !important;
   color: var(--text-primary) !important;
   font-family: var(--font-family);

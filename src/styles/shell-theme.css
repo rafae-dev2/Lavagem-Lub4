@@ -309,7 +309,7 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   color: #dcfce7;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-offline {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner.is-offline {
   background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
   border: 1px solid #f59e0b;
   border-left: 4px solid #d97706;
@@ -317,7 +317,7 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   box-shadow: 0 8px 24px -10px rgba(180, 83, 9, 0.22);
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-reconnecting {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner.is-reconnecting {
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
   border: 1px solid #22c55e;
   border-left: 4px solid #16a34a;
@@ -346,12 +346,12 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   color: #4ade80;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-offline .shell-offline-banner__icon {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner.is-offline .shell-offline-banner__icon {
   background: rgba(217, 119, 6, 0.14);
   color: #b45309;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-reconnecting .shell-offline-banner__icon {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner.is-reconnecting .shell-offline-banner__icon {
   background: rgba(22, 163, 74, 0.14);
   color: #15803d;
 }
@@ -397,13 +397,13 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   color: #bbf7d0;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-offline .shell-offline-banner__badge {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner.is-offline .shell-offline-banner__badge {
   background: rgba(217, 119, 6, 0.14);
   border-color: rgba(217, 119, 6, 0.35);
   color: #92400e;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner.is-reconnecting .shell-offline-banner__badge {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner.is-reconnecting .shell-offline-banner__badge {
   background: rgba(22, 163, 74, 0.14);
   border-color: rgba(22, 163, 74, 0.35);
   color: #166534;
@@ -437,7 +437,7 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   line-height: 1.3;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner__meta-item {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner__meta-item {
   background: rgba(255, 255, 255, 0.65);
   border-color: rgba(0, 0, 0, 0.10);
 }
@@ -469,7 +469,7 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   outline-offset: 2px;
 }
 
-html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18) .shell-offline-banner__dismiss {
+html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-ios-liquid-glass):not(.theme-ocean):not(.theme-sunset):not(.theme-forest):not(.theme-midnight):not(.theme-copper):not(.theme-glassy-v18):not(.theme-vitrea):not(.theme-calda) .shell-offline-banner__dismiss {
   background: rgba(255, 255, 255, 0.72);
   border-color: rgba(180, 83, 9, 0.32);
 }
@@ -511,3 +511,119 @@ html:not(.dark):not(.theme-liquid-glass-v18):not(.theme-black-cyan):not(.theme-i
   }
 }
 
+/* ── Live Last-Sync Relative Time & Countdown Indicator ───────────────────── */
+.shell-sync-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 5px 12px 7px;
+  border-radius: 12px;
+  background: var(--shell-header-action-bg);
+  border: 1px solid var(--shell-header-action-border);
+  color: var(--shell-header-text);
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: left;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+button.shell-sync-indicator {
+  cursor: pointer;
+}
+
+button.shell-sync-indicator:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+button.shell-sync-indicator:focus-visible {
+  outline: 2px solid var(--shell-header-action);
+  outline-offset: 2px;
+}
+
+.shell-sync-indicator__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--shell-header-action);
+  flex-shrink: 0;
+}
+
+.shell-sync-indicator__copy {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.shell-sync-indicator__relative {
+  font-weight: 700;
+  color: var(--shell-header-text);
+}
+
+.shell-sync-indicator__countdown {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--shell-header-muted);
+  padding-left: 6px;
+  border-left: 1px solid currentColor;
+  opacity: 0.88;
+}
+
+.shell-sync-indicator__meter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.shell-sync-indicator__meter-fill {
+  display: block;
+  height: 100%;
+  background: var(--shell-header-action);
+  opacity: 0.78;
+  transition: width 850ms linear;
+}
+
+.shell-sync-indicator.is-offline {
+  border-color: rgba(251, 191, 36, 0.48);
+}
+
+.shell-sync-indicator.is-syncing .shell-sync-indicator__icon {
+  color: #fbbf24;
+}
+
+.shell-sync-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.shell-sync-sidebar__text {
+  display: block;
+  line-height: 1.35;
+}
+
+.shell-sync-sidebar__track {
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.shell-sync-sidebar__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--sidebar-logo-ring, currentColor);
+  opacity: 0.85;
+  transition: width 850ms linear;
+}

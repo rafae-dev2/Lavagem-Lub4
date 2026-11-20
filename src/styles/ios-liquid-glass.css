@@ -8,8 +8,8 @@
  * ============================================================================ */
 
 html.theme-ios-liquid-glass {
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
-  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --ios-ink: #f5f8ff;
@@ -37,15 +37,15 @@ html.theme-ios-liquid-glass {
   --bg-primary: #000000 !important;
   --bg-secondary: rgba(14, 18, 26, 0.54) !important;
   --bg-tertiary: rgba(20, 26, 36, 0.46) !important;
-  --bg-card: rgba(16, 20, 30, 0.36) !important;
+  --bg-card: rgba(12, 16, 26, 0.58) !important;
   --bg-sidebar: rgba(8, 10, 16, 0.56) !important;
   --bg-hover: rgba(255, 255, 255, 0.09) !important;
   --bg-accent: rgba(10, 132, 255, 0.18) !important;
 
   --text-primary: #f5f8ff !important;
-  --text-secondary: #c8d6eb !important;
-  --text-tertiary: #9cb0cc !important;
-  --text-muted: #869bb8 !important;
+  --text-secondary: #e2ecf8 !important;
+  --text-tertiary: #b9cae3 !important;
+  --text-muted: #a4b8d6 !important;
   --text-inverse: #ffffff !important;
 
   --border-primary: rgba(255, 255, 255, 0.20) !important;
@@ -676,9 +676,21 @@ html.theme-ios-liquid-glass .app-shell .lavagem-premium .lavagem-premium-body :i
 html.theme-ios-liquid-glass .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-white/10"],
 html.theme-ios-liquid-glass .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-tertiary)]"],
 html.theme-ios-liquid-glass .app-shell .lavagem-premium .lavagem-premium-body :is(div, label, button)[class*="bg-[var(--bg-secondary)]"] {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.18) !important;
-  color: #e4eefc !important;
+  background: rgba(14, 20, 32, 0.56) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  color: #f8fafc !important;
+}
+
+html.theme-ios-liquid-glass .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > div,
+html.theme-ios-liquid-glass .app-shell .lavagem-premium .lavagem-premium-body .lub-toolbar > div:last-child > button:not([class*="bg-[var(--brand-green)]"]):not([class*="bg-green-"]):not([class*="bg-amber-"]):not([class*="bg-cyan-"]):not([aria-pressed="true"]) {
+  background: rgba(14, 20, 32, 0.64) !important;
+  backdrop-filter: blur(18px) saturate(185%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  color: #f8fafc !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20), 0 8px 18px -10px rgba(0, 0, 0, 0.45) !important;
 }
 
 html.theme-ios-liquid-glass .app-shell .lavagem-premium .lub-module .lub-kpi {
@@ -1007,11 +1019,23 @@ html.theme-ios-liquid-glass .bi-root input,
 html.theme-ios-liquid-glass .bi-root select,
 html.theme-ios-liquid-glass .bi-select-trigger,
 html.theme-ios-liquid-glass .bi-search,
+html.theme-ios-liquid-glass .bi-select-search,
 html.theme-ios-liquid-glass .bi-chart-empty {
   background: var(--ios-glass-input) !important;
   border-color: rgba(255, 255, 255, 0.22) !important;
   color: var(--ios-ink) !important;
   color-scheme: dark !important;
+}
+
+html.theme-ios-liquid-glass .app-shell .bi-root .bi-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-ios-liquid-glass .app-shell .bi-root .bi-select-search input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.theme-ios-liquid-glass .app-shell .bi-root .bi-search input:focus,
+html.theme-ios-liquid-glass .app-shell .bi-root .bi-select-search input:focus {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 html.theme-ios-liquid-glass .bi-button,
@@ -1051,6 +1075,99 @@ html.theme-ios-liquid-glass .bi-charts {
   --bi-slate-300: rgba(255, 255, 255, 0.22) !important;
   --bi-slate-200: rgba(255, 255, 255, 0.12) !important;
   --bi-slate-100: rgba(20, 26, 38, 0.56) !important;
+}
+
+html.theme-ios-liquid-glass .bi-status {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  color: #f5f8ff !important;
+}
+
+html.theme-ios-liquid-glass .bi-status-programado {
+  background: rgba(10, 132, 255, 0.22) !important;
+  border-color: rgba(96, 165, 250, 0.50) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-ios-liquid-glass .bi-status-aguardando {
+  background: rgba(251, 191, 36, 0.18) !important;
+  border-color: rgba(251, 191, 36, 0.44) !important;
+  color: #fde68a !important;
+}
+
+html.theme-ios-liquid-glass .bi-status-andamento {
+  background: rgba(129, 140, 248, 0.22) !important;
+  border-color: rgba(165, 180, 252, 0.50) !important;
+  color: #e0e7ff !important;
+}
+
+html.theme-ios-liquid-glass .bi-status-encerrado {
+  background: rgba(52, 211, 153, 0.20) !important;
+  border-color: rgba(110, 231, 183, 0.48) !important;
+  color: #d1fae5 !important;
+}
+
+html.theme-ios-liquid-glass .bi-heatmap-row > [role='columnheader'],
+html.theme-ios-liquid-glass .bi-heatmap-group-label {
+  color: #c8d6eb !important;
+}
+
+html.theme-ios-liquid-glass .bi-heatmap-group-button:hover,
+html.theme-ios-liquid-glass .bi-heatmap-group-button:focus-visible {
+  background: rgba(10, 132, 255, 0.18) !important;
+  border-color: rgba(96, 165, 250, 0.50) !important;
+  color: #ffffff !important;
+}
+
+html.theme-ios-liquid-glass .bi-heat-cell {
+  background: color-mix(in srgb, #0a84ff calc(var(--heat-intensity) * 80%), rgba(16, 20, 30, 0.86)) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+html.theme-ios-liquid-glass .bi-heat-cell:not(.is-zero) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55) !important;
+}
+
+html.theme-ios-liquid-glass .bi-heat-cell.is-zero {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  color: rgba(147, 167, 196, 0.70) !important;
+}
+
+html.theme-ios-liquid-glass .status-badge[data-status="PENDENTE"],
+html.theme-ios-liquid-glass .app-shell .bg-amber-100 {
+  background: rgba(251, 191, 36, 0.18) !important;
+  border-color: rgba(251, 191, 36, 0.44) !important;
+  color: #fde68a !important;
+}
+
+html.theme-ios-liquid-glass .status-badge[data-status="ATRASADO"],
+html.theme-ios-liquid-glass .app-shell .bg-red-100 {
+  background: rgba(239, 68, 68, 0.22) !important;
+  border-color: rgba(248, 113, 113, 0.48) !important;
+  color: #fecaca !important;
+}
+
+html.theme-ios-liquid-glass .status-badge[data-status="PROGRAMADO"],
+html.theme-ios-liquid-glass .app-shell .bg-blue-100 {
+  background: rgba(10, 132, 255, 0.20) !important;
+  border-color: rgba(96, 165, 250, 0.48) !important;
+  color: #dbeafe !important;
+}
+
+html.theme-ios-liquid-glass .status-badge[data-status="ANDAMENTO"],
+html.theme-ios-liquid-glass .app-shell .bg-purple-100 {
+  background: rgba(129, 140, 248, 0.22) !important;
+  border-color: rgba(165, 180, 252, 0.48) !important;
+  color: #e0e7ff !important;
+}
+
+html.theme-ios-liquid-glass .status-badge[data-status="ENCERRADO"],
+html.theme-ios-liquid-glass .app-shell .bg-green-100 {
+  background: rgba(52, 211, 153, 0.20) !important;
+  border-color: rgba(110, 231, 183, 0.48) !important;
+  color: #d1fae5 !important;
 }
 
 /* ── Apoio, Reformas & Carretas Canavieiras ────────────────────────────────── */
@@ -1185,6 +1302,13 @@ html.theme-ios-liquid-glass .app-shell .apoio-reference :is(.apoio-command-cente
   border-radius: 22px !important;
   color: var(--ios-ink) !important;
   box-shadow: var(--ios-shadow) !important;
+}
+
+html.theme-ios-liquid-glass .app-shell .maintenance-tracking .mt-toolbar {
+  padding: 18px 20px !important;
+  gap: 14px 18px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
 }
 
 html.theme-ios-liquid-glass .app-shell .maintenance-tracking :is(.mt-kpi, .apoio-kpi) {

@@ -30,6 +30,8 @@ function options(rows: BIRow[], key: (row: BIRow) => string, label: (row: BIRow)
 function CentralGerencial() {
   const { theme } = useTheme();
   const isVerdan = theme === 'verdan';
+  const isDashboardV32 = theme === 'dashboard-v32';
+  const isVitrea = theme === 'vitrea';
   const { data, loading, refreshing, error, refresh, clock } = useMaintenanceTracking({ automaticRefreshMs: MAINTENANCE_CENTRAL_REFRESH_MS, syncOnAutomaticRefresh: false });
   const [filters, setFilters] = useState<BIFilters>(freshFilters);
   const [advanced, setAdvanced] = useState(false);
@@ -124,7 +126,7 @@ function CentralGerencial() {
     <div className="bi-view-toolbar"><nav aria-label="Seções da Central Gerencial"><button type="button" aria-pressed={view === 'dashboard'} onClick={() => setView('dashboard')}><BarChart3 size={15} />Painel gerencial</button><button type="button" aria-pressed={view === 'orders'} onClick={() => setView('orders')}><ListFilter size={15} />Consulta de ordens <span>{n(summary.total)}</span></button><button type="button" aria-pressed={view === 'methodology'} onClick={() => setView('methodology')}><BookOpen size={15} />Metodologia</button></nav><div className="bi-presets"><span>Consultas rápidas</span><button type="button" onClick={() => preset('all')}>Geral</button><button type="button" onClick={() => preset('queue')}>Fila</button><button type="button" onClick={() => preset('overdue')}>Vencidas</button><button type="button" onClick={() => preset('external')}>Externas</button><button type="button" onClick={() => preset('closed')}>Encerradas</button></div></div>
 
     {loading && !data ? <div className="bi-loading" role="status"><RefreshCw size={24} className="animate-spin" /><h2>Carregando a visão integrada</h2><p>Consultando grupos, equipamentos e ordens na fonte compartilhada.</p></div> : <>
-      <section className="bi-kpis" aria-label="Indicadores gerenciais">{kpis.map(item => <article className={`bi-kpi bi-kpi-${item.tone}`} key={item.label}><div><span>{item.label}</span><item.icon size={17} /></div><strong>{isVerdan && typeof item.numericValue === 'number' ? <VerdanCountUp value={item.numericValue} /> : item.value}</strong><p>{item.note}</p></article>)}</section>
+      <section className="bi-kpis" aria-label="Indicadores gerenciais">{kpis.map(item => <article className={`bi-kpi bi-kpi-${item.tone}`} key={item.label}><div><span>{item.label}</span><item.icon size={17} /></div><strong>{(isVerdan || isDashboardV32 || isVitrea) && typeof item.numericValue === 'number' ? <VerdanCountUp value={item.numericValue} /> : item.value}</strong><p>{item.note}</p></article>)}</section>
       <div className="bi-method-note"><Clock3 size={15} /><p><strong>Leitura correta dos tempos:</strong> idade da fila é Entrada → agora para a situação atual. A fonte não informa o início do reparo; não é espera líquida ou MTTR. {summary.invalidDates > 0 && <span className="bi-quality-flag">{n(summary.invalidDates)} ordens com entrada ausente/inconsistente não geram média temporal.</span>}</p></div>
       {view === 'dashboard' && <ManagementCharts model={model} onGroup={pickGroup} onStatus={pickStatus} onAgeBand={pickAge} onWorkshop={pickWorkshop} />}
       {view === 'orders' && <BIOrderExplorer rows={rows} selectionKey={selectionKey} />}

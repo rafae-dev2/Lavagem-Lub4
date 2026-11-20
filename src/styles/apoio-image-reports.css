@@ -129,8 +129,11 @@
   font-weight: 700;
 }
 .apoio-image-reports .apoio-image-preview-text small.apoio-preview-emergency {
-  color: #b45309;
+  color: var(--apoio-warning, #b45309);
   font-weight: 600;
+}
+html.dark .apoio-image-reports .apoio-image-preview-text small.apoio-preview-emergency {
+  color: #fbbf24;
 }
 .apoio-group-card {
   border: 1px solid var(--border-primary);

@@ -1,5 +1,6 @@
 import EquipmentThumbnail from '../components/EquipmentThumbnail';
-import React, { useMemo, useRef, useState } from 'react';
+import { getCardTiltProps } from '../hooks/useCardTilt';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis,
   CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -7,10 +8,15 @@ import {
 } from 'recharts';
 import { Programacao, DashboardStats } from '../types';
 import StatusBadge from '../components/StatusBadge';
+import DashboardFocusModal from '../components/DashboardFocusModal';
+import {
+  getAdjacentFocusOrder,
+  type DashboardFocusContext,
+} from '../lib/dashboardFocusMode';
 import {
   AlertTriangle, Calendar, CheckCircle2, Clock,
   TrendingUp, Wrench, Activity, BarChart2, Zap,
-  Download, FileImage, FileText, ChevronDown
+  Download, FileImage, FileText, ChevronDown, Maximize2
 } from 'lucide-react';
 import { format, parseISO, isValid, differenceInDays } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -67,9 +73,18 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
   const { isDark, theme } = useTheme();
   const isVerdan = theme === 'verdan';
   const isLiquidGlassV18 = theme === 'liquid-glass-v18';
+  const isDashboardV32 = theme === 'dashboard-v32';
+  const isVitrea = theme === 'vitrea';
+  const isCalda = theme === 'calda';
+  const equipCardTiltProps = getCardTiltProps<HTMLButtonElement>({ maxTiltDeg: 5.5, scale: 1.015 });
   const dashRef = useRef<HTMLDivElement>(null);
+  const lastFocusedTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [exporting, setExporting] = useState(false);
   const [showExportMenu, setShowExportMenu] = useState(false);
+  const [focusedOrder, setFocusedOrder] = useState<{
+    id: string;
+    context: DashboardFocusContext;
+  } | null>(null);
   // exportTheme reserved for future use
   const [_exportTheme] = useState<DashExportTheme>('light');
 
@@ -138,17 +153,17 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
 
   // ─── Paleta de cores dinâmica ────────────────────────────────────────────────
   const C = {
-    atrasado:   isLiquidGlassV18 ? '#fb7185' : isVerdan ? '#f87171' : isDark ? '#fc8181' : '#ef4444',
-    pendente:   isLiquidGlassV18 ? '#fbbf24' : isVerdan ? '#fbbf24' : isDark ? '#fbbf24' : '#f59e0b',
-    programado: isLiquidGlassV18 ? '#60a5fa' : isVerdan ? '#38bdf8' : isDark ? '#4fd1c5' : '#3b82f6',
-    encerrado:  isLiquidGlassV18 ? '#34d399' : isVerdan ? '#b7ed40' : isDark ? '#38b2ac' : '#22c55e',
-    grid:       isLiquidGlassV18 ? 'rgba(255, 255, 255, 0.08)' : isDark ? 'rgba(208, 236, 182, 0.08)' : '#f0f0f0',
-    axis:       isLiquidGlassV18 ? 'rgba(241, 245, 249, 0.70)' : isVerdan ? '#8ea594' : isDark ? '#9a9a9a' : '#9ca3af',
+    atrasado:   isCalda ? '#f47c67' : isVitrea ? '#f6a59c' : isDashboardV32 ? '#fb7185' : isLiquidGlassV18 ? '#fb7185' : isVerdan ? '#f87171' : isDark ? '#fc8181' : '#ef4444',
+    pendente:   isCalda ? '#f4be5e' : isVitrea ? '#f3cd7e' : isDashboardV32 ? '#fbbf24' : isLiquidGlassV18 ? '#fbbf24' : isVerdan ? '#fbbf24' : isDark ? '#fbbf24' : '#f59e0b',
+    programado: isCalda ? '#1e9bf0' : isVitrea ? '#7aaef0' : isDashboardV32 ? '#f97316' : isLiquidGlassV18 ? '#60a5fa' : isVerdan ? '#38bdf8' : isDark ? '#4fd1c5' : '#3b82f6',
+    encerrado:  isCalda ? '#34d399' : isVitrea ? '#68c0b8' : isDashboardV32 ? '#10b981' : isLiquidGlassV18 ? '#34d399' : isVerdan ? '#b7ed40' : isDark ? '#38b2ac' : '#22c55e',
+    grid:       isCalda ? 'rgba(255, 255, 255, 0.09)' : isVitrea ? 'rgba(255, 255, 255, 0.08)' : isDashboardV32 ? 'rgba(255, 255, 255, 0.06)' : isLiquidGlassV18 ? 'rgba(255, 255, 255, 0.08)' : isDark ? 'rgba(208, 236, 182, 0.08)' : '#f0f0f0',
+    axis:       isCalda ? '#c2c7d0' : isVitrea ? '#b6c0d1' : isDashboardV32 ? '#9ca3af' : isLiquidGlassV18 ? 'rgba(241, 245, 249, 0.70)' : isVerdan ? '#8ea594' : isDark ? '#9a9a9a' : '#9ca3af',
     tooltip:    {
-      background: isLiquidGlassV18 ? 'rgba(20, 19, 23, 0.92)' : isVerdan ? 'rgba(10, 21, 14, 0.94)' : isDark ? '#253347' : '#ffffff',
-      border: `1px solid ${isLiquidGlassV18 ? 'rgba(255, 255, 255, 0.18)' : isVerdan ? 'rgba(183, 237, 64, 0.35)' : isDark ? 'rgba(255,255,255,0.08)' : '#e5e7eb'}`,
-      borderRadius: 14,
-      color: isDark ? '#eef6ec' : '#111827',
+      background: isCalda ? 'rgba(42, 44, 49, 0.96)' : isVitrea ? 'rgba(28, 28, 32, 0.94)' : isDashboardV32 ? 'rgba(20, 21, 25, 0.96)' : isLiquidGlassV18 ? 'rgba(20, 19, 23, 0.92)' : isVerdan ? 'rgba(10, 21, 14, 0.94)' : isDark ? '#253347' : '#ffffff',
+      border: `1px solid ${isCalda ? 'rgba(255, 255, 255, 0.22)' : isVitrea ? 'rgba(255, 255, 255, 0.18)' : isDashboardV32 ? 'rgba(255, 255, 255, 0.12)' : isLiquidGlassV18 ? 'rgba(255, 255, 255, 0.18)' : isVerdan ? 'rgba(183, 237, 64, 0.35)' : isDark ? 'rgba(255,255,255,0.08)' : '#e5e7eb'}`,
+      borderRadius: isCalda || isVitrea ? 16 : 14,
+      color: isCalda ? '#ffffff' : isVitrea ? '#f3f3f6' : isDark ? '#eef6ec' : '#111827',
       fontSize: 12,
     },
     card:       isDark ? 'glass-card' : 'bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-200',
@@ -160,9 +175,9 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
     { name: 'Atrasado',   value: stats.atrasado,       color: C.atrasado },
     { name: 'Pendente',   value: stats.pendente ?? 0,   color: C.pendente },
     { name: 'Programado', value: stats.programado,      color: C.programado },
-    { name: 'Andamento',  value: stats.andamento ?? 0,  color: isLiquidGlassV18 ? '#818cf8' : isDark ? '#c084fc' : '#9333ea' },
+    { name: 'Andamento',  value: stats.andamento ?? 0,  color: isCalda ? '#56b8ff' : isVitrea ? '#a9cdfc' : isDashboardV32 ? '#818cf8' : isLiquidGlassV18 ? '#818cf8' : isDark ? '#c084fc' : '#9333ea' },
     { name: 'Encerrado',  value: stats.encerrado,       color: C.encerrado },
-  ].filter(d => d.value > 0), [stats, isDark, isLiquidGlassV18]);
+  ].filter(d => d.value > 0), [stats, isDark, isLiquidGlassV18, isDashboardV32, isVitrea, isCalda]);
 
   // ─── Dados mensais (últimos 6 meses) ────────────────────────────────────────
   const monthlyData = useMemo(() => {
@@ -231,6 +246,51 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
   const atrasados = useMemo(() =>
     schedules.filter(s => s.situacao === 'ATRASADO').slice(0, 8),
     [schedules]
+  );
+
+  const activeFocusQueue = useMemo(() => {
+    if (!focusedOrder) return [];
+    return focusedOrder.context === 'atrasados' ? atrasados : proximos7;
+  }, [focusedOrder, atrasados, proximos7]);
+
+  const focusedSchedule = useMemo(() => {
+    if (!focusedOrder) return null;
+    return activeFocusQueue.find((item) => item.id === focusedOrder.id)
+      ?? schedules.find((item) => item.id === focusedOrder.id)
+      ?? null;
+  }, [focusedOrder, activeFocusQueue, schedules]);
+
+  const focusedQueueIndex = useMemo(() => {
+    if (!focusedSchedule) return 0;
+    const idx = activeFocusQueue.findIndex((item) => item.id === focusedSchedule.id);
+    return idx >= 0 ? idx : 0;
+  }, [focusedSchedule, activeFocusQueue]);
+
+  const openFocusOrder = useCallback(
+    (schedule: Programacao, context: DashboardFocusContext, triggerEl: HTMLButtonElement | null) => {
+      lastFocusedTriggerRef.current = triggerEl;
+      setFocusedOrder({ id: schedule.id, context });
+    },
+    [],
+  );
+
+  const closeFocusOrder = useCallback(() => {
+    setFocusedOrder(null);
+    window.requestAnimationFrame(() => {
+      lastFocusedTriggerRef.current?.focus();
+    });
+  }, []);
+
+  const navigateFocusQueue = useCallback(
+    (direction: 'prev' | 'next') => {
+      setFocusedOrder((current) => {
+        if (!current) return null;
+        const queue = current.context === 'atrasados' ? atrasados : proximos7;
+        const adjacent = getAdjacentFocusOrder(queue, current.id, direction);
+        return adjacent ? { id: adjacent.id, context: current.context } : current;
+      });
+    },
+    [atrasados, proximos7],
   );
 
   // ─── Cards de stat ───────────────────────────────────────────────────────────
@@ -374,10 +434,10 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
                 <div>
                   <p className={`text-xs font-medium ${isDark ? 'text-[var(--text-muted)]' : 'opacity-70'}`}>{sc.label}</p>
                   <p className={`text-2xl font-black mt-1 tabular-nums ${isDark ? 'text-[var(--text-primary)]' : ''}`}>
-                    {(isVerdan || isLiquidGlassV18) && typeof sc.value === 'number' ? <VerdanCountUp value={sc.value} /> : sc.value}
+                    {(isVerdan || isLiquidGlassV18 || isDashboardV32 || isVitrea || isCalda) && typeof sc.value === 'number' ? <VerdanCountUp value={sc.value} /> : sc.value}
                   </p>
                 </div>
-                <div className={`p-2 rounded-lg ${isDark ? 'bg-white/5' : 'bg-white/60'}`}>
+                <div className={`dashboard-kpi__icon p-2 rounded-lg ${isDark ? 'bg-white/5' : 'bg-white/60'}`}>
                   <Icon size={18} className={isDark ? sc.iconDark : ''} />
                 </div>
               </div>
@@ -459,14 +519,26 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
           ) : (
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={monthlyData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+                <defs>
+                  <linearGradient id="v32OrangeBar" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#fb923c" />
+                    <stop offset="55%" stopColor="#f97316" />
+                    <stop offset="100%" stopColor="#9a3412" />
+                  </linearGradient>
+                  <linearGradient id="v32EmeraldBar" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#34d399" />
+                    <stop offset="65%" stopColor="#10b981" />
+                    <stop offset="100%" stopColor="#065f46" />
+                  </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
                 <XAxis dataKey="mes" tick={{ fontSize: 11, fill: C.axis }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fill: C.axis }} axisLine={false} tickLine={false} />
                 <Tooltip contentStyle={C.tooltip} cursor={{ fill: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)' }} />
                 <Legend formatter={(v) => <span style={{ color: C.axis, fontSize: 11 }}>{v}</span>} />
-                <Bar dataKey="programado" name="Programado" fill={C.programado} radius={isLiquidGlassV18 ? [6,6,6,6] : [4,4,0,0]} maxBarSize={28} animationDuration={isLiquidGlassV18 ? 360 : 1500} />
-                <Bar dataKey="atrasado"   name="Atrasado"   fill={C.atrasado}   radius={isLiquidGlassV18 ? [6,6,6,6] : [4,4,0,0]} maxBarSize={28} animationDuration={isLiquidGlassV18 ? 360 : 1500} />
-                <Bar dataKey="encerrado"  name="Encerrado"  fill={C.encerrado}  radius={isLiquidGlassV18 ? [6,6,6,6] : [4,4,0,0]} maxBarSize={28} animationDuration={isLiquidGlassV18 ? 360 : 1500} />
+                <Bar dataKey="programado" name="Programado" fill={isDashboardV32 ? 'url(#v32OrangeBar)' : C.programado} radius={isLiquidGlassV18 ? [6,6,6,6] : isDashboardV32 ? [6,6,0,0] : [4,4,0,0]} maxBarSize={28} animationDuration={isLiquidGlassV18 ? 360 : 1500} />
+                <Bar dataKey="atrasado"   name="Atrasado"   fill={C.atrasado}   radius={isLiquidGlassV18 ? [6,6,6,6] : isDashboardV32 ? [6,6,0,0] : [4,4,0,0]} maxBarSize={28} animationDuration={isLiquidGlassV18 ? 360 : 1500} />
+                <Bar dataKey="encerrado"  name="Encerrado"  fill={isDashboardV32 ? 'url(#v32EmeraldBar)' : C.encerrado}  radius={isLiquidGlassV18 ? [6,6,6,6] : isDashboardV32 ? [6,6,0,0] : [4,4,0,0]} maxBarSize={28} animationDuration={isLiquidGlassV18 ? 360 : 1500} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -511,7 +583,26 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
             <Zap size={15} className={isDark ? 'text-[var(--brand-yellow)]' : 'text-amber-500'} />
             <h3 className={`text-sm font-semibold ${C.cardTitle}`}>Taxa de Conclusão</h3>
           </div>
-          {isVerdan ? (
+          {isDashboardV32 ? (
+            <div className="w-full space-y-3 flex flex-col items-center">
+              <VerdanRadialGauge
+                valuePct={taxaConclusao}
+                label="CONCLUÍDO"
+                variant="v32-segmented"
+                size={206}
+              />
+              <div className="v32-gauge-subgrid w-full">
+                <div className="v32-gauge-subwell">
+                  <span>Encerradas</span>
+                  <strong className="tabular-nums text-emerald-400">{stats.encerrado}</strong>
+                </div>
+                <div className="v32-gauge-subwell">
+                  <span>Em aberto</span>
+                  <strong className="tabular-nums text-amber-400">{Math.max(0, stats.total - stats.encerrado)}</strong>
+                </div>
+              </div>
+            </div>
+          ) : isVerdan ? (
             <div className="w-full space-y-4">
               <VerdanRadialGauge
                 valuePct={taxaConclusao}
@@ -558,8 +649,8 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
               <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: isDark ? '#c8c8c8' : '#374151' }} width={80} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={C.tooltip} cursor={{ fill: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)' }} />
               <Legend formatter={(v) => <span style={{ color: C.axis, fontSize: 11 }}>{v}</span>} />
-              <Bar dataKey="total"     name="Total"     fill={isLiquidGlassV18 ? '#60a5fa' : isDark ? '#4fd1c5' : '#1a7a2e'} radius={isLiquidGlassV18 ? [6,6,6,6] : [0,4,4,0]} maxBarSize={18} />
-              <Bar dataKey="encerrado" name="Encerrado" fill={isLiquidGlassV18 ? '#34d399' : isDark ? '#38b2ac' : '#22c55e'} radius={isLiquidGlassV18 ? [6,6,6,6] : [0,4,4,0]} maxBarSize={18} />
+              <Bar dataKey="total"     name="Total"     fill={isCalda ? '#1e9bf0' : isVitrea ? '#7aaef0' : isDashboardV32 ? '#f97316' : isLiquidGlassV18 ? '#60a5fa' : isDark ? '#4fd1c5' : '#1a7a2e'} radius={isCalda || isVitrea || isLiquidGlassV18 ? [6,6,6,6] : isDashboardV32 ? [0,6,6,0] : [0,4,4,0]} maxBarSize={18} />
+              <Bar dataKey="encerrado" name="Encerrado" fill={isCalda ? '#34d399' : isVitrea ? '#68c0b8' : isDashboardV32 ? '#10b981' : isLiquidGlassV18 ? '#34d399' : isDark ? '#38b2ac' : '#22c55e'} radius={isCalda || isVitrea || isLiquidGlassV18 ? [6,6,6,6] : isDashboardV32 ? [0,6,6,0] : [0,4,4,0]} maxBarSize={18} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -573,9 +664,16 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
           ? 'bg-[var(--bg-tertiary)] border border-red-500/20 rounded-xl shadow-xl glow-red'
           : 'bg-white border border-red-200 rounded-xl shadow-sm'
         } p-5`}>
-          <h3 className={`text-sm font-semibold mb-3 flex items-center gap-2 ${isDark ? 'text-red-400' : 'text-red-700'}`}>
-            <AlertTriangle size={15} /> Tarefas Atrasadas ({stats.atrasado})
-          </h3>
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <h3 className={`text-sm font-semibold flex items-center gap-2 ${isDark ? 'text-red-400' : 'text-red-700'}`}>
+              <AlertTriangle size={15} /> Tarefas Atrasadas ({stats.atrasado})
+            </h3>
+            {atrasados.length > 0 && (
+              <span className={`text-[11px] font-medium ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>
+                Clique para Modo Foco
+              </span>
+            )}
+          </div>
           {atrasados.length === 0 ? (
             <p className={`text-sm text-center py-6 ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-400'}`}>Nenhuma tarefa atrasada 🎉</p>
           ) : (
@@ -583,9 +681,16 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
               {atrasados.map(s => {
                 const diasAtraso = s.dataProgramada ? differenceInDays(today, parseISO(s.dataProgramada)) : 0;
                 return (
-                  <div key={s.id} className={`glass-card dashboard-equipment-card flex items-center justify-between gap-3 text-sm rounded-xl px-3 py-2.5 ${
-                    isDark ? 'bg-red-950/25 border border-red-800/25' : 'bg-red-50/90 border border-red-200/80'
-                  }`}>
+                  <button
+                    key={s.id}
+                    type="button"
+                    {...equipCardTiltProps}
+                    onClick={(event) => openFocusOrder(s, 'atrasados', event.currentTarget)}
+                    aria-label={`Abrir modo foco da Frota ${s.frota} — ${s.tipoPreventiva}`}
+                    className={`glass-card dashboard-equipment-card tilt-card dash-order-trigger flex items-center justify-between gap-3 text-sm rounded-xl px-3 py-2.5 ${
+                      isDark ? 'bg-red-950/25 border border-red-800/25' : 'bg-red-50/90 border border-red-200/80'
+                    }`}
+                  >
                     <div className="flex items-center gap-2.5 min-w-0">
                       <EquipmentThumbnail equipment={s} size="table" />
                       <div className="min-w-0">
@@ -593,13 +698,16 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
                         <span className={`ml-2 text-xs ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>{s.tipoPreventiva}</span>
                       </div>
                     </div>
-                    <div className="text-right shrink-0">
-                      <div className={`text-xs font-semibold ${isDark ? 'text-red-400' : 'text-red-600'}`}>
-                        {diasAtraso > 0 ? `${diasAtraso}d atraso` : s.dataProgramada}
+                    <div className="flex items-center gap-2.5 shrink-0">
+                      <div className="text-right">
+                        <div className={`text-xs font-semibold tabular-nums ${isDark ? 'text-red-400' : 'text-red-600'}`}>
+                          {diasAtraso > 0 ? `${diasAtraso}d atraso` : s.dataProgramada}
+                        </div>
+                        <div className={`text-xs tabular-nums ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>{s.horarioAgendado}</div>
                       </div>
-                      <div className={`text-xs ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>{s.horarioAgendado}</div>
+                      <Maximize2 size={14} className="dash-order-trigger__hint shrink-0" aria-hidden="true" />
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -611,17 +719,31 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
           ? 'bg-[var(--bg-tertiary)] border border-[var(--brand-green)]/20 rounded-xl shadow-xl glow-green'
           : 'bg-white border border-blue-200 rounded-xl shadow-sm'
         } p-5`}>
-          <h3 className={`text-sm font-semibold mb-3 flex items-center gap-2 ${isDark ? 'text-[var(--brand-green)]' : 'text-blue-700'}`}>
-            <Clock size={15} /> Próximos 7 Dias ({proximos7.length})
-          </h3>
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <h3 className={`text-sm font-semibold flex items-center gap-2 ${isDark ? 'text-[var(--brand-green)]' : 'text-blue-700'}`}>
+              <Clock size={15} /> Próximos 7 Dias ({proximos7.length})
+            </h3>
+            {proximos7.length > 0 && (
+              <span className={`text-[11px] font-medium ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>
+                Clique para Modo Foco
+              </span>
+            )}
+          </div>
           {proximos7.length === 0 ? (
             <p className={`text-sm text-center py-6 ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-400'}`}>Nenhuma programação nos próximos 7 dias</p>
           ) : (
             <div className="space-y-2">
               {proximos7.map(s => (
-                <div key={s.id} className={`glass-card dashboard-equipment-card flex items-center justify-between gap-3 text-sm rounded-xl px-3 py-2.5 ${
-                  isDark ? 'bg-[var(--brand-green)]/5 border border-[var(--brand-green)]/10' : 'bg-blue-50/90 border border-blue-200/80'
-                }`}>
+                <button
+                  key={s.id}
+                  type="button"
+                  {...equipCardTiltProps}
+                  onClick={(event) => openFocusOrder(s, 'proximos7', event.currentTarget)}
+                  aria-label={`Abrir modo foco da Frota ${s.frota} — ${s.tipoPreventiva}`}
+                  className={`glass-card dashboard-equipment-card tilt-card dash-order-trigger flex items-center justify-between gap-3 text-sm rounded-xl px-3 py-2.5 ${
+                    isDark ? 'bg-[var(--brand-green)]/5 border border-[var(--brand-green)]/10' : 'bg-blue-50/90 border border-blue-200/80'
+                  }`}
+                >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <EquipmentThumbnail equipment={s} size="table" />
                     <div className="min-w-0">
@@ -629,18 +751,31 @@ export default function Dashboard({ schedules, allSchedules, stats, loading, err
                       <span className={`ml-2 text-xs ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>{s.tipoPreventiva}</span>
                     </div>
                   </div>
-                  <div className="text-right shrink-0">
-                    <div className={`text-xs font-semibold ${isDark ? 'text-[var(--brand-green)]' : 'text-blue-600'}`}>
-                      {s.dataProgramada ? format(parseISO(s.dataProgramada), 'dd/MM', { locale: ptBR }) : '—'}
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="text-right">
+                      <div className={`text-xs font-semibold tabular-nums ${isDark ? 'text-[var(--brand-green)]' : 'text-blue-600'}`}>
+                        {s.dataProgramada ? format(parseISO(s.dataProgramada), 'dd/MM', { locale: ptBR }) : '—'}
+                      </div>
+                      <div className={`text-xs tabular-nums ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>{s.horarioAgendado}</div>
                     </div>
-                    <div className={`text-xs ${isDark ? 'text-[var(--text-muted)]' : 'text-gray-500'}`}>{s.horarioAgendado}</div>
+                    <Maximize2 size={14} className="dash-order-trigger__hint shrink-0" aria-hidden="true" />
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           )}
         </div>
       </div>
+
+      <DashboardFocusModal
+        schedule={focusedSchedule}
+        context={focusedOrder?.context ?? 'atrasados'}
+        allSchedules={allSchedules ?? schedules}
+        queueLength={activeFocusQueue.length}
+        queueIndex={focusedQueueIndex}
+        onClose={closeFocusOrder}
+        onNavigateQueue={navigateFocusQueue}
+      />
     </div>
   );
 }

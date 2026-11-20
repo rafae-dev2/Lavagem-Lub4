@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type Theme = 'verdan' | 'liquid-glass-v18' | 'black-cyan' | 'ios-liquid-glass' | 'light' | 'dark' | 'ocean' | 'sunset' | 'forest' | 'midnight' | 'rose' | 'arctic' | 'copper' | 'lavender' | 'glass' | 'glassy-v18';
+export type Theme = 'verdan' | 'liquid-glass-v18' | 'dashboard-v32' | 'vitrea' | 'calda' | 'black-cyan' | 'ios-liquid-glass' | 'light' | 'dark' | 'ocean' | 'sunset' | 'forest' | 'midnight' | 'rose' | 'arctic' | 'copper' | 'lavender' | 'glass' | 'glassy-v18';
 
 export interface ThemeInfo {
   key: Theme;
@@ -15,6 +15,9 @@ export interface ThemeInfo {
 export const THEMES: ThemeInfo[] = [
   { key: 'verdan',   label: 'Verdan Farm OS', emoji: '🌿', description: 'Vidro escuro botânico com lima e animações fluidas', accentColor: '#b7ed40', previewBg: 'linear-gradient(135deg,#06100a 0%,#0f2918 55%,#1a4224 100%)', previewAccent: '#b7ed40' },
   { key: 'liquid-glass-v18', label: 'Liquid Glass V18', emoji: '💎', description: 'Blur liquid glass premium fumê e glow azul real', accentColor: '#3B82F6', previewBg: 'linear-gradient(135deg,#2c231c 0%,#1f2634 48%,#2563eb 100%)', previewAccent: '#60A5FA' },
+  { key: 'dashboard-v32', label: 'Dashboard V32', emoji: '🪵', description: 'Console nogueira tátil com grafite fosco e âmbar V32', accentColor: '#F97316', previewBg: 'linear-gradient(135deg,#4e311d 0%,#141518 54%,#f97316 100%)', previewAccent: '#FB923C' },
+  { key: 'vitrea', label: 'Vitrea Glass', emoji: '🔮', description: 'Vidro líquido grafite com borda especular cônica e azul-céu', accentColor: '#7AAEF0', previewBg: 'linear-gradient(135deg,#0c0c0e 0%,#2b2c32 54%,#7aaef0 100%)', previewAccent: '#A9CDFC' },
+  { key: 'calda', label: 'Calda App Glass', emoji: '📱', description: 'Vidro fumê arquitetônico com barra inferior app e modo celular no PC', accentColor: '#1E9BF0', previewBg: 'linear-gradient(135deg,#202226 0%,#3a3d42 56%,#1e9bf0 100%)', previewAccent: '#F6F7F8' },
   { key: 'black-cyan', label: 'Black Total Ciano', emoji: '🖤', description: 'Preto absoluto com botões azul ciano robusto premium', accentColor: '#06b6d4', previewBg: 'linear-gradient(135deg,#000000 0%,#04080e 58%,#083344 100%)', previewAccent: '#06b6d4' },
   { key: 'ios-liquid-glass', label: 'iOS Black Liquid Glass', emoji: '🫧', description: 'Black Liquid Glass ultra transparente estilo iPhone iOS', accentColor: '#0A84FF', previewBg: 'linear-gradient(135deg,#000000 0%,#0b1526 52%,#0a84ff 100%)', previewAccent: '#0A84FF' },
   { key: 'light',    label: 'Claro',     emoji: '☀️',  description: 'Tema claro corporativo',     accentColor: '#1F6B45', previewBg: '#F5F9F6', previewAccent: '#1F6B45' },
@@ -39,20 +42,21 @@ interface ThemeContextType {
   themeInfo: ThemeInfo;
 }
 
-const DEFAULT_THEME: Theme = 'verdan';
+const DEFAULT_THEME: Theme = 'calda';
 const THEME_STORAGE_KEY = 'bp-theme';
 const THEME_DEFAULT_VERSION_KEY = 'bp-theme-default-version';
-const THEME_DEFAULT_VERSION = 'verdan-v10.29';
+const THEME_DEFAULT_VERSION = 'calda-v10.30';
+const DEFAULT_THEME_INFO = THEMES.find(t => t.key === DEFAULT_THEME) ?? THEMES[0];
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: DEFAULT_THEME,
   setTheme: () => {},
   toggleTheme: () => {},
   isDark: true,
-  themeInfo: THEMES[0],
+  themeInfo: DEFAULT_THEME_INFO,
 });
 
-const DARK_THEMES: Theme[] = ['verdan', 'liquid-glass-v18', 'black-cyan', 'ios-liquid-glass', 'dark', 'ocean', 'sunset', 'forest', 'midnight', 'copper', 'glassy-v18'];
+const DARK_THEMES: Theme[] = ['verdan', 'liquid-glass-v18', 'dashboard-v32', 'vitrea', 'calda', 'black-cyan', 'ios-liquid-glass', 'dark', 'ocean', 'sunset', 'forest', 'midnight', 'copper', 'glassy-v18'];
 const LIGHT_THEMES: Theme[] = ['light', 'rose', 'arctic', 'lavender', 'glass'];
 
 const THEME_KEYS = new Set<Theme>(THEMES.map(t => t.key));
@@ -108,7 +112,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (typeof document !== 'undefined') {
       const root = document.documentElement;
       // Remover todas as classes de tema sem tocar em classes estruturais da aplicação.
-      root.classList.remove('dark', 'theme-verdan', 'theme-liquid-glass-v18', 'theme-black-cyan', 'theme-ios-liquid-glass', 'theme-ocean', 'theme-sunset', 'theme-forest', 'theme-midnight', 'theme-rose', 'theme-arctic', 'theme-copper', 'theme-lavender', 'theme-glass', 'theme-glassy-v18');
+      root.classList.remove('dark', 'theme-verdan', 'theme-liquid-glass-v18', 'theme-dashboard-v32', 'theme-vitrea', 'theme-calda', 'theme-black-cyan', 'theme-ios-liquid-glass', 'theme-ocean', 'theme-sunset', 'theme-forest', 'theme-midnight', 'theme-rose', 'theme-arctic', 'theme-copper', 'theme-lavender', 'theme-glass', 'theme-glassy-v18');
 
       if (DARK_THEMES.includes(appliedTheme)) root.classList.add('dark');
       if (appliedTheme !== 'light' && appliedTheme !== 'dark') root.classList.add(`theme-${appliedTheme}`);
@@ -119,7 +123,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
   const isDark = DARK_THEMES.includes(theme);
-  const themeInfo = THEMES.find(t => t.key === theme) ?? THEMES[0];
+  const themeInfo = THEMES.find(t => t.key === theme) ?? DEFAULT_THEME_INFO;
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, isDark, themeInfo }}>

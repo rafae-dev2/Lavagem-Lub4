@@ -8,7 +8,7 @@
   --apoio-line: #e2ebe5;
   --apoio-surface: #fff;
   --apoio-text: #1b2a22;
-  --apoio-muted: #5f7268;
+  --apoio-muted: #4a5d53;
   --apoio-warning: #8a5a00;
   --apoio-warning-bg: #fdf3dc;
   --apoio-danger: #c0392b;
@@ -22,11 +22,15 @@
   --border-primary: var(--apoio-line);
   --text-primary: var(--apoio-text);
   --text-secondary: var(--apoio-muted);
-  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-family, 'Inter', system-ui, sans-serif);
   color: var(--apoio-text);
   max-width: 1440px;
   margin: 0 auto;
   padding-bottom: 12px;
+}
+.apoio-module :is(h1, h2, h3, h4, .apoio-hero h2, .apoio-hero-count strong, .apoio-kpi strong, .apoio-days strong, .apoio-os, .apoio-fleet-title) {
+  font-family: var(--font-display, 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif);
+  letter-spacing: -0.02em;
 }
 html.dark .apoio-module {
   --apoio-green: #86d9a6;

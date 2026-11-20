@@ -1,0 +1,415 @@
+/* ============================================================================
+   UNIFIED STATUS SEMANTICS — Across ALL Modules & ALL Themes
+   ----------------------------------------------------------------------------
+   Guarantees an unmistakable visual distinction everywhere in the app:
+   - ENCERRADO / Encerrada  → Solid Emerald Green + check affordance
+   - PROGRAMADO / Programada → Distinct Sapphire Blue + dashed border + calendar
+   - ANDAMENTO / Em andamento → Distinct Violet / Indigo (never steals green/blue)
+   - PENDENTE / Aguardando  → Warm Amber
+   - ATRASADO / Vencido     → Crimson / Coral Red
+   ============================================================================ */
+
+/* ── 1. Global StatusBadge (Lavagem, Dashboard, Modo Foco, Calendário, Kanban) */
+.status-badge.status-badge-encerrado,
+.status-badge[data-status="ENCERRADO"] {
+  background: #dcfce7 !important;
+  color: #14532d !important;
+  border: 1px solid #22c55e !important;
+}
+
+.status-badge.status-badge-programado,
+.status-badge[data-status="PROGRAMADO"] {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  border: 1.5px dashed #3b82f6 !important;
+}
+
+.status-badge.status-badge-andamento,
+.status-badge[data-status="ANDAMENTO"] {
+  background: #f3e8ff !important;
+  color: #5b21b6 !important;
+  border: 1px solid #a855f7 !important;
+}
+
+/* Dark themes (Calda, Vitrea, Dark, V18, Verdan, Dashboard V32, Black Cyan, iOS) */
+html.dark .status-badge.status-badge-encerrado,
+html.dark .status-badge[data-status="ENCERRADO"],
+html.theme-calda .app-shell .status-badge[data-status="ENCERRADO"],
+html.theme-vitrea .app-shell .status-badge[data-status="ENCERRADO"] {
+  background: rgba(16, 185, 129, 0.20) !important;
+  color: #bbf7d0 !important;
+  border: 1px solid rgba(52, 211, 153, 0.56) !important;
+}
+
+html.dark .status-badge.status-badge-programado,
+html.dark .status-badge[data-status="PROGRAMADO"],
+html.theme-calda .app-shell .status-badge[data-status="PROGRAMADO"],
+html.theme-vitrea .app-shell .status-badge[data-status="PROGRAMADO"] {
+  background: rgba(59, 130, 246, 0.22) !important;
+  color: #dbeafe !important;
+  border: 1.5px dashed rgba(96, 165, 250, 0.78) !important;
+}
+
+html.dark .status-badge.status-badge-andamento,
+html.dark .status-badge[data-status="ANDAMENTO"],
+html.theme-calda .app-shell .status-badge[data-status="ANDAMENTO"],
+html.theme-vitrea .app-shell .status-badge[data-status="ANDAMENTO"] {
+  background: rgba(168, 85, 247, 0.22) !important;
+  color: #f3e8ff !important;
+  border: 1px solid rgba(192, 132, 252, 0.56) !important;
+}
+
+/* ── 2. Lavagem e Lubrificação Table Rows & Cards ─────────────────────────── */
+.lub-row-programado td:first-child {
+  border-left: 3px dashed #3b82f6 !important;
+}
+
+.lub-row-encerrado td:first-child {
+  border-left: 3px solid #22c55e !important;
+}
+
+.lub-row-andamento td:first-child {
+  border-left: 3px solid #a855f7 !important;
+}
+
+.lub-schedule-card[data-status="ENCERRADO"] {
+  border-top: 3px solid #22c55e !important;
+}
+
+.lub-schedule-card[data-status="PROGRAMADO"] {
+  border-top: 3px dashed #3b82f6 !important;
+}
+
+.lub-schedule-card[data-status="ANDAMENTO"] {
+  border-top: 3px solid #a855f7 !important;
+}
+
+html.dark .lub-schedule-card[data-status="ENCERRADO"],
+html.theme-calda .lub-schedule-card[data-status="ENCERRADO"] {
+  border-top-color: #34d399 !important;
+}
+
+html.dark .lub-schedule-card[data-status="PROGRAMADO"],
+html.theme-calda .lub-schedule-card[data-status="PROGRAMADO"] {
+  border-top-color: #60a5fa !important;
+}
+
+html.dark .lub-schedule-card[data-status="ANDAMENTO"],
+html.theme-calda .lub-schedule-card[data-status="ANDAMENTO"] {
+  border-top-color: #c084fc !important;
+}
+
+/* ── 3. Maintenance Tracking & Controle Apoio Cards (MaintenanceOrderCard) ── */
+.maintenance-tracking .mt-status--encerrado,
+.maintenance-tracking .mt-order--closed .mt-status--encerrado,
+.apoio-module .apoio-table-status-closed {
+  background: #dcfce7 !important;
+  color: #14532d !important;
+  border: 1px solid #22c55e !important;
+}
+
+.maintenance-tracking .mt-status--encerrado .mt-status-dot {
+  background: #16a34a !important;
+}
+
+.maintenance-tracking .mt-status--programado,
+.apoio-module .apoio-table-status-scheduled {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  border: 1.5px dashed #3b82f6 !important;
+}
+
+.maintenance-tracking .mt-status--programado .mt-status-dot {
+  background: #2563eb !important;
+  border-radius: 3px !important;
+}
+
+.maintenance-tracking .mt-status--andamento,
+.apoio-module .apoio-table-status-progress {
+  background: #f3e8ff !important;
+  color: #5b21b6 !important;
+  border: 1px solid #a855f7 !important;
+}
+
+.maintenance-tracking .mt-status--andamento .mt-status-dot {
+  background: #9333ea !important;
+}
+
+/* Scheduled ribbon & card treatment — unmistakably distinct from green Closed ribbon */
+.maintenance-tracking .mt-order--scheduled {
+  border-top: 3px dashed #3b82f6 !important;
+}
+
+.maintenance-tracking .mt-scheduled-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 32px;
+  padding: 6px 16px 6px 19px;
+  border-bottom: 1px dashed rgba(59, 130, 246, 0.42);
+  background: linear-gradient(96deg, #eff6ff 0%, #dbeafe 100%);
+  color: #1e3a8a;
+  line-height: 1.25;
+}
+
+.maintenance-tracking .mt-scheduled-ribbon strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1d4ed8 !important;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+
+.maintenance-tracking .mt-scheduled-ribbon span {
+  color: #1e40af;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.maintenance-tracking .mt-closed-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 32px;
+  padding: 6px 16px 6px 19px;
+  border-bottom: 1px solid rgba(22, 163, 74, 0.42) !important;
+  background: linear-gradient(96deg, #14532d 0%, #15803d 68%, #16a34a 100%) !important;
+  color: #f0fdf4 !important;
+}
+
+.maintenance-tracking .mt-closed-ribbon strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff !important;
+}
+
+.maintenance-tracking .mt-closed-ribbon span {
+  color: #dcfce7 !important;
+}
+
+/* Dark & Calda / Vitrea / Glassy overrides for Maintenance & Apoio */
+html.dark .maintenance-tracking .mt-status--encerrado,
+html.dark .maintenance-tracking .mt-order--closed .mt-status--encerrado,
+html.dark .apoio-module .apoio-table-status-closed,
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-status--encerrado, .apoio-table-status-closed),
+html.theme-calda .app-shell .apoio-module .apoio-table-status-closed,
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-status--encerrado, .apoio-table-status-closed),
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-closed {
+  background: rgba(16, 185, 129, 0.22) !important;
+  color: #bbf7d0 !important;
+  border: 1px solid rgba(52, 211, 153, 0.56) !important;
+}
+
+html.dark .maintenance-tracking .mt-status--encerrado .mt-status-dot,
+html.theme-calda .app-shell .maintenance-tracking .mt-status--encerrado .mt-status-dot {
+  background: #34d399 !important;
+}
+
+html.dark .maintenance-tracking .mt-status--programado,
+html.dark .apoio-module .apoio-table-status-scheduled,
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-status--programado, .apoio-table-status-scheduled),
+html.theme-calda .app-shell .apoio-module .apoio-table-status-scheduled,
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-status--programado, .apoio-table-status-scheduled),
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-scheduled {
+  background: rgba(59, 130, 246, 0.22) !important;
+  color: #dbeafe !important;
+  border: 1.5px dashed rgba(96, 165, 250, 0.78) !important;
+}
+
+html.dark .maintenance-tracking .mt-status--programado .mt-status-dot,
+html.theme-calda .app-shell .maintenance-tracking .mt-status--programado .mt-status-dot {
+  background: #60a5fa !important;
+  border-radius: 3px !important;
+}
+
+html.dark .maintenance-tracking .mt-status--andamento,
+html.dark .apoio-module .apoio-table-status-progress,
+html.theme-calda .app-shell .maintenance-tracking :is(.mt-status--andamento, .apoio-table-status-progress),
+html.theme-calda .app-shell .apoio-module .apoio-table-status-progress,
+html.theme-vitrea .app-shell .maintenance-tracking :is(.mt-status--andamento, .apoio-table-status-progress),
+html.theme-vitrea .app-shell .apoio-module .apoio-table-status-progress {
+  background: rgba(168, 85, 247, 0.22) !important;
+  color: #f3e8ff !important;
+  border: 1px solid rgba(192, 132, 252, 0.56) !important;
+}
+
+html.dark .maintenance-tracking .mt-status--andamento .mt-status-dot,
+html.theme-calda .app-shell .maintenance-tracking .mt-status--andamento .mt-status-dot {
+  background: #c084fc !important;
+}
+
+html.dark .maintenance-tracking .mt-order--closed,
+html.theme-calda .app-shell .maintenance-tracking .mt-order--closed {
+  border-top: 3px solid #34d399 !important;
+}
+
+html.dark .maintenance-tracking .mt-order--scheduled,
+html.theme-calda .app-shell .maintenance-tracking .mt-order--scheduled {
+  border-top: 3px dashed #60a5fa !important;
+}
+
+html.dark .maintenance-tracking .mt-closed-ribbon,
+html.theme-calda .app-shell .maintenance-tracking .mt-closed-ribbon {
+  background: linear-gradient(96deg, rgba(16, 185, 129, 0.26) 0%, rgba(5, 150, 105, 0.18) 100%) !important;
+  border-bottom: 1px solid rgba(52, 211, 153, 0.38) !important;
+  color: #d1fae5 !important;
+}
+
+html.dark .maintenance-tracking .mt-closed-ribbon strong,
+html.theme-calda .app-shell .maintenance-tracking .mt-closed-ribbon strong {
+  color: #86efac !important;
+}
+
+html.dark .maintenance-tracking .mt-closed-ribbon span,
+html.theme-calda .app-shell .maintenance-tracking .mt-closed-ribbon span {
+  color: #d1fae5 !important;
+}
+
+html.dark .maintenance-tracking .mt-scheduled-ribbon,
+html.theme-calda .app-shell .maintenance-tracking .mt-scheduled-ribbon {
+  background: linear-gradient(96deg, rgba(59, 130, 246, 0.24) 0%, rgba(37, 99, 235, 0.12) 100%) !important;
+  border-bottom: 1px dashed rgba(96, 165, 250, 0.48) !important;
+  color: #dbeafe !important;
+}
+
+html.dark .maintenance-tracking .mt-scheduled-ribbon strong,
+html.theme-calda .app-shell .maintenance-tracking .mt-scheduled-ribbon strong {
+  color: #93c5fd !important;
+}
+
+html.dark .maintenance-tracking .mt-scheduled-ribbon span,
+html.theme-calda .app-shell .maintenance-tracking .mt-scheduled-ribbon span {
+  color: #dbeafe !important;
+}
+
+/* ── 4. Apoio Orders Table Rows & Marks ───────────────────────────────────── */
+.apoio-table-row-closed > .apoio-table-fleet-cell {
+  box-shadow: inset 4px 0 0 #22c55e !important;
+}
+
+.apoio-table-row-scheduled > .apoio-table-fleet-cell {
+  box-shadow: inset 4px 0 0 #3b82f6 !important;
+}
+
+.apoio-table-closed-mark {
+  color: #15803d !important;
+}
+
+.apoio-table-scheduled-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 4px;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+html.dark .apoio-table-closed-mark,
+html.theme-calda .apoio-table-closed-mark {
+  color: #86efac !important;
+}
+
+html.dark .apoio-table-scheduled-mark,
+html.theme-calda .apoio-table-scheduled-mark {
+  color: #93c5fd !important;
+}
+
+/* ── 5. Painel Operacional (ApoioOrdersPanelView & TrackingOperationalPanel) */
+.apoio-op-status.is-closed {
+  background: rgba(22, 163, 74, 0.16) !important;
+  color: #15803d !important;
+  border: 1px solid rgba(34, 197, 94, 0.45) !important;
+}
+
+.apoio-op-status.is-scheduled {
+  background: rgba(59, 130, 246, 0.14) !important;
+  color: #1d4ed8 !important;
+  border: 1.5px dashed rgba(59, 130, 246, 0.62) !important;
+}
+
+.apoio-op-status.is-progress {
+  background: rgba(168, 85, 247, 0.14) !important;
+  color: #6d28d9 !important;
+  border: 1px solid rgba(168, 85, 247, 0.45) !important;
+}
+
+html.dark .apoio-op-status.is-closed,
+html.theme-calda .apoio-op-status.is-closed {
+  background: rgba(16, 185, 129, 0.22) !important;
+  color: #bbf7d0 !important;
+  border: 1px solid rgba(52, 211, 153, 0.56) !important;
+}
+
+html.dark .apoio-op-status.is-scheduled,
+html.theme-calda .apoio-op-status.is-scheduled {
+  background: rgba(59, 130, 246, 0.22) !important;
+  color: #dbeafe !important;
+  border: 1.5px dashed rgba(96, 165, 250, 0.78) !important;
+}
+
+html.dark .apoio-op-status.is-progress,
+html.theme-calda .apoio-op-status.is-progress {
+  background: rgba(168, 85, 247, 0.22) !important;
+  color: #f3e8ff !important;
+  border: 1px solid rgba(192, 132, 252, 0.56) !important;
+}
+
+.apoio-op-item.is-closed {
+  border-color: rgba(34, 197, 94, 0.36);
+}
+
+.apoio-op-item.is-scheduled {
+  border-style: dashed;
+  border-color: rgba(59, 130, 246, 0.42);
+}
+
+/* ── 6. Central Gerencial / BI Order Explorer (.bi-status-*) ──────────────── */
+.bi-root .bi-status-encerrado {
+  background: #dcfce7 !important;
+  border: 1px solid #22c55e !important;
+  color: #14532d !important;
+}
+
+.bi-root .bi-status-programado {
+  background: #eff6ff !important;
+  border: 1.5px dashed #3b82f6 !important;
+  color: #1e40af !important;
+}
+
+.bi-root .bi-status-andamento {
+  background: #f3e8ff !important;
+  border: 1px solid #a855f7 !important;
+  color: #5b21b6 !important;
+}
+
+html.dark .bi-root .bi-status-encerrado,
+html.theme-calda .bi-root .bi-status-encerrado,
+html.theme-vitrea .bi-root .bi-status-encerrado {
+  background: rgba(16, 185, 129, 0.22) !important;
+  border: 1px solid rgba(52, 211, 153, 0.56) !important;
+  color: #bbf7d0 !important;
+}
+
+html.dark .bi-root .bi-status-programado,
+html.theme-calda .bi-root .bi-status-programado,
+html.theme-vitrea .bi-root .bi-status-programado {
+  background: rgba(59, 130, 246, 0.22) !important;
+  border: 1.5px dashed rgba(96, 165, 250, 0.78) !important;
+  color: #dbeafe !important;
+}
+
+html.dark .bi-root .bi-status-andamento,
+html.theme-calda .bi-root .bi-status-andamento,
+html.theme-vitrea .bi-root .bi-status-andamento {
+  background: rgba(168, 85, 247, 0.22) !important;
+  border: 1px solid rgba(192, 132, 252, 0.56) !important;
+  color: #f3e8ff !important;
+}
